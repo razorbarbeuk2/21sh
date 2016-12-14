@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 15:50:28 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/14 13:08:14 by RAZOR            ###   ########.fr       */
+/*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
+/*   Updated: 2016/12/13 16:22:56 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 static int init_struct(t_data *data)
 {
 	data->env = NULL;
+	data->entry = NULL;
 	data->sel = NULL;
+	if ((data->entry = (t_entry *)malloc(sizeof(t_entry))) == NULL)
+		return (0);
 	if ((data->sel = (t_select *)malloc(sizeof(t_select))) == NULL)
 		return (0);
+	data->entry->line = NULL;
 	data->sel->path_arg = NULL;
 	data->sel->arg = NULL;
 	data->sel->termcapbuf = NULL;
@@ -29,13 +33,10 @@ static int init_struct(t_data *data)
 
 int	init_sh(t_data *data, char **env)
 {
-
 	if (!get_tab_to_lst(&data->env, env))
 		return (0);
 	term_init(data->sel);
-
 	listen_cursor(data);
-	
 	return (1);
 	// if (!init_env(&data->env))
 	// 	return (0);

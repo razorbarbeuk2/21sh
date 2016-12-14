@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/14 15:49:34 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/12/14 10:42:09 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,23 @@
 # define BUILD_EXE 1
 # define RED "\e[31m"
 # define ORANGE "\033[38;2;255;189;0m"
+# define POS "\033[6n"
+# define DEBUG ft_putstr("FUCK");
 
-typedef	int		(*t_func)(t_list **env_lst, char **line);
-typedef	void	(*t_option)(t_list *env_lst, char **line);
+typedef	int			(*t_func)(t_list **env_lst, char **line);
+typedef	void		(*t_option)(t_list *env_lst, char **line);
 
-typedef enum	e_enum
+typedef enum		e_enum
 {
-				UP = 279165,
-				DOWN =  279166,
-				RIGHT = 279167,
-				LEFT = 279168,
-				SPACE = 32,
-				ESC = 27,
-				ENTER = 10,
-				DEL = 127,
-}				t_enum;
+					UP = 279165,
+					DOWN =  279166,
+					RIGHT = 279167,
+					LEFT = 279168,
+					SPACE = 32,
+					ESC = 27,
+					ENTER = 10,
+					DEL = 127,
+}					t_enum;
 
 typedef struct		s_char
 {
@@ -62,12 +64,19 @@ typedef struct		s_buil
 	t_func			f;
 }					t_buil;
 
+typedef struct		s_entry
+{
+	t_list			*line;
+	size_t			len_line;
+}					t_entry;
+
 typedef struct		s_select
 {
 	char			**path_arg;
 	char			**arg;
 	char			*termcapbuf;
-	int				pos[2];
+	int				*pos;
+	int				*pos_start;
 	int				tty;
 	int				width;
 	int				height;
@@ -85,7 +94,7 @@ typedef struct		s_env
 typedef struct		s_data
 {
 	t_list			*env;
-	t_list			*entry;
+	t_entry			*entry;
 	t_select		*sel;
 }					t_data;
 
@@ -93,6 +102,7 @@ typedef struct		s_data
 int					get_tab_to_lst(t_list **data_env, char **environ);
 char				**get_lst_to_tab(t_list *env_lst);
 void				print_lst(t_list *lst);
+void				print_pos_cursor(t_data *data);
 /*TOOLS FREE*/
 void				ft_free_char(char **tmp);
 void				free_env(void *tmp, size_t tmp_size);
@@ -102,7 +112,7 @@ char				*ft_cut_path(t_list *env_lst, char *line);
 int					ft_concat_int(char *buf);
 int					ft_putchar_select(int c);
 /*PROMPT*/
-void				get_prompt(t_data *data);
+void				ft_listen_cmd(t_data *data);
 /*SEARCH*/
 char				*get_search_infos(t_list *env, char *str);
 /*BUILTINS DRIVE*/
@@ -142,9 +152,22 @@ int					term_init(t_select *sel);
 void				termios_init(struct	termios *term);
 /*PROMPT*/
 void				get_super_prompt(t_data *data, char *line);
-/*TEXT_LINE*/
+int					get_pos_prompt(t_data *data);
+void				ft_pos_new_line(t_data *data);
+/*MOTION_CURSOR*/
 int					listen_cursor(t_data *data);
-void				ft_move_left(t_select *sel, int *pos_x);
-
+void				ft_move_left(t_select *sel);
+void				ft_move_right(t_select *sel);
+void				ft_move_up(t_select *sel);
+void				ft_move_down(t_select *sel);
+void				ft_move_cursor(t_select *sel, int result);
+void				print_character(t_data *data, char result);
+void				del_one_character(t_data *data, char result);
+void				exec_cmd_character(t_data *data, char result);
+/*PRINT_CHARACT*/
+int					ft_add_print_caract(t_data *data, char result);
+int					ft_del_print_caract(t_data *data, char result);
+/*TOOLS*/
+void				print_lst_line(t_data *data, t_list *lst);
 
 #endif

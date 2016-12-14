@@ -6,7 +6,7 @@
 #    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2016/10/14 16:02:33 by RAZOR            ###   ########.fr        #
+#    Updated: 2016/12/14 10:42:34 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				term/init_term.c \
 				text_line/listen_cursor.c \
 				text_line/motion_cursor.c \
+				text_line/prompt_position.c \
+				text_line/prompt_insert_caract.c \
+				text_line/prompt_new_line_bottom.c \
+				text_line/data_str_insert_caract.c \
 				fork/access.c \
 				fork/fork.c \
 				fork/get_exe_path.c \

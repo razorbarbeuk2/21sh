@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:44:29 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 18:01:50 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/11/29 16:30:42 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,18 @@ int ft_concat_int(char *buf)
 		i++;
 	}
 	return (result);
+}
+
+void		print_pos_cursor(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while(data->sel->pos[i])
+	{
+		ft_putnbr_fd(data->sel->pos[i], data->sel->tty);
+		if (data->sel->pos[i + 1])
+			ft_putchar_fd(';', data->sel->tty);
+		i++;
+	}
 }

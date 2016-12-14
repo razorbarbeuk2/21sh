@@ -6,57 +6,60 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/14 16:25:03 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/12/13 16:24:58 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-
-
 void		ft_move_cursor(t_select *sel, int result)
 {
 	if (result == LEFT)
-		ft_move_left(sel, sel->pos);
+		ft_move_left(sel);
 	if (result == RIGHT)
+		ft_move_right(sel);
+	// if (result == DOWN)
 
-	if (result == DOWN)
-
-	if (result == UP)
-	tputs(tgoto(tgetstr("cm", NULL), sel->pos[0], sel->pos[1]), 1, ft_putchar_select);
-
+	// if (result == UP)
+	tputs(tgoto(tgetstr("cm", NULL), sel->pos[1], sel->pos[0]), 1, ft_putchar_select);
 }
 
-void		print_character(t_data *data, char result)
+void		ft_cmd_cursor(t_data *data, int result)
 {
-	tputs(tgetstr("im", NULL), 1, ft_putchar_select);
-	ft_putchar_fd(result, data->sel->tty);
-	tputs(tgetstr("ic", NULL), 1, ft_putchar_select);
-	tputs(tgetstr("ip", NULL), 1, ft_putchar_select);
-	tputs(tgetstr("ei", NULL), 1, ft_putchar_select);
+	// ft_putnbr_fd(result, data->sel->tty);
+	// ft_putchar_fd(':', data->sel->tty);
+	// ft_putnbr_fd(DEL, data->sel->tty);
+	// if (result == ESC)
+	if (result == ENTER)
+		exec_cmd_character(data, result);
+	if (result == DEL)
+		del_one_character(data, result);
 }
 
 int			listen_cursor(t_data *data)
 {
-	char				buf[7];
-	int					result;
+	char	buf[8];
+	int		result;
 
 	result = 0;
-	ft_bzero(buf, 7);
+	ft_bzero(buf, 8);
 	get_super_prompt(data, NULL);
-	ft_putstr(tgetstr("cv", NULL));
-	ft_putchar(' ');
-	ft_putstr(tgetstr("ch", NULL));
-	while(read(0, buf, 7))
+	data->sel->pos = ft_memalloc(2);
+	data->sel->pos_start = ft_memalloc(2);
+	get_pos_prompt(data);
+	data->sel->pos_start[0] = data->sel->pos[0];
+	data->sel->pos_start[1] = data->sel->pos[1];
+	tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
+	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);
-
-		if (ft_isalpha(result))
+		ft_cmd_cursor(data, result);
+		if (result >= 32 && result <= 126)
 			print_character(data, result);
 		if (result >= UP && result <= LEFT)
 			ft_move_cursor(data->sel, result);
-
-		ft_bzero(buf, 7);
+		get_pos_prompt(data);
+		ft_bzero(buf, 8);
 	}
 	return (0);
 }
