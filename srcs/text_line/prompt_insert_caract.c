@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/12/14 10:46:53 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/12/15 17:11:36 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,17 @@ void		exec_cmd_character(t_data *data, char result)
 		//ft_putnbr_fd(ft_strlen(data->cmd), data->sel->tty);
 		// ft_putnbr_fd(data->pos_test, data->sel->tty);
 		//print_lst_line(data, data->entry->line);
+		// ft_putnbr_fd(data->entry->size_line, data->sel->tty);
+		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(data->entry->nb_line, data->sel->tty);
 		ft_putnbr_fd(data->sel->pos[0], data->sel->tty);
 		ft_putchar_fd(';', data->sel->tty);
 		ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
-
+		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(data->entry->size_line, data->sel->tty);
+		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(data->sel->width, data->sel->tty);
+		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
 
 		// ft_putstr_fd(data->cmd, data->sel->tty);
 		// ft_putstr_fd(data->test, data->sel->tty);
@@ -61,7 +68,7 @@ void		exec_cmd_character(t_data *data, char result)
 void		del_one_character(t_data *data, char result)
 {
 	(void)result;
-	ft_move_cursor(data->sel, LEFT);
+	ft_move_cursor(data, LEFT);
 	tputs(tgetstr("dm", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("ed", NULL), 1, ft_putchar_select);

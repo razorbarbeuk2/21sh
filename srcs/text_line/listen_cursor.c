@@ -6,22 +6,22 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/12/13 16:24:58 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/12/15 12:21:40 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void		ft_move_cursor(t_select *sel, int result)
+void		ft_move_cursor(t_data *data, int result)
 {
 	if (result == LEFT)
-		ft_move_left(sel);
+		ft_move_left(data);
 	if (result == RIGHT)
-		ft_move_right(sel);
+		ft_move_right(data);
 	// if (result == DOWN)
 
 	// if (result == UP)
-	tputs(tgoto(tgetstr("cm", NULL), sel->pos[1], sel->pos[0]), 1, ft_putchar_select);
+	tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
 }
 
 void		ft_cmd_cursor(t_data *data, int result)
@@ -47,6 +47,7 @@ int			listen_cursor(t_data *data)
 	data->sel->pos = ft_memalloc(2);
 	data->sel->pos_start = ft_memalloc(2);
 	get_pos_prompt(data);
+	data->entry->size_line = data->sel->len_prompt;
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];
 	tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
@@ -57,7 +58,7 @@ int			listen_cursor(t_data *data)
 		if (result >= 32 && result <= 126)
 			print_character(data, result);
 		if (result >= UP && result <= LEFT)
-			ft_move_cursor(data->sel, result);
+			ft_move_cursor(data, result);
 		get_pos_prompt(data);
 		ft_bzero(buf, 8);
 	}
