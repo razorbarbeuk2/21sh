@@ -12,12 +12,16 @@
 
 #include "sh21.h"
 
-void		ft_move_cursor(t_select *sel, int result)
+void		ft_move_cursor(t_data *data, int result)
 {
+	t_select *sel;
+
+	sel = NULL;
+	sel = data->sel;
 	if (result == LEFT)
-		ft_move_left(sel);
+		ft_move_left(data);
 	if (result == RIGHT)
-		ft_move_right(sel);
+		ft_move_right(data);
 	// if (result == DOWN)
 
 	// if (result == UP)
@@ -57,7 +61,7 @@ int			listen_cursor(t_data *data)
 		if (result >= 32 && result <= 126)
 			print_character(data, result);
 		if (result >= UP && result <= LEFT)
-			ft_move_cursor(data->sel, result);
+			ft_move_cursor(data, result);
 		get_pos_prompt(data);
 		ft_bzero(buf, 8);
 	}

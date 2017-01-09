@@ -156,11 +156,11 @@ int					get_pos_prompt(t_data *data);
 void				ft_pos_new_line(t_data *data);
 /*MOTION_CURSOR*/
 int					listen_cursor(t_data *data);
-void				ft_move_left(t_select *sel);
-void				ft_move_right(t_select *sel);
-void				ft_move_up(t_select *sel);
-void				ft_move_down(t_select *sel);
-void				ft_move_cursor(t_select *sel, int result);
+void				ft_move_left(t_data *data);
+void				ft_move_right(t_data *data);
+void				ft_move_up(t_data *data);
+void				ft_move_down(t_data *data);
+void				ft_move_cursor(t_data *data, int result);
 void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
 void				exec_cmd_character(t_data *data, char result);
