@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/12/14 10:42:09 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/12/15 15:44:23 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct		s_entry
 {
 	t_list			*line;
 	size_t			len_line;
+	size_t			size_line;
+	int				nb_line;
 }					t_entry;
 
 typedef struct		s_select
