@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/12/13 17:11:47 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/01/10 16:02:13 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,14 @@ void ft_move_right(t_data *data)
 	ret = ((data->entry->len_line + data->sel->len_prompt)/data->sel->width);
 	if (((int)sel->len_prompt + (int)data->entry->len_line) > sel->width)
 	{
-		if (sel->pos[1] < (((int)sel->len_prompt + (int)data->entry->len_line)%(int)sel->width) && sel->pos[0] != sel->pos_start[0])
-			data->sel->pos[1] += 1;
-		if (sel->pos[1] < (int)sel->width && (sel->pos[0] == sel->pos_start[0]))
+		if (sel->pos[0] == (sel->pos_start[0] + ret))
+		{
+			if (sel->pos[1] < (((int)sel->len_prompt + (int)data->entry->len_line)%(int)sel->width))
+				data->sel->pos[1] += 1;
+			else
+				return;
+		}
+		else
 			data->sel->pos[1] += 1;
 		if (sel->pos[1] == (data->sel->width - 1))
 		{
