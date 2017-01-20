@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/01/10 14:36:05 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/01/19 22:05:33 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void		exec_cmd_character(t_data *data, char result)
 		//ft_putnbr_fd(ft_strlen(data->cmd), data->sel->tty);
 		// ft_putnbr_fd(data->pos_test, data->sel->tty);
 		//print_lst_line(data, data->entry->line);
-		ft_putnbr_fd(data->sel->pos[0], data->sel->tty);
-		ft_putchar_fd(';', data->sel->tty);
-		ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
-		ft_putchar_fd(';', data->sel->tty);
-		ft_putnbr_fd(((data->sel->pos_start[0] + (data->entry->len_line + data->sel->len_prompt)/data->sel->width)), data->sel->tty);
+		ft_putnbr_fd(data->sel->pos_search, data->sel->tty);
+		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
+		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(((data->sel->pos_start[0] + (data->entry->len_line + data->sel->len_prompt)/data->sel->width)), data->sel->tty);
 		// ft_putnbr_fd(data->sel->width, data->sel->tty);
 		// ft_putchar_fd(';', data->sel->tty);
 		
@@ -68,5 +68,5 @@ void		del_one_character(t_data *data, char result)
 	tputs(tgetstr("dm", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("ed", NULL), 1, ft_putchar_select);
-	ft_del_print_caract(data, result);
+	//ft_del_print_caract(data, result);
 }

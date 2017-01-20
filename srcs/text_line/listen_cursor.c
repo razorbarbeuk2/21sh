@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/12/15 12:21:40 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/01/19 22:11:14 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ void		ft_move_cursor(t_data *data, int result)
 
 	sel = NULL;
 	sel = data->sel;
+
 	if (result == LEFT)
 		ft_move_left(data);
 	if (result == RIGHT)
 		ft_move_right(data);
+	if (result == HOME)
+		ft_move_home(data);
+	if (result == END)
+		ft_move_end(data);
 	// if (result == DOWN)
 
 	// if (result == UP)
@@ -34,6 +39,7 @@ void		ft_cmd_cursor(t_data *data, int result)
 	// ft_putchar_fd(':', data->sel->tty);
 	// ft_putnbr_fd(DEL, data->sel->tty);
 	// if (result == ESC)
+	//ft_putstr_fd("FUCK", data->sel->tty);
 	if (result == ENTER)
 		exec_cmd_character(data, result);
 	if (result == DEL)
@@ -58,8 +64,11 @@ int			listen_cursor(t_data *data)
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);
-		ft_cmd_cursor(data, result);
-		if (result >= 32 && result <= 126)
+		if (result == DEL || result == ENTER)
+			ft_cmd_cursor(data, result);
+		if (result == HOME || result == END)
+			ft_move_cursor(data, result);
+		if ((result >= 32 && result <= 126) && result != HOME && result != END) //Enlever HOME et END dans cette condition Num de touche à changer
 			print_character(data, result);
 		if (result >= UP && result <= LEFT)
 			ft_move_cursor(data, result);

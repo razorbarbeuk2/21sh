@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/12/15 15:44:23 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/01/17 18:15:12 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef enum		e_enum
 					ESC = 27,
 					ENTER = 10,
 					DEL = 127,
+					HOME = 58,
+					END = 61,
 }					t_enum;
 
 typedef struct		s_char
@@ -79,6 +81,7 @@ typedef struct		s_select
 	char			*termcapbuf;
 	int				*pos;
 	int				*pos_start;
+	int				pos_search;
 	int				tty;
 	int				width;
 	int				height;
@@ -162,6 +165,8 @@ void				ft_move_left(t_data *data);
 void				ft_move_right(t_data *data);
 void				ft_move_up(t_data *data);
 void				ft_move_down(t_data *data);
+void				ft_move_home(t_data *data);
+void				ft_move_end(t_data *data);
 void				ft_move_cursor(t_data *data, int result);
 void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
