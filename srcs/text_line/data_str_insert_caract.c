@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/01/16 15:22:03 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/01/22 19:23:17 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ t_list	*ft_add_swap(t_data *data, t_list **tmp_lst, t_list **tmp_st)
 	{
 		tmp_swap = (*tmp_lst);
 		while (tmp_swap && ++count < pos)
+		{
+			tmp_swap->prev = tmp_swap;
 			tmp_swap = tmp_swap->next;
+		}
 		(*tmp_st) = tmp_swap->next;
 		tmp_swap->next = NULL;
 	}
