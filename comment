@@ -65,3 +65,22 @@ t_list	*ft_find_pos_int_lst(t_data *data)
 		tmp = tmp->next;
 	return (tmp);
 }
+
+void ft_move_left(t_data *data)
+{
+	t_select *sel;
+
+	sel = NULL;
+	sel = data->sel;
+	if (sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0])
+		data->sel->pos[1] -= 1;
+	else if (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0)
+		data->sel->pos[1] -= 1;
+	else if (sel->pos[1] == 0)
+	{
+		data->sel->pos[1] = (data->sel->width - 1);
+		data->sel->pos[0] -= 1;
+	}
+	else
+		return ;
+}

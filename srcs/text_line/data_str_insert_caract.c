@@ -6,11 +6,26 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/01/22 19:23:17 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/02/07 13:56:44 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void		ft_print_lst_line(t_data *data, t_list *lst)
+{
+	t_list *tmp;
+
+	tmp = NULL;
+	tmp = lst;
+	if (tmp == NULL)
+		ft_putstr_fd("FUCK", data->sel->tty);
+	while(tmp)
+	{
+		ft_putstr_fd((char *)tmp->content, data->sel->tty);
+		tmp = tmp->next;
+	}
+}
 
 int		ft_del_print_caract(t_data *data, char result)
 {
@@ -61,6 +76,7 @@ int		ft_add_print_caract(t_data *data, char result)
 
 	tmp_st = NULL;
 	tmp_swap = NULL;
+	data->entry->cut_line = NULL;
 	tmp_lst = data->entry->line;
 	if (result)
 	{
@@ -69,6 +85,16 @@ int		ft_add_print_caract(t_data *data, char result)
 			tmp_swap = ft_add_swap(data, &tmp_lst, &tmp_st);
 			ft_add_at(&tmp_swap, result);
 			tmp_swap->next->next = tmp_st;
+			data->entry->cut_line = tmp_swap->next->next;
+			tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
+			while (data->entry->cut_line)
+			{
+				ft_move_cursor(data, RIGHT);
+				del_one_character(data, DEL);
+				data->entry->cut_line = data->entry->cut_line->next;
+			}
+			print_lst_line(data, data->entry->cut_line);
+			tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 		}
 		else
 			ft_add_at(&tmp_lst, result);

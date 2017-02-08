@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/01/19 22:11:14 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/01/24 12:54:47 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		ft_move_cursor(t_data *data, int result)
 	// if (result == DOWN)
 
 	// if (result == UP)
-	tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
+	//tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
 }
 
 void		ft_cmd_cursor(t_data *data, int result)
@@ -60,7 +60,7 @@ int			listen_cursor(t_data *data)
 	data->entry->size_line = data->sel->len_prompt;
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];
-	tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
+	//tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);

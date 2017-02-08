@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/01/17 18:15:12 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/02/06 10:13:06 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct		s_buil
 typedef struct		s_entry
 {
 	t_list			*line;
+	t_list			*cut_line;
 	size_t			len_line;
 	size_t			size_line;
 	int				nb_line;
