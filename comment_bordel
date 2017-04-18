@@ -1,0 +1,49 @@
+// t_list	*ft_find_pos_int_lst(t_data *data)
+// {
+// 	int count;
+// 	int multipy;
+// 	t_list *tmp;
+
+// 	count = -1;
+// 	tmp = NULL;
+// 	tmp = data->entry->line;
+// 	data->sel->pos_search = 0;
+// 	if (data->sel->pos[0] == data->sel->pos_start[0])
+// 		data->sel->pos_search = (data->sel->pos[1] - data->sel->len_prompt);
+// 	else
+// 	{
+// 		multipy = data->sel->pos[0] - data->sel->pos_start[0];
+// 		data->sel->pos_search = (data->entry->len_line) - (data->sel->pos[1]*multipy);
+// 	}
+// 	while(tmp->next && ++count <= data->sel->pos_search)
+// 		tmp = tmp->next;
+// 	return (tmp);
+// }
+
+void	ft_pos_new_line(t_data *data)
+{
+	int len;
+	int count;
+	t_list *tmp;
+	t_list *tmp_;
+
+	count = 0;
+	tmp = NULL;
+	tmp_ = NULL;
+	len = (int)data->sel->len_prompt + (int)data->entry->len_line;
+	if (data->sel->pos_search < len)
+	{
+		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
+		tmp = tmp_;
+		while (tmp_)
+		{
+			ft_move_cursor(data, RIGHT);
+			del_one_character(data, DEL);
+			tmp_ = tmp_->next;
+		}
+		//print_lst_line(data, tmp);
+		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
+	}
+	if (data->sel->pos[0] == (data->sel->height - 1))
+		data->sel->pos_start[0] = data->sel->pos[0] - ((int)data->entry->len_line + (int)data->sel->len_prompt)/(data->sel->width);
+}
