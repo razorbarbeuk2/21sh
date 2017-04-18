@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listen_cursor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/03/09 14:08:48 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/04/18 16:39:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,25 @@ void		ft_move_cursor(t_data *data, int result)
 	sel = data->sel;
 
 	if (result == LEFT)
+	{
 		ft_move_left(data);
+		data->sel->i_lst--;
+	}
 	if (result == RIGHT)
+	{
 		ft_move_right(data);
+		data->sel->i_lst++;
+	}
 	if (result == HOME)
+	{
 		ft_move_home(data);
+		data->sel->i_lst = 0;
+	}
 	if (result == END)
+	{
 		ft_move_end(data);
+		data->sel->i_lst = data->entry->len_line;
+	}
 	// if (result == DOWN)
 
 	// if (result == UP)

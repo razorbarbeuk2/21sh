@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_new_line_bottom.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/18 13:32:40 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/04/18 15:47:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void		print_lst_line(t_data *data, t_list *lst)
 
 void	ft_pos_new_line(t_data *data)
 {
-	
+	ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
 }
