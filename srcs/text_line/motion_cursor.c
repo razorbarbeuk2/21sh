@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/18 15:44:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:58:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,39 @@ void ft_move_left(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-	if (sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0])
+
+	if ((sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0]) || (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0) || (sel->pos[1] == 0))
+	{
 		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
-	else if (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0)
-		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
-	else if (sel->pos[1] == 0)
-		ft_move(data, (data->sel->width - 1), (data->sel->pos[0] -= 1));
-	else
-		return ;
+		if (data->sel->i_lst > 0)
+			data->sel->i_lst--;	
+		
+		//ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
+	}
+	return ;
 }
 
 void ft_move_right(t_data *data)
 {
-	if (((int)data->sel->len_prompt + (int)data->entry->len_line) > data->sel->width)
+	int len;
+
+	len = (int)data->sel->len_prompt + (int)data->entry->len_line;
+	if (data->sel->pos[0] == (data->sel->pos_start[0] + (len/data->sel->width)) && (len > data->sel->width))
 	{
-		if (data->sel->pos[0] == data->sel->pos_start[0] + ((int)(data->entry->len_line + data->sel->len_prompt)/data->sel->width))
+		if (data->sel->pos[1] < (len%(int)data->sel->width))
 		{
-			if (data->sel->pos[1] < (((int)data->sel->len_prompt + (int)data->entry->len_line)%(int)data->sel->width))
-				tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
-			else
-				return;
+			tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
+			if (data->sel->i_lst < (int)data->entry->len_line)
+				data->sel->i_lst++;
 		}
-		else
-			tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
-		if (data->sel->pos[1] == (data->sel->width - 1))
-			ft_move(data, (data->sel->pos[1] = 0), (data->sel->pos[0] += 1));
+		return;
 	}
-	if (((int)data->sel->len_prompt + (int)data->entry->len_line) < data->sel->width)
-	{
-		if (data->sel->pos[1] < (int)data->sel->len_prompt + (int)data->entry->len_line)
-			tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
-	}
-	else
-		return ;
+	if ((data->sel->pos[1] == (data->sel->width - 1)) && (len > data->sel->width))
+		ft_move(data, (data->sel->pos[1] = 0), (data->sel->pos[0] += 1));
+	if ((data->sel->pos[1] < len))
+		tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
+	if (data->sel->i_lst < (int)data->entry->len_line)
+		data->sel->i_lst++;
 }
 
 void ft_move_home(t_data *data)
@@ -65,10 +65,16 @@ void ft_move_home(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-	if (sel->pos[1] != (sel->pos_start[1] + (int)sel->len_prompt) && sel->pos[0] != sel->pos_start[0])
+	if ((sel->pos[1] != (sel->pos_start[1] + (int)sel->len_prompt) && sel->pos[0] != sel->pos_start[0]) || (sel->pos[0] == sel->pos_start[0]))
+	{
 		ft_move(data, data->sel->pos_start[1], data->sel->pos_start[0]);
-	if (sel->pos[0] == sel->pos_start[0])
-		ft_move(data, data->sel->pos_start[1], data->sel->pos[0]);
+		data->sel->i_lst = 0;
+	}
+	// if (sel->pos[0] == sel->pos_start[0])
+	// {
+	// 	ft_move(data, data->sel->pos_start[1], data->sel->pos[0]);
+	// 	data->sel->i_lst = 0;
+	// }
 	return;
 }
 

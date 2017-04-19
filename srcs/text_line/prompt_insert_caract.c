@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/18 16:37:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:44:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ void		exec_cmd_character(t_data *data, char result)
 		//print_lst_line(data, data->entry->line);
 		// ft_putnbr_fd(data->sel->pos_search, data->sel->tty);
 		// ft_putchar_fd(';', data->sel->tty);
+		//****************
 		ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
+		//****************
+		// ft_putnbr_fd(data->sel->pos[0], data->sel->tty);
+		// ft_putchar_fd(' ', data->sel->tty);
 		// ft_putnbr_fd(data->sel->pos[1], data->sel->tty);
-		// ft_putstr_fd("::", data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
 		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
+		// ft_putchar_fd(' ', data->sel->tty);
 		// ft_putnbr_fd(data->sel->pos_start[1], data->sel->tty);
+		//****************
 		// ft_putchar_fd(';', data->sel->tty);
 		// ft_putnbr_fd(((data->sel->pos_start[0] + (data->entry->len_line + data->sel->len_prompt)/data->sel->width)), data->sel->tty);
 		// ft_putnbr_fd(data->sel->width, data->sel->tty);

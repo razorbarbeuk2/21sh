@@ -6,11 +6,17 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/18 16:39:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:53:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void		ft_check_cursor(t_data *data)
+{
+	if(data->sel->pos[0] == 0) // A verifier en cas de clear window;
+		data->sel->pos[0] = 1;
+}
 
 void		ft_move_cursor(t_data *data, int result)
 {
@@ -18,22 +24,13 @@ void		ft_move_cursor(t_data *data, int result)
 
 	sel = NULL;
 	sel = data->sel;
-
+	ft_check_cursor(data);
 	if (result == LEFT)
-	{
 		ft_move_left(data);
-		data->sel->i_lst--;
-	}
 	if (result == RIGHT)
-	{
 		ft_move_right(data);
-		data->sel->i_lst++;
-	}
 	if (result == HOME)
-	{
 		ft_move_home(data);
-		data->sel->i_lst = 0;
-	}
 	if (result == END)
 	{
 		ft_move_end(data);

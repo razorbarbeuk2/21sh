@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/18 15:59:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 16:08:26 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ typedef enum		e_enum
 					ESC = 27,
 					ENTER = 10,
 					DEL = 127,
-					HOME = 58,
-					END = 61,
+					HOME = 279172,
+					END = 279170,
+					//HOME = 58,
+					//END = 61,
 }					t_enum;
 
 typedef struct		s_char
