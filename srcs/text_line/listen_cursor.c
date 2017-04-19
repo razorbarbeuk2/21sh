@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/19 16:53:33 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:18:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void		ft_move_cursor(t_data *data, int result)
 	if (result == HOME)
 		ft_move_home(data);
 	if (result == END)
-	{
 		ft_move_end(data);
-		data->sel->i_lst = data->entry->len_line;
-	}
 	// if (result == DOWN)
 
 	// if (result == UP)

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/19 16:58:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 18:19:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,10 @@ void ft_move_left(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-
 	if ((sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0]) || (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0) || (sel->pos[1] == 0))
 	{
 		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
-		if (data->sel->i_lst > 0)
-			data->sel->i_lst--;	
-		
-		//ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
+		motion_list(data, 'L');
 	}
 	return ;
 }
@@ -46,17 +42,24 @@ void ft_move_right(t_data *data)
 		if (data->sel->pos[1] < (len%(int)data->sel->width))
 		{
 			tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
-			if (data->sel->i_lst < (int)data->entry->len_line)
-				data->sel->i_lst++;
+			motion_list(data, 'R');
 		}
 		return;
 	}
 	if ((data->sel->pos[1] == (data->sel->width - 1)) && (len > data->sel->width))
+	{
 		ft_move(data, (data->sel->pos[1] = 0), (data->sel->pos[0] += 1));
+		motion_list(data, 'R');
+		return;
+	}
 	if ((data->sel->pos[1] < len))
+	{
 		tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
-	if (data->sel->i_lst < (int)data->entry->len_line)
-		data->sel->i_lst++;
+		motion_list(data, 'R');
+		return;
+	}
+		
+	
 }
 
 void ft_move_home(t_data *data)
@@ -68,13 +71,8 @@ void ft_move_home(t_data *data)
 	if ((sel->pos[1] != (sel->pos_start[1] + (int)sel->len_prompt) && sel->pos[0] != sel->pos_start[0]) || (sel->pos[0] == sel->pos_start[0]))
 	{
 		ft_move(data, data->sel->pos_start[1], data->sel->pos_start[0]);
-		data->sel->i_lst = 0;
+		motion_list(data, 'H');
 	}
-	// if (sel->pos[0] == sel->pos_start[0])
-	// {
-	// 	ft_move(data, data->sel->pos_start[1], data->sel->pos[0]);
-	// 	data->sel->i_lst = 0;
-	// }
 	return;
 }
 
@@ -94,4 +92,5 @@ void ft_move_end(t_data *data)
 	if (ret == 0)
 		data->sel->pos[1] = (int)sel->len_prompt + (int)data->entry->len_line;
 	ft_move(data, data->sel->pos[1], data->sel->pos[0]);
+	motion_list(data, 'E');
 }

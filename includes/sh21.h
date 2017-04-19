@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/19 16:08:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:20:51 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void				ft_move_cursor(t_data *data, int result);
 void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
 void				exec_cmd_character(t_data *data, char result);
+void				motion_list(t_data *data, char opt);
 /*PRINT_CHARACT*/
 int					ft_add_print_caract(t_data *data, char result);
 int					ft_del_print_caract(t_data *data, char result);
