@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/19 18:19:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/20 14:57:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void ft_move_right(t_data *data)
 		motion_list(data, 'R');
 		return;
 	}
-		
-	
 }
 
 void ft_move_home(t_data *data)
