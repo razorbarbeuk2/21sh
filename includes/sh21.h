@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/19 17:20:51 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/21 11:14:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void				termios_init(struct	termios *term);
 /*PROMPT*/
 void				get_super_prompt(t_data *data, char *line);
 int					get_pos_prompt(t_data *data);
-void				ft_pos_new_line(t_data *data);
 /*MOTION_CURSOR*/
 int					listen_cursor(t_data *data);
 void				ft_move_left(t_data *data);

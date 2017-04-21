@@ -47,3 +47,36 @@ void	ft_pos_new_line(t_data *data)
 	if (data->sel->pos[0] == (data->sel->height - 1))
 		data->sel->pos_start[0] = data->sel->pos[0] - ((int)data->entry->len_line + (int)data->sel->len_prompt)/(data->sel->width);
 }
+
+// int		ft_add_print_caract(t_data *data, char result)
+// {
+// 	int		pos;
+// 	int		count;
+// 	t_list	*tmp_swap;
+// 	t_list	*tmp_lst;
+// 	t_list	*tmp_st;
+
+// 	count = 0;
+// 	tmp_swap = NULL;
+// 	tmp_st = NULL;
+// 	tmp_lst = data->entry->line;
+// 	pos = ((data->sel->pos[1] - (int)data->sel->len_prompt));
+// 	if (result)
+// 	{
+// 		if (data->sel->pos[1] < ((int)data->sel->len_prompt + (int)data->entry->len_line))
+// 		{
+// 			tmp_swap = tmp_lst;
+// 			while (tmp_swap && ++count < pos)
+// 				tmp_swap = tmp_swap->next;
+// 			tmp_st = tmp_swap->next;
+// 			tmp_swap->next = NULL;
+// 			ft_add_at(&tmp_swap, result);
+// 			tmp_swap->next->next = tmp_st;
+// 		}
+// 		else
+// 			ft_add_at(&tmp_lst, result);
+// 		data->entry->line = tmp_lst;
+// 		data->entry->len_line += 1;
+// 	}
+// 	return (1);
+// }

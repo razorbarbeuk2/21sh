@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/19 17:55:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/21 16:51:12 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		print_character(t_data *data, char result)
 	ft_putchar_fd(result, data->sel->tty);
 	ft_add_print_caract(data, result);
 	data->sel->i_lst++;
-	//ft_pos_new_line(data);
 	tputs(tgetstr("ic", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("ip", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("ei", NULL), 1, ft_putchar_select);
@@ -26,12 +25,13 @@ void		print_character(t_data *data, char result)
 
 void		exec_cmd_character(t_data *data, char result)
 {
+	
 	(void)result;
 	if (data->sel)
 	{
 		//ft_putnbr_fd(ft_strlen(data->cmd), data->sel->tty);
 		// ft_putnbr_fd(data->pos_test, data->sel->tty);
-		//print_lst_line(data, data->entry->line);
+		// print_lst_line(data, data->entry->line);
 		// ft_putnbr_fd(data->sel->pos_search, data->sel->tty);
 		// ft_putchar_fd(';', data->sel->tty);
 		//****************
