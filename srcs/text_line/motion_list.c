@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:19:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/19 17:45:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/24 12:37:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	motion_list(t_data *data, char opt)
 	if ((data->sel->i_lst < (int)data->entry->len_line) && opt == 'R')
 		data->sel->i_lst++;
 	if (data->sel->i_lst && opt == 'H')
-		data->sel->i_lst = 1;
+		data->sel->i_lst = 0;
 	if ((data->sel->i_lst < (int)data->entry->len_line) && opt == 'E')
 		data->sel->i_lst = (int)data->entry->len_line;
 	return;

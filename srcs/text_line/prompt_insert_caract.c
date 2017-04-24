@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_insert_caract.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/23 22:18:44 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/04/24 18:08:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void		print_character(t_data *data, char result)
 	tputs(tgetstr("im", NULL), 1, ft_putchar_select);
 	ft_putchar_fd(result, data->sel->tty);
 	ft_add_print_caract(data, result);
-	motion_list(data, 'R');
 	tputs(tgetstr("ic", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("ip", NULL), 1, ft_putchar_select);
 	tputs(tgetstr("ei", NULL), 1, ft_putchar_select);
+	motion_list(data, 'R');
 	print_lst_line(data, data->entry->cut_line);
 }
 
@@ -32,11 +32,14 @@ void		exec_cmd_character(t_data *data, char result)
 	{
 		//ft_putnbr_fd(ft_strlen(data->cmd), data->sel->tty);
 		// ft_putnbr_fd(data->pos_test, data->sel->tty);
-		print_lst_line(data, data->entry->line);
+		
 		// ft_putnbr_fd(data->sel->pos_search, data->sel->tty);
 		// ft_putchar_fd(';', data->sel->tty);
 		//****************
+		print_lst_line(data, data->entry->line);
 		// ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
+		// ft_putnbr_fd((int)data->entry->len_line, data->sel->tty);
+		// ft_putnbr_fd(data->sel->i_lst - 1, data->sel->tty);
 		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
 		//****************
 		// ft_putnbr_fd(data->sel->pos[0], data->sel->tty);
@@ -62,11 +65,13 @@ void		exec_cmd_character(t_data *data, char result)
 void		del_one_character(t_data *data, char result)
 {
 	(void)result;
-	ft_move_cursor(data, LEFT);
-	tputs(tgetstr("dm", NULL), 1, ft_putchar_select);
-	tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-	tputs(tgetstr("ed", NULL), 1, ft_putchar_select);
 	ft_del_print_caract(data, result);
-	motion_list(data, 'L');
+	ft_move_cursor(data, LEFT);
+	tputs(tgoto((tgetstr("dc", NULL)), 0, 0), 0, ft_putchar_select);
+	//tputs(tgetstr("dm", NULL), 1, ft_putchar_select);
+	
+	//tputs(tgetstr("ed", NULL), 1, ft_putchar_select);
+	
+	//motion_list(data, 'L');
 	//print_lst_line(data, data->entry->cut_line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_del_caract.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/23 22:41:08 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/04/24 18:57:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,48 @@
 
 void	ft_del_lst(void *content, size_t content_size)
 {
-	ft_memdel(&content);
-	content_size = 0;
+	if (content)
+	{
+		free(content);
+		content_size = 0;
+	}
+	return ;
+	
 }
 
 int		ft_del_print_caract(t_data *data, char result)
 {
-	t_list	*tmp_lst;
-	t_list	*tmp_st;
+	t_list	*tmp_tools;
 	t_list	*tmp_swap;
+	t_list	*tmp_st;
 
-	tmp_st = NULL;
+	tmp_st = data->entry->line;
 	tmp_swap = NULL;
-	tmp_lst = data->entry->line;
-	data->entry->cut_line = NULL;
-	tmp_st = tmp_lst;
-	if (result)
+	tmp_tools = NULL;
+	if (result && data->entry->line)
 	{
-		if ((data->sel->i_lst) < (int)data->entry->len_line)
+		if ((int)data->entry->len_line && data->sel->i_lst == 0)
 		{
-			tmp_lst = ft_move_at_list(data, &tmp_lst, data->sel->i_lst - 1);
-			tmp_swap = tmp_lst->next->next;
-			ft_lstdelone(&tmp_lst->next, &ft_del_lst);
-			tmp_lst->next = tmp_swap;
-			data->entry->cut_line = tmp_swap;
-			tmp_lst = tmp_st;
+			tmp_swap = data->entry->line;
+			data->entry->line = tmp_swap->next;
+			ft_lstdelone(&tmp_swap, &ft_del_lst);
 		}
-		else
-			ft_strdel((char **)&tmp_lst->content);
-		data->entry->line = tmp_lst;
+		if (data->sel->i_lst <= (int)data->entry->len_line && data->sel->i_lst > 1)
+		{
+			tmp_tools = ft_move_at_list(data, &data->entry->line, data->sel->i_lst - 1);
+			tmp_swap = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+			if (tmp_swap->next)
+				tmp_tools->next = ft_move_at_list(data, &data->entry->line, data->sel->i_lst)->next;
+			else
+				tmp_tools->next = NULL;
+			ft_lstdelone(&tmp_swap, &ft_del_lst);
+		}
 		data->entry->len_line--;
+	}
+	else
+	{
+		data->entry->line = NULL;
+		data->entry->len_line = 0;
 	}
 	return (1);
 }
