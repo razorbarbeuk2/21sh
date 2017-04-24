@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/21 11:14:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/23 21:47:46 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,11 @@ void				del_one_character(t_data *data, char result);
 void				exec_cmd_character(t_data *data, char result);
 void				motion_list(t_data *data, char opt);
 /*PRINT_CHARACT*/
+
 int					ft_add_print_caract(t_data *data, char result);
 int					ft_del_print_caract(t_data *data, char result);
 /*TOOLS*/
+t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);
 
 #endif

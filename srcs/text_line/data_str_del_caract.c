@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_str_insert_caract.c                           :+:      :+:    :+:   */
+/*   data_str_del_caract.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/23 21:48:16 by RAZOR            ###   ########.fr       */
+/*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
+/*   Updated: 2017/04/23 22:41:08 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void	ft_add_at(t_list **lst, char result)
+void	ft_del_lst(void *content, size_t content_size)
 {
-	char	*tmp;
-
-	tmp = NULL;
-	tmp = ft_strdup(&result);
-	tmp[1] = '\0';
-	ft_lstadd_back(lst, ft_lstnew(tmp, sizeof(char *)));
-	ft_strdel(&tmp);
+	ft_memdel(&content);
+	content_size = 0;
 }
 
-int		ft_add_print_caract(t_data *data, char result)
+int		ft_del_print_caract(t_data *data, char result)
 {
 	t_list	*tmp_lst;
 	t_list	*tmp_st;
@@ -36,20 +31,19 @@ int		ft_add_print_caract(t_data *data, char result)
 	tmp_st = tmp_lst;
 	if (result)
 	{
-		if (data->sel->i_lst < (int)data->entry->len_line)
+		if ((data->sel->i_lst) < (int)data->entry->len_line)
 		{
-			tmp_lst = ft_move_at_list(data, &tmp_lst, data->sel->i_lst);
-			tmp_swap = tmp_lst->next;
-			tmp_lst->next = NULL;
-			ft_add_at(&tmp_lst, result);
-			tmp_lst->next->next = tmp_swap;
+			tmp_lst = ft_move_at_list(data, &tmp_lst, data->sel->i_lst - 1);
+			tmp_swap = tmp_lst->next->next;
+			ft_lstdelone(&tmp_lst->next, &ft_del_lst);
+			tmp_lst->next = tmp_swap;
 			data->entry->cut_line = tmp_swap;
 			tmp_lst = tmp_st;
 		}
 		else
-			ft_add_at(&tmp_lst, result);
+			ft_strdel((char **)&tmp_lst->content);
 		data->entry->line = tmp_lst;
-		data->entry->len_line++;
+		data->entry->len_line--;
 	}
 	return (1);
 }

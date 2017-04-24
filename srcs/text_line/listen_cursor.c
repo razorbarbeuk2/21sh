@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listen_cursor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/19 17:18:33 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/23 21:08:40 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		ft_move_cursor(t_data *data, int result)
 
 	sel = NULL;
 	sel = data->sel;
-	ft_check_cursor(data);
+	//ft_check_cursor(data);
 	if (result == LEFT)
 		ft_move_left(data);
 	if (result == RIGHT)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
+#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/04/19 17:21:36 by gbourson         ###   ########.fr        #
+#    Updated: 2017/04/23 21:25:02 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				text_line/prompt_insert_caract.c \
 				text_line/prompt_new_line_bottom.c \
 				text_line/data_str_insert_caract.c \
+				text_line/data_str_del_caract.c \
 				fork/access.c \
 				fork/fork.c \
 				fork/get_exe_path.c \
