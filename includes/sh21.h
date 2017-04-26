@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/23 21:47:46 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/04/26 12:18:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ void				ft_move_down(t_data *data);
 void				ft_move_home(t_data *data);
 void				ft_move_end(t_data *data);
 void				ft_move_cursor(t_data *data, int result);
+void 				ft_move(t_data *data, int x, int y);
 void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
 void				exec_cmd_character(t_data *data, char result);

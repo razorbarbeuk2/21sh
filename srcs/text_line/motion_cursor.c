@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/20 14:57:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/26 17:29:16 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,22 @@ void ft_move_left(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-	if ((sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0]) || (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0) || (sel->pos[1] == 0))
+	if (sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0])
 	{
 		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
 		motion_list(data, 'L');
+		return ;
+	}
+	if (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0)
+	{
+		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
+		motion_list(data, 'L');
+		return ;
+	}
+	if (sel->pos[0] > sel->pos_start[0] && sel->pos[1] == 0)
+	{
+		ft_move(data, (data->sel->pos[1] = (int)data->sel->width), (data->sel->pos[0] -= 1));
+		return ;
 	}
 	return ;
 }

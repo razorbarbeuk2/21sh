@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:40:50 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/14 14:31:00 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/04/26 12:32:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			term_init(t_select *sel)
 			return (-1);
 		sel->width = win.ws_col;
 		sel->height = win.ws_row;
+		
 		// tputs(tgetstr("ti", NULL), 1, ft_putchar_select);
 		// tputs(tgetstr("vi", NULL), 1, ft_putchar_select);
 	}
