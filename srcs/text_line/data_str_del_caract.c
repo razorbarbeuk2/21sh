@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/26 17:35:31 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:11:30 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,29 @@ int		ft_del_print_caract(t_data *data, char result)
 	t_list	*tmp_swap;
 	t_list	*tmp_st;
 
-	tmp_st = data->entry->line;
 	tmp_swap = NULL;
 	tmp_tools = NULL;
-	if (result && data->entry->line)
+	(void)result;
+	tmp_st = data->entry->line;
+	if (data->entry->line)
 	{
-		if ((int)data->entry->len_line && data->sel->i_lst == 0)
+		if (data->sel->i_lst > 0)
 		{
-			tmp_swap = data->entry->line;
-			data->entry->line = tmp_swap->next;
-			data->entry->cut_line = data->entry->line;
-			ft_lstdelone(&tmp_swap, &ft_del_lst);
+			if (data->entry->line->next)
+			{
+				tmp_swap = data->entry->line;
+				data->entry->line = data->entry->line->next;
+				data->entry->cut_line = data->entry->line;
+				ft_lstdelone(&tmp_swap, &ft_del_lst);
+			}
 		}
-		if (data->sel->i_lst <= (int)data->entry->len_line && data->sel->i_lst > 1)
+		if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
 		{
 			tmp_tools = ft_move_at_list(data, &data->entry->line, data->sel->i_lst - 1);
 			tmp_swap = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
 			if (tmp_swap->next)
 			{
-				tmp_tools->next = ft_move_at_list(data, &data->entry->line, data->sel->i_lst)->next;
+				tmp_tools->next = tmp_swap->next;
 				data->entry->cut_line = tmp_swap->next;
 			}
 			else

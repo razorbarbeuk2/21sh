@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/26 17:29:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:07:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void ft_move_left(t_data *data)
 		motion_list(data, 'L');
 		return ;
 	}
-	if (sel->pos[0] > sel->pos_start[0] && sel->pos[1] == 0)
+	if (sel->pos[0] != sel->pos_start[0] && sel->pos[1] == 0)
 	{
-		ft_move(data, (data->sel->pos[1] = (int)data->sel->width), (data->sel->pos[0] -= 1));
+		ft_move(data, (data->sel->pos[1] = ((int)data->sel->width - 1)), (data->sel->pos[0] -= 1));
 		return ;
 	}
 	return ;
