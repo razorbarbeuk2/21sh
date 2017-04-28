@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/27 17:11:30 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:06:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,21 @@ int		ft_del_print_caract(t_data *data, char result)
 	tmp_tools = NULL;
 	(void)result;
 	tmp_st = data->entry->line;
-	if (data->entry->line)
+	data->entry->cut_line = NULL;
+	if ((int)data->entry->len_line > 0 && data->sel->i_lst > 0)
 	{
-		if (data->sel->i_lst > 0)
+		if (data->sel->i_lst == (int)data->entry->len_line)
 		{
-			if (data->entry->line->next)
+			if ((int)data->entry->len_line > 1)
 			{
-				tmp_swap = data->entry->line;
-				data->entry->line = data->entry->line->next;
-				data->entry->cut_line = data->entry->line;
-				ft_lstdelone(&tmp_swap, &ft_del_lst);
+				tmp_swap = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst - 1));
+				tmp_swap->next = NULL;
 			}
+			tmp_swap = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+			ft_lstdelone(&tmp_swap, &ft_del_lst);
+			return (1);
 		}
-		if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
+		else if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
 		{
 			tmp_tools = ft_move_at_list(data, &data->entry->line, data->sel->i_lst - 1);
 			tmp_swap = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
@@ -54,16 +56,15 @@ int		ft_del_print_caract(t_data *data, char result)
 				tmp_tools->next = tmp_swap->next;
 				data->entry->cut_line = tmp_swap->next;
 			}
-			else
-				tmp_tools->next = NULL;
 			ft_lstdelone(&tmp_swap, &ft_del_lst);
+			return (1);
 		}
-		data->entry->len_line--;
+		
 	}
 	else
 	{
 		data->entry->line = NULL;
 		data->entry->len_line = 0;
 	}
-	return (1);
+	return (0);
 }

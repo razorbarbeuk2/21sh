@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/04/26 12:18:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/28 15:11:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct		s_data
 int					get_tab_to_lst(t_list **data_env, char **environ);
 char				**get_lst_to_tab(t_list *env_lst);
 void				print_lst(t_list *lst);
+void 				print_lst_line_tools(t_data *data, t_list *lst);
 void				print_pos_cursor(t_data *data);
 /*TOOLS FREE*/
 void				ft_free_char(char **tmp);

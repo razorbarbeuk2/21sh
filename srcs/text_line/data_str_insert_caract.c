@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/26 15:05:34 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/28 14:55:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		ft_add_print_caract(t_data *data, char result)
 	tmp_st = tmp_lst;
 	if (result)
 	{
+
 		if ((int)data->entry->len_line > 0 && data->sel->i_lst == 0)
 		{
 			tmp_lst = NULL;
@@ -46,8 +47,9 @@ int		ft_add_print_caract(t_data *data, char result)
 			data->entry->len_line++;
 			return (1);
 		}
-		if ((data->sel->i_lst < (int)data->entry->len_line) && data->sel->i_lst > 0)
+		else if ((data->sel->i_lst < (int)data->entry->len_line) && data->sel->i_lst > 0)
 		{
+
 			tmp_lst = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
 			tmp_swap = tmp_lst->next;
 			tmp_lst->next = NULL;
