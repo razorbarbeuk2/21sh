@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_insert_caract.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/28 14:55:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/01 01:17:10 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,23 @@ int		ft_add_print_caract(t_data *data, char result)
 
 	tmp_st = NULL;
 	tmp_swap = NULL;
+	tmp_lst = NULL;
 	tmp_lst = data->entry->line;
 	data->entry->cut_line = NULL;
 	tmp_st = tmp_lst;
 	if (result)
 	{
-
-		if ((int)data->entry->len_line > 0 && data->sel->i_lst == 0)
-		{
-			tmp_lst = NULL;
-			ft_add_at(&tmp_lst, result);
-			tmp_lst->next = data->entry->line;
-			data->entry->line = tmp_lst;
-			data->entry->cut_line = tmp_lst->next;
-			data->entry->len_line++;
-			return (1);
-		}
-		else if ((data->sel->i_lst < (int)data->entry->len_line) && data->sel->i_lst > 0)
+		// if ((int)data->entry->len_line > 0)
+		// {
+		// 	tmp_lst = NULL;
+		// 	ft_add_at(&tmp_lst, result);
+		// 	tmp_lst->next = data->entry->line;
+		// 	data->entry->line = tmp_lst;
+		// 	data->entry->cut_line = tmp_lst->next;
+		// 	data->entry->len_line++;
+		// 	return (1);
+		// }
+		if ((data->sel->i_lst < (int)data->entry->len_line) && data->sel->i_lst > 0)
 		{
 
 			tmp_lst = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);

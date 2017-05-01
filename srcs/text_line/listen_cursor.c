@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listen_cursor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/26 12:32:42 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/01 01:13:15 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ void		ft_cmd_cursor(t_data *data, int result)
 
 int			listen_cursor(t_data *data)
 {
-	char	buf[8];
+	char	buf[7];
 	int		result;
 
 	result = 0;
-	ft_bzero(buf, 8);
+	ft_bzero(buf, 7);
 	get_super_prompt(data, NULL);
-	data->sel->pos = ft_memalloc(2);
-	data->sel->pos_start = ft_memalloc(2);
+	data->sel->pos = ft_memalloc(2*sizeof(int));
+	data->sel->pos_start = ft_memalloc(2*sizeof(int));
 	get_pos_prompt(data);
 	data->entry->size_line = data->sel->len_prompt;
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];
 	//tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
-	while(read(0, buf, 8))
+	while(read(0, buf, 7))
 	{
 		result = ft_concat_int(buf);
 		if (result == DEL || result == ENTER)
@@ -79,7 +79,7 @@ int			listen_cursor(t_data *data)
 		if (result >= UP && result <= LEFT)
 			ft_move_cursor(data, result);
 		get_pos_prompt(data);
-		ft_bzero(buf, 8);
+		ft_bzero(buf, 7);
 	}
 	return (0);
 }

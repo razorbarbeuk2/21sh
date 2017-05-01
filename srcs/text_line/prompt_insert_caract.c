@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_insert_caract.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/28 17:17:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/30 22:49:06 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		print_character(t_data *data, char result)
 {
-	
 	ft_add_print_caract(data, result);
 	ft_putchar_fd(result, data->sel->tty);
 	motion_list(data, 'R');
@@ -22,7 +21,6 @@ void		print_character(t_data *data, char result)
 		ft_move(data, (data->sel->pos[1] = 0), (data->sel->pos[0] += 1));
 	if (data->sel->i_lst < (int)data->entry->len_line)
 		print_lst_line(data, data->entry->cut_line);
-	return ;
 }
 
 void		exec_cmd_character(t_data *data, char result)
@@ -80,25 +78,27 @@ static void		del_print_middle_sentence(t_data *data)
 void		del_one_character(t_data *data, char result)
 {
 	int i_lst;
+	int i_;
 
-	i_lst = 0;	
+	i_lst = 0;
+	i_ = 0;
 	(void)result;
 	if (ft_del_print_caract(data, result))
 	{
 		if (data->sel->i_lst == (int)data->entry->len_line)
 		{
-			if ((data->sel->pos[1]) == 0)
+			if ((data->sel->pos[1]) == 0 && !i_)
+			{
 				ft_move(data, (data->sel->pos[1] = ((int)data->sel->width - 1)), (data->sel->pos[0] -= 1));
+				i_ = 1;
+			}
 			ft_move_cursor(data, LEFT);
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-			if ((data->sel->pos[1]) == (data->sel->width - 1))
+			if ((data->sel->pos[1]) == (data->sel->width - 1) && i_)
+			{
 				ft_move(data, data->sel->pos[1] = ((int)data->sel->width - 1), data->sel->pos[0]);
-			//if (data->sel->i_lst == ((int)data->entry->len_line - 1))
-				
-			// if (data->sel->i_lst == (int)data->entry->len_line)
-			// 	ft_move_end(data);
-			
-			
+				i_ = 0;
+			}
 		}
 		else if (data->sel->i_lst < (int)data->entry->len_line)
 		{
@@ -106,8 +106,10 @@ void		del_one_character(t_data *data, char result)
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 			del_print_middle_sentence(data);
 		}
-		if (data->entry->len_line != 0)
-			data->entry->len_line--;
+		data->entry->len_line--;
+		return ;
 	}
+	data->entry->line = NULL;
+	data->entry->len_line = 0;
 	return ;
 }

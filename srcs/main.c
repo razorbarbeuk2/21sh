@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/24 12:32:17 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/04/30 20:29:38 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ static int init_struct(t_data *data)
 	if ((data->sel = (t_select *)malloc(sizeof(t_select))) == NULL)
 		return (0);
 	data->entry->line = NULL;
+	data->entry->cut_line = NULL;
 	data->entry->len_line = 0;
 	data->entry->nb_line = 0;
-	data->sel->i_lst = 0;
 	data->sel->path_arg = NULL;
 	data->sel->arg = NULL;
 	data->sel->termcapbuf = NULL;
+	data->sel->i_lst = 0;
 	data->sel->tty = 0;
 	data->sel->width = 0;
 	data->sel->height = 0;
+	data->sel->prompt = NULL;
+	data->sel->len_prompt = 0;
 	return (1);
 }
 

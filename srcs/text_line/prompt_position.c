@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/18 15:44:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/01 00:28:24 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static void	ft_clean_buf_pos(t_data *data, char *buf)
 	}
 	ft_free_char(tab_pos);
 	data->sel->pos[i] = 0;
+	tab_pos = NULL;
 }
 
 int			get_pos_prompt(t_data *data)
 {
 	char	buf[14];
 
+	ft_bzero(buf, 14);
 	ft_putstr_fd(POS, data->sel->tty);
 	read(data->sel->tty, buf, sizeof(buf));
 	ft_clean_buf_pos(data, buf);
