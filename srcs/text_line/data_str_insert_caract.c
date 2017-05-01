@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_insert_caract.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/01 01:17:10 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/01 14:22:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 void	ft_add_at(t_list **lst, char result)
 {
-	char	*tmp;
-
-	tmp = NULL;
-	tmp = ft_strdup(&result);
-	tmp[1] = '\0';
-	ft_lstadd_back(lst, ft_lstnew(tmp, sizeof(char *)));
-	ft_strdel(&tmp);
+	ft_lstadd_back(lst, ft_lstnew(&result, sizeof(char)));
 }
 
 int		ft_add_print_caract(t_data *data, char result)
@@ -62,6 +56,9 @@ int		ft_add_print_caract(t_data *data, char result)
 			ft_add_at(&tmp_lst, result);
 		data->entry->line = tmp_lst;
 		data->entry->len_line++;
+		tmp_swap = NULL;
+		tmp_lst = NULL;
+		tmp_st = NULL;
 	}
 	return (1);
 }

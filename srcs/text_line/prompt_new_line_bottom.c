@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_new_line_bottom.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/01 00:08:50 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/01 15:59:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
 		}
 		return (tmp_lst);
 	}
+	tmp_lst = NULL;
 	return (NULL);
 }
 
