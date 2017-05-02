@@ -3,28 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   listen_cursor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/01 18:47:32 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/02 17:51:13 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void		ft_check_cursor(t_data *data)
-{
-	if(data->sel->pos[0] == 0) // A verifier en cas de clear window;
-		data->sel->pos[0] = 1;
-}
-
 void		ft_move_cursor(t_data *data, int result)
 {
-	t_select *sel;
-
-	sel = NULL;
-	sel = data->sel;
-	//ft_check_cursor(data);
 	if (result == LEFT)
 		ft_move_left(data);
 	if (result == RIGHT)
@@ -33,19 +22,14 @@ void		ft_move_cursor(t_data *data, int result)
 		ft_move_home(data);
 	if (result == END)
 		ft_move_end(data);
-	// if (result == DOWN)
-
-	// if (result == UP)
-	//tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
 }
 
 void		ft_cmd_cursor(t_data *data, int result)
 {
-	// ft_putnbr_fd(result, data->sel->tty);
-	// ft_putchar_fd(':', data->sel->tty);
-	// ft_putnbr_fd(DEL, data->sel->tty);
-	// if (result == ESC)
-	//ft_putstr_fd("FUCK", data->sel->tty);
+	if (result == ALT_DOWN)
+		ft_move_down(data);
+	if (result == ALT_UP)
+		ft_move_up(data);
 	if (result == ENTER)
 		exec_cmd_character(data, result);
 	if (result == DEL)
@@ -66,11 +50,10 @@ int			listen_cursor(t_data *data)
 	data->entry->size_line = data->sel->len_prompt;
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];
-	//tputs(tgoto(tgetstr("cm", NULL), data->sel->pos[1], data->sel->pos[0]), 1, ft_putchar_select);
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);
-		if (result == DEL || result == ENTER)
+		if (result == DEL || result == ENTER || result == ALT_UP || result == ALT_DOWN)
 			ft_cmd_cursor(data, result);
 		if (result == HOME || result == END)
 			ft_move_cursor(data, result);

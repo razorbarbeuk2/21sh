@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_insert_caract.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/02 14:15:35 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/02 19:01:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ void		print_character(t_data *data, char result)
 	motion_list(data, 'R');
 	if ((data->sel->pos[1]) == (data->sel->width - 1))
 		ft_move(data, (data->sel->pos[1] = 0), (data->sel->pos[0] += 1));
-	if (data->sel->i_lst < (int)data->entry->len_line)
+	if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
+	{
+		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
 		print_lst_line(data, data->entry->cut_line);
+		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
+	}
 }
 
 void		exec_cmd_character(t_data *data, char result)
@@ -37,7 +41,7 @@ void		exec_cmd_character(t_data *data, char result)
 		//****************
 		ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
 		ft_putnbr_fd((int)data->entry->len_line, data->sel->tty);
-		print_lst_line_tools(data, data->entry->line);
+		//print_lst_line_tools(data, data->entry->line);
 		// ft_putnbr_fd(data->sel->i_lst - 1, data->sel->tty);
 		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
 		//****************
@@ -64,15 +68,23 @@ void		exec_cmd_character(t_data *data, char result)
 static void		del_print_middle_sentence(t_data *data)
 {
 	int i_lst;
+	int pos_x = 0;
+	int pos_y = 0;
+	//int len = 0;
 
 	i_lst = 0;
+	pos_x = data->sel->pos[1];
+	pos_y = data->sel->pos[0];
+	// len = (int)data->sel->len_prompt + (int)data->entry->len_line;
+	// if ((len%(int)data->sel->width) < ((int)data->sel->width - 1))
+	// {
 	i_lst = data->sel->i_lst;
-	tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
 	ft_move_end(data);
 	tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-	tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
-	data->sel->i_lst = i_lst;
+	ft_move(data, (pos_x - 1), pos_y);
 	print_lst_line(data, data->entry->cut_line);
+	data->sel->i_lst = i_lst;
+	// }
 }
 
 void		del_one_character(t_data *data, char result)
@@ -83,8 +95,7 @@ void		del_one_character(t_data *data, char result)
 	i_lst = 0;
 	i_ = 0;
 	(void)result;
-	ft_del_print_caract(data, result);
-	if (data->sel->i_lst > 0)
+	if ((int)data->entry->len_line && data->sel->i_lst)
 	{
 		if (data->sel->i_lst == (int)data->entry->len_line)
 		{
@@ -107,7 +118,9 @@ void		del_one_character(t_data *data, char result)
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 			del_print_middle_sentence(data);
 		}
+		ft_del_print_caract(data, result);
 		data->entry->len_line--;
+		return ;
 	}
 	return ;
 }
