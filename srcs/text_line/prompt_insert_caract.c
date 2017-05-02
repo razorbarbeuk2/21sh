@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_insert_caract.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/01 16:24:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/02 14:15:35 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void		del_one_character(t_data *data, char result)
 	i_lst = 0;
 	i_ = 0;
 	(void)result;
-	if (ft_del_print_caract(data, result))
+	ft_del_print_caract(data, result);
+	if (data->sel->i_lst > 0)
 	{
 		if (data->sel->i_lst == (int)data->entry->len_line)
 		{
@@ -107,9 +108,6 @@ void		del_one_character(t_data *data, char result)
 			del_print_middle_sentence(data);
 		}
 		data->entry->len_line--;
-		return ;
 	}
-	data->entry->line = NULL;
-	data->entry->len_line = 0;
 	return ;
 }

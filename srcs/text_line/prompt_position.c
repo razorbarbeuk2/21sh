@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/01 00:28:24 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/01 18:45:48 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_clean_buf_pos(t_data *data, char *buf)
 		i++;
 	}
 	ft_free_char(tab_pos);
-	data->sel->pos[i] = 0;
+	//data->sel->pos[i] = 0;
 	tab_pos = NULL;
 }
 

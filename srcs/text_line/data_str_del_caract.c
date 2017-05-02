@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_del_caract.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/01 16:24:27 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/01 22:11:46 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_del_print_caract(t_data *data, char result)
 	tmp_tools = NULL;
 	tmp_st = data->entry->line;
 	data->entry->cut_line = NULL;
-	if ((int)data->entry->len_line > 0 && data->sel->i_lst > 0)
+	if ((int)data->entry->len_line > 0 && data->sel->i_lst)
 	{
 		if (data->sel->i_lst < (int)data->entry->len_line)
 		{
@@ -62,6 +62,5 @@ int		ft_del_print_caract(t_data *data, char result)
 		tmp_st = NULL;
 		return (1);
 	}
-	
 	return (0);
 }
