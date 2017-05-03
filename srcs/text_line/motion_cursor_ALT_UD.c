@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:17:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/02 17:45:34 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/03 10:05:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ void ft_move_up(t_data *data)
 	sel = NULL;
 	sel = data->sel;
 	len = (int)data->sel->len_prompt + (int)data->entry->len_line;
-	if (sel->pos[0] > sel->pos_start[0] && ((data->sel->pos[0] - 1) != sel->pos_start[0]))
-		ft_move(data, data->sel->pos[1], (data->sel->pos[0] -= 1));
-	else
+	if (sel->pos[0] > sel->pos_start[0])
 	{
-		if (data->sel->pos[1] < data->sel->pos_start[1])
-			ft_move_home(data);
-		else
+		if ((data->sel->pos[0] - 1) != sel->pos_start[0])
 			ft_move(data, data->sel->pos[1], (data->sel->pos[0] -= 1));
+		else
+		{
+			if (data->sel->pos[1] < data->sel->pos_start[1])
+				ft_move_home(data);
+			else
+				ft_move(data, data->sel->pos[1], (data->sel->pos[0] -= 1));
+		}
+		motion_list(data, 'U');
 	}
-	motion_list(data, 'U');
 	return ;
 }
 
