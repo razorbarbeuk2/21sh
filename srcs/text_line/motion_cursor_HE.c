@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   motion_cursor_HE.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:16:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/03 16:12:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/03 23:02:03 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void ft_move_end(t_data *data)
 	if (data->sel->pos[1] != (data->sel->width - 1))
 		ft_move(data, data->sel->pos[1], data->sel->pos[0]);
 	else
-		ft_move(data, 0, data->sel->pos[0] += 1);
+		ft_move(data, (data->sel->pos[1] = (data->sel->width - 1)), data->sel->pos[0]);
 	motion_list(data, 'E');
 }
