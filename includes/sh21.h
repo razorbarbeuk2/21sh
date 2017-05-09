@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/02 16:07:04 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/09 15:11:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ typedef enum		e_enum
 					END = 279170,
 					ALT_UP = 27279165,
 					ALT_DOWN = 27279166,
+					ALT_RIGHT = 27279167,
+					ALT_LEFT = 27279168
+					// ALT_RIGHT
 					//HOME = 58,
 					//END = 61,
 }					t_enum;
@@ -90,6 +93,7 @@ typedef struct		s_select
 	int				tty;
 	int				width;
 	int				height;
+	int				_bottom;
 	char			*prompt;
 	size_t			len_prompt;
 	struct termios	myterm;
@@ -170,6 +174,8 @@ void				ft_move_left(t_data *data);
 void				ft_move_right(t_data *data);
 void				ft_move_up(t_data *data);
 void				ft_move_down(t_data *data);
+void				ft_move_word_left(t_data *data);
+void				ft_move_word_right(t_data *data);
 void				ft_move_home(t_data *data);
 void				ft_move_end(t_data *data);
 void				ft_move_cursor(t_data *data, int result);

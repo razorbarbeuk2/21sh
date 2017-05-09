@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/02 17:51:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/09 16:00:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void		ft_cmd_cursor(t_data *data, int result)
 		ft_move_down(data);
 	if (result == ALT_UP)
 		ft_move_up(data);
+	if (result == ALT_LEFT)
+		ft_move_word_left(data);
+	if (result == ALT_RIGHT)
+		ft_move_word_right(data);
 	if (result == ENTER)
 		exec_cmd_character(data, result);
 	if (result == DEL)
@@ -50,10 +54,14 @@ int			listen_cursor(t_data *data)
 	data->entry->size_line = data->sel->len_prompt;
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];
+	if (data->sel->pos_start[0] == (data->sel->height - 1))
+		data->sel->_bottom = 1;
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);
-		if (result == DEL || result == ENTER || result == ALT_UP || result == ALT_DOWN)
+		if (result == DEL || result == ENTER)
+			ft_cmd_cursor(data, result);
+		if (result == ALT_UP || result == ALT_DOWN || result == ALT_LEFT || result == ALT_RIGHT)
 			ft_cmd_cursor(data, result);
 		if (result == HOME || result == END)
 			ft_move_cursor(data, result);

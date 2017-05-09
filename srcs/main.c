@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/30 20:29:38 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/09 14:05:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int init_struct(t_data *data)
 	data->sel->height = 0;
 	data->sel->prompt = NULL;
 	data->sel->len_prompt = 0;
+	data->sel->_bottom = 0;
 	return (1);
 }
 

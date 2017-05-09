@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/02 16:38:27 by gbourson         ###   ########.fr        #
+#    Updated: 2017/05/09 15:50:43 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				text_line/motion_cursor_LR.c \
 				text_line/motion_cursor_HE.c \
 				text_line/motion_cursor_ALT_UD.c \
+				text_line/motion_cursor_ALT_W_LR.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
 				text_line/prompt_insert_caract.c \
