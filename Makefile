@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/10 17:17:09 by gbourson         ###   ########.fr        #
+#    Updated: 2017/05/10 17:55:08 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,17 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				env/env_elem_search.c \
 				term/init_term.c \
 				text_line/listen_cursor.c \
+				text_line/motion_cursor_ADD.c \
+				text_line/motion_cursor_DEL.c \
 				text_line/motion_cursor_LR.c \
 				text_line/motion_cursor_HE.c \
 				text_line/motion_cursor_ALT_UD.c \
 				text_line/motion_cursor_ALT_W_LR.c \
+				text_line/motion_cursor_CPY.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
-				data/data_cpy_caract.c \
 				data/data_exec_cmd.c \
 				tools/tools_free.c \
 				tools/tools_list.c \
@@ -49,6 +51,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				main.c \
 				parse_options.c \
 				prompt.c \
+
 				
 
 SRC			=	$(addprefix srcs/, $(SRC_NAME))

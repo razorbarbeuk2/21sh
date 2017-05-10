@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/09 16:00:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/10 18:05:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,36 @@ void		ft_move_cursor(t_data *data, int result)
 {
 	if (result == LEFT)
 		ft_move_left(data);
-	if (result == RIGHT)
+	else if (result == RIGHT)
 		ft_move_right(data);
-	if (result == HOME)
+	else if (result == HOME)
 		ft_move_home(data);
-	if (result == END)
+	else if (result == END)
 		ft_move_end(data);
+	else
+		return ;
 }
 
 void		ft_cmd_cursor(t_data *data, int result)
 {
 	if (result == ALT_DOWN)
 		ft_move_down(data);
-	if (result == ALT_UP)
+	else if (result == ALT_UP)
 		ft_move_up(data);
-	if (result == ALT_LEFT)
+	else if (result == ALT_LEFT)
 		ft_move_word_left(data);
-	if (result == ALT_RIGHT)
+	else if (result == ALT_RIGHT)
 		ft_move_word_right(data);
-	if (result == ENTER)
+	else if (result == SHIFT_LEFT)
+		ft_cpy_word_left(data, result);
+	else if (result == SHIFT_RIGHT)
+		ft_cpy_word_right(data, result);
+	else if (result == ENTER)
 		exec_cmd_character(data, result);
-	if (result == DEL)
+	else if (result == DEL)
 		del_one_character(data, result);
+	else
+		return ;
 }
 
 int			listen_cursor(t_data *data)
@@ -62,6 +70,8 @@ int			listen_cursor(t_data *data)
 		if (result == DEL || result == ENTER)
 			ft_cmd_cursor(data, result);
 		if (result == ALT_UP || result == ALT_DOWN || result == ALT_LEFT || result == ALT_RIGHT)
+			ft_cmd_cursor(data, result);
+		if (result == SHIFT_LEFT || result == SHIFT_RIGHT)
 			ft_cmd_cursor(data, result);
 		if (result == HOME || result == END)
 			ft_move_cursor(data, result);
