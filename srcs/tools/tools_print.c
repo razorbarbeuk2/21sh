@@ -6,35 +6,11 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/10 14:10:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:00:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-
-t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
-{
-	t_list	*tmp_lst;
-	int 	count;
-
-	(void)data;
-	tmp_lst = NULL;
-	tmp_lst = (*lst);
-	if (!pos)
-		return (tmp_lst);
-	count = 0;
-	if (pos)
-	{
-		while (count != pos && tmp_lst)
-		{
-			tmp_lst = tmp_lst->next;
-			count++;
-		}
-		return (tmp_lst);
-	}
-	tmp_lst = NULL;
-	return (NULL);
-}
 
 void		print_lst_line(t_data *data, t_list *lst)
 {
@@ -54,7 +30,7 @@ void		print_lst_line(t_data *data, t_list *lst)
 	list = NULL;
 }
 
-void print_lst_line_tools(t_data *data, t_list *lst)
+void		print_lst_line_tools(t_data *data, t_list *lst)
 {
 	t_list *list;
 

@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/09 15:50:43 by gbourson         ###   ########.fr        #
+#    Updated: 2017/05/10 17:17:09 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				env/iter_elem_env.c \
 				env/del_elem_env.c \
 				env/edit_elem_env.c \
+				env/env_elem_search.c \
 				term/init_term.c \
 				text_line/listen_cursor.c \
 				text_line/motion_cursor_LR.c \
@@ -33,10 +34,14 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				text_line/motion_cursor_ALT_W_LR.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
-				text_line/prompt_insert_caract.c \
-				text_line/prompt_new_line_bottom.c \
-				text_line/data_str_insert_caract.c \
-				text_line/data_str_del_caract.c \
+				data/data_str_insert_caract.c \
+				data/data_str_del_caract.c \
+				data/data_cpy_caract.c \
+				data/data_exec_cmd.c \
+				tools/tools_free.c \
+				tools/tools_list.c \
+				tools/tools_termcaps.c \
+				tools/tools_print.c \
 				fork/access.c \
 				fork/fork.c \
 				fork/get_exe_path.c \
@@ -44,10 +49,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				main.c \
 				parse_options.c \
 				prompt.c \
-				search.c \
-				tools_free.c \
-				tools_list.c \
-				tools_termcaps.c \
+				
 
 SRC			=	$(addprefix srcs/, $(SRC_NAME))
 INCLUDES	=	-I./libft/includes/ -I./includes

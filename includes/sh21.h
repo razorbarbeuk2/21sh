@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/09 15:11:36 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:02:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_buil
 typedef struct		s_entry
 {
 	t_list			*line;
+	t_list			*cpy;
 	t_list			*cut_line;
 	size_t			len_line;
 	size_t			size_line;
@@ -184,10 +185,10 @@ void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
 void				exec_cmd_character(t_data *data, char result);
 void				motion_list(t_data *data, char opt);
-/*PRINT_CHARACT*/
-
-int					ft_add_print_caract(t_data *data, char result);
-int					ft_del_print_caract(t_data *data, char result);
+/*ADD_DEL_CPY_PRINT_CHARACT*/
+int					ft_add_print_caract(t_data *data, char result); /*data_str_insert_caract.c*/
+int					ft_del_print_caract(t_data *data, char result); /*data_str_insert.c*/
+void				ft_add_at(t_list **lst, char result);
 /*TOOLS*/
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);

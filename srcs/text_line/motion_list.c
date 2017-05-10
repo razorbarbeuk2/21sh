@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:19:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/03 13:58:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:00:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,28 @@ void	motion_list(t_data *data, char opt)
 			data->sel->i_lst = (int)data->entry->len_line;
 	}
 	return;
+}
+
+t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
+{
+	t_list	*tmp_lst;
+	int 	count;
+
+	(void)data;
+	tmp_lst = NULL;
+	tmp_lst = (*lst);
+	if (!pos)
+		return (tmp_lst);
+	count = 0;
+	if (pos)
+	{
+		while (count != pos && tmp_lst)
+		{
+			tmp_lst = tmp_lst->next;
+			count++;
+		}
+		return (tmp_lst);
+	}
+	tmp_lst = NULL;
+	return (NULL);
 }
