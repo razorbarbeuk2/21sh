@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/10 18:14:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/11 16:22:08 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void		exec_cmd_character(t_data *data, char result)
 		// ft_putchar_fd(';', data->sel->tty);
 		//****************
 		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
-		ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
+		// ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
+		//ft_putstr_fd(data->entry->cpy, data->sel->tty);
+		//print_lst_line_tools(data, data->entry->cpy);
+		ft_putnbr_fd(ft_lst_count(data->entry->line), data->sel->tty);
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 		// ft_putnbr_fd(data->sel->width, data->sel->tty);
 		// ft_putchar_fd(';', data->sel->tty);
@@ -33,7 +36,7 @@ void		exec_cmd_character(t_data *data, char result)
 		// ft_putchar_fd(';', data->sel->tty);
 		// ft_putnbr_fd((int)data->entry->len_line, data->sel->tty);
 		
-		//print_lst_line_tools(data, data->entry->line);
+		
 		// ft_putnbr_fd(data->sel->i_lst - 1, data->sel->tty);
 		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
 		//****************

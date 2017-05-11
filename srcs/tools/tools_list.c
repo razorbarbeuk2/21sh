@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:25:35 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/04/18 15:51:07 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/11 16:24:14 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**get_lst_to_tab(t_list *env_lst)
 
 	env = NULL;
 	tmp_lst = NULL;
-	environ = (char **)malloc(sizeof(char *) * (lst_count(env_lst) + 1));
+	environ = (char **)malloc(sizeof(char *) * (ft_lst_count(env_lst) + 1));
 	tmp_lst = env_lst;
 	i = 0;
 

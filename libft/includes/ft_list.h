@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:08:54 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/01/20 17:59:39 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/11 16:22:35 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct		s_list
 	struct s_list	*prev;
 }					t_list;
 
-int		lst_count(t_list *env_lst);
+int		ft_lst_count(t_list *lst);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 void	ft_lstadd(t_list **alst, t_list *new);
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t));

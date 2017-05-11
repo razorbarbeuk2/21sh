@@ -6,20 +6,23 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/13 14:45:25 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/11 15:57:41 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/11 16:21:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int		lst_count(t_list *env_lst)
+int		ft_lst_count(t_list *lst)
 {
-	int count;
+	t_list	*tmp;
+	int 	count;
 
 	count = 0;
-	while (env_lst)
+	tmp = NULL;
+	tmp = lst;
+	while (tmp)
 	{
-		env_lst = env_lst->next;
+		tmp = tmp->next;
 		count++;
 	}
 	return (count);

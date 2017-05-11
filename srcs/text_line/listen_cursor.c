@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/10 18:05:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/11 16:57:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ void		ft_cmd_cursor(t_data *data, int result)
 	else if (result == ALT_RIGHT)
 		ft_move_word_right(data);
 	else if (result == SHIFT_LEFT)
-		ft_cpy_word_left(data, result);
+		ft_cpy_word_left(data);
 	else if (result == SHIFT_RIGHT)
-		ft_cpy_word_right(data, result);
+		ft_cpy_word_right(data);
+	else if (result == CTRL_CPY_PASTE)
+		ft_paste_word_cpy(data);
+	else if (result == CTRL_CUT_PASTE)
+		ft_paste_word_cut(data);
 	else if (result == ENTER)
 		exec_cmd_character(data, result);
 	else if (result == DEL)
@@ -58,6 +62,7 @@ int			listen_cursor(t_data *data)
 	get_super_prompt(data, NULL);
 	data->sel->pos = ft_memalloc(2*sizeof(int));
 	data->sel->pos_start = ft_memalloc(2*sizeof(int));
+	data->sel->pos_tmp = ft_memalloc(2*sizeof(int));
 	get_pos_prompt(data);
 	data->entry->size_line = data->sel->len_prompt;
 	data->sel->pos_start[0] = data->sel->pos[0];
@@ -71,7 +76,7 @@ int			listen_cursor(t_data *data)
 			ft_cmd_cursor(data, result);
 		if (result == ALT_UP || result == ALT_DOWN || result == ALT_LEFT || result == ALT_RIGHT)
 			ft_cmd_cursor(data, result);
-		if (result == SHIFT_LEFT || result == SHIFT_RIGHT)
+		if (result == SHIFT_LEFT || result == SHIFT_RIGHT || result == CTRL_CPY_PASTE || result == CTRL_CUT_PASTE)
 			ft_cmd_cursor(data, result);
 		if (result == HOME || result == END)
 			ft_move_cursor(data, result);

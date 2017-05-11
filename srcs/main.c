@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/09 14:05:43 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/11 17:53:14 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int init_struct(t_data *data)
 	if ((data->sel = (t_select *)malloc(sizeof(t_select))) == NULL)
 		return (0);
 	data->entry->line = NULL;
+	data->entry->cpy = NULL;
 	data->entry->cut_line = NULL;
 	data->entry->len_line = 0;
 	data->entry->nb_line = 0;
@@ -29,6 +30,7 @@ static int init_struct(t_data *data)
 	data->sel->arg = NULL;
 	data->sel->termcapbuf = NULL;
 	data->sel->i_lst = 0;
+	data->sel->i_lst_tmp = 0;
 	data->sel->tty = 0;
 	data->sel->width = 0;
 	data->sel->height = 0;
