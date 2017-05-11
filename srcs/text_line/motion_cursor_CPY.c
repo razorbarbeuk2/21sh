@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:18:02 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/10 19:12:33 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/11 11:55:54 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,23 @@
 void	ft_cpy_word_left(t_data *data, int result)
 {
 	t_list	*tmp;
+	int		_i;
 
 	(void)result;
 	tmp = NULL;
-	//  = 0;
-
-	tputs(tgetstr("so", NULL), 1, ft_putchar_select);
-	// // ft_putnbr_fd(tgetflag("ms"), data->sel->tty);
-	// // if (!tgetflag("ms"))
-	
-	
-	// tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
-	ft_putchar_fd('f', data->sel->tty);
-	tputs(tgetstr("me", NULL), 1, ft_putchar_select);
-	ft_move_cursor(data, LEFT);
+	_i = 0;
+	_i = data->sel->i_lst;
+	if (data->sel->i_lst > 0)
+	{
+		tputs(tgetstr("so", NULL), 1, ft_putchar_select);
+		tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+		ft_move_cursor(data, LEFT);
+		ft_putchar_fd(((char *)tmp->content)[0], data->sel->tty);	
+		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
+		ft_move_cursor(data, LEFT);
+	}
+	if (data->sel->i_lst != 0)
+			data->sel->i_lst++;
 	return ;
 }
 
@@ -38,8 +41,13 @@ void	ft_cpy_word_right(t_data *data, int result)
 
 	(void)result;
 	tmp = NULL;
-	tputs(tgetstr("so", NULL), 1, ft_putchar_select);
-	ft_move_right(data);
-	tputs(tgetstr("se", NULL), 1, ft_putchar_select);
+	if (data->sel->i_lst < (int)data->entry->len_line - 1)
+	{
+		tputs(tgetstr("so", NULL), 1, ft_putchar_select);
+		tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+		ft_putchar_fd(((char *)tmp->content)[0], data->sel->tty);
+		motion_list(data, 'R');
+		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
+	}
 	return ;
 }

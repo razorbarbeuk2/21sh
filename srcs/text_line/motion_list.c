@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:19:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/10 17:00:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/11 11:52:46 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
 	count = 0;
 	if (pos)
 	{
-		while (count != pos && tmp_lst)
+		while (count != pos && tmp_lst && tmp_lst->next)
 		{
 			tmp_lst = tmp_lst->next;
 			count++;
