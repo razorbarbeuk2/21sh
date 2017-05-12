@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/12 16:26:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/12 17:28:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ typedef enum		e_enum
 					SHIFT_LEFT = -23279172,
 					SHIFT_RIGHT = -23279173,
 					CTRL_CPY_PASTE = 16,
-					CTRL_CUT_PASTE = 12
+					CTRL_CUT_PASTE = 12,
+					RST = 18,
+
 					// ALT_RIGHT
 					//HOME = 58,
 					//END = 61,
@@ -191,6 +193,7 @@ void				ft_move_home(t_data *data);
 void				ft_move_end(t_data *data);
 void				ft_move_cursor(t_data *data, int result);
 void 				ft_move(t_data *data, int x, int y);
+void				reset_line(t_data *data);
 void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
 void				exec_cmd_character(t_data *data, char result);
