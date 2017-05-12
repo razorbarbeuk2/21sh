@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:18:02 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/11 18:26:17 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/12 16:26:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_cpy_word_right(t_data *data)
 	if (data->sel->i_lst < (int)data->entry->len_line - 1)
 	{
 		tputs(tgetstr("so", NULL), 1, ft_putchar_select);
-		tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+		tmp = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst + 1));
 		ft_putchar_fd(((char *)tmp->content)[0], data->sel->tty);
 		motion_list(data, 'R');
 		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
@@ -70,13 +70,11 @@ void	ft_paste_word_cpy(t_data *data)
 	if (data->entry->cpy)
 	{
 		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
-		tputs(tgetstr("im", NULL), 1, ft_putchar_select);
 		while (tmp)
 		{
 			print_character(data, ((char *)tmp->content)[0]);
 			tmp = tmp->next;
 		}
-		tputs(tgetstr("ei", NULL), 1, ft_putchar_select);
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 	}
 	return ;
@@ -88,30 +86,34 @@ void	ft_paste_word_cut(t_data *data)
 	t_list	*tmp;
 	int		_count;
 	int		_i;
+	int		_c;
 
 	tmp = NULL;
 	tmp = data->entry->cpy;
 	_i = data->sel->i_lst;
-	_count = (ft_lst_count(data->entry->cpy) - 1);
+	_count = 0;
+	_c = 0;
 	if (data->entry->cpy)
 	{
-		ft_move(data, data->sel->pos_tmp[1], data->sel->pos_tmp[0]);
+		ft_move(data, (data->sel->pos_tmp[1] - 1), data->sel->pos_tmp[0]);
+		_count = ft_lst_count(data->entry->cpy);
+		data->sel->i_lst = data->sel->i_lst_tmp;
 		while (_count--)
 			ft_move_cursor(data, RIGHT);
 		_count = ft_lst_count(data->entry->cpy);
 		while (_count--)
+			del_one_character(data, 0);
+		_count = ft_lst_count(data->entry->cpy);
+		_c = pos(_i - _count);
+		data->sel->i_lst = _c;
+		ft_move_home(data);
+		get_pos_prompt(data);
+		while (_c--)
 		{
-			tmp = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst_tmp + _count));
-			del_one_character(data, ((char *)tmp->content)[0]);
-			tmp = NULL;
+			ft_move_cursor(data, RIGHT);
+			get_pos_prompt(data);
 		}
-		// _count = ft_lst_count(data->entry->cpy);
-		// ft_move_home(data);
-		pos(2);
-		// _i = pos(_i - _count);
-		// while (_i--)
-		// 	ft_move_cursor(data, RIGHT);
-		// ft_paste_word_cpy(data);
+		ft_paste_word_cpy(data);
 	}
 	return ;
 }
