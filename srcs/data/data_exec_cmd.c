@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/15 17:37:27 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/15 18:05:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static t_parse	*data_parsing_init(void)
 {
 	static	t_parse	p[] = {
-		{"|", },
-		{"<", },
+		{"|", data_parse_pipe},
+		{"<", data_ope_left},
 		{">", },
 		{"<<", },
 		{">>", },
