@@ -6,59 +6,65 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/12 13:52:27 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/15 17:37:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void		exec_cmd_character(t_data *data, char result)
+static t_parse	*data_parsing_init(void)
 {
-	
-	(void)result;
-	if (data->sel)
+	static	t_parse	p[] = {
+		{"|", },
+		{"<", },
+		{">", },
+		{"<<", },
+		{">>", },
+		{"&&", },
+		{";", },
+		{NULL, NULL}
+	};
+	return ((void *)f);
+}
+
+int				data_parsing_drive(t_data *data)
+{
+	int		i;
+	t_parse	*parse;
+
+	i = 0;
+	parse = NULL;
+	parse = data_parsing_init();
+	while (parse[i].name)
 	{
-		//ft_putnbr_fd(ft_strlen(data->cmd), data->sel->tty);
-		// ft_putnbr_fd(data->pos_test, data->sel->tty);
-		
-		// ft_putnbr_fd(data->sel->pos_search, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
-		//****************
-		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
-		print_lst_line_tools(data, data->entry->line);
-		// ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
-		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
-		
-		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);		
-		//ft_putnbr_fd(ft_lst_count(data->entry->line), data->sel->tty);
-		
-		// ft_putnbr_fd(data->sel->width, data->sel->tty);
-		// 
-		
-		// ft_putchar_fd(';', data->sel->tty);
-		
-		
-		
-		// ft_putnbr_fd(data->sel->i_lst - 1, data->sel->tty);
-		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
-		//****************
-		// ft_putnbr_fd(data->sel->pos[0], data->sel->tty);
-		// ft_putchar_fd(' ', data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos[1], data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
-		// ft_putchar_fd(' ', data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos_start[1], data->sel->tty);
-		//****************
-		// ft_putchar_fd(';', data->sel->tty);
-		// ft_putnbr_fd(((data->sel->pos_start[0] + (data->entry->len_line + data->sel->len_prompt)/data->sel->width)), data->sel->tty);
-		// ft_putnbr_fd(data->sel->width, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
-		
-		// ft_putstr_fd(data->cmd, data->sel->tty);
-		// ft_putstr_fd(data->test, data->sel->tty);
+		if (ft_strcmp(*line, buil[i].name) == 0)
+		{
+			if (!opt)
+				return (1);
+			else
+				return (buil[i].f(env_lst, line));
+		}
+		i++;
 	}
-	else
-		ft_putstr_fd("FUCK", data->sel->tty);
+	return (0);
+}
+
+void		exec_cmd_character(t_data *data)
+{
+	char 	*str;
+	int		i;
+
+	i = 0;
+	str = NULL;
+	str = convert_data_lst_tab(data);
+	if (data->entry->line_str)
+	{
+		ft_free_char(data->entry->line_str);
+		data->entry->line_str = NULL;	
+	}
+	data->entry->line_str = data_clean_to_tab(data, str);
+	
+	
+	//get_exe_path();
+	return ;
 }

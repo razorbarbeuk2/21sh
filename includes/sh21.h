@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/12 17:28:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:41:56 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@
 
 typedef	int			(*t_func)(t_list **env_lst, char **line);
 typedef	void		(*t_option)(t_list *env_lst, char **line);
+typedef	int			(*t_parse)(t_data *data);
+
+typedef struct		s_parse
+{
+	char			c;
+	t_parse			p;
+}					t_parse;
 
 typedef enum		e_enum
 {
@@ -86,6 +93,7 @@ typedef struct		s_entry
 	t_list			*cut_line;
 	size_t			len_line;
 	size_t			size_line;
+	char 			**line_str;
 	int				nb_line;
 }					t_entry;
 
@@ -135,6 +143,12 @@ char				*ft_cut_path(t_list *env_lst, char *line);
 /*TOOLS TERMCAPS*/
 int					ft_concat_int(char *buf);
 int					ft_putchar_select(int c);
+/*TOOLS COUNT*/
+int 				len_word(char *str);
+int 				ft_count_word_caract(char *str);
+int 				data_check_caract(char c);
+char 				*trim_str(char *str);
+char				*ft_strcpy_data(char *dst, const char *str);
 /*PROMPT*/
 void				ft_listen_cmd(t_data *data);
 /*SEARCH*/
@@ -196,12 +210,16 @@ void 				ft_move(t_data *data, int x, int y);
 void				reset_line(t_data *data);
 void				print_character(t_data *data, char result);
 void				del_one_character(t_data *data, char result);
-void				exec_cmd_character(t_data *data, char result);
+void				exec_cmd_character(t_data *data);
 void				motion_list(t_data *data, char opt);
 /*ADD_DEL_CPY_PRINT_CHARACT*/
 int					ft_add_print_caract(t_data *data, char result); /*data_str_insert_caract.c*/
 int					ft_del_print_caract(t_data *data, char result); /*data_str_insert.c*/
 void				ft_add_at(t_list **lst, char result);
+/*DATA*/
+char 				**data_clean_to_tab(t_data *data, char *str);
+char 				*convert_data_lst_tab(t_data *data);
+int 				data_check_caract(char c);
 /*TOOLS*/
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);

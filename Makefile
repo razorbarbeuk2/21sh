@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/12 17:20:37 by gbourson         ###   ########.fr        #
+#    Updated: 2017/05/15 14:58:17 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				tools/tools_list.c \
 				tools/tools_termcaps.c \
 				tools/tools_print.c \
+				tools/tools_count.c \
 				fork/access.c \
 				fork/fork.c \
 				fork/get_exe_path.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 12:41:39 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/15 16:11:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_free_char(char **tmp)
 	}
 	free(tmp);
 	tmp = NULL;
+	return ;
 }
 
 void		free_env(void *tmp, size_t tmp_size)

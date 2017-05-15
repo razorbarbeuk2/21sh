@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/11 17:53:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/15 13:54:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int init_struct(t_data *data)
 	data->entry->line = NULL;
 	data->entry->cpy = NULL;
 	data->entry->cut_line = NULL;
+	data->entry->line_str = NULL;
 	data->entry->len_line = 0;
 	data->entry->nb_line = 0;
 	data->sel->path_arg = NULL;
