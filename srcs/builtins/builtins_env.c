@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/13 15:09:13 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/16 15:21:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_list	*ft_lst_cpy(t_list **env_lst)
 	return (cpy);
 }
 
-int		builtin_env(t_list **env_lst, char **line)
+int		builtin_env(t_data *data, t_list **env_lst, char **line)
 {
 	int		i;
 	char	**tmp;
@@ -57,7 +57,7 @@ int		builtin_env(t_list **env_lst, char **line)
 		i++;
 	}
 	if (line[i])
-		parse_line_builtins(&cpy, &line[i]);
+		parse_line_builtins(data, &cpy, &line[i]);
 	else
 		print_lst(cpy);
 	ft_free_char(tmp);

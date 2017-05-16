@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count.h                                         :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 16:08:54 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/16 16:59:21 by gbourson         ###   ########.fr       */
+/*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
+/*   Updated: 2017/05/16 16:56:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_COUNT_H
-# define FT_COUNT_H
+#ifndef DATA_H
+# define DATA_H
 
-int		ft_count_number(int n);
-int		ft_count_tab(char **tmp);
-int		ft_count_word(char const *w, char c);
+typedef struct		s_env
+{
+	char			*key;
+	char			*infos;
+}					t_env;
+
+typedef struct		s_data
+{
+	t_list			*env;
+	t_entry			*entry;
+	t_select		*sel;
+}					t_data;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exe_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 16:14:42 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/16 14:59:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ static char		*get_exe_path_check_result(char *line, char *paths, int i)
 		return (ft_name_join(line, paths));
 }
 
-void			get_exe_path(t_list *env, char **line)
+void			get_exe_path(t_data *data, char **line)
 {
 	char	**paths;
 	char	*result;
 	int		i;
 
 	i = 0;
-	if (!ft_no_paths(env, line, &paths, &result))
+	if (!ft_no_paths(data->env, line, &paths, &result))
 		return ;
 	while (paths && paths[i])
 	{
 		result = get_exe_path_check_result(line[0], paths[i], i);
-		if (ft_get_access(env, line, paths, result))
+		if (ft_get_access(data->env, line, paths, result))
 			return ;
 		else if (i == 0 && ft_strchr(line[0], '/'))
 		{

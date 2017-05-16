@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/13 15:08:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/16 15:29:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_buil	*buil_init(void)
 	return ((void *)f);
 }
 
-int				buil_drive(t_list **env_lst, char **line, int opt)
+int				buil_drive(t_data *data, char **line, int opt)
 {
 	int		i;
 	t_buil	*buil;
@@ -41,17 +41,17 @@ int				buil_drive(t_list **env_lst, char **line, int opt)
 			if (!opt)
 				return (1);
 			else
-				return (buil[i].f(env_lst, line));
+				return (buil[i].f(&data->env, line));
 		}
 		i++;
 	}
 	return (0);
 }
 
-void			parse_line_builtins(t_list **env, char **line)
+void			parse_line_builtins(t_data *data, t_list **env_lst, char **line)
 {
-	if (line[0] && buil_drive(env, &line[0], BUILD_FIND))
-		buil_drive(env, line, BUILD_EXE);
+	if (line[0] && buil_drive(data, &line[0], BUILD_FIND))
+		buil_drive(data, line, BUILD_EXE);
 	else if (line[0])
-		get_exe_path(*env, line);
+		get_exe_path(data, line);
 }

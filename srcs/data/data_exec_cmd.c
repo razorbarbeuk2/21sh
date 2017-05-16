@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/15 18:05:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/16 16:17:21 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_parse	*data_parsing_init(void)
 {
-	static	t_parse	p[] = {
+	static	t_lex	p[] = {
 		{"|", data_parse_pipe},
 		{"<", data_ope_left},
-		{">", },
-		{"<<", },
-		{">>", },
-		{"&&", },
-		{";", },
+		{">", data_ope_right},
+		{"<<", data_ope_double_left},
+		{">>", data_ope_double_right},
+		{"&&", data_ope_and},
+		{";", data_ope_semicolon},
 		{NULL, NULL}
 	};
 	return ((void *)f);
@@ -30,20 +30,15 @@ static t_parse	*data_parsing_init(void)
 int				data_parsing_drive(t_data *data)
 {
 	int		i;
-	t_parse	*parse;
+	t_lex	*parse;
 
 	i = 0;
 	parse = NULL;
 	parse = data_parsing_init();
-	while (parse[i].name)
+	while (parse[i].c)
 	{
-		if (ft_strcmp(*line, buil[i].name) == 0)
-		{
-			if (!opt)
-				return (1);
-			else
-				return (buil[i].f(env_lst, line));
-		}
+		if (parse[i])
+			return (parse[i].f(data));
 		i++;
 	}
 	return (0);
@@ -63,7 +58,15 @@ void		exec_cmd_character(t_data *data)
 		data->entry->line_str = NULL;	
 	}
 	data->entry->line_str = data_clean_to_tab(data, str);
-	
+	while (data->entry->line_str[i])
+	{
+		if (data_parsing_init(data))
+		{
+			/* code */
+		}
+		else
+			parse_line_builtins()
+	}
 	
 	//get_exe_path();
 	return ;
