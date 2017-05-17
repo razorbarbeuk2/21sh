@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 14:32:16 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 14:12:32 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/17 12:01:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,12 @@ void				builtin_echo_quote(t_list *env_lst, char **line)
 	return ;
 }
 
-int					builtin_echo(t_list **env_lst, char **line)
+int					builtin_echo(t_data *data, t_list **env_lst, char **line)
 {
 	int		i;
 	t_opt	*opt;
 
+	(void)data;
 	i = 1;
 	opt = ft_opt_echo();
 	while (line[i])

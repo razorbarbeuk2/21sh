@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/16 15:29:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/17 12:10:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				buil_drive(t_data *data, char **line, int opt)
 			if (!opt)
 				return (1);
 			else
-				return (buil[i].f(&data->env, line));
+				return (buil[i].f(data, &data->env, line));
 		}
 		i++;
 	}

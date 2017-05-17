@@ -6,17 +6,18 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:23 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/13 16:19:42 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/17 12:02:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int				builtin_unsetenv(t_list **env_lst, char **line)
+int				builtin_unsetenv(t_data *data, t_list **env_lst, char **line)
 {
 	int i;
 
 	i = 1;
+	(void)data;
 	ft_strdel(&line[0]);
 	while (line[i])
 	{
@@ -37,7 +38,7 @@ static void		builtin_setenv_next(char **tmp, t_list **env_lst, \
 	ft_strdel_double(tmp);
 }
 
-int				builtin_setenv(t_list **env_lst, char **line)
+int				builtin_setenv(t_data *data, t_list **env_lst, char **line)
 {
 	int		i;
 	int		n;
@@ -45,6 +46,7 @@ int				builtin_setenv(t_list **env_lst, char **line)
 
 	i = 1;
 	n = 0;
+	(void)data;
 	if (line[i] && ft_isalpha_string(line[i]))
 	{
 		if (ft_count_tab(&line[i]) > 2)

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:15 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/13 14:13:58 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/17 12:00:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ static int	test_param_exit(char *line)
 	return (1);
 }
 
-int			builtin_exit(t_list **env_lst, char **line)
+int			builtin_exit(t_data *data, t_list **env_lst, char **line)
 {
 	int i;
 
 	i = 1;
+	(void)data;
 	if (!line[i])
 		exit(0);
 	else if (!test_param_exit(line[i]))
