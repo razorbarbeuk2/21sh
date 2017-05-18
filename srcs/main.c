@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/15 13:54:20 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 15:42:54 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int init_struct(t_data *data)
 {
 	data->env = NULL;
+	data->env_cpy = NULL;
+	data->cmd = NULL;
 	data->entry = NULL;
 	data->sel = NULL;
 	if ((data->entry = (t_entry *)malloc(sizeof(t_entry))) == NULL)

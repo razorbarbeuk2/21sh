@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:06:51 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/15 17:37:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 14:59:56 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char 		**data_clean_to_tab(t_data *data, char *str)
 	int		i;
 
 	i = 0;
+	(void)data;
 	tab_tmp = NULL;
 	st_tmp = NULL;
 	str = trim_str(str);

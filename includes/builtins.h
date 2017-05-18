@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:20:22 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/17 12:09:30 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 14:24:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_buil
 }					t_buil;
 
 /*BUILTINS DRIVE*/
-int					buil_drive(t_data *data, char **line, int opt);
+int					buil_drive(t_data *data, t_list **env_lst, char **line, int opt);
 /*BUILTINS*/
 void				parse_line_builtins(t_data *data, t_list **env_lst, char **line);
 /*BUILTINS ENV*/

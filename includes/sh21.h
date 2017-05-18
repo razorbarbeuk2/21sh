@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/16 17:19:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 16:20:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ typedef struct		s_lex
 	char			*c;
 	t_parse			p;
 }					t_lex;
+
+typedef struct		s_cmd
+{
+	char 			*cmd;
+	char 			*opt;
+	char 			*file;
+	int 			_select_cmd;
+}					t_cmd
+
 
 /*TOOLS*/
 int					get_tab_to_lst(t_list **data_env, char **environ);

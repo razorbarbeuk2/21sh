@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:27 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/17 11:59:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 14:51:31 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int				builtin_cd(t_data *data, t_list **env_lst, char **line)
 	char	**oldpath;
 	char	**path;
 
+	(void)data;
 	if (!ft_init_path(&oldpath, &path, line))
 		return (0);
 	oldpath[1] = ft_memalloc(1024);

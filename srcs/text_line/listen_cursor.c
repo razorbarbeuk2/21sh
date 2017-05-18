@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/12 17:36:04 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 14:53:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		ft_cmd_cursor(t_data *data, int result)
 	else if (result == CTRL_CUT_PASTE)
 		ft_paste_word_cut(data);
 	else if (result == ENTER)
-		exec_cmd_character(data, result);
+		exec_cmd_character(data);
 	else if (result == DEL)
 		del_one_character(data, result);
 	else if (result == RST)

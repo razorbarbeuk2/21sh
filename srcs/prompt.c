@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/12/12 14:17:39 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/18 14:55:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			ft_listen_cmd(t_data *data)
 			tmp_clean = ft_str_to_tab(tmp_line[i]);
 			//ft_print_tab(data, data->cmd);
 			//data->len_cmd = ft_strlen_each_cmd(data->cmd);
-			parse_line_builtins(&data->env, tmp_clean);
+			parse_line_builtins(data, &data->env, tmp_clean);
 			ft_free_char(tmp_clean);
 			i++;
 		}

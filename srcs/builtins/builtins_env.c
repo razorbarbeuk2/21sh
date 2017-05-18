@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/16 15:21:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/18 14:23:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,24 @@ int		builtin_env(t_data *data, t_list **env_lst, char **line)
 {
 	int		i;
 	char	**tmp;
-	t_list	*cpy;
 
 	i = 1;
-	cpy = NULL;
+	data->env_cpy = NULL;
 	tmp = NULL;
-	cpy = get_parse_opt(line, OPT_ENV) ? NULL : ft_lst_cpy(env_lst);
+	data->env_cpy = get_parse_opt(line, OPT_ENV) ? NULL : ft_lst_cpy(env_lst);
 	while (line[i] && line[i][0] == '-')
 		i++;
 	while (line[i] && ft_strchr(line[i], '='))
 	{
 		tmp = ft_strsplit(line[i], '=');
-		iter_elem_env(tmp, &cpy, &modif_elem);
+		iter_elem_env(tmp, &data->env_cpy, &modif_elem);
 		i++;
 	}
 	if (line[i])
-		parse_line_builtins(data, &cpy, &line[i]);
+		parse_line_builtins(data, &data->env_cpy, &line[i]);
 	else
-		print_lst(cpy);
+		print_lst(data->env_cpy);
 	ft_free_char(tmp);
-	ft_lstdel(&cpy, &free_env);
+	ft_lstdel(&data->env_cpy, &free_env);
 	return (1);
 }
