@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/18 16:20:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/19 16:28:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ typedef struct		s_cmd
 	char 			*opt;
 	char 			*file;
 	int 			_select_cmd;
-}					t_cmd
+}					t_cmd;
+
+typedef struct		s_caract
+{
+	char 			*caract;
+}					s_caract;
 
 
 /*TOOLS*/
@@ -124,5 +129,31 @@ int 				data_check_caract(char c);
 /*TOOLS*/
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);
+
+
+/*CLEAN CARACT*/
+char 				**data_split_to_tab(char *line_str, char *caract);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif
