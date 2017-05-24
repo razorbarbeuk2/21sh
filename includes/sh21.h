@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/19 16:28:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/24 14:31:14 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int 				ft_count_word_caract(char *str);
 int 				data_check_caract(char c);
 char 				*trim_str(char *str);
 char				*ft_strcpy_data(char *dst, const char *str);
+int					ft_count_word_spec_caract(char *line_str, char *caract);
+int					len_word_caract(char *line_str, char *caract);
 /*PROMPT*/
 void				ft_listen_cmd(t_data *data);
 /*SEARCH*/
@@ -126,6 +128,7 @@ void				ft_add_at(t_list **lst, char result);
 char 				**data_clean_to_tab(t_data *data, char *str);
 char 				*convert_data_lst_tab(t_data *data);
 int 				data_check_caract(char c);
+int 				data_check_spec_caract(char c, char *caract);
 /*TOOLS*/
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);

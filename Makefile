@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
+#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/18 14:59:28 by gbourson         ###   ########.fr        #
+#    Updated: 2017/05/21 14:32:14 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,12 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				text_line/motion_cursor_RST.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
+				data/data_str_check_caract.c \
 				data/data_str_clean_caract.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
 				data/data_exec_cmd.c \
+				tools/tools_count_spec_caract.c \
 				tools/tools_free.c \
 				tools/tools_list.c \
 				tools/tools_termcaps.c \
