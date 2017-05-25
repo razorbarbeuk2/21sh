@@ -3,14 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/11 14:50:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/25 18:18:02 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void		print_list_cmd(t_data *data, t_list *lst)
+{
+	t_cmd *cmd_lst;
+
+	cmd_lst = NULL;
+	while (lst)
+	{
+		cmd_lst = (t_cmd *)lst->content;
+		//ft_putstr_fd("CMD :", data->sel->tty);
+		if (!cmd_lst)
+			ft_putstr_fd("FUCK", data->sel->tty);
+		else if (cmd_lst->cmd)
+		{
+			ft_putstr_fd("cmd :", data->sel->tty);
+			ft_putstr_fd(cmd_lst->cmd, data->sel->tty);
+		}
+		else if (cmd_lst->opt)
+		{
+			ft_putstr_fd("opt :", data->sel->tty);
+			ft_putstr_fd(cmd_lst->opt, data->sel->tty);
+		}
+		else if (cmd_lst->file)
+		{
+			ft_putstr_fd("file :", data->sel->tty);
+			ft_putstr_fd(cmd_lst->file, data->sel->tty);
+		}
+		write(1, " ", 1);
+		lst = lst->next;
+		cmd_lst = NULL;
+	}
+}
 
 void		print_lst_line(t_data *data, t_list *lst)
 {

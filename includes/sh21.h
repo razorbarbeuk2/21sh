@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/24 14:31:14 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/25 18:44:20 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void				get_exe_cmd(char **path, char **cmd, t_list *env_lst);
 /*PRINT*/
 void				print_error(char *str);
 void				print_cmd_not_found(char *str);
+void				print_list_cmd(t_data *data, t_list *lst);
 /*TERM*/
 int					term_init(t_select *sel);
 void				termios_init(struct	termios *term);
@@ -129,6 +130,7 @@ char 				**data_clean_to_tab(t_data *data, char *str);
 char 				*convert_data_lst_tab(t_data *data);
 int 				data_check_caract(char c);
 int 				data_check_spec_caract(char c, char *caract);
+int					data_create_list_struct_cmd(t_data *data, char **line_str, t_cmd **cmd_node);
 /*TOOLS*/
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);

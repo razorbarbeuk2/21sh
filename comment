@@ -84,3 +84,142 @@ void ft_move_left(t_data *data)
 	else
 		return ;
 }
+
+
+t_cmd		*data_check_str_list_struct_cmd(t_data *data, char *line_str)
+{
+	t_cmd	*cmd_node;
+	char 	*caract;
+	char 	**tmp;
+	//int 	i;
+
+	tmp = NULL;
+	// i = 0;
+	caract = NULL;
+	cmd_node = NULL;
+	ft_putstr_fd("\n", data->sel->tty);
+	ft_putstr_fd(line_str, data->sel->tty);
+	ft_putstr_fd("\nif\n", data->sel->tty);
+	if (data_check_special_caract_global(data, line_str, &caract) && line_str)
+	{
+		ft_putstr_fd("K\n", data->sel->tty);
+		//ft_putstr_fd(caract, data->sel->tty);
+		tmp = data_split_to_tab(line_str, caract);
+		// while(tmp[i])
+		// {
+		// 	ft_putstr_fd("-", data->sel->tty);
+		// 	ft_putstr_fd(tmp[i], data->sel->tty);
+		// 	ft_putstr_fd("\n", data->sel->tty);
+		// 	i++;
+		// }
+		// ft_putnbr_fd(i, data->sel->tty);
+		while (tmp)
+		{
+			
+			if (tmp)
+				// ft_putstr_fd(tmp[i], data->sel->tty);
+				// ft_putstr_fd("|", data->sel->tty);
+				// ft_putstr_fd(tmp[i + 2], data->sel->tty);
+				// ft_putstr_fd("\n", data->sel->tty);
+				return (data_check_str_list_struct_cmd(data, (*tmp)));
+			tmp++;
+		}
+	}
+	else
+		return (data_create_list_struct_cmd(data, line_str));
+}
+
+// static t_parse	*data_parsing_init(void)
+// {
+// 	static	t_lex	p[] = {
+// 		{"|", data_parse_pipe},
+// 		{"<", data_ope_left},
+// 		{">", data_ope_right},
+// 		{"<<", data_ope_double_left},
+// 		{">>", data_ope_double_right},
+// 		{"&&", data_ope_and},
+// 		{";", data_ope_semicolon},
+// 		{NULL, NULL}
+// 	};
+// 	return ((void *)p);
+// }
+
+// int				data_parsing_drive(t_data *data)
+// {
+// 	int		i;
+// 	t_lex	*parse;
+
+// 	i = 0;
+// 	parse = NULL;
+// 	parse = data_parsing_init();
+// 	while (parse[i].c)
+// 	{
+// 		if (parse[i])
+// 			return (parse[i].f(data));
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+// int 		data_check_special_caract_inside(char str)
+// {
+// 	if (str == "<")
+// 		return (1);
+// 	if (str == ">")
+// 		return (1);
+// 	if (str == "|")
+// 		return (1);
+// 	if (str == ";")
+// 	return (1);
+// }
+
+// int			ft_striter_data_c(char *s, void (*f)(char *))
+// {
+// 	if (s && f)
+// 	{
+// 		while (*s)
+// 			return(f(s++));
+// 	}
+// 	return (0);
+// }
+
+// int 		data_check_special_caract(t_data *data, char *str)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	if (ft_strcmp(str, "|"))
+// 		return (1);
+// 	if (ft_strcmp(str, "&&"))
+// 		return (1);
+// 	ft_striter_data_c(str, &data_check_special_caract_inside);
+// 	return (0);
+// }
+
+**********************************************
+
+t_cmd		*data_check_str_list_struct_cmd(t_data *data, char *line_str, size_t nbr)
+{
+	t_cmd	*cmd_node;
+	char 	*caract;
+	char 	**tmp;
+
+	tmp = NULL;
+	caract = NULL;
+	cmd_node = NULL;
+	ft_putstr_fd("\n", data->sel->tty);
+	ft_putstr_fd(line_str, data->sel->tty);
+	ft_putstr_fd("\nif\n", data->sel->tty);
+	if (data_check_special_caract_global(data, line_str, &caract) && line_str)
+	{
+		tmp = data_split_to_tab(line_str, caract);
+		nbr = ft_count_tab(tmp);
+	}
+	if (nbr > 1)
+	{
+		return (data_check_str_list_struct_cmd(data, tmp[nbr], nbr - 1));
+	}
+	return(data_create_list_struct_cmd(data, line_str));
+}
+
+**********************************************

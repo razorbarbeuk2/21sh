@@ -6,7 +6,7 @@
 #    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/21 14:32:14 by RAZOR            ###   ########.fr        #
+#    Updated: 2017/05/25 18:44:03 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				data/data_str_clean_caract.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
+				data/data_create_cmd_node.c \
 				data/data_exec_cmd.c \
 				tools/tools_count_spec_caract.c \
 				tools/tools_free.c \
