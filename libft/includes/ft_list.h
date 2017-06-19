@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:08:54 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/11 16:22:35 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/05/26 11:30:20 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
+	int				type;
 	struct s_list	*next;
 	struct s_list	*prev;
 }					t_list;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/18 14:50:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/12 14:16:48 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				buil_drive(t_data *data, t_list **env_lst, char **line, int opt)
 
 void			parse_line_builtins(t_data *data, t_list **env_lst, char **line)
 {
-	if (line[0] && buil_drive(data, env_lst, &line[0], BUILD_FIND))
+	if (line[0] && buil_drive(data, env_lst, line, BUILD_FIND))
 		buil_drive(data, env_lst, line, BUILD_EXE);
 	else if (line[0])
 		get_exe_path(data, line);

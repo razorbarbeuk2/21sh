@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:25:35 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/11 16:24:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/12 14:23:00 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	get_tab_to_lst(t_list **data_env, char **environ)
 		tmp = ft_strsplit(environ[i], '=');
 		env->key = ft_strdup(tmp[0]);
 		if (!tmp[1] || ft_strlen(tmp[1]) == 0)
-			env->infos = " ";
+			env->infos = ft_strdup(" ");
 		else
 			env->infos = ft_strdup(tmp[1]);
 		ft_lstadd_back(data_env, ft_lstnew(env, sizeof(t_env)));

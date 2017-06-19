@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 16:22:04 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/15 17:41:39 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_error(char *str)
 
 void	print_cmd_not_found(char *str)
 {
-	print_error("minishell: ");
+	print_error("21sh: ");
 	print_error(str);
 	print_error(" command not found");
 	print_error("\n");

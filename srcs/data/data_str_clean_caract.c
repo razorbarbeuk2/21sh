@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:06:51 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/21 14:30:27 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/05/30 23:18:12 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char 		**data_clean_to_tab(t_data *data, char *str)
 	return (tab_tmp);
 }
 
-char 		**data_split_to_tab(char *line_str, char *caract)
+char 		**data_split_to_tab(char *line_str, char caract)
 {
 	char 	**tab_tmp;
 	char 	**st;
@@ -78,13 +78,13 @@ char 		**data_split_to_tab(char *line_str, char *caract)
 	len = 0;
 	i = 0;
 	count_word = 0;
-	count_word = ft_count_word_spec_caract(line_str, caract);
+	count_word = ft_count_word_spec_caract(line_str, &caract);
 	if (!(tab_tmp = (char **)malloc((count_word + 1)*sizeof(char *))))
 		return (NULL);
 	st = tab_tmp;
 	while (count_word--)
 	{
-		len = len_word_caract(line_str, caract);
+		len = len_word_caract(line_str, &caract);
 		if (!(*tab_tmp = (char *)malloc((len + 1)*sizeof(char))))
 			return (NULL);
 		*tab_tmp = ft_strncpy(*tab_tmp, line_str, len);

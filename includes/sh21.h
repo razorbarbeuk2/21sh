@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/25 18:44:20 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/16 01:09:47 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@
 # define POS "\033[6n"
 # define DEBUG ft_putstr("FUCK");
 
-typedef	int			(*t_parse)(t_data *data);
-
-typedef struct		s_lex
+typedef struct		s_fd
 {
-	char			*c;
-	t_parse			p;
-}					t_lex;
+	int				stdin;
+	int				stdout;
+	int				stderr;
+}					t_fd;
+
+typedef struct		s_sep
+{
+	char 			*separate;
+}					t_sep;
 
 typedef struct		s_cmd
 {
@@ -44,6 +48,8 @@ typedef struct		s_cmd
 	char 			*opt;
 	char 			*file;
 	int 			_select_cmd;
+	char			**exec_cmd;
+	t_fd			fds;
 }					t_cmd;
 
 typedef struct		s_caract
@@ -74,12 +80,15 @@ char 				*trim_str(char *str);
 char				*ft_strcpy_data(char *dst, const char *str);
 int					ft_count_word_spec_caract(char *line_str, char *caract);
 int					len_word_caract(char *line_str, char *caract);
+/*TOOLS LIST CREATE NODE*/
+t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
 /*PROMPT*/
 void				ft_listen_cmd(t_data *data);
 /*SEARCH*/
 char				*get_search_infos(t_list *env, char *str);
 /*ENV*/
 void				init_env(t_list **env_lst);
+int					init_paths_env(t_data *data);
 int					iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s));
 int					modif_elem(char **tab_line, t_list **env_lst, t_list **start);
 int					del_elem(char **tab_line, t_list **env_lst, t_list **start);
@@ -128,16 +137,31 @@ void				ft_add_at(t_list **lst, char result);
 /*DATA*/
 char 				**data_clean_to_tab(t_data *data, char *str);
 char 				*convert_data_lst_tab(t_data *data);
+void				data_check_str_list_struct_cmd_loop(t_data *data, char **line_str, int i, int size);
 int 				data_check_caract(char c);
 int 				data_check_spec_caract(char c, char *caract);
-int					data_create_list_struct_cmd(t_data *data, char **line_str, t_cmd **cmd_node);
+void				data_create_list_struct(t_data *data, char **line_str, void **node, int *t);
+int					data_str_check_opt_cmd(t_cmd *cmd, char *line_str);
+int 				ft_is_caract_(char *str, char *c);
+/*HISTORY*/
+int					data_check_and_create_history_file(t_data *data, char *cmd);
+
+/*EXEC*/
+int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next);
+int					exec_cmd_node(t_data *data, t_list *current);
+
 /*TOOLS*/
+
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);
+void 				count_list_cmd(t_data *data, t_list *lst);
+
 
 
 /*CLEAN CARACT*/
-char 				**data_split_to_tab(char *line_str, char *caract);
+char 				**data_split_to_tab(char *line_str, char caract);
+//char 				**data_split_to_tab(char *line_str, char *caract);
+
 
 
 

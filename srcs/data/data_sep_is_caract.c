@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   data_sep_is_caract.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/06 00:18:29 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/29 12:05:44 by RAZOR            ###   ########.fr       */
+/*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
+/*   Updated: 2017/05/31 17:48:58 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "sh21.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+int 		ft_is_caract_(char *str, char *c)
 {
-	t_list *tmp;
+	int i;
 
-	tmp = *alst;
-	if (tmp == NULL)
-		*alst = new;
-	else if (tmp)
+	i = 0;
+	while (str[i])
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		if (str[i] == '|')
+		{
+			(*c) = '|';
+			return (1);
+		}
+		if (str[i] == ';')
+		{
+			(*c) = '|';
+			return (1);
+		}
+		i++;
 	}
+	return (0);
 }

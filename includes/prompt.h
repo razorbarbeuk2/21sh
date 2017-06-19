@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/16 17:19:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/16 01:14:13 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 
 # include <term.h>
 
-typedef enum		e_enum
+typedef enum		e_enum_exec
+{
+					TYPE_CMD = 1,
+					TYPE_SEP = 2,
+					PIPE_READ = 0,
+					PIPE_WRITE = 1
+}					t_enum_exec;
+
+typedef enum		e_enum_cursor
 {
 					UP = 279165,
 					DOWN =  279166,
@@ -35,12 +43,11 @@ typedef enum		e_enum
 					SHIFT_RIGHT = -23279173,
 					CTRL_CPY_PASTE = 16,
 					CTRL_CUT_PASTE = 12,
-					RST = 18,
-
+					RST = 18
 					// ALT_RIGHT
 					//HOME = 58,
 					//END = 61,
-}					t_enum;
+}					t_enum_cursor;
 
 typedef struct		s_entry
 {

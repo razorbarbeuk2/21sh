@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/18 15:38:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/12 23:17:46 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct		s_data
 	t_list			*cmd;
 	t_entry			*entry;
 	t_select		*sel;
+	int				nb_pipe;
+	char			**paths;
 }					t_data;
 
 #endif

@@ -6,7 +6,7 @@
 #    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/05/25 18:44:03 by RAZOR            ###   ########.fr        #
+#    Updated: 2017/06/15 16:33:21 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,19 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				text_line/motion_cursor_RST.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
+				data/data_str_check_opt_cmd.c \
 				data/data_str_check_caract.c \
 				data/data_str_clean_caract.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
 				data/data_create_cmd_node.c \
+				data/data_create_cmd_list.c \
+				data/data_sep_is_caract.c \
 				data/data_exec_cmd.c \
+				data/data_exec_pipe.c \
+				history/data_create_history_files.c \
 				tools/tools_count_spec_caract.c \
+				tools/tools_list_create_node.c \
 				tools/tools_free.c \
 				tools/tools_list.c \
 				tools/tools_termcaps.c \

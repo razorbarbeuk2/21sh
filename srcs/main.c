@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/18 15:42:54 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/15 17:54:09 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,19 @@ static int init_struct(t_data *data)
 	data->sel->prompt = NULL;
 	data->sel->len_prompt = 0;
 	data->sel->_bottom = 0;
+	data->nb_pipe = 0;
 	return (1);
 }
 
 int	init_sh(t_data *data, char **env)
 {
 	if (!get_tab_to_lst(&data->env, env))
-		return (0);
-	term_init(data->sel);
+		return (-1);
+
+	if (!init_paths_env(data))
+		return (-1);
+	if (!term_init(data->sel))
+		return (-1);
 	listen_cursor(data);
 	return (1);
 	// if (!init_env(&data->env))
@@ -62,6 +67,9 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	init_struct(&data);
 	if (!init_sh(&data, env))
+	{
+		print_cmd_not_found("21 is Dead\n");
 		return (0);
+	}
 	return (0);
 }
