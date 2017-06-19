@@ -3,17 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
+#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/06/15 16:33:21 by RAZOR            ###   ########.fr        #
+#    Updated: 2017/06/19 16:52:57 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME 		=	21sh
 LIB			=	./libft/libft.a
-SRC_NAME 	=	builtins/builtins_init.c \
+SRC_NAME 	=	init/init_data.c \
+				init/init_prompt.c \
+				init/init_env.c \
+				init/init_term.c \
+				builtins/builtins_init.c \
 				builtins/builtins_env.c \
 				builtins/builtins_set_unset_env.c \
 				builtins/builtins_cd.c \
@@ -21,12 +25,10 @@ SRC_NAME 	=	builtins/builtins_init.c \
 				builtins/builtins_echo.c \
 				builtins/builtins_echo_opt.c \
 				builtins/builtins_exit.c \
-				env/init_env.c \
 				env/iter_elem_env.c \
 				env/del_elem_env.c \
 				env/edit_elem_env.c \
 				env/env_elem_search.c \
-				term/init_term.c \
 				text_line/listen_cursor.c \
 				text_line/motion_cursor_ADD.c \
 				text_line/motion_cursor_DEL.c \

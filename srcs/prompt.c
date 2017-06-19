@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 15:11:25 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 17:04:31 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,6 @@ void	get_hist_prompt(t_data *data)
 	ft_putstr_fd(SEARCH_COLOR, data->sel->tty);
 	ft_putstr_fd("SEARCH HISTORIC : ", data->sel->tty);
 	ft_putstr_fd("\033[m", data->sel->tty);
-	while(read(0, buf, 8))
-	{
-		result = ft_concat_int(buf);
-		ft_putchar_fd(result, data->sel->tty);
-		if (result == ENTER)
-		{
-			print_lst_line(data, data->entry->line);
-		}
-		ft_bzero(buf, 8);
-	}
 	//tputs(tgetstr("al", NULL), 1, ft_putchar_select);
 
 	// while (data->sel->pos[0] != data->sel->pos_start[0])

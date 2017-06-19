@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 15:13:01 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 16:29:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,18 @@ void		exec_cmd_character(t_data *data)
 	str = NULL;
 	tmp = NULL;
 	caract = NULL;
-	data->entry->line_str = convert_data_lst_tab(data);
-	if (data->entry->line_str_double)
-	{
-		ft_free_char(data->entry->line_str_double);
-		data->entry->line_str_double = NULL;
-	}
-	data_check_and_create_history_file(data, str);
-	data->entry->line_str_double = ft_strsplit(str, ';');
-	data_check_str_list_struct_cmd_loop(data, data->entry->line_str_double, 0, ft_count_tab(data->entry->line_str_double));
+	ft_putnbr_fd(data->sel->pos[1], data->sel->tty);
+	ft_putchar_fd(':', data->sel->tty);
+	ft_putnbr_fd(data->sel->pos_start[1], data->sel->tty);
+	// data->entry->line_str = convert_data_lst_tab(data);
+	// if (data->entry->line_str_double)
+	// {
+	// 	ft_free_char(data->entry->line_str_double);
+	// 	data->entry->line_str_double = NULL;
+	// }
+	// data_check_and_create_history_file(data, str);
+	// data->entry->line_str_double = ft_strsplit(str, ';');
+	// data_check_str_list_struct_cmd_loop(data, data->entry->line_str_double, 0, ft_count_tab(data->entry->line_str_double));
 	// ft_putstr("\nGO EXEC\n");
 	// ft_putstr("NB PIPE :");
 	// ft_putnbr(data->nb_pipe);

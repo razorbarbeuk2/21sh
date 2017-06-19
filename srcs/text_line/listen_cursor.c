@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 14:58:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 17:05:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,6 @@ int			listen_cursor(t_data *data)
 
 	result = 0;
 	ft_bzero(buf, 8);
-	get_super_prompt(data, NULL);
-	data->sel->pos = ft_memalloc(2*sizeof(int));
-	data->sel->pos_start = ft_memalloc(2*sizeof(int));
-	data->sel->pos_tmp = ft_memalloc(2*sizeof(int));
-	get_pos_prompt(data);
-	data->entry->size_line = data->sel->len_prompt;
-	data->sel->pos_start[0] = data->sel->pos[0];
-	data->sel->pos_start[1] = data->sel->pos[1];
-	if (data->sel->pos_start[0] == (data->sel->height - 1))
-		data->sel->_bottom = 1;
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);

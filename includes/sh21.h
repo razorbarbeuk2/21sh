@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/19 14:16:45 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 16:07:13 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int					ft_count_word_spec_caract(char *line_str, char *caract);
 int					len_word_caract(char *line_str, char *caract);
 /*TOOLS LIST CREATE NODE*/
 t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
-/*PROMPT*/
-void				ft_listen_cmd(t_data *data);
-/*SEARCH*/
-char				*get_search_infos(t_list *env, char *str);
-/*ENV*/
+/*INIT*/
 void				init_env(t_list **env_lst);
 int					init_paths_env(t_data *data);
+int					init_struct(t_data *data);
+int 				init_pos(t_data *data);
+/*ENV*/
+char				*get_search_infos(t_list *env, char *str);
 int					iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s));
 int					modif_elem(char **tab_line, t_list **env_lst, t_list **start);
 int					del_elem(char **tab_line, t_list **env_lst, t_list **start);
@@ -110,6 +110,7 @@ void				termios_init(struct	termios *term);
 /*PROMPT*/
 void				get_super_prompt(t_data *data, char *line);
 int					get_pos_prompt(t_data *data);
+void				ft_listen_cmd(t_data *data);
 /*MOTION_CURSOR*/
 int					listen_cursor(t_data *data);
 void				ft_move_left(t_data *data);
@@ -147,20 +148,13 @@ int 				ft_is_caract_(char *str, char *c);
 /*HISTORY*/
 void				get_hist_prompt(t_data *data);
 int					data_check_and_create_history_file(t_data *data, char *cmd);
-
-
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next);
 int					exec_cmd_node(t_data *data, t_list *current);
-
 /*TOOLS*/
-
 t_list				*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void				print_lst_line(t_data *data, t_list *lst);
 void 				count_list_cmd(t_data *data, t_list *lst);
-
-
-
 /*CLEAN CARACT*/
 char 				**data_split_to_tab(char *line_str, char caract);
 //char 				**data_split_to_tab(char *line_str, char *caract);
