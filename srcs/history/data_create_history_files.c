@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 15:35:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 12:05:34 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 18:47:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,20 @@ int			data_check_and_create_history_file(t_data *data, char *cmd)
 	int		nb_line;
 
 	(void)data;
-	
 	nb_line = 0;
 	line = NULL;
 	fd = data_open_history_file(1);
-	if (fd)
+	//ft_putnbr_fd(fd, data->sel->tty);
+	if (fd && cmd)
 	{
 		while ((get_next_line(fd, &line) != 0))
 			nb_line++;
 		ft_putstr_fd(cmd, fd);
+		ft_putstr_fd("FUCK", data->sel->tty);
 		write(fd, "\n", 1);
 		close(fd);
 	}
+
 	return (1);
 }
 
@@ -57,6 +59,7 @@ int			data_search_in_history_file(t_data *data, char *search_cmd)
 	nb_line = 0;
 	line = NULL;
 	fd = data_open_history_file(2);
+
 	if (fd)
 	{
 		while (get_next_line(fd, &line))

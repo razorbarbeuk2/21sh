@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 17:05:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 18:33:30 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,23 @@ void		ft_cmd_cursor(t_data *data, int result)
 		return ;
 }
 
-int			listen_cursor(t_data *data)
+int			listen_cursor(t_data *data, t_entry *entry)
 {
 	char	buf[8];
 	int		result;
 
 	result = 0;
 	ft_bzero(buf, 8);
+	data->entry = NULL;
+	data->entry = entry;
+	if (data->set_historique)
+	{
+		get_pos_prompt(data);
+		data->sel->len_prompt = data->nb_prompt_historique;
+		data->sel->pos_start[0] = data->sel->pos[0];
+		data->sel->pos_start[1] = data->sel->pos[1];
+	}
+	data->entry->size_line = data->sel->len_prompt;
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);

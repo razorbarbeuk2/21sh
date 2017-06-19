@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 17:04:31 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 18:43:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,21 @@ void	get_super_prompt(t_data *data, char *line)
 
 void	get_hist_prompt(t_data *data)
 {
-	char	buf[8];
-	int		result;
 	char 	*tmp;
 
 	tmp = NULL;
-	result = 0;
-	ft_bzero(buf, 8);
+	tmp = ft_strdup("SEARCH HISTORIC : ");
 	ft_move_home(data);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
 	ft_putstr_fd(SEARCH_COLOR, data->sel->tty);
-	ft_putstr_fd("SEARCH HISTORIC : ", data->sel->tty);
+	ft_putstr_fd(tmp, data->sel->tty);
 	ft_putstr_fd("\033[m", data->sel->tty);
+	data->set_historique = 1;
+	data->nb_prompt_historique = ft_strlen(tmp);
+	listen_cursor(data, data->historique);
+	ft_strdel(&tmp);
 	//tputs(tgetstr("al", NULL), 1, ft_putchar_select);
 
 	// while (data->sel->pos[0] != data->sel->pos_start[0])
