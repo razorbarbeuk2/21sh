@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/15 17:55:54 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/19 15:13:01 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ void		exec_cmd_character(t_data *data)
 	str = NULL;
 	tmp = NULL;
 	caract = NULL;
-	str = convert_data_lst_tab(data);
-	if (data->entry->line_str)
+	data->entry->line_str = convert_data_lst_tab(data);
+	if (data->entry->line_str_double)
 	{
-		ft_free_char(data->entry->line_str);
-		data->entry->line_str = NULL;
+		ft_free_char(data->entry->line_str_double);
+		data->entry->line_str_double = NULL;
 	}
 	data_check_and_create_history_file(data, str);
-	
-	data->entry->line_str = ft_strsplit(str, ';');
-	data_check_str_list_struct_cmd_loop(data, data->entry->line_str, 0, ft_count_tab(data->entry->line_str));
+	data->entry->line_str_double = ft_strsplit(str, ';');
+	data_check_str_list_struct_cmd_loop(data, data->entry->line_str_double, 0, ft_count_tab(data->entry->line_str_double));
 	// ft_putstr("\nGO EXEC\n");
 	// ft_putstr("NB PIPE :");
 	// ft_putnbr(data->nb_pipe);

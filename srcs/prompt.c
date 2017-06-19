@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/18 14:55:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 15:11:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,38 +41,79 @@ void	get_super_prompt(t_data *data, char *line)
 	ft_strdel(&tmp);
 }
 
-static void		ft_init_get_prompt(char ***tmp_line, char ***tmp_clean, char **line)
+void	get_hist_prompt(t_data *data)
 {
-	*line = NULL;
-	*tmp_line = NULL;
-	*tmp_clean = NULL;
-}
+	char	buf[8];
+	int		result;
+	char 	*tmp;
 
-void			ft_listen_cmd(t_data *data)
-{
-	char	**tmp_line;
-	char	**tmp_clean;
-	int		i;
-	char	*line;
-
-
-	ft_init_get_prompt(&tmp_line, &tmp_clean, &line);
-	//signal(SIGINT, handler_1);
-	
-	while (get_next_line(data->sel->tty, &line))
+	tmp = NULL;
+	result = 0;
+	ft_bzero(buf, 8);
+	ft_move_home(data);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
+	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
+	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
+	ft_putstr_fd(SEARCH_COLOR, data->sel->tty);
+	ft_putstr_fd("SEARCH HISTORIC : ", data->sel->tty);
+	ft_putstr_fd("\033[m", data->sel->tty);
+	while(read(0, buf, 8))
 	{
-		i = 0;
-		tmp_line = ft_strsplit(line, ';');
-		while (tmp_line[i])
+		result = ft_concat_int(buf);
+		ft_putchar_fd(result, data->sel->tty);
+		if (result == ENTER)
 		{
-			tmp_clean = ft_str_to_tab(tmp_line[i]);
-			//ft_print_tab(data, data->cmd);
-			//data->len_cmd = ft_strlen_each_cmd(data->cmd);
-			parse_line_builtins(data, &data->env, tmp_clean);
-			ft_free_char(tmp_clean);
-			i++;
+			print_lst_line(data, data->entry->line);
 		}
-		ft_free_char(tmp_line);
-		ft_strdel(&line);
+		ft_bzero(buf, 8);
 	}
+	//tputs(tgetstr("al", NULL), 1, ft_putchar_select);
+
+	// while (data->sel->pos[0] != data->sel->pos_start[0])
+	// {
+	// 	get_pos_prompt(data);
+	// 	tputs(tgetstr("al", NULL), 1, ft_putchar_select);
+	// 	ft_move_up(data);
+	// }
+
+	// ft_putnbr_fd(data->sel->pos[1], data->sel->tty);
+	// ft_putchar_fd(':', data->sel->tty);
+	// ft_putnbr_fd(data->sel->pos_start[1], data->sel->tty);
+
 }
+
+// static void		ft_init_get_prompt(char ***tmp_line, char ***tmp_clean, char **line)
+// {
+// 	*line = NULL;
+// 	*tmp_line = NULL;
+// 	*tmp_clean = NULL;
+// }
+
+// void			ft_listen_cmd(t_data *data)
+// {
+// 	char	**tmp_line;
+// 	char	**tmp_clean;
+// 	int		i;
+// 	char	*line;
+
+
+// 	ft_init_get_prompt(&tmp_line, &tmp_clean, &line);
+// 	//signal(SIGINT, handler_1);
+	
+// 	while (get_next_line(data->sel->tty, &line))
+// 	{
+// 		i = 0;
+// 		tmp_line = ft_strsplit(line, ';');
+// 		while (tmp_line[i])
+// 		{
+// 			tmp_clean = ft_str_to_tab(tmp_line[i]);
+// 			//ft_print_tab(data, data->cmd);
+// 			//data->len_cmd = ft_strlen_each_cmd(data->cmd);
+// 			parse_line_builtins(data, &data->env, tmp_clean);
+// 			ft_free_char(tmp_clean);
+// 			i++;
+// 		}
+// 		ft_free_char(tmp_line);
+// 		ft_strdel(&line);
+// 	}
+// }

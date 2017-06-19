@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:57:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/12 13:52:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 11:42:09 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void		del_one_character(t_data *data, char result)
 				i_ = 0;
 			}
 			return ;
-			
 		}
 		else if (data->sel->i_lst > 0 && data->sel->i_lst < (int)data->entry->len_line)
 		{

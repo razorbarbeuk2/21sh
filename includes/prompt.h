@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/16 01:14:13 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/19 15:11:42 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef enum		e_enum_cursor
 					SHIFT_RIGHT = -23279173,
 					CTRL_CPY_PASTE = 16,
 					CTRL_CUT_PASTE = 12,
-					RST = 18
+					SEARCH_HIST = 18,
+					RST = 14
 					// ALT_RIGHT
 					//HOME = 58,
 					//END = 61,
@@ -56,7 +57,8 @@ typedef struct		s_entry
 	t_list			*cut_line;
 	size_t			len_line;
 	size_t			size_line;
-	char 			**line_str;
+	char 			*line_str;
+	char 			**line_str_double;
 	int				nb_line;
 }					t_entry;
 

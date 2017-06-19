@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/16 01:09:47 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/19 14:16:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # define RED "\e[31m"
 # define ORANGE "\033[38;2;255;189;0m"
+# define SEARCH_COLOR "\033[38;2;22;193;213m"
 # define POS "\033[6n"
 # define DEBUG ft_putstr("FUCK");
 
@@ -144,7 +145,9 @@ void				data_create_list_struct(t_data *data, char **line_str, void **node, int 
 int					data_str_check_opt_cmd(t_cmd *cmd, char *line_str);
 int 				ft_is_caract_(char *str, char *c);
 /*HISTORY*/
+void				get_hist_prompt(t_data *data);
 int					data_check_and_create_history_file(t_data *data, char *cmd);
+
 
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next);

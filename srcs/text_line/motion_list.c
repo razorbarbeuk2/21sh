@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   motion_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:19:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/16 00:31:10 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/19 11:44:10 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
 	tmp_lst = NULL;
 	tmp_lst = (*lst);
 	if (!pos)
-		return (tmp_lst);
+		return (NULL);
 	count = 1;
 	if (pos)
 	{

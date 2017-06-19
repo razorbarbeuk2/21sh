@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/15 17:54:09 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/19 15:05:34 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int init_struct(t_data *data)
 	data->entry->cpy = NULL;
 	data->entry->cut_line = NULL;
 	data->entry->line_str = NULL;
+	data->entry->line_str_double = NULL;
 	data->entry->len_line = 0;
 	data->entry->nb_line = 0;
 	data->sel->path_arg = NULL;

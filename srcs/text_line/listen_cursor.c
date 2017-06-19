@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/18 14:53:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/19 14:58:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void		ft_move_cursor(t_data *data, int result)
 		ft_move_home(data);
 	else if (result == END)
 		ft_move_end(data);
+	else if (result == UP)
+	{
+		/* code */
+	}
+	else if (result == DOWN)
+	{
+		/* code */	
+	}
 	else
 		return ;
 }
@@ -50,6 +58,8 @@ void		ft_cmd_cursor(t_data *data, int result)
 		del_one_character(data, result);
 	else if (result == RST)
 		reset_line(data);
+	else if (result == SEARCH_HIST)
+		get_hist_prompt(data);
 	else
 		return ;
 }
@@ -74,20 +84,10 @@ int			listen_cursor(t_data *data)
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);
-		if (result == DEL || result == ENTER)
-			ft_cmd_cursor(data, result);
-		else if (result == ALT_UP || result == ALT_DOWN || result == ALT_LEFT || result == ALT_RIGHT)
-			ft_cmd_cursor(data, result);
-		else if (result == SHIFT_LEFT || result == SHIFT_RIGHT)
-			ft_cmd_cursor(data, result);
-		else if (result == RST || result == CTRL_CPY_PASTE || result == CTRL_CUT_PASTE)
-			ft_cmd_cursor(data, result);
-		else if (result == HOME || result == END)
-			ft_move_cursor(data, result);
-		else if ((result >= 32 && result <= 126) && result != HOME && result != END) //Enlever HOME et END dans cette condition Num de touche à changer
+		ft_cmd_cursor(data, result);
+		ft_move_cursor(data, result);
+		if ((result >= 32 && result <= 126) && result != HOME && result != END) //Enlever HOME et END dans cette condition Num de touche à changer
 			print_character(data, result);
-		else if (result >= UP && result <= LEFT)
-			ft_move_cursor(data, result);
 		get_pos_prompt(data);
 		ft_bzero(buf, 8);
 	}

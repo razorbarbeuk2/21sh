@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_history_files.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 15:35:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/16 18:54:00 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/19 12:05:34 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ int			data_open_history_file(int opt)
 	int		fd;
 
 	fd = 0;
-	if (!(fd = open("/tmp/log_21sh_history", (O_RDWR | O_CREAT), S_IRWXU | S_IRWXG | S_IRWXO)))
+	if (!(fd = open("/tmp/log_21sh_history", (O_RDWR | O_CREAT), S_IRWXU | S_IRWXG | S_IRWXO)) && opt == 1)
+		return (-1);
+	if (!(fd = open("/tmp/log_21sh_history", (O_RDWR))) && opt == 2)
 		return (-1);
 	return (fd);
 }
 
 int			data_check_and_create_history_file(t_data *data, char *cmd)
 {
-	
+	int		fd;	
 	char 	*line;
 	int		nb_line;
 
@@ -32,7 +34,7 @@ int			data_check_and_create_history_file(t_data *data, char *cmd)
 	
 	nb_line = 0;
 	line = NULL;
-	
+	fd = data_open_history_file(1);
 	if (fd)
 	{
 		while ((get_next_line(fd, &line) != 0))
@@ -54,8 +56,7 @@ int			data_search_in_history_file(t_data *data, char *search_cmd)
 	fd = 0;
 	nb_line = 0;
 	line = NULL;
-	if (!(fd = open("/tmp/log_21sh_history", (O_RDWR))))
-		return (-1);
+	fd = data_open_history_file(2);
 	if (fd)
 	{
 		while (get_next_line(fd, &line))
@@ -63,7 +64,7 @@ int			data_search_in_history_file(t_data *data, char *search_cmd)
 			if (ft_strcmp(line, search_cmd) == 0)
 				break ;
 			else
-				ft_putstr_fd("No result\n");
+				print_error("No result\n");
 			nb_line++;
 		}
 		close(fd);
