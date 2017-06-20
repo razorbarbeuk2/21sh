@@ -3,43 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_cmd_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:27:13 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/13 13:45:40 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/20 12:25:42 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static void 		ft_init_t_sep(t_sep	**sep_node)
-{
-	t_sep	*sep_tmp;
-
-	sep_tmp = NULL;
-	sep_tmp = (*sep_node);
-	sep_tmp->separate = NULL;
-}
-
-static void 		ft_init_t_cmd(t_cmd	**cmd_node)
-{
-	t_cmd	*cmd_tmp;
-
-	cmd_tmp = NULL;
-	cmd_tmp = (*cmd_node);
-	cmd_tmp->cmd = NULL;
-	cmd_tmp->opt = NULL;
-	cmd_tmp->file = NULL;
-	cmd_tmp->_select_cmd = 0;
-	cmd_tmp->fds.stdin = 0;
-	cmd_tmp->fds.stdout = 1;
-	cmd_tmp->fds.stderr = 2;
-}
-
 int		data_create_node_cmd(t_data *data, char *line_str, t_cmd **cmd_node, char **exec_cmd)
 {
 	t_cmd	*cmd_node_tmp;
-
 
 	(void)data;
 	cmd_node_tmp = (*cmd_node);
@@ -85,8 +60,7 @@ void		data_create_list_struct(t_data *data, char **line_str, void **node, int *t
 	i = 0;
 	cmd_node_tmp = NULL;
 	sep_node_tmp = NULL;
-	sep_node_tmp = ft_memalloc(sizeof(t_sep));
-	ft_init_t_sep(&sep_node_tmp);
+	sep_node_tmp = init_t_sep();
 	if (ft_strcmp(line_str[i], "|") == 0)
 	{
 		if (data_create_node_separator(data, line_str[i], &sep_node_tmp))
@@ -98,8 +72,7 @@ void		data_create_list_struct(t_data *data, char **line_str, void **node, int *t
 	}
 	else
 	{
-		cmd_node_tmp = ft_memalloc(sizeof(t_cmd));
-		ft_init_t_cmd(&cmd_node_tmp);
+		cmd_node_tmp = init_t_cmd();
 		while (line_str[i] && !parse_pipe_and_semicolumn(line_str[i]))
 		{
 			if (data_create_node_cmd(data, line_str[i], &cmd_node_tmp, line_str))

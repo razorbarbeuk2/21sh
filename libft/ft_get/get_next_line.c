@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 15:09:57 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/11 15:56:47 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/20 17:09:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int		get_next_line(int const fd, char **line)
 			return (-1);
 		if (ret == 0 && str != NULL)
 		{
-			*line = ft_strdup(str);
+			(*line) = ft_strdup(str);
 			ft_strdel(&str);
-			return ((ft_strcmp(*line, "")) != 0);
+			return ((ft_strcmp((*line), "")) != 0);
 		}
 		if (str == NULL)
 			str = ft_strdup(buf);

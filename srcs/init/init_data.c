@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/19 17:46:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/20 17:42:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ static t_select *init_data_sel()
 	return (init_sel);
 }
 
+static t_historic *init_data_hist()
+{
+	t_historic *init_hist;
+
+	init_hist = NULL;
+	if (!(init_hist = (t_historic *)malloc(sizeof(t_historic))))
+		return (NULL);
+	init_hist->fd = 0;
+	init_hist->count_pos = 0;
+	init_hist->list_historic = NULL;
+	return (init_hist);
+}
+
 int init_struct(t_data *data)
 {
 	if (!init_data_env_cmd(data))
@@ -69,6 +82,8 @@ int init_struct(t_data *data)
 	if (!(data->historique = init_data_entry()))
 		return (-1);
 	if (!(data->sel = init_data_sel()))
+		return (-1);
+	if (!(data->historic = init_data_hist()))
 		return (-1);
 	return (1);
 }

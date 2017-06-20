@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/06/19 16:52:57 by gbourson         ###   ########.fr        #
+#    Updated: 2017/06/20 12:26:05 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_NAME 	=	init/init_data.c \
 				init/init_prompt.c \
 				init/init_env.c \
 				init/init_term.c \
+				init/init_cmd.c \
 				builtins/builtins_init.c \
 				builtins/builtins_env.c \
 				builtins/builtins_set_unset_env.c \
@@ -51,6 +52,7 @@ SRC_NAME 	=	init/init_data.c \
 				data/data_exec_cmd.c \
 				data/data_exec_pipe.c \
 				history/data_create_history_files.c \
+				history/data_up_down_history.c \
 				tools/tools_count_spec_caract.c \
 				tools/tools_list_create_node.c \
 				tools/tools_free.c \

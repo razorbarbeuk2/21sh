@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 16:08:54 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/26 11:30:20 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/20 14:57:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list	*ft_lstnew(void const *content, size_t content_size);
+void	*ft_lst_swap_content(t_list **lst);
 
 #endif

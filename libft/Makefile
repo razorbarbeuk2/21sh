@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/10/11 17:08:17 by RAZOR            ###   ########.fr        #
+#    Updated: 2017/06/20 14:58:18 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ FT_IS_SRC_O			=	$(addprefix bin/,$(_FT_IS_SRC_O))
 
 #Define FT_LIST
 _FT_LIST_SRC		=	ft_lst_count.c ft_lstadd.c ft_lstadd_back.c ft_lstdel.c\
-						ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c
+						ft_lstdelone.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_lst_swap_content.c
 
 FT_LIST_SRC			=	$(addprefix ft_list/,$(_FT_LIST_SRC))
 _FT_LIST_SRC_O		=	$(patsubst %.c,%.o, $(_FT_LIST_SRC))

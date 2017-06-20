@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/19 17:26:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/20 16:29:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ typedef struct		s_cmd
 	t_fd			fds;
 }					t_cmd;
 
-typedef struct		s_caract
-{
-	char 			*caract;
-}					s_caract;
-
-
 /*TOOLS*/
 int					get_tab_to_lst(t_list **data_env, char **environ);
 char				**get_lst_to_tab(t_list *env_lst);
@@ -88,6 +82,8 @@ void				init_env(t_list **env_lst);
 int					init_paths_env(t_data *data);
 int					init_struct(t_data *data);
 int 				init_pos(t_data *data);
+t_cmd 				*init_t_cmd();
+t_sep 				*init_t_sep();
 /*ENV*/
 char				*get_search_infos(t_list *env, char *str);
 int					iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s));
@@ -147,7 +143,10 @@ int					data_str_check_opt_cmd(t_cmd *cmd, char *line_str);
 int 				ft_is_caract_(char *str, char *c);
 /*HISTORY*/
 void				get_hist_prompt(t_data *data);
-int					data_check_and_create_history_file(t_data *data, char *cmd);
+int					data_init_history_file(t_data *data);
+// int				data_check_and_create_history_file(t_data *data, char *cmd);
+int					ft_move_up_down_historic(t_data *data, int result);
+// int 				ft_move_down_historic(t_data *data);
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next);
 int					exec_cmd_node(t_data *data, t_list *current);
