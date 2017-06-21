@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/20 16:29:33 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 16:32:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void 				print_lst_line_tools(t_data *data, t_list *lst);
 void				print_pos_cursor(t_data *data);
 /*TOOLS FREE*/
 void				ft_free_char(char **tmp);
-void				free_env(void *tmp, size_t tmp_size);
+void				ft_free_env(void *tmp, size_t tmp_size);
 void				ft_free_tab_path(char **oldpath, char **path);
+void				ft_free_node(void *tmp, size_t tmp_size);
 char				*ft_cut_path(t_list *env_lst, char *line);
 /*TOOLS TERMCAPS*/
 int					ft_concat_int(char *buf);
@@ -82,6 +83,7 @@ void				init_env(t_list **env_lst);
 int					init_paths_env(t_data *data);
 int					init_struct(t_data *data);
 int 				init_pos(t_data *data);
+t_entry 			*init_data_entry();
 t_cmd 				*init_t_cmd();
 t_sep 				*init_t_sep();
 /*ENV*/
@@ -104,6 +106,7 @@ void				print_list_cmd(t_data *data, t_list *lst);
 int					term_init(t_select *sel);
 void				termios_init(struct	termios *term);
 /*PROMPT*/
+void				get_reset_prompt(t_data *data);
 void				get_super_prompt(t_data *data, char *line);
 int					get_pos_prompt(t_data *data);
 void				ft_listen_cmd(t_data *data);
@@ -125,7 +128,7 @@ void				ft_move_cursor(t_data *data, int result);
 void 				ft_move(t_data *data, int x, int y);
 void				reset_line(t_data *data);
 void				print_character(t_data *data, char result);
-void				del_one_character(t_data *data, char result);
+void				del_one_character(t_data *data, int result);
 void				exec_cmd_character(t_data *data);
 void				motion_list(t_data *data, char opt);
 /*ADD_DEL_CPY_PRINT_CHARACT*/
@@ -144,9 +147,9 @@ int 				ft_is_caract_(char *str, char *c);
 /*HISTORY*/
 void				get_hist_prompt(t_data *data);
 int					data_init_history_file(t_data *data);
-// int				data_check_and_create_history_file(t_data *data, char *cmd);
+int					data_check_and_create_history_cmd(t_data *data, char *cmd);
+int					data_search_in_history_file(t_data *data, char *search_cmd);
 int					ft_move_up_down_historic(t_data *data, int result);
-// int 				ft_move_down_historic(t_data *data);
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next);
 int					exec_cmd_node(t_data *data, t_list *current);

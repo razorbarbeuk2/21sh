@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 11:17:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/20 18:21:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 16:21:46 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,34 @@
 char			*ft_search_up_down_historic(t_data *data, int count_pos)
 {
 	char 		*tmp;
-	int 		pos;
+	t_list		*lst;
 
 	tmp = NULL;
-	pos = 0;
-	while (data->historic->list_historic && pos < count_pos)
+	lst = NULL;
+	lst = data->historic->list_historic;
+	while (lst)
 	{
-		tmp = (char *)data->historic->list_historic->content;
-		data->historic->list_historic = data->historic->list_historic->next;
-		pos++;
+		tmp = (char *)lst->content;
+		if (ft_atoi(&tmp[0]) == count_pos)
+			return (ft_strchr(tmp, ' ') + 1);
+		lst = lst->next;
+		tmp = NULL;
 	}
-	return (tmp);
+	return (NULL);
+}
+
+void			ft_insert_cmd_to_prompt(t_data *data, char *s)
+{
+	int i;
+
+	i = 0;
+	reset_line(data);
+	while (s[i])
+	{
+		print_character(data, s[i]);
+		i++;
+	}
+	return ;
 }
 
 int				ft_move_up_down_historic(t_data *data, int result)
@@ -35,27 +52,16 @@ int				ft_move_up_down_historic(t_data *data, int result)
 	tmp = NULL;
 	if (data->historic->list_historic)
 	{
-
 		ft_move_home(data);
 		tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
-		ft_putstr_fd("||", data->sel->tty);
-		ft_putnbr_fd(data->historic->count_pos, data->sel->tty);
-		ft_putstr_fd("||", data->sel->tty);
-		data->historic->count_pos++;
+		if (result == DOWN && data->historic->count_pos < data->historic->count_node)
+			data->historic->count_pos++;
 		tmp = ft_search_up_down_historic(data, data->historic->count_pos);
 		if (tmp)
-		{
-			ft_putstr_fd(tmp, data->sel->tty);
-			write(data->sel->tty, " ", 1);
-			ft_putnbr_fd(data->historic->count_pos, data->sel->tty);
-		}
-		// if (result == UP && data->historic->count_pos < data->historic->count_node)
-		// {
-		// 	data->historic->count_pos++;
-		// 	ft_putstr_fd("||", data->sel->tty);
-		// 	ft_putnbr_fd(data->historic->count_pos, data->sel->tty);
-		// 	ft_putstr_fd("||", data->sel->tty);
-		// }
+			ft_insert_cmd_to_prompt(data, tmp);
+		if (result == UP && data->historic->count_pos > 0)
+			data->historic->count_pos--;
 	}
 	return (0);
 }
+

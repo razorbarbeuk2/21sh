@@ -6,11 +6,17 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 15:35:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/20 17:32:36 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 15:29:35 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void		data_uptdate_count_history_file(t_data *data)
+{
+	data->historic->count_node = ft_lst_count(data->historic->list_historic);
+	data->historic->count_pos = (data->historic->count_node);
+}
 
 int			data_init_history_file(t_data *data)
 {
@@ -21,7 +27,7 @@ int			data_init_history_file(t_data *data)
 		return (-1);
 	if (data->historic->fd)
 	{
-		while ((get_next_line(data->historic->fd, &line)))
+		while ((get_next_line(data->historic->fd, &line)) != 0)
 		{
 			ft_lstadd(&data->historic->list_historic, ft_lstnew(line, ft_strlen(line) + 1));
 			ft_strdel(&line);
@@ -29,27 +35,37 @@ int			data_init_history_file(t_data *data)
 		}
 		close(data->historic->fd);
 	}
-	data->historic->count_node = ft_lst_count(data->historic->list_historic);
+	data_uptdate_count_history_file(data);
 	return (1);
 }
 
-// int			data_check_and_create_history_file(t_data *data, char *cmd)
-// {
-// 	char 	*line;
+int			data_check_and_create_history_cmd(t_data *data, char *cmd)
+{
+	char 	*line;
+	int 	nb_line;
 
-// 	fd = data_open_history_file(1);
-// 	if (fd && cmd)
-// 	{
-// 		while ((get_next_line(fd, &line) != 0))
-// 			nb_line++;
-// 		ft_putnbr_fd(nb_line + 1, fd);
-// 		write(fd, " ", 1);
-// 		ft_putstr_fd(cmd, fd);
-// 		write(fd, "\n", 1);
-// 		close(fd);
-// 	}
-// 	return (1);
-// }
+	line = NULL;
+	nb_line = 0;
+	if (!(data->historic->fd = open("/tmp/log_21sh_history", O_RDWR)))
+		return (-1);
+	if (data->historic->fd && cmd)
+	{
+		while ((get_next_line(data->historic->fd, &line) != 0))
+		{
+			nb_line++;
+			ft_strdel(&line);
+			line = NULL;
+		}
+		ft_putnbr_fd((nb_line + 1), data->historic->fd);
+		write(data->historic->fd, " ", 1);
+		ft_putstr_fd(cmd, data->historic->fd);
+		write(data->historic->fd, "\n", 1);
+		close(data->historic->fd);
+	}
+	ft_lstdel(&data->historic->list_historic, &ft_free_node);
+	data_init_history_file(data);
+	return (1);
+}
 
 // int			data_search_in_history_file(t_data *data, char *search_cmd)
 // {

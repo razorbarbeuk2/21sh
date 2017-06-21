@@ -6,22 +6,17 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 18:43:07 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 15:47:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void	ft_print_tab(t_data *data, char **str_tab)
+void	get_reset_prompt(t_data *data)
 {
-	int i;
-
-	i = 0;
-	while(str_tab[i])
-	{
-		ft_putstr_fd(str_tab[i], data->sel->tty);
-		i++;
-	}
+	ft_putstr_fd("\n", data->sel->tty);
+	init_pos(data);
+	return ;
 }
 
 void	get_super_prompt(t_data *data, char *line)
@@ -39,6 +34,7 @@ void	get_super_prompt(t_data *data, char *line)
 	ft_putstr_fd("\033[m", data->sel->tty);
 	data->sel->len_prompt = ft_strlen(tmp);
 	ft_strdel(&tmp);
+	return ;
 }
 
 void	get_hist_prompt(t_data *data)
@@ -58,6 +54,7 @@ void	get_hist_prompt(t_data *data)
 	data->nb_prompt_historique = ft_strlen(tmp);
 	listen_cursor(data, data->historique);
 	ft_strdel(&tmp);
+	return ;
 	//tputs(tgetstr("al", NULL), 1, ft_putchar_select);
 
 	// while (data->sel->pos[0] != data->sel->pos_start[0])

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:57:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/19 11:42:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 16:22:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ static void		del_print_middle_sentence(t_data *data)
 	data->sel->i_lst = i_lst;
 }
 
-void		del_one_character(t_data *data, char result)
+void		del_one_character(t_data *data, int result)
 {
 	int i_lst;
 	int i_;
 
 	i_lst = 0;
 	i_ = 0;
-	(void)result;
 	if ((int)data->entry->len_line && data->sel->i_lst)
 	{
 		if (data->sel->i_lst == (int)data->entry->len_line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:25:35 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/12 14:23:00 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/21 14:24:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**get_lst_to_tab(t_list *env_lst)
 		tmp_lst = tmp_lst->next;
 	}
 	environ[i] = NULL;
-	ft_lstdel(&env_lst, &free_env);
+	ft_lstdel(&env_lst, &ft_free_env);
 	return (environ);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/18 14:23:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 14:24:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int		builtin_env(t_data *data, t_list **env_lst, char **line)
 	else
 		print_lst(data->env_cpy);
 	ft_free_char(tmp);
-	ft_lstdel(&data->env_cpy, &free_env);
+	ft_lstdel(&data->env_cpy, &ft_free_env);
 	return (1);
 }

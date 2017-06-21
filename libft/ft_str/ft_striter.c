@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 15:31:48 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/18 16:54:20 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 15:56:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	ft_striter_c(char *s, void (*f)(char))
 			s++;
 		}
 	}
+	return ;
 }

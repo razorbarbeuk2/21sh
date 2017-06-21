@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/15 16:11:20 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 14:23:08 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,13 @@ void	ft_free_char(char **tmp)
 	return ;
 }
 
-void		free_env(void *tmp, size_t tmp_size)
+void		ft_free_node(void *tmp, size_t tmp_size)
+{
+	ft_memdel(&tmp);
+	tmp_size = 0;
+}
+
+void		ft_free_env(void *tmp, size_t tmp_size)
 {
 	t_env	*env;
 

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/20 17:42:39 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 16:31:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int init_data_env_cmd(t_data *data)
 	return (1);
 }
 
-static t_entry *init_data_entry()
+t_entry 	*init_data_entry()
 {
 	t_entry *init_entry;
 
@@ -68,7 +68,7 @@ static t_historic *init_data_hist()
 	if (!(init_hist = (t_historic *)malloc(sizeof(t_historic))))
 		return (NULL);
 	init_hist->fd = 0;
-	init_hist->count_pos = 0;
+	init_hist->count_pos = -10;
 	init_hist->list_historic = NULL;
 	return (init_hist);
 }

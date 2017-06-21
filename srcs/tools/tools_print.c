@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/28 22:26:38 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/21 15:31:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void	ft_print_tab(t_data *data, char **str_tab)
+{
+	int i;
+
+	i = 0;
+	while(str_tab[i])
+	{
+		ft_putstr_fd(str_tab[i], data->sel->tty);
+		i++;
+	}
+}
 
 void 		count_list_cmd(t_data *data, t_list *lst)
 {
