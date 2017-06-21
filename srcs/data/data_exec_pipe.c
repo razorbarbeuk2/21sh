@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 18:35:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/15 17:37:47 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/21 17:45:17 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ int			create_pipe(int pipfd[2], t_fd *fd)
 // 		return (-1);
 // 	}
 // 	fd->stdin = pipefd[PIPE_WRITE];
-// 	return (1);
-// }
+	return (0);
+//
+}
 
-// int			exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next)
-// {
+int			exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next)
+{
 // 	t_fd	fd;
 // 	int		pipefd[2];
 // 	pid_t	pid;
 
-	
+	(void)data;
+	(void)prev;
+	(void)next;
 // 	if (create_pipe(pipefd, fd) == -1)
 // 		return (-1);
 // 	if ((pid = fork()) == -1)
@@ -64,7 +67,6 @@ int			create_pipe(int pipfd[2], t_fd *fd)
 
 int		exec_cmd_node(t_data *data, t_list *cur)
 {
-	ft_putstr("GO\n");
 	parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd);
 	return (0);
 }

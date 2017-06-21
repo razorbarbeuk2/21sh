@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 16:56:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 18:55:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			data_exec_cmd(t_data *data, t_list *cmd_list)
 			exec_cmd_node(data, cmd_list);
 		cmd_list = cmd_list->next;
 	}
+	ft_lstdel(&data->cmd, &ft_free_cmd);
 	return (1);
 }
 
@@ -56,17 +57,16 @@ void		exec_cmd_character(t_data *data)
 		}
 		data_check_and_create_history_cmd(data, data->entry->line_str);
 		data->entry->line_str_double = ft_strsplit(data->entry->line_str, ';');
+		ft_putstr_fd("\nGETCHAR 1", data->sel->tty);
+		getchar();
 		data_check_str_list_struct_cmd_loop(data, data->entry->line_str_double, 0, ft_count_tab(data->entry->line_str_double));
-		// ft_putstr("\nGO EXEC\n");
-		// ft_putstr("NB PIPE :");
-		// ft_putnbr(data->nb_pipe);
-		// ft_putstr("\n");
+		ft_putstr_fd("\nGETCHAR 2", data->sel->tty);
+		getchar();
+		ft_putstr_fd("\n", data->sel->tty);
+		
 		data_exec_cmd(data, data->cmd);
 	}
-	else
-	{
-		reset_line(data);
-		get_reset_prompt(data);
-	}
+	free_data_entry(data);
+	get_reset_prompt(data);
 	return ;
 }

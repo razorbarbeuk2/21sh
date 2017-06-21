@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 16:32:20 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 18:06:00 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void				ft_free_char(char **tmp);
 void				ft_free_env(void *tmp, size_t tmp_size);
 void				ft_free_tab_path(char **oldpath, char **path);
 void				ft_free_node(void *tmp, size_t tmp_size);
+void				ft_free_cmd(void *tmp, size_t tmp_size);
+void				free_data_entry(t_data *data);
 char				*ft_cut_path(t_list *env_lst, char *line);
 /*TOOLS TERMCAPS*/
 int					ft_concat_int(char *buf);

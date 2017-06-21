@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 14:23:08 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/21 18:07:01 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,21 @@ char	*ft_cut_path(t_list *env_lst, char *line)
 		return (ft_strdup("/"));
 	else
 		return (ft_strdup(pwd));
+}
+
+void		ft_free_cmd(void *tmp, size_t tmp_size)
+{
+	t_cmd	*cmd_tmp;
+
+	cmd_tmp = NULL;
+	cmd_tmp = ((t_cmd *)tmp);
+	ft_strdel(&cmd_tmp->cmd);
+	ft_strdel(&cmd_tmp->opt);
+	ft_strdel(&cmd_tmp->file);
+	cmd_tmp->_select_cmd = 0;
+	ft_free_char(cmd_tmp->exec_cmd);
+	ft_memdel((void **)&cmd_tmp);
+	tmp_size = 0;
 }
 
 void	ft_free_char(char **tmp)
