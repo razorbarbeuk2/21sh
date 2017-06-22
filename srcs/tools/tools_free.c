@@ -6,51 +6,18 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 18:07:01 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 17:42:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-/*A REFAIRE*/
-char	*ft_cut_path(t_list *env_lst, char *line)
+void		ft_free_select(t_data *data)
 {
-	char	*pwd;
-	char	*home;
-
-	(void)line;
-	pwd = NULL;
-	home = NULL;
-	if (!(pwd = get_search_infos(env_lst, "PWD")))
-		pwd = " ";
-	if (!(home = get_search_infos(env_lst, "HOME")))
-		home = " ";
-	if ((ft_strlen(pwd) > ft_strlen(home)))
-	{
-		return (ft_strsub(pwd, ft_strlen(home), ft_strlen(pwd) - \
-		ft_strlen(home)));
-	}
-	else if ((ft_strcmp(pwd, home)) == 0)
-		return (ft_strdup("~"));
-	else if ((ft_strcmp(pwd, "/")) == 0)
-		return (ft_strdup("/"));
-	else
-		return (ft_strdup(pwd));
-}
-
-void		ft_free_cmd(void *tmp, size_t tmp_size)
-{
-	t_cmd	*cmd_tmp;
-
-	cmd_tmp = NULL;
-	cmd_tmp = ((t_cmd *)tmp);
-	ft_strdel(&cmd_tmp->cmd);
-	ft_strdel(&cmd_tmp->opt);
-	ft_strdel(&cmd_tmp->file);
-	cmd_tmp->_select_cmd = 0;
-	ft_free_char(cmd_tmp->exec_cmd);
-	ft_memdel((void **)&cmd_tmp);
-	tmp_size = 0;
+	ft_memdel((void **)&data->sel->pos);
+	ft_memdel((void **)&data->sel->pos_start);
+	ft_memdel((void **)&data->sel->pos_tmp);
+	ft_strdel(&data->sel->prompt);
 }
 
 void	ft_free_char(char **tmp)

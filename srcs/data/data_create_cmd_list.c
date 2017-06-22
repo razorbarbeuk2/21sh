@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 18:57:28 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 17:49:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		data_check_str_list_struct_cmd_loop(t_data *data, char **line_str, int i, 
 	void	*node;
 
 	tmp = NULL;
+	node = NULL;
 	if (i == size)
 		return ;
 	if (i < size)
@@ -47,10 +48,9 @@ void		data_check_str_list_struct_cmd_loop(t_data *data, char **line_str, int i, 
 		{
 			tmp = data_clean_to_tab(data, line_str[i]);
 			data_create_list_struct(data, tmp, &node, &type);
-			ft_free_char(tmp);
 			ft_lstadd_back(&data->cmd, data_check_str_list_struct_node(data, node, type));
+			ft_memdel(&node);
 			data_check_str_list_struct_cmd_loop(data, line_str, i + 1, size);
-			
 		}
 	}
 }

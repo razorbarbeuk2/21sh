@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 16:15:08 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/15 16:24:43 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/22 14:01:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ void	init_env(t_list **env_lst)
 	tmp = NULL;
 }
 
-int		init_paths_env(t_data *data)
+int		init_paths_home_env(t_data *data)
 {
 	char *tmpstr;
 
 	tmpstr = NULL;
 	if (data->env && (tmpstr = get_search_infos(data->env, "PATH")))
 	{
+		data->home = ft_strdup(get_search_infos(data->env, "HOME"));
 		data->paths = ft_strsplit(tmpstr, ':');
 		return (1);
 	}

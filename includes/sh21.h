@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 18:06:00 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 18:01:26 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ void				ft_free_char(char **tmp);
 void				ft_free_env(void *tmp, size_t tmp_size);
 void				ft_free_tab_path(char **oldpath, char **path);
 void				ft_free_node(void *tmp, size_t tmp_size);
+void				ft_free_select(t_data *data);
 void				ft_free_cmd(void *tmp, size_t tmp_size);
+void				ft_lstdel_cmd(t_list **alst);
 void				free_data_entry(t_data *data);
-char				*ft_cut_path(t_list *env_lst, char *line);
+char				*ft_cut_path(t_data *data);
+
 /*TOOLS TERMCAPS*/
 int					ft_concat_int(char *buf);
 int					ft_putchar_select(int c);
@@ -82,7 +85,7 @@ int					len_word_caract(char *line_str, char *caract);
 t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
 /*INIT*/
 void				init_env(t_list **env_lst);
-int					init_paths_env(t_data *data);
+int					init_paths_home_env(t_data *data);
 int					init_struct(t_data *data);
 int 				init_pos(t_data *data);
 t_entry 			*init_data_entry();
@@ -108,8 +111,8 @@ void				print_list_cmd(t_data *data, t_list *lst);
 int					term_init(t_select *sel);
 void				termios_init(struct	termios *term);
 /*PROMPT*/
-void				get_reset_prompt(t_data *data);
-void				get_super_prompt(t_data *data, char *line);
+int					get_reset_prompt(t_data *data);
+void				get_super_prompt(t_data *data);
 int					get_pos_prompt(t_data *data);
 void				ft_listen_cmd(t_data *data);
 /*MOTION_CURSOR*/

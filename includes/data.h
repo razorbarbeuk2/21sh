@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/20 16:26:46 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 13:54:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_data
 	int 			set_historique;
 	int 			nb_prompt_historique;
 	int				nb_pipe;
+	char			*home;
 	char			**paths;
 }					t_data;
 

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 18:37:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 14:05:16 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_sh(t_data *data, char **env)
 
 	if (!get_tab_to_lst(&data->env, env))
 		return (-1);
-	if (!init_paths_env(data))
+	if (!init_paths_home_env(data))
 		return (-1);
 	if (!term_init(data->sel))
 		return (-1);

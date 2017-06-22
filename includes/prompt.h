@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 16:10:44 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 14:46:26 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ typedef struct		s_entry
 
 typedef struct		s_select
 {
-	char			**path_arg;
-	char			**arg;
-	char			*termcapbuf;
 	int				*pos;
 	int				*pos_start;
 	int				*pos_tmp;

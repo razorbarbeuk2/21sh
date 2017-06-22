@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 16:31:43 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 13:58:46 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static t_select *init_data_sel()
 	init_sel = NULL;
 	if (!(init_sel = (t_select *)malloc(sizeof(t_select))))
 		return (NULL);
-	init_sel->path_arg = NULL;
-	init_sel->arg = NULL;
-	init_sel->termcapbuf = NULL;
+	init_sel->pos = NULL;
+	init_sel->pos_start = NULL;
+	init_sel->pos_tmp = 0;
 	init_sel->i_lst = 0;
 	init_sel->i_lst_tmp = 0;
 	init_sel->tty = 0;

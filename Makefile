@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/06/20 12:26:05 by gbourson         ###   ########.fr        #
+#    Updated: 2017/06/22 17:47:04 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC_NAME 	=	init/init_data.c \
 				tools/tools_count_spec_caract.c \
 				tools/tools_list_create_node.c \
 				tools/tools_free.c \
+				tools/tools_free_cmd.c \
 				tools/tools_list.c \
 				tools/tools_termcaps.c \
 				tools/tools_print.c \
