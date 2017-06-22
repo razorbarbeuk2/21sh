@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/22 18:02:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/22 18:07:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ char	*ft_cut_path(t_data *data)
 int		get_reset_prompt(t_data *data)
 {
 	ft_putstr_fd("\n", data->sel->tty);
-	ft_free_select(data);
 	
+	ft_free_select(data);
+
 	if (!init_pos(data))
 		return (-1);
 	listen_cursor(data, data->line);
