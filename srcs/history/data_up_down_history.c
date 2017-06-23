@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 11:17:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 16:21:46 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 15:17:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				ft_move_up_down_historic(t_data *data, int result)
 	char  		*tmp;
 	
 	tmp = NULL;
-	if (data->historic->list_historic)
+	if (data->historic->list_historic && data->historic->count_pos < data->historic->count_node && data->historic->count_pos > 0)
 	{
 		ft_move_home(data);
 		tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
@@ -58,9 +58,11 @@ int				ft_move_up_down_historic(t_data *data, int result)
 			data->historic->count_pos++;
 		tmp = ft_search_up_down_historic(data, data->historic->count_pos);
 		if (tmp)
+		{
 			ft_insert_cmd_to_prompt(data, tmp);
-		if (result == UP && data->historic->count_pos > 0)
+			if (result == UP && data->historic->count_pos > 0)
 			data->historic->count_pos--;
+		}
 	}
 	return (0);
 }

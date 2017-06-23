@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/22 14:46:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 16:55:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef enum		e_enum_cursor
 					SEARCH_HIST = 18, // CTRL + R
 					RST = 14 // CTRL + N
 					// ALT_RIGHT
-					//HOME = 58,
-					//END = 61,
+					// HOME = 58,
+					// END = 61,
 }					t_enum_cursor;
 
 typedef struct		s_entry

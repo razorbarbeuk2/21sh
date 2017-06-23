@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/22 17:42:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 18:06:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void		ft_free_select(t_data *data)
 {
-	ft_memdel((void **)&data->sel->pos);
-	ft_memdel((void **)&data->sel->pos_start);
-	ft_memdel((void **)&data->sel->pos_tmp);
-	ft_strdel(&data->sel->prompt);
+	if (data->sel)
+	{
+		ft_memdel((void **)&data->sel->pos);
+		ft_memdel((void **)&data->sel->pos_start);
+		ft_memdel((void **)&data->sel->pos_tmp);
+		ft_strdel(&data->sel->prompt);
+	}
+	return ;
 }
 
 void	ft_free_char(char **tmp)
@@ -40,8 +44,12 @@ void	ft_free_char(char **tmp)
 
 void		ft_free_node(void *tmp, size_t tmp_size)
 {
-	ft_memdel(&tmp);
-	tmp_size = 0;
+	if (tmp)
+	{
+		ft_memdel(&tmp);
+		tmp_size = 0;
+	}
+	return ;
 }
 
 void		ft_free_env(void *tmp, size_t tmp_size)
@@ -50,12 +58,16 @@ void		ft_free_env(void *tmp, size_t tmp_size)
 
 	env = NULL;
 	env = ((t_env *)tmp);
-	if (env->key)
-		ft_strdel(&env->key);
-	if (env->infos)
-		ft_strdel(&env->infos);
-	ft_memdel((void **)&env);
-	tmp_size = 0;
+	if (env)
+	{
+		if (env->key)
+			ft_strdel(&env->key);
+		if (env->infos)
+			ft_strdel(&env->infos);
+		ft_memdel((void **)&env);
+		tmp_size = 0;
+	}
+	
 }
 
 void		ft_free_tab_path(char **oldpath, char **path)

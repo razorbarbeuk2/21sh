@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/22 13:29:52 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 17:23:48 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int			listen_cursor(t_data *data, t_entry *entry)
 	data->entry->size_line = data->sel->len_prompt;
 	while(read(0, buf, 8))
 	{
-
 		result = ft_concat_int(buf);
+		if (result == LEFT || result == RIGHT || result == HOME || result == END || result == UP || result == DOWN)
+			ft_move_cursor(data, result);
 		ft_cmd_cursor(data, result);
-		ft_move_cursor(data, result);
-		if ((result >= 32 && result <= 126) && result != HOME && result != END) //Enlever HOME et END dans cette condition Num de touche à changer
+		if ((result >= 32 && result <= 126) && result != HOME && result != END)//Enlever HOME et END dans cette condition Num de touche à changer
 			print_character(data, result);
 		get_pos_prompt(data);
 		ft_bzero(buf, 8);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:41:09 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/19 18:36:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 18:02:17 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int 	init_pos(t_data *data)
 {
-	get_super_prompt(data, NULL);
+	get_super_prompt(data);
 	if (!(data->sel->pos = ft_memalloc(2*sizeof(int))))
 		return (-1);
 	if (!(data->sel->pos_start = ft_memalloc(2*sizeof(int))))

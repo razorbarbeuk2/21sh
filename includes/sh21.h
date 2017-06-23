@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/22 18:01:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 17:45:53 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct		s_cmd
 	char 			*file;
 	int 			_select_cmd;
 	char			**exec_cmd;
-	t_fd			fds;
+	//t_fd			fds;
 }					t_cmd;
 
 /*TOOLS*/

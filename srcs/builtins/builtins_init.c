@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 17:10:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 18:11:54 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ int				buil_drive(t_data *data, t_list **env_lst, char **line, int opt)
 
 void			parse_line_builtins(t_data *data, t_list **env_lst, char **line)
 {
-	if (line[0] && buil_drive(data, env_lst, line, BUILD_FIND))
-		buil_drive(data, env_lst, line, BUILD_EXE);
-	else if (line[0])
-		get_exe_path(data, line);
+	if (line)
+	{
+		if (line[0] && buil_drive(data, env_lst, line, BUILD_FIND))
+			buil_drive(data, env_lst, line, BUILD_EXE);
+		else if (line[0])
+			get_exe_path(data, line);
+	}
 }

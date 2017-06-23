@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/19 18:11:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 18:06:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	ft_clean_buf_pos(t_data *data, char *buf)
 	ft_free_char(tab_pos);
 	//data->sel->pos[i] = 0;
 	tab_pos = NULL;
+	return ;
 }
 
 int			get_pos_prompt(t_data *data)

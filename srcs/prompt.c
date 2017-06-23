@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/22 18:07:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/23 17:49:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ char	*ft_cut_path(t_data *data)
 int		get_reset_prompt(t_data *data)
 {
 	ft_putstr_fd("\n", data->sel->tty);
-	
-	ft_free_select(data);
-
+	if (data->sel)
+		ft_free_select(data);
+	if (data->entry)
+		free_data_entry(data);
+	if (data->cmd)
+		ft_lstdel_cmd(&data->cmd);
 	if (!init_pos(data))
 		return (-1);
 	listen_cursor(data, data->line);
@@ -50,11 +53,13 @@ void	get_super_prompt(t_data *data)
 		else
 		{
 			ft_putstr_fd(data->sel->prompt, data->sel->tty);
-			data->sel->len_prompt = (ft_strlen(data->sel->prompt) + 4);	
+			data->sel->len_prompt = (ft_strlen(data->sel->prompt) + 4);
 		}
 	}
 	ft_putstr_fd(" $> ", data->sel->tty);
 	ft_putstr_fd("\033[m", data->sel->tty);
+	//printf("%zu%p\n", data->sel->len_prompt, &data->sel->len_prompt);
+	//0x100003040
 	return ;
 }
 
