@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:20:22 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/15 16:29:37 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/26 16:55:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct		s_buil
 /*BUILTINS DRIVE*/
 int					buil_drive(t_data *data, t_list **env_lst, char **line, int opt);
 /*BUILTINS*/
-void				parse_line_builtins(t_data *data, t_list **env_lst, char **line);
+int					parse_line_builtins(t_data *data, t_list **env_lst, char **line);
 /*BUILTINS ENV*/
 int					builtin_env(t_data *data, t_list **env_lst, char **line);
 int					builtin_unsetenv(t_data *data, t_list **env_lst, char **line);

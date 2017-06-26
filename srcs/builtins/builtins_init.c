@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/23 18:11:54 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 18:14:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,32 @@ int				buil_drive(t_data *data, t_list **env_lst, char **line, int opt)
 	t_buil	*buil;
 
 	i = 0;
+	buil = NULL;
 	buil = buil_init();
-	while (buil[i].name)
+	if (*line)
 	{
-		if (ft_strcmp(*line, buil[i].name) == 0)
+
+		while (buil[i].name)
 		{
-			if (!opt)
-				return (1);
-			else
-				return (buil[i].f(data, env_lst, line));
+			ft_putstr("ACCESS*********\n");
+			if (ft_strcmp(*line, buil[i].name) == 0)
+			{
+				if (!opt)
+					return (1);
+				else
+					return (buil[i].f(data, env_lst, line));
+			}
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }
 
-void			parse_line_builtins(t_data *data, t_list **env_lst, char **line)
+int			parse_line_builtins(t_data *data, t_list **env_lst, char **line)
 {
-	if (line)
-	{
-		if (line[0] && buil_drive(data, env_lst, line, BUILD_FIND))
-			buil_drive(data, env_lst, line, BUILD_EXE);
-		else if (line[0])
-			get_exe_path(data, line);
-	}
+	if (buil_drive(data, env_lst, line, BUILD_FIND))
+		return(buil_drive(data, env_lst, line, BUILD_EXE));
+	else
+		return(get_exe_path(data, line));
+	return (0);
 }

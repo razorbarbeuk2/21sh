@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/23 17:45:53 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 17:26:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct		s_cmd
 	char 			*file;
 	int 			_select_cmd;
 	char			**exec_cmd;
-	//t_fd			fds;
+	t_fd			fds;
 }					t_cmd;
 
 /*TOOLS*/
@@ -99,10 +99,10 @@ int					del_elem(char **tab_line, t_list **env_lst, t_list **start);
 /*OPTIONS*/
 int					get_parse_opt(char **str, char *opt);
 /*EXE*/
-void				get_exe_path(t_data *data, char **line);
+int					get_exe_path(t_data *data, char **line);
 int					ft_get_access(t_list *env, char **line, char **paths, char *result);
 int					ft_no_paths(t_list *env, char **line, char ***paths, char **result);
-void				get_exe_cmd(char **path, char **cmd, t_list *env_lst);
+int					get_exe_cmd(char **path, char **cmd, t_list *env_lst);
 /*PRINT*/
 void				print_error(char *str);
 void				print_cmd_not_found(char *str);

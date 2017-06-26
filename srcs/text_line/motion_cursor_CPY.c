@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:18:02 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/12 16:26:18 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 15:51:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_cpy_word_right(t_data *data)
 		ft_putchar_fd(((char *)tmp->content)[0], data->sel->tty);
 		motion_list(data, 'R');
 		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
-		ft_add_at(&data->entry->cpy, ((char *)tmp->content)[0]);
+		ft_lstadd_back(&data->entry->cpy, ft_lstnew(&tmp->content, ft_strlen(tmp->content + 1)));
 		ft_cpy_word_pos(data);
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:59:10 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 18:29:45 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 15:36:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void		print_character(t_data *data, char result)
 		print_lst_line(data, data->entry->cut_line);
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 	}
+	return ;
 }

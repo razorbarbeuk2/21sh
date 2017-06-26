@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 17:19:00 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/23 17:25:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 17:46:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_data_entry(t_data *data)
 		data->entry->line_str = NULL;
 		data->entry->line_str_double = NULL;
 	}
+	data->line = init_data_entry();
 	data->entry = init_data_entry();
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:41:33 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/23 17:51:08 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 18:18:10 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ void		ft_free_cmd(void *tmp, size_t tmp_size)
 		ft_strdel(&cmd_tmp->cmd);
 		ft_strdel(&cmd_tmp->opt);
 		ft_strdel(&cmd_tmp->file);
-		// cmd_tmp->_select_cmd = 0;
-		ft_free_char(cmd_tmp->exec_cmd);
-		//ft_memdel((void **)&cmd_tmp);
+		cmd_tmp->_select_cmd = 0;
+		if (cmd_tmp->exec_cmd)
+		{
+			ft_free_char(cmd_tmp->exec_cmd);
+			cmd_tmp->exec_cmd = NULL;
+		}
 		tmp_size = 0;
 	}
+	cmd_tmp = NULL;
 	return ;
 }
 

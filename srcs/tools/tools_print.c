@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/23 15:06:51 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 11:48:00 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void		print_list_cmd(t_data *data, t_list *lst)
 
 void		print_lst_line(t_data *data, t_list *lst)
 {
-	t_list *list;
+	t_list		*list;
 
 	list = NULL;
 	list = lst;

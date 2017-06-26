@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 18:35:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 17:45:17 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 18:04:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ int			exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next)
 
 int		exec_cmd_node(t_data *data, t_list *cur)
 {
-	parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd);
+	char **exec_line;
+
+	exec_line = NULL;
+	exec_line = ((t_cmd *)cur->content)->exec_cmd;
+	if (exec_line)
+	{
+		ft_putstr("TEST EXEC : ");
+		ft_putnbr_fd(parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd), data->sel->tty);
+		ft_putstr("\n");
+	}
 	return (0);
 }

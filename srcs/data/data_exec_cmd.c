@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/23 18:15:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/26 18:07:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void		exec_cmd_character(t_data *data)
 		data_exec_cmd(data);
 	}
 	if (!get_reset_prompt(data))
-		return ;
+		print_error("Prompt error\n");
 	return ;
 }

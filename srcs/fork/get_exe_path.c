@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exe_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/12 23:00:11 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/26 18:12:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ static void		*ft_name_join(char *name, char *path)
 
 static char		*get_exe_path_check_result(char *line, char *paths, int i)
 {
-	if (i == 0 && ft_strchr(line, '/'))
-		return (ft_strdup(line));
-	else
-		return (ft_name_join(line, paths));
+	if (line)
+	{
+		if (i == 0 && ft_strchr(line, '/'))
+			return (ft_strdup(line));
+		else
+			return (ft_name_join(line, paths));
+	}
+	return (NULL);
 }
 
-void			get_exe_path(t_data *data, char **line)
+int			get_exe_path(t_data *data, char **line)
 {
 	char	**paths;
 	char	*result;
@@ -40,22 +44,27 @@ void			get_exe_path(t_data *data, char **line)
 
 	i = 0;
 	if (!ft_no_paths(data->env, line, &paths, &result))
-		return ;
+		return (0);
 	while (paths && paths[i])
 	{
 		result = get_exe_path_check_result(line[0], paths[i], i);
+
 		if (ft_get_access(data->env, line, paths, result))
-			return ;
+			return (0);
 		else if (i == 0 && ft_strchr(line[0], '/'))
 		{
+
 			print_cmd_not_found(line[0]);
 			ft_free_char(paths);
 			ft_strdel(&result);
-			return ;
+			return (1);
 		}
+		else
+			return (0);
 		ft_strdel(&result);
 		i++;
 	}
 	ft_free_char(paths);
 	print_cmd_not_found(line[0]);
+	return (1);
 }
