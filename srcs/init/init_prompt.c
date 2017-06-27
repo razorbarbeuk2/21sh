@@ -24,7 +24,7 @@ int 	init_pos(t_data *data)
 	get_pos_prompt(data);
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];
-	if (data->sel->pos_start[0] == (data->sel->height - 1))
+	if (data->sel->pos_start[0] == (data->term->height - 1))
 		data->sel->_bottom = 1;
 	return (1);
 }

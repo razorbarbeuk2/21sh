@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_free_cmd.c                                   :+:      :+:    :+:   */
+/*   free_struct_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:41:33 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 18:18:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:56:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_free_sep(void *tmp, size_t tmp_size)
 	{
 		sep = ((t_sep *)tmp);
 		ft_strdel(&sep->separate);
-		//ft_memdel((void **)&sep);
+		sep = NULL;
 		tmp_size = 0;
 	}
 	return ;
@@ -64,7 +64,6 @@ void	ft_lstdel_cmd(t_list **alst)
 			ft_free_cmd(tmp->content, tmp->content_size);
 		if (tmp->type == TYPE_SEP)
 			ft_free_sep(tmp->content, tmp->content_size);
-		//free(tmp);
 		tmp = NULL;
 		tmp = tmp_n;
 	}

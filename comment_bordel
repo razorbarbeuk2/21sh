@@ -44,8 +44,8 @@ void	ft_pos_new_line(t_data *data)
 		//print_lst_line(data, tmp);
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 	}
-	if (data->sel->pos[0] == (data->sel->height - 1))
-		data->sel->pos_start[0] = data->sel->pos[0] - ((int)data->entry->len_line + (int)data->sel->len_prompt)/(data->sel->width);
+	if (data->sel->pos[0] == (data->term->height - 1))
+		data->sel->pos_start[0] = data->sel->pos[0] - ((int)data->entry->len_line + (int)data->sel->len_prompt)/(data->term->width);
 }
 
 // int		ft_add_print_caract(t_data *data, char result)
@@ -139,47 +139,47 @@ void		exec_cmd_character(t_data *data)
 	(void)result;
 	if (data->sel)
 	{
-		//ft_putnbr_fd(ft_strlen(data->cmd), data->sel->tty);
-		// ft_putnbr_fd(data->pos_test, data->sel->tty);
+		//ft_putnbr_fd(ft_strlen(data->cmd), data->term->tty);
+		// ft_putnbr_fd(data->pos_test, data->term->tty);
 		
-		// ft_putnbr_fd(data->sel->pos_search, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putnbr_fd(data->sel->pos_search, data->term->tty);
+		// ft_putchar_fd(';', data->term->tty);
 		//****************
 		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
 		print_lst_line_tools(data, data->entry->line);
-		// ft_putnbr_fd(data->sel->i_lst, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
-		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
+		// ft_putnbr_fd(data->sel->i_lst, data->term->tty);
+		// ft_putchar_fd(';', data->term->tty);
+		// ft_putnbr_fd(data->entry->len_line, data->term->tty);
 		
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);		
-		//ft_putnbr_fd(ft_lst_count(data->entry->line), data->sel->tty);
+		//ft_putnbr_fd(ft_lst_count(data->entry->line), data->term->tty);
 		
-		// ft_putnbr_fd(data->sel->width, data->sel->tty);
+		// ft_putnbr_fd(data->term->width, data->term->tty);
 		// 
 		
-		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putchar_fd(';', data->term->tty);
 		
 		
 		
-		// ft_putnbr_fd(data->sel->i_lst - 1, data->sel->tty);
-		// ft_putnbr_fd(data->entry->len_line, data->sel->tty);
+		// ft_putnbr_fd(data->sel->i_lst - 1, data->term->tty);
+		// ft_putnbr_fd(data->entry->len_line, data->term->tty);
 		//****************
-		// ft_putnbr_fd(data->sel->pos[0], data->sel->tty);
-		// ft_putchar_fd(' ', data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos[1], data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos_start[0], data->sel->tty);
-		// ft_putchar_fd(' ', data->sel->tty);
-		// ft_putnbr_fd(data->sel->pos_start[1], data->sel->tty);
+		// ft_putnbr_fd(data->sel->pos[0], data->term->tty);
+		// ft_putchar_fd(' ', data->term->tty);
+		// ft_putnbr_fd(data->sel->pos[1], data->term->tty);
+		// ft_putchar_fd(';', data->term->tty);
+		// ft_putnbr_fd(data->sel->pos_start[0], data->term->tty);
+		// ft_putchar_fd(' ', data->term->tty);
+		// ft_putnbr_fd(data->sel->pos_start[1], data->term->tty);
 		//****************
-		// ft_putchar_fd(';', data->sel->tty);
-		// ft_putnbr_fd(((data->sel->pos_start[0] + (data->entry->len_line + data->sel->len_prompt)/data->sel->width)), data->sel->tty);
-		// ft_putnbr_fd(data->sel->width, data->sel->tty);
-		// ft_putchar_fd(';', data->sel->tty);
+		// ft_putchar_fd(';', data->term->tty);
+		// ft_putnbr_fd(((data->sel->pos_start[0] + (data->entry->len_line + data->sel->len_prompt)/data->term->width)), data->term->tty);
+		// ft_putnbr_fd(data->term->width, data->term->tty);
+		// ft_putchar_fd(';', data->term->tty);
 		
-		// ft_putstr_fd(data->cmd, data->sel->tty);
-		// ft_putstr_fd(data->test, data->sel->tty);
+		// ft_putstr_fd(data->cmd, data->term->tty);
+		// ft_putstr_fd(data->test, data->term->tty);
 	}
 	else
-		ft_putstr_fd("FUCK", data->sel->tty);
+		ft_putstr_fd("FUCK", data->term->tty);
 }

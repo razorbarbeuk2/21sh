@@ -69,13 +69,18 @@ typedef struct		s_select
 	int				*pos_tmp;
 	int				i_lst;
 	int				i_lst_tmp;
-	int				tty;
-	int				width;
-	int				height;
 	int				_bottom;
 	char			*prompt;
 	size_t			len_prompt;
-	struct termios	myterm;
 }					t_select;
+
+typedef struct		s_term
+{
+	int				tty;
+	int				width;
+	int				height;
+	struct termios	myterm;
+}					t_term;
+
 
 #endif

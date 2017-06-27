@@ -6,23 +6,11 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/23 18:06:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:04:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-
-void		ft_free_select(t_data *data)
-{
-	if (data->sel)
-	{
-		ft_memdel((void **)&data->sel->pos);
-		ft_memdel((void **)&data->sel->pos_start);
-		ft_memdel((void **)&data->sel->pos_tmp);
-		ft_strdel(&data->sel->prompt);
-	}
-	return ;
-}
 
 void	ft_free_char(char **tmp)
 {

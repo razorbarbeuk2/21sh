@@ -47,8 +47,8 @@ int			get_pos_prompt(t_data *data)
 	char	buf[14];
 
 	ft_bzero(buf, 14);
-	ft_putstr_fd(POS, data->sel->tty);
-	read(data->sel->tty, buf, sizeof(buf));
+	ft_putstr_fd(POS, data->term->tty);
+	read(data->term->tty, buf, sizeof(buf));
 	ft_clean_buf_pos(data, buf);
 	ft_bzero(buf, 14);
 	return (0);

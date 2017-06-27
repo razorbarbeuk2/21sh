@@ -19,7 +19,7 @@ int	init_sh(t_data *data, char **env)
 		return (-1);
 	if (!init_paths_home_env(data))
 		return (-1);
-	if (!term_init(data->sel))
+	if (!term_init(data->term))
 		return (-1);
 	if (!init_pos(data))
 		return (-1);

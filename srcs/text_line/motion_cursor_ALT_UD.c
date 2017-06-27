@@ -46,12 +46,12 @@ void ft_move_down(t_data *data)
 	sel = data->sel;
 	nb_line_start = 0;
 	len = (int)data->sel->len_prompt + (int)data->entry->len_line;
-	nb_line_start = data->sel->pos_start[0] + (len/data->sel->width);
-	if ((data->sel->pos[0]) < (nb_line_start) && (len > data->sel->width))
+	nb_line_start = data->sel->pos_start[0] + (len/data->term->width);
+	if ((data->sel->pos[0]) < (nb_line_start) && (len > data->term->width))
 	{
 		if ((data->sel->pos[0] + 1) == nb_line_start)
 		{
-			if (data->sel->pos[1] < (len%(int)data->sel->width))
+			if (data->sel->pos[1] < (len%(int)data->term->width))
 				ft_move(data, data->sel->pos[1], (data->sel->pos[0] += 1));
 			else
 				ft_move_end(data);

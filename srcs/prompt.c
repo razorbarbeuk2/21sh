@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/26 17:31:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:15:03 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ char	*ft_cut_path(t_data *data)
 
 int		get_reset_prompt(t_data *data)
 {
-	ft_putstr_fd("\n", data->sel->tty);
-	if (data->sel)
-		ft_free_select(data);
-	if (data->entry)
-		free_data_entry(data);
+	ft_putstr_fd("\n", data->term->tty);
+	free_cursor(data);
 	if (data->cmd)
 		ft_lstdel_cmd(&data->cmd);
 	if (!init_pos(data))
@@ -42,22 +39,22 @@ int		get_reset_prompt(t_data *data)
 
 void	get_super_prompt(t_data *data)
 {
-	ft_putstr_fd(ORANGE, data->sel->tty);
+	ft_putstr_fd(ORANGE, data->term->tty);
 	if ((data->sel->prompt = ft_cut_path(data)))
 	{
 		if (data->home)
 		{
-			ft_putstr_fd(data->sel->prompt + ft_strlen(data->home), data->sel->tty);
+			ft_putstr_fd(data->sel->prompt + ft_strlen(data->home), data->term->tty);
 			data->sel->len_prompt = (ft_strlen(data->sel->prompt) - ft_strlen(data->home) + 4);
 		}
 		else
 		{
-			ft_putstr_fd(data->sel->prompt, data->sel->tty);
+			ft_putstr_fd(data->sel->prompt, data->term->tty);
 			data->sel->len_prompt = (ft_strlen(data->sel->prompt) + 4);
 		}
 	}
-	ft_putstr_fd(" $> ", data->sel->tty);
-	ft_putstr_fd("\033[m", data->sel->tty);
+	ft_putstr_fd(" $> ", data->term->tty);
+	ft_putstr_fd("\033[m", data->term->tty);
 	//printf("%zu%p\n", data->sel->len_prompt, &data->sel->len_prompt);
 	//0x100003040
 	return ;
@@ -73,9 +70,9 @@ void	get_hist_prompt(t_data *data)
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
-	ft_putstr_fd(SEARCH_COLOR, data->sel->tty);
-	ft_putstr_fd(tmp, data->sel->tty);
-	ft_putstr_fd("\033[m", data->sel->tty);
+	ft_putstr_fd(SEARCH_COLOR, data->term->tty);
+	ft_putstr_fd(tmp, data->term->tty);
+	ft_putstr_fd("\033[m", data->term->tty);
 	data->set_historique = 1;
 	data->nb_prompt_historique = ft_strlen(tmp);
 	listen_cursor(data, data->historique);

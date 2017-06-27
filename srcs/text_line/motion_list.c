@@ -24,15 +24,15 @@ void	motion_list(t_data *data, char opt)
 		data->sel->i_lst = (int)data->entry->len_line;
 	if (opt == 'U')
 	{
-		if ((data->sel->i_lst - (int)data->sel->width) > 0)
-			data->sel->i_lst -= ((int)data->sel->width);
+		if ((data->sel->i_lst - (int)data->term->width) > 0)
+			data->sel->i_lst -= ((int)data->term->width);
 		else
 			data->sel->i_lst = 0;
 	}
 	if (opt == 'D')
 	{
-		if ((int)data->entry->len_line >= (data->sel->i_lst + (int)data->sel->width))
-			data->sel->i_lst += (int)data->sel->width;
+		if ((int)data->entry->len_line >= (data->sel->i_lst + (int)data->term->width))
+			data->sel->i_lst += (int)data->term->width;
 		else
 			data->sel->i_lst = (int)data->entry->len_line;
 	}

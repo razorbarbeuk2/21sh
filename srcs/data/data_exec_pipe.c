@@ -72,10 +72,6 @@ int		exec_cmd_node(t_data *data, t_list *cur)
 	exec_line = NULL;
 	exec_line = ((t_cmd *)cur->content)->exec_cmd;
 	if (exec_line)
-	{
-		ft_putstr("TEST EXEC : ");
-		ft_putnbr_fd(parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd), data->sel->tty);
-		ft_putstr("\n");
-	}
+		ft_putnbr_fd(parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd), data->term->tty);
 	return (0);
 }

@@ -21,7 +21,7 @@ static void		del_print_middle_sentence(t_data *data)
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
 	ft_move_end(data);
 	get_pos_prompt(data);
-	if (data->sel->pos[1] != (data->sel->width - 1))
+	if (data->sel->pos[1] != (data->term->width - 1))
 		tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 	else
 	{
@@ -48,14 +48,14 @@ void		del_one_character(t_data *data, int result)
 			data->entry->len_line--;
 			if ((data->sel->pos[1]) == 0 && !i_)
 			{
-				ft_move(data, (data->sel->pos[1] = ((int)data->sel->width - 1)), (data->sel->pos[0] -= 1));
+				ft_move(data, (data->sel->pos[1] = ((int)data->term->width - 1)), (data->sel->pos[0] -= 1));
 				i_ = 1;
 			}
 			ft_move_cursor(data, LEFT);
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-			if ((data->sel->pos[1]) == (data->sel->width - 1) && i_)
+			if ((data->sel->pos[1]) == (data->term->width - 1) && i_)
 			{
-				ft_move(data, data->sel->pos[1] = ((int)data->sel->width - 1), data->sel->pos[0]);
+				ft_move(data, data->sel->pos[1] = ((int)data->term->width - 1), data->sel->pos[0]);
 				i_ = 0;
 			}
 			return ;

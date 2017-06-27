@@ -52,7 +52,7 @@ void		exec_cmd_character(t_data *data)
 		data_check_and_create_history_cmd(data, data->entry->line_str);
 		data->entry->line_str_double = ft_strsplit(data->entry->line_str, ';');
 		data_check_str_list_struct_cmd_loop(data, data->entry->line_str_double, 0, ft_count_tab(data->entry->line_str_double));
-		ft_putstr_fd("\n", data->sel->tty);
+		ft_putstr_fd("\n", data->term->tty);
 		data_exec_cmd(data);
 	}
 	if (!get_reset_prompt(data))

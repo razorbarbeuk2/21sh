@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/22 13:54:33 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:47:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct		s_historic
 	int 			count_pos;
 	int 			count_node;
 	t_list			*list_historic;
-	t_list			*rev_list_historic;
+	t_list			*rev_list_historic;/*PEUT ETRE A VIRER*/
 }					t_historic;
 
 typedef struct		s_env
@@ -38,6 +38,7 @@ typedef struct		s_data
 	t_entry			*line;
 	t_select		*sel;
 	t_historic		*historic;
+	t_term			*term;
 	int 			set_historique;
 	int 			nb_prompt_historique;
 	int				nb_pipe;

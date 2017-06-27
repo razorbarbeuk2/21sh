@@ -39,9 +39,9 @@ void		print_pos_cursor(t_data *data)
 	i = 0;
 	while(data->sel->pos[i])
 	{
-		ft_putnbr_fd(data->sel->pos[i], data->sel->tty);
+		ft_putnbr_fd(data->sel->pos[i], data->term->tty);
 		if (data->sel->pos[i + 1])
-			ft_putchar_fd(';', data->sel->tty);
+			ft_putchar_fd(';', data->term->tty);
 		i++;
 	}
 }

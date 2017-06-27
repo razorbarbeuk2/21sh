@@ -15,13 +15,13 @@
 void		print_character(t_data *data, char result)
 {
 	ft_add_print_caract(data, result);
-	ft_putchar_fd(result, data->sel->tty);
+	ft_putchar_fd(result, data->term->tty);
 	motion_list(data, 'R');
-	if (data->sel->pos[1] == (data->sel->width - 1))
+	if (data->sel->pos[1] == (data->term->width - 1))
 	{
 		if (data->sel->_bottom)
 			data->sel->pos_start[0]--;
-		ft_putchar_fd('\n', data->sel->tty);
+		ft_putchar_fd('\n', data->term->tty);
 	}
 	if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
 	{

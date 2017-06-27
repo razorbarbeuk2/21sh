@@ -12,15 +12,12 @@
 
 #include "sh21.h"
 
-int		ft_no_paths(t_list *env, char **line, char ***paths, char **result)
+int		ft_no_paths(t_data *data, char **line)
 {
-	*result = NULL;
-	*paths = NULL;
-	*paths = ft_strsplit(get_search_infos(env, "PATH"), ':');
-	if (!*paths)
+	if (!data->paths)
 	{
 		if (access(line[0], X_OK) == 0)
-			get_exe_cmd(&line[0], line, env);
+			get_exe_cmd(&line[0], line, data->env);
 		else
 			print_error("PATH is empty\n");
 		return (0);
@@ -28,15 +25,18 @@ int		ft_no_paths(t_list *env, char **line, char ***paths, char **result)
 	return (1);
 }
 
-int			ft_get_access(t_list *env, char **line, char **paths, char *result)
+int			ft_get_access(t_data *data, char **line, char *result)
 {
-	// ft_putstr("ACCESS***\n");
+	
 	// ft_putstr(result);
 	// ft_putstr("\n");
+	// ft_putstr("PP");
+	// ft_putstr(result);
+	// ft_putstr("TUTU");
+	// write(1, "\n", 1);
 	if (access(result, X_OK) == 0)
 	{
-		get_exe_cmd(&result, line, env);
-		ft_free_char(paths);
+		get_exe_cmd(&result, line, data->env);
 		ft_strdel(&result);
 		return (1);
 	}

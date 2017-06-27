@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 17:26:43 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:56:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,10 @@ void				ft_free_char(char **tmp);
 void				ft_free_env(void *tmp, size_t tmp_size);
 void				ft_free_tab_path(char **oldpath, char **path);
 void				ft_free_node(void *tmp, size_t tmp_size);
-void				ft_free_select(t_data *data);
 void				ft_free_cmd(void *tmp, size_t tmp_size);
 void				ft_lstdel_cmd(t_list **alst);
-void				free_data_entry(t_data *data);
-char				*ft_cut_path(t_data *data);
+int     			free_cursor(t_data *data);
+int 				free_destruction_final(t_data *data);
 
 /*TOOLS TERMCAPS*/
 int					ft_concat_int(char *buf);
@@ -88,6 +87,7 @@ void				init_env(t_list **env_lst);
 int					init_paths_home_env(t_data *data);
 int					init_struct(t_data *data);
 int 				init_pos(t_data *data);
+t_select 			*init_data_sel();
 t_entry 			*init_data_entry();
 t_cmd 				*init_t_cmd();
 t_sep 				*init_t_sep();
@@ -100,17 +100,18 @@ int					del_elem(char **tab_line, t_list **env_lst, t_list **start);
 int					get_parse_opt(char **str, char *opt);
 /*EXE*/
 int					get_exe_path(t_data *data, char **line);
-int					ft_get_access(t_list *env, char **line, char **paths, char *result);
-int					ft_no_paths(t_list *env, char **line, char ***paths, char **result);
+int					ft_get_access(t_data *data, char **line, char *result);
+int					ft_no_paths(t_data *data, char **line);
 int					get_exe_cmd(char **path, char **cmd, t_list *env_lst);
 /*PRINT*/
 void				print_error(char *str);
 void				print_cmd_not_found(char *str);
 void				print_list_cmd(t_data *data, t_list *lst);
 /*TERM*/
-int					term_init(t_select *sel);
+int					term_init(t_term *term);
 void				termios_init(struct	termios *term);
 /*PROMPT*/
+char				*ft_cut_path(t_data *data);
 int					get_reset_prompt(t_data *data);
 void				get_super_prompt(t_data *data);
 int					get_pos_prompt(t_data *data);

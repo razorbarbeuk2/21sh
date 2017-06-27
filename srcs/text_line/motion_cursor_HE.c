@@ -33,17 +33,20 @@ void ft_move_end(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-	ret = ((data->entry->len_line + data->sel->len_prompt)/data->sel->width);
+	ft_putstr("[-]");
+	ft_putnbr(data->term->width);
+	ft_putstr("[-]\n");
+	ret = ((data->entry->len_line + data->sel->len_prompt)/data->term->width);
 	if (ret > 0)
 	{
-		data->sel->pos[1] = ((int)sel->len_prompt + (int)data->entry->len_line)%(int)sel->width;
+		data->sel->pos[1] = ((int)sel->len_prompt + (int)data->entry->len_line)%(int)data->term->width;
 		data->sel->pos[0] = data->sel->pos_start[0] + ret;
 	}
 	if (ret == 0)
 		data->sel->pos[1] = (int)sel->len_prompt + (int)data->entry->len_line;
-	if (data->sel->pos[1] != (data->sel->width - 1))
+	if (data->sel->pos[1] != (data->term->width - 1))
 		ft_move(data, data->sel->pos[1], data->sel->pos[0]);
 	else
-		ft_move(data, (data->sel->pos[1] = (data->sel->width - 1)), data->sel->pos[0]);
+		ft_move(data, (data->sel->pos[1] = (data->term->width - 1)), data->sel->pos[0]);
 	motion_list(data, 'E');
 }

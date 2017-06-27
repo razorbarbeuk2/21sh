@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/06/22 17:47:04 by gbourson         ###   ########.fr        #
+#    Updated: 2017/06/27 18:56:41 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,9 @@ SRC_NAME 	=	init/init_data.c \
 				fork/access.c \
 				fork/fork.c \
 				fork/get_exe_path.c \
+				free/ft_free.c \
+				free/free_struct.c \
+				free/free_struct_cmd.c \
 				print/print_error.c \
 				main.c \
 				parse_options.c \

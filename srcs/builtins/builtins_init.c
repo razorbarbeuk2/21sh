@@ -37,10 +37,8 @@ int				buil_drive(t_data *data, t_list **env_lst, char **line, int opt)
 	buil = buil_init();
 	if (*line)
 	{
-
 		while (buil[i].name)
 		{
-			ft_putstr("ACCESS*********\n");
 			if (ft_strcmp(*line, buil[i].name) == 0)
 			{
 				if (!opt)

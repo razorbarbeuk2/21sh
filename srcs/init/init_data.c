@@ -22,6 +22,20 @@ static int init_data_env_cmd(t_data *data)
 	return (1);
 }
 
+t_term 	*init_term()
+{
+	t_term *init_term;
+
+	init_term = NULL;
+	if (!(init_term = (t_term *)malloc(sizeof(t_term))))
+		return (NULL);
+	init_term->tty = 0;
+	init_term->width = 0;
+	init_term->height = 0;
+
+	return (init_term);
+}
+
 t_entry 	*init_data_entry()
 {
 	t_entry *init_entry;
@@ -37,10 +51,11 @@ t_entry 	*init_data_entry()
 	init_entry->len_line = 0;
 	init_entry->size_line = 0;
 	init_entry->nb_line = 0;
+
 	return (init_entry);
 }
 
-static t_select *init_data_sel()
+t_select *init_data_sel()
 {
 	t_select *init_sel;
 
@@ -52,12 +67,10 @@ static t_select *init_data_sel()
 	init_sel->pos_tmp = 0;
 	init_sel->i_lst = 0;
 	init_sel->i_lst_tmp = 0;
-	init_sel->tty = 0;
-	init_sel->width = 0;
-	init_sel->height = 0;
+	init_sel->_bottom = 0;
 	init_sel->prompt = NULL;
 	init_sel->len_prompt = 0;
-	init_sel->_bottom = 0;
+
 	return (init_sel);
 }
 
@@ -71,12 +84,15 @@ static t_historic *init_data_hist()
 	init_hist->fd = 0;
 	init_hist->count_pos = -10;
 	init_hist->list_historic = NULL;
+	
 	return (init_hist);
 }
 
 int init_struct(t_data *data)
 {
 	if (!init_data_env_cmd(data))
+		return (-1);
+	if (!(data->term = init_term()))
 		return (-1);
 	if (!(data->line = init_data_entry()))
 		return (-1);

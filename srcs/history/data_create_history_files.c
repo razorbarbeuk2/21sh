@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 15:35:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 18:42:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/27 18:50:26 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int			data_check_and_create_history_cmd(t_data *data, char *cmd)
 		write(data->historic->fd, "\n", 1);
 		close(data->historic->fd);
 	}
-	ft_lstdel(&data->historic->list_historic, &ft_free_node);
 	data_init_history_file(data);
 	return (1);
 }

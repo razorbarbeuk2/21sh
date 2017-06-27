@@ -34,7 +34,7 @@ void	ft_cpy_word_left(t_data *data)
 	tputs(tgetstr("so", NULL), 1, ft_putchar_select);
 	tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
 	ft_move_cursor(data, LEFT);
-	ft_putchar_fd(((char *)tmp->content)[0], data->sel->tty);	
+	ft_putchar_fd(((char *)tmp->content)[0], data->term->tty);	
 	tputs(tgetstr("me", NULL), 1, ft_putchar_select);
 	data->sel->i_lst++;
 	ft_lstadd(&data->entry->cpy, ft_lstnew(&(((char *)tmp->content)[0]), sizeof(char)));
@@ -52,7 +52,7 @@ void	ft_cpy_word_right(t_data *data)
 	{
 		tputs(tgetstr("so", NULL), 1, ft_putchar_select);
 		tmp = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst + 1));
-		ft_putchar_fd(((char *)tmp->content)[0], data->sel->tty);
+		ft_putchar_fd(((char *)tmp->content)[0], data->term->tty);
 		motion_list(data, 'R');
 		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
 		ft_lstadd_back(&data->entry->cpy, ft_lstnew(&tmp->content, ft_strlen(tmp->content + 1)));
