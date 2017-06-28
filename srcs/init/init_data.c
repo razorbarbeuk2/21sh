@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 16:17:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 17:57:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,26 @@ t_entry 	*init_data_entry()
 	init_entry->cut_line = NULL;
 	init_entry->line_str = NULL;
 	init_entry->line_str_double = NULL;
+	init_entry->nb_line = 0;
 	init_entry->len_line = 0;
 	init_entry->size_line = 0;
-	init_entry->nb_line = 0;
 
 	return (init_entry);
 }
 
-t_select *init_data_sel()
+t_select 	*init_data_sel()
 {
 	t_select *init_sel;
 
 	init_sel = NULL;
 	if (!(init_sel = (t_select *)malloc(sizeof(t_select))))
 		return (NULL);
-	init_sel->pos = NULL;
-	init_sel->pos_start = NULL;
-	init_sel->pos_tmp = 0;
+	if (!(init_sel->pos = ft_memalloc(2*sizeof(int))))
+		return (NULL);
+	if (!(init_sel->pos_start = ft_memalloc(2*sizeof(int))))
+		return (NULL);
+	if (!(init_sel->pos_tmp = ft_memalloc(2*sizeof(int))))
+		return (NULL);
 	init_sel->i_lst = 0;
 	init_sel->i_lst_tmp = 0;
 	init_sel->_bottom = 0;
@@ -74,7 +77,7 @@ t_select *init_data_sel()
 	return (init_sel);
 }
 
-static t_historic *init_data_hist()
+t_historic *init_data_hist()
 {
 	t_historic *init_hist;
 

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:41:33 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/27 18:56:11 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 18:04:42 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,23 @@ void		ft_free_cmd(void *tmp, size_t tmp_size)
 	{
 		cmd_tmp = ((t_cmd *)tmp);
 		ft_strdel(&cmd_tmp->cmd);
+		cmd_tmp->cmd = NULL;
 		ft_strdel(&cmd_tmp->opt);
+		cmd_tmp->opt = NULL;
 		ft_strdel(&cmd_tmp->file);
+		cmd_tmp->file = NULL;
 		cmd_tmp->_select_cmd = 0;
 		if (cmd_tmp->exec_cmd)
 		{
 			ft_free_char(cmd_tmp->exec_cmd);
 			cmd_tmp->exec_cmd = NULL;
 		}
+		tmp = NULL;
 		tmp_size = 0;
 	}
+	free(cmd_tmp);
 	cmd_tmp = NULL;
+	
 	return ;
 }
 
@@ -64,9 +70,10 @@ void	ft_lstdel_cmd(t_list **alst)
 			ft_free_cmd(tmp->content, tmp->content_size);
 		if (tmp->type == TYPE_SEP)
 			ft_free_sep(tmp->content, tmp->content_size);
-		tmp = NULL;
+		free(tmp);
 		tmp = tmp_n;
 	}
+	tmp = NULL;
 	tmp_n = NULL;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:27 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/18 14:51:31 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 12:03:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		ft_init_path(char ***oldpath, char ***path, char **line)
 	return (1);
 }
 
-int				builtin_cd(t_data *data, t_list **env_lst, char **line)
+int				builtin_cd(t_data *data, char **line)
 {
 	char	**oldpath;
 	char	**path;
@@ -68,15 +68,15 @@ int				builtin_cd(t_data *data, t_list **env_lst, char **line)
 	oldpath[1] = ft_memalloc(1024);
 	getcwd(oldpath[1], 1024);
 	ft_strdel(&line[0]);
-	ft_check_caract(env_lst, path, line);
+	ft_check_caract(&data->env, path, line);
 	path[1] = ft_memalloc(1024);
 	if (path && oldpath && line[1])
 	{
 		if (ft_check_move(line[1]))
 		{
 			getcwd(path[1], 1024);
-			iter_elem_env(oldpath, env_lst, &modif_elem);
-			iter_elem_env(path, env_lst, &modif_elem);
+			iter_elem_env(oldpath, &data->env, &modif_elem);
+			iter_elem_env(path, &data->env, &modif_elem);
 		}
 		ft_free_tab_path(oldpath, path);
 		return (1);

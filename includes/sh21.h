@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/27 18:56:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 17:58:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void				ft_free_cmd(void *tmp, size_t tmp_size);
 void				ft_lstdel_cmd(t_list **alst);
 int     			free_cursor(t_data *data);
 int 				free_destruction_final(t_data *data);
+void 				ft_free_pos(t_select *sel);
+t_select			*free_data_select(t_select *sel);
+t_entry				*free_data_entry(t_entry *entry);
+t_historic			*free_data_historic(t_historic *historic);
 
 /*TOOLS TERMCAPS*/
 int					ft_concat_int(char *buf);
@@ -86,11 +90,12 @@ t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
 void				init_env(t_list **env_lst);
 int					init_paths_home_env(t_data *data);
 int					init_struct(t_data *data);
-int 				init_pos(t_data *data);
+int 				init_prompt(t_data *data);
 t_select 			*init_data_sel();
 t_entry 			*init_data_entry();
 t_cmd 				*init_t_cmd();
 t_sep 				*init_t_sep();
+t_historic 			*init_data_hist();
 /*ENV*/
 char				*get_search_infos(t_list *env, char *str);
 int					iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s));
@@ -110,6 +115,7 @@ void				print_list_cmd(t_data *data, t_list *lst);
 /*TERM*/
 int					term_init(t_term *term);
 void				termios_init(struct	termios *term);
+void				ft_term_reset(t_term *term);
 /*PROMPT*/
 char				*ft_cut_path(t_data *data);
 int					get_reset_prompt(t_data *data);

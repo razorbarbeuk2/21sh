@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/23 16:55:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 13:17:55 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef struct		s_entry
 	t_list			*line;
 	t_list			*cpy;
 	t_list			*cut_line;
-	size_t			len_line;
-	size_t			size_line;
 	char 			*line_str;
 	char 			**line_str_double;
 	int				nb_line;
+	size_t			len_line;
+	size_t			size_line;
 }					t_entry;
 
 typedef struct		s_select

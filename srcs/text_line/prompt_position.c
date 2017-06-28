@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/23 18:06:47 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 16:05:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			get_pos_prompt(t_data *data)
 
 	ft_bzero(buf, 14);
 	ft_putstr_fd(POS, data->term->tty);
-	read(data->term->tty, buf, sizeof(buf));
+	read(data->term->tty, buf, 14);
 	ft_clean_buf_pos(data, buf);
 	ft_bzero(buf, 14);
 	return (0);

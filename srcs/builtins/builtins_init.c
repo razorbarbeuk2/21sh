@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 18:14:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 12:02:10 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int				buil_drive(t_data *data, t_list **env_lst, char **line, int opt)
 	t_buil	*buil;
 
 	i = 0;
+	(void)env_lst;
 	buil = NULL;
 	buil = buil_init();
 	if (*line)
@@ -44,7 +45,7 @@ int				buil_drive(t_data *data, t_list **env_lst, char **line, int opt)
 				if (!opt)
 					return (1);
 				else
-					return (buil[i].f(data, env_lst, line));
+					return (buil[i].f(data, line));
 			}
 			i++;
 		}

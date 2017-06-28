@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/06/27 18:56:41 by gbourson         ###   ########.fr        #
+#    Updated: 2017/06/28 12:05:43 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_NAME 	=	init/init_data.c \
 				init/init_prompt.c \
 				init/init_env.c \
 				init/init_term.c \
+				init/term_reset.c \
 				init/init_cmd.c \
 				builtins/builtins_init.c \
 				builtins/builtins_env.c \
@@ -56,7 +57,6 @@ SRC_NAME 	=	init/init_data.c \
 				tools/tools_count_spec_caract.c \
 				tools/tools_list_create_node.c \
 				tools/tools_free.c \
-				tools/tools_free_cmd.c \
 				tools/tools_list.c \
 				tools/tools_termcaps.c \
 				tools/tools_print.c \
@@ -64,7 +64,7 @@ SRC_NAME 	=	init/init_data.c \
 				fork/access.c \
 				fork/fork.c \
 				fork/get_exe_path.c \
-				free/ft_free.c \
+				free/free_ft.c \
 				free/free_struct.c \
 				free/free_struct_cmd.c \
 				print/print_error.c \

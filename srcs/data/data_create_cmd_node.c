@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:27:13 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/23 14:44:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 15:55:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		data_create_node_cmd(t_data *data, char *line_str, t_cmd **cmd_node, char *
 	t_cmd	*cmd_node_tmp;
 
 	(void)data;
+	cmd_node_tmp = NULL;
 	cmd_node_tmp = (*cmd_node);
 	if (line_str)
 	{
@@ -41,8 +42,10 @@ int		data_create_node_separator(t_data *data, char *line_str, t_sep **sep)
 	t_sep	*tmp_sep;
 
 	(void)data;
+	tmp_sep = NULL;
 	tmp_sep = (*sep);
 	tmp_sep->separate = ft_strdup(line_str);
+	tmp_sep = NULL;
 	return (1);
 }
 

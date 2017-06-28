@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/27 18:15:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 17:58:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ int		get_reset_prompt(t_data *data)
 	ft_putstr_fd("\n", data->term->tty);
 	free_cursor(data);
 	if (data->cmd)
+	{
 		ft_lstdel_cmd(&data->cmd);
-	if (!init_pos(data))
+		data->cmd = NULL;
+	}
+	if (!(data->sel = init_data_sel()))
+		return (-1);
+	if (!(data->line = init_data_entry()))
+		return (-1);
+	if (!init_prompt(data))
 		return (-1);
 	listen_cursor(data, data->line);
 	return (1);

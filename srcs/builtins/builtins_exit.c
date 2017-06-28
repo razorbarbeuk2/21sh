@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:15 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/17 12:00:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 17:14:00 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,20 @@ static int	test_param_exit(char *line)
 	return (1);
 }
 
-int			builtin_exit(t_data *data, t_list **env_lst, char **line)
+int			builtin_exit(t_data *data, char **line)
 {
 	int i;
 
 	i = 1;
-	(void)data;
 	if (!line[i])
 		exit(0);
-	else if (!test_param_exit(line[i]))
+	else if (!test_param_exit(line[1]))
 		ft_putendl(ft_strcat(line[0], ": Expression Syntax."));
-	else if (test_param_exit(line[i]))
+	else if (test_param_exit(line[1]))
 	{
-		exit(ft_atoi(line[i]));
-		free(*env_lst);
-		*env_lst = NULL;
+		ft_term_reset(data->term);
+		free_destruction_final(data);
+		exit(ft_atoi(line[1]));
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/22 14:05:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 14:15:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_sh(t_data *data, char **env)
 		return (-1);
 	if (!term_init(data->term))
 		return (-1);
-	if (!init_pos(data))
+	if (!init_prompt(data))
 		return (-1);
 	if (!data_init_history_file(data))
 		return (-1);

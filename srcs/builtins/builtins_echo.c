@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 14:32:16 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/17 12:01:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 12:04:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,17 @@ void				builtin_echo_quote(t_list *env_lst, char **line)
 	return ;
 }
 
-int					builtin_echo(t_data *data, t_list **env_lst, char **line)
+int					builtin_echo(t_data *data, char **line)
 {
 	int		i;
 	t_opt	*opt;
 
-	(void)data;
 	i = 1;
 	opt = ft_opt_echo();
 	while (line[i])
 	{
-		builtin_echo_quote(*env_lst, &line[i]);
-		if (builtin_echo_parse_opt(*env_lst, line, opt))
+		builtin_echo_quote(data->env, &line[i]);
+		if (builtin_echo_parse_opt(data->env, line, opt))
 			return (1);
 		else
 			ft_putstr(line[i]);

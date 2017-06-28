@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 14:24:18 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 11:57:09 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_list	*ft_lst_cpy(t_list **env_lst)
 	return (cpy);
 }
 
-int		builtin_env(t_data *data, t_list **env_lst, char **line)
+int		builtin_env(t_data *data, char **line)
 {
 	int		i;
 	char	**tmp;
@@ -46,7 +46,7 @@ int		builtin_env(t_data *data, t_list **env_lst, char **line)
 	i = 1;
 	data->env_cpy = NULL;
 	tmp = NULL;
-	data->env_cpy = get_parse_opt(line, OPT_ENV) ? NULL : ft_lst_cpy(env_lst);
+	data->env_cpy = get_parse_opt(line, OPT_ENV) ? NULL : ft_lst_cpy(&data->env);
 	while (line[i] && line[i][0] == '-')
 		i++;
 	while (line[i] && ft_strchr(line[i], '='))

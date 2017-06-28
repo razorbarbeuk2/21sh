@@ -6,13 +6,13 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:23 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/17 12:02:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 12:03:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int				builtin_unsetenv(t_data *data, t_list **env_lst, char **line)
+int				builtin_unsetenv(t_data *data, char **line)
 {
 	int i;
 
@@ -21,7 +21,7 @@ int				builtin_unsetenv(t_data *data, t_list **env_lst, char **line)
 	ft_strdel(&line[0]);
 	while (line[i])
 	{
-		iter_elem_env(&line[i], env_lst, &del_elem);
+		iter_elem_env(&line[i], &data->env, &del_elem);
 		ft_strdel(&line[i]);
 		i++;
 	}
@@ -38,7 +38,7 @@ static void		builtin_setenv_next(char **tmp, t_list **env_lst, \
 	ft_strdel_double(tmp);
 }
 
-int				builtin_setenv(t_data *data, t_list **env_lst, char **line)
+int				builtin_setenv(t_data *data, char **line)
 {
 	int		i;
 	int		n;
@@ -62,7 +62,7 @@ int				builtin_setenv(t_data *data, t_list **env_lst, char **line)
 			n++;
 			i++;
 		}
-		builtin_setenv_next(tmp, env_lst, line, n);
+		builtin_setenv_next(tmp, &data->env, line, n);
 	}
 	return (0);
 }
