@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 22:52:19 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 16:51:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		get_reset_prompt(t_data *data)
 {
 	ft_putstr_fd("\n", data->term->tty);
 	free_cursor(data);
+	ft_putendl_fd("OK ", data->term->tty);
 	if (data->cmd)
 	{
 		ft_lstdel_cmd(&data->cmd);

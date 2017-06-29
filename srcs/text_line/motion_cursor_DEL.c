@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:57:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 16:22:45 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 12:04:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,7 @@ static void		del_print_middle_sentence(t_data *data)
 
 	i_lst = 0;
 	i_lst = data->sel->i_lst;
-	tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
-	ft_move_end(data);
-	get_pos_prompt(data);
-	if (data->sel->pos[1] != (data->term->width - 1))
-		tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-	else
-	{
-		tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-		ft_move(data, data->sel->pos[1]--, data->sel->pos[0]);
-	}
-	tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 	print_lst_line(data, data->entry->cut_line);
 	data->sel->i_lst = i_lst;
 }

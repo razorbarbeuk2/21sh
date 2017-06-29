@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 22:13:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 14:09:51 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_historic *init_data_hist()
 	if (!(init_hist = (t_historic *)malloc(sizeof(t_historic))))
 		return (NULL);
 	init_hist->fd = 0;
-	init_hist->count_pos = -10;
+	init_hist->count_pos = 0;
 	init_hist->list_historic = NULL;
 	
 	return (init_hist);

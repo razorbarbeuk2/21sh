@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   motion_cursor_HE.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:16:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/03 23:02:03 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 11:57:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void ft_move_end(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-	ft_putstr("[-]");
-	ft_putnbr(data->term->width);
-	ft_putstr("[-]\n");
 	ret = ((data->entry->len_line + data->sel->len_prompt)/data->term->width);
 	if (ret > 0)
 	{

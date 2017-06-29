@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 23:01:19 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 10:57:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ int 	free_destruction_final(t_data *data)
 		data->historic = NULL;
 	}
     if (data->term)
-    {
-        
-    }
+		ft_term_reset(data->term);
 	ft_free_char(data->paths);
 	return (1);
 }

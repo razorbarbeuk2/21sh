@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 23:41:15 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 17:16:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int			data_exec_cmd(t_data *data)
+int data_exec_cmd(t_data *data)
 {
 	t_list *prev;
 	t_list *lst;
@@ -20,6 +20,7 @@ int			data_exec_cmd(t_data *data)
 	prev = NULL;
 	lst = NULL;
 	lst = data->cmd;
+	print_list_cmd(data, data->cmd);
 	while (lst)
 	{
 		prev = lst;
@@ -36,12 +37,11 @@ int			data_exec_cmd(t_data *data)
 	return (1);
 }
 
-void		exec_cmd_character(t_data *data)
+void exec_cmd_character(t_data *data)
 {
-	char 	**tmp;
-	char 	*caract;
-	int		i;
-	
+	char **tmp;
+	char *caract;
+	int i;
 
 	i = 0;
 	tmp = NULL;
@@ -49,7 +49,8 @@ void		exec_cmd_character(t_data *data)
 	data->entry->line_str = convert_data_lst_tab(data);
 	if (data->entry->line_str)
 	{
-		data_check_and_create_history_cmd(data, data->entry->line_str);
+		if (!add_sentence_historic_node_to_list(data))
+			print_error("historic error\n");
 		data->entry->line_str_double = ft_strsplit(data->entry->line_str, ';');
 		data_check_str_list_struct_cmd_loop(data, data->entry->line_str_double, 0, ft_count_tab(data->entry->line_str_double));
 		ft_putstr_fd("\n", data->term->tty);
@@ -57,5 +58,18 @@ void		exec_cmd_character(t_data *data)
 	}
 	if (!get_reset_prompt(data))
 		print_error("Prompt error\n");
-	return ;
+	return;
 }
+
+
+/*DEBUG*******************************************/
+	// ft_putstr("\n[-]\n");
+	// ft_putnbr_fd(data->sel->pos[0], data->term->tty);
+	// write(1, " ", 1);
+	// ft_putnbr_fd(data->sel->pos[1], data->term->tty);
+	// ft_putstr("[-]\n");
+	// ft_putnbr_fd(data->sel->pos_start[0], data->term->tty);
+	// write(1, " ", 1);
+	// ft_putnbr_fd(data->sel->pos_start[1], data->term->tty);
+	// ft_putstr("[-]\n");
+	/************************************************/

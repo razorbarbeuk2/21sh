@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_cmd_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:27:13 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/29 00:07:02 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 17:36:26 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+char 	**data_add_files(t_cmd *cmd_node_tmp, char *str)
+{
+	char **tmp;
+	int i;
+
+	i = 0;
+	tmp = NULL;
+	if(str && cmd_node_tmp->files)
+	{
+		while (cmd_node_tmp->files[i])
+			i++;
+		if (!(tmp = (char **)malloc((i + 1)*sizeof(char *))))
+			return (NULL);
+		tmp[i] = ft_strdup(str);
+		tmp[i + 1] = NULL;
+	}
+	return (tmp);
+}
 
 int		data_create_node_cmd(t_data *data, char *line_str, t_cmd **cmd_node, char **exec_cmd)
 {
@@ -19,6 +38,7 @@ int		data_create_node_cmd(t_data *data, char *line_str, t_cmd **cmd_node, char *
 	(void)data;
 	cmd_node_tmp = NULL;
 	cmd_node_tmp = (*cmd_node);
+	ft_putendl_fd(line_str, data->term->tty);
 	if (line_str)
 	{
 		if (line_str && !cmd_node_tmp->_select_cmd)
@@ -31,10 +51,7 @@ int		data_create_node_cmd(t_data *data, char *line_str, t_cmd **cmd_node, char *
 		else if (data_str_check_opt_cmd(cmd_node_tmp, line_str))
 			return (1);
 		else
-		{
-			ft_putstr("FILE");
-			cmd_node_tmp->file = ft_strdup(line_str);
-		}
+			cmd_node_tmp->files = data_add_files(cmd_node_tmp, line_str);
 		return (1);
 	}
 	return (0);
@@ -68,6 +85,7 @@ void		data_create_list_struct(t_data *data, char **line_str, void **node, int *t
 	i = 0;
 	cmd_node_tmp = NULL;
 	sep_node_tmp = NULL;
+	write(1, "\n", 1);
 	if (ft_strcmp(line_str[i], "|") == 0)
 	{
 		sep_node_tmp = init_t_sep();

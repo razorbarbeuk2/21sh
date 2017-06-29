@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 15:35:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/27 18:50:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 15:34:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,21 @@ int			data_init_history_file(t_data *data)
 	if (data->historic->fd)
 	{
 		while ((get_next_line(data->historic->fd, &line)) != 0)
-		{
+		{	
 			ft_lstadd(&data->historic->list_historic, ft_lstnew(line, ft_strlen(line) + 1));
 			ft_strdel(&line);
+			line = NULL;
 		}
 		close(data->historic->fd);
 	}
 	ft_strdel(&line);
 	data_uptdate_count_history_file(data);
+	// while(data->historic->list_historic)
+	// {
+	// 	ft_putstr_fd(((char *)data->historic->list_historic->content), data->term->tty);
+	// 	write(1, "\n", 1);
+	// 	data->historic->list_historic = data->historic->list_historic->next;
+	// }
 	return (1);
 }
 
@@ -62,7 +69,6 @@ int			data_check_and_create_history_cmd(t_data *data, char *cmd)
 		write(data->historic->fd, "\n", 1);
 		close(data->historic->fd);
 	}
-	data_init_history_file(data);
 	return (1);
 }
 

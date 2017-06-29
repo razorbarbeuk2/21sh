@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 11:17:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/23 15:17:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 17:10:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ void			ft_insert_cmd_to_prompt(t_data *data, char *s)
 	int i;
 
 	i = 0;
-	reset_line(data);
+	ft_move_home(data);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
+	if (data->entry->line)
+	{
+		ft_lstdel(&data->entry->line, &ft_free_node);
+		data->entry->line = NULL;
+	}
 	while (s[i])
 	{
 		print_character(data, s[i]);
@@ -50,7 +56,7 @@ int				ft_move_up_down_historic(t_data *data, int result)
 	char  		*tmp;
 	
 	tmp = NULL;
-	if (data->historic->list_historic && data->historic->count_pos < data->historic->count_node && data->historic->count_pos > 0)
+	if (data->historic->list_historic && (data->historic->count_pos < data->historic->count_node + 1) && data->historic->count_pos > 0)
 	{
 		ft_move_home(data);
 		tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
@@ -61,7 +67,7 @@ int				ft_move_up_down_historic(t_data *data, int result)
 		{
 			ft_insert_cmd_to_prompt(data, tmp);
 			if (result == UP && data->historic->count_pos > 0)
-			data->historic->count_pos--;
+				data->historic->count_pos--;
 		}
 	}
 	return (0);

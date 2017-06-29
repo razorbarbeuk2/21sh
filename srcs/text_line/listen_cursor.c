@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/27 18:32:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 14:10:24 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ int			listen_cursor(t_data *data, t_entry *entry)
 		data->sel->pos_start[1] = data->sel->pos[1];
 	}
 	data->entry->size_line = data->sel->len_prompt;
-	// ft_putstr("\n[-]");
-	// ft_putstr(data->sel->prompt);
-	// ft_putstr("[-]\n");
 	while(read(0, buf, 8))
 	{
 		result = ft_concat_int(buf);

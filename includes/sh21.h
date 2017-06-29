@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 17:58:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 16:40:48 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_cmd
 {
 	char 			*cmd;
 	char 			*opt;
-	char 			*file;
+	char 			**files;
 	int 			_select_cmd;
 	char			**exec_cmd;
 	t_fd			fds;
@@ -161,6 +161,8 @@ void				get_hist_prompt(t_data *data);
 int					data_init_history_file(t_data *data);
 int					data_check_and_create_history_cmd(t_data *data, char *cmd);
 int					data_search_in_history_file(t_data *data, char *search_cmd);
+void				data_uptdate_count_history_file(t_data *data);
+int 				add_sentence_historic_node_to_list(t_data *data);
 int					ft_move_up_down_historic(t_data *data, int result);
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next);

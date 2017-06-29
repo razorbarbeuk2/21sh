@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:59:10 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 15:36:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 14:57:24 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void		print_character(t_data *data, char result)
 	}
 	if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
 	{
-		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
+		tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 		print_lst_line(data, data->entry->cut_line);
-		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 	}
 	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:41:33 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 00:16:36 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/06/29 11:27:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ void		ft_free_cmd(void *tmp, size_t tmp_size)
 		cmd_tmp->cmd = NULL;
 		ft_strdel(&cmd_tmp->opt);
 		cmd_tmp->opt = NULL;
-		if(cmd_tmp->file)
-		{
-			ft_putendl("WESH");
-			ft_strdel(&cmd_tmp->file);
-			cmd_tmp->file = NULL;
-		}
+		ft_free_char(cmd_tmp->files);
+		cmd_tmp->files = NULL;
 		if (cmd_tmp->exec_cmd)
 		{
 			ft_free_char(cmd_tmp->exec_cmd);
