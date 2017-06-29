@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:03:08 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 18:01:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/28 23:18:56 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_select *free_data_select(t_select *sel)
 		ft_strdel(&sel->prompt);
 		sel->prompt = NULL;
 	}
+	free(sel);
 	sel = NULL;
 	return (init_data_sel());
 }

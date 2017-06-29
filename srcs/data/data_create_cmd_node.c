@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_cmd_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 18:27:13 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 15:55:44 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/06/29 00:07:02 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int		data_create_node_cmd(t_data *data, char *line_str, t_cmd **cmd_node, char *
 		else if (data_str_check_opt_cmd(cmd_node_tmp, line_str))
 			return (1);
 		else
+		{
+			ft_putstr("FILE");
 			cmd_node_tmp->file = ft_strdup(line_str);
+		}
 		return (1);
 	}
 	return (0);
@@ -88,4 +91,5 @@ void		data_create_list_struct(t_data *data, char **line_str, void **node, int *t
 			i++;
 		}
 	}
+	return ;
 }
