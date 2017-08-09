@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 16:05:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 17:59:46 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			get_pos_prompt(t_data *data)
 {
 	char	buf[14];
 
-	ft_bzero(buf, 14);
+	ft_memset(buf, 0, 14);
 	ft_putstr_fd(POS, data->term->tty);
 	read(data->term->tty, buf, 14);
 	ft_clean_buf_pos(data, buf);

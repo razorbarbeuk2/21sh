@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:25:35 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/21 14:24:39 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 17:46:59 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void print_lst(t_list *lst)
 
 	tmp = lst;
 	env = NULL;
-
+	if(!lst)
+		ft_putendl("FUCK 21SH");
 	while (tmp)
 	{
 		env = (t_env *)tmp->content;
@@ -29,6 +30,7 @@ void print_lst(t_list *lst)
 		tmp = tmp->next;
 	}
 	tmp = NULL;
+	return ;
 }
 
 char	**get_lst_to_tab(t_list *env_lst)
@@ -40,7 +42,7 @@ char	**get_lst_to_tab(t_list *env_lst)
 
 	env = NULL;
 	tmp_lst = NULL;
-	environ = (char **)malloc(sizeof(char *) * (ft_lst_count(env_lst) + 1));
+	environ = (char **)ft_memalloc((ft_lst_count(env_lst) + 1)*sizeof(char *));
 	tmp_lst = env_lst;
 	i = 0;
 
@@ -72,8 +74,7 @@ int	get_tab_to_lst(t_list **data_env, char **environ)
 	env = NULL;
 	while (environ[i])
 	{
-		if ((env = (t_env *)malloc(sizeof(t_env))) == NULL)
-			return (0);
+		env = (t_env *)ft_memalloc(sizeof(t_env));
 		tmp = ft_strsplit(environ[i], '=');
 		env->key = ft_strdup(tmp[0]);
 		if (!tmp[1] || ft_strlen(tmp[1]) == 0)

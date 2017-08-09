@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/29 16:51:25 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/19 12:57:01 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ char	*ft_cut_path(t_data *data)
 
 int		get_reset_prompt(t_data *data)
 {
-	ft_putstr_fd("\n", data->term->tty);
+	ft_putchar_fd('\n', data->term->tty);
 	free_cursor(data);
-	ft_putendl_fd("OK ", data->term->tty);
 	if (data->cmd)
 	{
 		ft_lstdel_cmd(&data->cmd);
@@ -38,6 +37,8 @@ int		get_reset_prompt(t_data *data)
 	if (!(data->sel = init_data_sel()))
 		return (-1);
 	if (!(data->line = init_data_entry()))
+		return (-1);
+	if (!(data->quotes = init_data_quotes()))
 		return (-1);
 	if (!init_prompt(data))
 		return (-1);
@@ -81,9 +82,24 @@ void	get_hist_prompt(t_data *data)
 	ft_putstr_fd(SEARCH_COLOR, data->term->tty);
 	ft_putstr_fd(tmp, data->term->tty);
 	ft_putstr_fd("\033[m", data->term->tty);
-	data->set_historique = 1;
-	data->nb_prompt_historique = ft_strlen(tmp);
-	listen_cursor(data, data->historique);
+	data->set_historique = ACTIVE;
+	data->historic->nb_prompt_historique = ft_strlen(tmp);
+	listen_cursor(data, data->historic->historique);
+	ft_strdel(&tmp);
+	return ;
+}
+
+void	get_quote_prompt(t_data *data)
+{
+	char 	*tmp;
+
+	tmp = NULL;
+	tmp = ft_strdup("quote> ");
+	ft_move_home(data);
+	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
+	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
+	ft_putstr_fd(tmp, data->term->tty);
+	data->quotes->nb_prompt_quote = ft_strlen(tmp);
 	ft_strdel(&tmp);
 	return ;
 }

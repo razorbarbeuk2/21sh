@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 14:45:51 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 13:38:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 17:49:37 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	t_list *lst;
 
 	lst = NULL;
-	if (!(lst = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
+	lst = (t_list *)ft_memalloc(sizeof(t_list));
 	if (lst)
 	{
 		lst->content = NULL;
@@ -28,8 +27,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 		lst->prev = NULL;
 		if (content)
 		{
-			if (!(lst->content = (void *)malloc(content_size)))
-				return (NULL);
+			lst->content = (void *)ft_memalloc(content_size);			
 			ft_bzero(lst->content, content_size);
 			ft_memcpy(lst->content, content, content_size);
 			lst->content_size = content_size;

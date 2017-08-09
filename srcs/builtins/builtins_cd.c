@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:27 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 12:03:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 16:52:30 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ static int		ft_init_path(char ***oldpath, char ***path, char **line)
 		print_error("Too many arguments\n");
 		return (0);
 	}
-	if (!(*path = (char **)malloc((2) * sizeof(char *))))
-		return (0);
-	if (!(*oldpath = (char **)malloc((2) * sizeof(char *))))
-		return (0);
+	(*path) = (char **)ft_memalloc(2*sizeof(char *));
+	(*oldpath) = (char **)ft_memalloc(2*sizeof(char *));
 	*oldpath[0] = ft_strdup("OLDPWD");
 	*path[0] = ft_strdup("PWD");
 	return (1);

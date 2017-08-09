@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_set_unset_env.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:23 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 12:03:07 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 16:43:34 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int				builtin_setenv(t_data *data, char **line)
 			print_error("Too many arguments.\n");
 			return (0);
 		}
-		if (!(tmp = (char **)malloc((3) * sizeof(char *))))
-			return (0);
+		tmp = (char **)ft_memalloc(3*sizeof(char *));
 		while (line[i])
 		{
 			tmp[n] = line[i];

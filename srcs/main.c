@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/29 13:56:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/10 14:38:21 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	init_sh(t_data *data, char **env)
 	if (!data_init_history_file(data))
 		return (-1);
 	listen_cursor(data, data->line);
+	
 	return (1);
 	// if (!init_env(&data->env))
 	// 	return (0);

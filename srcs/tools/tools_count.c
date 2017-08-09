@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_count.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 14:48:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/05/15 15:58:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/07 15:47:58 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			len_word(char *str)
 	return (i);
 }
 
-int 		ft_count_word_caract(char *str)
+int 		ft_count_word_caract(t_data *data, char *str)
 {
 	int 	i;
 	int 	count;
@@ -31,6 +31,8 @@ int 		ft_count_word_caract(char *str)
 	count = 0;
 	while (str[i])
 	{
+		if (data_check_quote(str[i]))
+			i += (data->quotes->quote_pos[2] - data->quotes->quote_pos[1]);	
 		if ((!data_check_caract(str[i]) && data_check_caract(str[i + 1])) || (!data_check_caract(str[i]) && str[i + 1] == '\0'))
 			count++;
 		i++;

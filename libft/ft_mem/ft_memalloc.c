@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 14:39:58 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/11 15:59:01 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/07/06 17:20:56 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memalloc(size_t size)
 	void	*new;
 
 	if (!(new = (void *)malloc((size))))
-		return (NULL);
+		ft_print_err("ERROR MALLOC");
 	ft_bzero(new, size);
 	return (new);
 }

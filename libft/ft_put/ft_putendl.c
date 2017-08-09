@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 12:41:49 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/11 16:00:10 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/02 16:08:02 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_putendl(char const *s)
 {
-	ft_putstr(s);
+	if (!s)
+		ft_putstr("NULL");
+	else
+		ft_putstr(s);
 	ft_putchar('\n');
 }

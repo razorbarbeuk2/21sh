@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:03:08 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 17:12:53 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/11 13:52:18 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_entry *free_data_entry(t_entry *entry)
 		if (entry->cpy)
 			ft_lstdel(&entry->cpy, &ft_free_node);
 		ft_strdel(&entry->line_str);
-		ft_free_char(entry->line_str_double);
+		//ft_free_char(entry->line_str_double);
 		entry->line_str = NULL;
 		entry->line_str_double = NULL;
 		entry->nb_line = 0;
@@ -67,6 +67,19 @@ t_historic *free_data_historic(t_historic *historic)
 		historic->count_node = 0;
 		ft_lstdel(&historic->list_historic, &ft_free_node);
 		historic->list_historic = NULL;
+		historic->historique = free_data_entry(historic->historique);
 	}
 	return (init_data_hist());
+}
+
+t_quote *free_data_quotes(t_quote *quotes)
+{
+	if (quotes)
+	{
+		ft_memdel((void **)&quotes->quote_pos);
+		quotes->quote_pos = NULL;
+		quotes->nb_prompt_quote = 0;
+		quotes->quote = free_data_entry(quotes->quote);
+	}
+	return (init_data_quotes());
 }

@@ -3,67 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 18:35:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/26 18:04:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/03 18:14:44 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int			create_pipe(int pipfd[2], t_fd *fd)
-{
-	(void)fd;
-	(void)pipfd;
-// 	ft_putstr("PIPE\n");
-// 	if (pipe(pipefd) == -1)
-// 	{
-// 		print_error("pipe error");
-// 		return (-1);
-// 	}
-// 	fd->stdin = pipefd[PIPE_WRITE];
-	return (0);
-//
-}
-
-int			exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next)
-{
-// 	t_fd	fd;
-// 	int		pipefd[2];
+// int			exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next, int *save_fd)
+// {
+// 	int 	pfd[2];
 // 	pid_t	pid;
 
-	(void)data;
-	(void)prev;
-	(void)next;
-// 	if (create_pipe(pipefd, fd) == -1)
-// 		return (-1);
+// 	(void)save_fd;
 // 	if ((pid = fork()) == -1)
 // 		print_error("fork error");
-	
+// 	pipe(pfd);
 // 	if (pid == 0)
 // 	{
-// 		/* parent */
-// 		ft_putstr("\nDAD\n");
-// 		close(pipefd[1]);
-// 		dup2(pipefd[0], 0);
-// 		//close(pipefd[0]);
-// 		exec_cmd_node(data, next);
-// 		return (1);
+// 		ft_putendl("CHILD ---------------------");
+// 		close(pfd[1]);
+//        	dup2(pfd[0], STDIN_FILENO);
+//        	close(pfd[0]);
+// 		return (exec_cmd_node(data, next));
 // 	}
 // 	else
 // 	{
-// 		/* child */
-// 		ft_putstr("\nCHILD\n");
-// 		close(pipefd[0]);
-// 		dup2(pipefd[1], 1);
-// 		//close(pipefd[1]);
-// 		exec_cmd_node(data, prev);
-// 		return (1);
+// 		ft_putendl("FATHER ---------------------");
+// 		close(pfd[0]);
+// 		dup2(pfd[1], STDOUT_FILENO);
+// 		close(pfd[1]);
+// 		return (exec_cmd_node(data, next));
 // 	}
-// 	waitpid(-1, 0, 0);
-	return (0);
-}
+// 	close(pfd[0]);
+// 	close(pfd[1]);
+// 	waitpid(pid, 0, 0);
+// 	return (0);
+// }
 
 int		exec_cmd_node(t_data *data, t_list *cur)
 {
@@ -72,6 +50,6 @@ int		exec_cmd_node(t_data *data, t_list *cur)
 	exec_line = NULL;
 	exec_line = ((t_cmd *)cur->content)->exec_cmd;
 	if (exec_line)
-		ft_putnbr_fd(parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd), data->term->tty);
+		parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd);
 	return (0);
 }

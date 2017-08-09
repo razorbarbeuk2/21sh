@@ -302,3 +302,149 @@ int 		data_check_special_caract_global(t_data *data, char *line_str, char **cara
 // 	ft_lstadd_back(&data->cmd, data_check_str_list_struct_node(data, node, type));
 // 	return ;
 // }
+
+
+// char 		**data_split_to_tab(char *line_str, char caract)
+// {
+// 	char 	**tab_tmp;
+// 	char 	**st;
+// 	int		count_word;
+// 	int		len;
+// 	int		i;
+
+// 	tab_tmp = NULL;
+// 	st = NULL;
+// 	len = 0;
+// 	i = 0;
+// 	count_word = 0;
+// 	count_word = ft_count_word_spec_caract(line_str, &caract);
+// 	if (!(tab_tmp = (char **)ft_memalloc((count_word + 1)*sizeof(char *))))
+// 		return (NULL);
+// 	st = tab_tmp;
+// 	while (count_word--)
+// 	{
+// 		len = len_word_caract(line_str, &caract);
+// 		if (!(*tab_tmp = (char *)ft_memalloc((len + 1)*sizeof(char))))
+// 			return (NULL);
+// 		*tab_tmp = ft_strncpy(*tab_tmp, line_str, len);
+// 		line_str = line_str + len;
+// 		tab_tmp++;
+// 	}
+// 	*tab_tmp = NULL;
+// 	tab_tmp = st;
+// 	return (tab_tmp);
+// }
+
+// int			data_check_and_create_history_cmd(t_data *data, char *cmd)
+// {
+// 	char 	*line;
+// 	int 	nb_line;
+
+// 	line = NULL;
+// 	nb_line = 0;
+// 	if (!(data->historic->fd = open("/tmp/log_21sh_history", O_RDWR)))
+// 		return (-1);
+// 	if (data->historic->fd && cmd)
+// 	{
+// 		while ((get_next_line(data->historic->fd, &line) != 0))
+// 		{
+// 			nb_line++;
+// 			ft_strdel(&line);
+// 		}
+// 		ft_strdel(&line);
+// 		write_sentence_in_historic_file(data, cmd, &nb_line, ACTIVE);
+// 		close(data->historic->fd);
+// 	}
+// 	return (1);
+// }
+
+// int			data_search_in_history_file(t_data *data, char *search_cmd)
+// {
+// 	int		fd;
+// 	char 	*line;
+// 	int		nb_line;
+
+// 	(void)data;
+// 	fd = 0;
+// 	nb_line = 0;
+// 	line = NULL;
+// 	fd = data_open_history_file(2);
+// 	if (fd)
+// 	{
+// 		while (get_next_line(fd, &line))
+// 		{
+// 			if (ft_strcmp(line, search_cmd) == 0)
+// 				break ;
+// 			else
+// 				print_error("No result\n");
+// 			nb_line++;
+// 		}
+// 		close(fd);
+// 	}
+// 	return (1);
+// }
+
+t_list *lst;
+	pid_t pid;
+	int fd_tmp;
+	int p[2 * data->nb_pipe];
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	fd_tmp = 0;
+	lst = NULL;
+	lst = data->cmd;
+	while (i < data->nb_pipe)
+	{
+		if (pipe(p + i * 2) < 0)
+		{
+			print_error("pipe error");
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+
+	while (lst)
+	{
+		if ((pid = fork()) == -1)
+			print_error("fork error\n");
+		if (pid == 0)
+		{
+			if (lst->next->next)
+			{
+				if (dup2(p[j + 1], STDOUT_FILENO) < 0)
+				{
+					print_error("dup2 error 1\n");
+					exit(EXIT_FAILURE);
+				}
+			}
+			if (j != 0)
+			{
+				if (dup2(p[j - 2], STDIN_FILENO) < 0)
+				{
+					print_error("dup2 error 2\n");
+					exit(EXIT_FAILURE);
+				}
+			}
+			data_pipe_close(data, p);
+			if (lst->type == TYPE_CMD)
+				exec_cmd_node(data, lst);
+		}
+		else if (pid < 0)
+		{
+			print_error("dup2 error\n");
+			exit(EXIT_FAILURE);
+		}
+		lst = lst->next;
+		j += 2;
+	}
+	data_pipe_close(data, p);
+	i = 0;
+	while (i < data->nb_pipe)
+	{
+		wait(&fd_tmp);
+		i++;
+	}
+	return (1);

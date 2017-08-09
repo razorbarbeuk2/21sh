@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/29 17:33:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/04 14:38:04 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void ft_print_tab(t_data *data, char **str_tab)
+void print_tab(t_data *data, char **str_tab)
 {
 	int i;
 
 	i = 0;
 	while (str_tab[i])
 	{
-		ft_putstr_fd(str_tab[i], data->term->tty);
+		ft_putendl_fd(str_tab[i], data->term->tty);
 		i++;
 	}
 }
@@ -90,6 +90,7 @@ void print_list_node_sep(t_data *data, t_list *lst)
 
 void print_list_cmd(t_data *data, t_list *lst)
 {
+	write(1, "\n", 1);
 	while (lst)
 	{
 		if (lst->type == TYPE_CMD)
@@ -99,10 +100,10 @@ void print_list_cmd(t_data *data, t_list *lst)
 			write(1, "\n", 1);
 			print_list_node_cmd(data, lst);
 		}
-		if (lst->type == TYPE_SEP)
+		if (lst->type == TYPE_PIPE)
 		{
-			ft_putstr_fd("TYPE_SEP : ", data->term->tty);
-			ft_putnbr_fd(TYPE_SEP, data->term->tty);
+			ft_putstr_fd("TYPE_PIPE : ", data->term->tty);
+			ft_putnbr_fd(TYPE_PIPE, data->term->tty);
 			write(1, "\n", 1);
 			print_list_node_sep(data, lst);
 		}
@@ -110,6 +111,8 @@ void print_list_cmd(t_data *data, t_list *lst)
 	}
 }
 
+
+/*FAIRE ATTENTION*/
 void print_lst_line(t_data *data, t_list *lst)
 {
 	t_list *list;
@@ -142,7 +145,7 @@ void print_lst_line_tools(t_data *data, t_list *lst)
 		ft_putstr_fd("FUCK", data->term->tty);
 	while (list)
 	{
-		ft_putstr_fd((char *)list->content, data->term->tty);
+		ft_putendl_fd((char *)list->content, data->term->tty);
 		list = list->next;
 	}
 	return;

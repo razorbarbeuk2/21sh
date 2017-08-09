@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_sep_is_caract.c                               :+:      :+:    :+:   */
+/*   ft_print_err.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/07 19:37:33 by RAZOR            ###   ########.fr       */
+/*   Created: 2017/07/06 16:31:37 by RAZOR             #+#    #+#             */
+/*   Updated: 2017/07/06 17:02:12 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "../libft.h"
 
-int data_check_quote(char c)
+void ft_print_err(char *err)
 {
-	if (c == '"' || c == '\'')
-		return (1);
-	return (0);
-}
-
-int data_check_caract(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\r' || c == '\n')
-		return (1);
-	return (0);
-}
-
-int data_check_spec_caract(char c, char *caract)
-{
-	if (c == caract[0])
-		return (1);
-	return (0);
+    ft_putendl_fd(err, 2);
+    exit(-1);
+    return ;
 }

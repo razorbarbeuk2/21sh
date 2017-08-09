@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   free_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 10:57:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/11 13:50:28 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+int     free_quote(t_data *data)
+{
+	if (data->quotes->quote_pos[0])
+	{
+		data->quotes = free_data_quotes(data->quotes);
+		free (data->quotes->quote);
+		data->quotes->quote = NULL;
+		free(data->quotes);
+		data->quotes = NULL;
+	}
+	return (1);
+}
 
 int     free_cursor(t_data *data)
 {
@@ -48,6 +60,8 @@ int 	free_destruction_final(t_data *data)
 	if (data->historic)
 	{
 		data->historic = free_data_historic(data->historic);
+		free (data->historic->historique);
+		data->historic->historique = NULL;
 		free(data->historic);
 		data->historic = NULL;
 	}

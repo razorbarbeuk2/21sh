@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 11:57:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/01 17:29:02 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_lst_cpy(t_list **env_lst)
 	env_cpy = NULL;
 	while (start)
 	{
-		env_cpy = (t_env *)malloc(sizeof(t_env));
+		env_cpy = (t_env *)ft_memalloc(sizeof(t_env));
 		env = ((t_env *)start->content);
 		if (env->key)
 			env_cpy->key = ft_strdup(env->key);

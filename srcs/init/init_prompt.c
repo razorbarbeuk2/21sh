@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:41:09 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 11:51:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/10 14:38:00 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ int 	init_prompt(t_data *data)
 	data->sel->pos_start[1] = data->sel->pos[1];
 	if (data->sel->pos_start[0] == (data->term->height - 1))
 		data->sel->_bottom = 1;
-	
 	return (1);
 }

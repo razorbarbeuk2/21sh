@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
+#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2017/06/20 14:58:18 by gbourson         ###   ########.fr        #
+#    Updated: 2017/07/06 17:03:02 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,16 +84,23 @@ FT_TO_SRC			=	$(addprefix ft_to/,$(_FT_TO_SRC))
 _FT_TO_SRC_O		=	$(patsubst %.c,%.o, $(_FT_TO_SRC))
 FT_TO_SRC_O			=	$(addprefix bin/,$(_FT_TO_SRC_O))
 
+#Define FT_ERR
+_FT_ERR_SRC			=	ft_print_err.c\
+
+FT_ERR_SRC			=	$(addprefix ft_err/,$(_FT_ERR_SRC))
+_FT_ERR_SRC_O		=	$(patsubst %.c,%.o, $(_FT_ERR_SRC))
+FT_ERR_SRC_O		=	$(addprefix bin/,$(_FT_ERR_SRC_O))
+
 #Define Global LIBFT files
 LIBFT_SRC			=	$(FT_COUNT_SRC) $(FT_GET_SRC) $(FT_IS_SRC) $(FT_LIST_SRC)\
 						$(FT_MATH_SRC) $(FT_MEM_SRC) $(FT_PUT_SRC) $(FT_STR_SRC)\
-						$(FT_TO_SRC)
+						$(FT_TO_SRC) $(FT_ERR_SRC)
 _LIBFT_O_FILES		=	$(_FT_COUNT_SRC_O) $(_FT_GET_SRC_O) $(_FT_IS_SRC_O) $(_FT_LIST_SRC_O)\
 						$(_FT_MATH_SRC_O) $(_FT_MEM_SRC_O) $(_FT_PUT_SRC_O) $(_FT_STR_SRC_O)\
-						$(_FT_TO_SRC_O)
+						$(_FT_TO_SRC_O) $(_FT_ERR_SRC_O)
 LIBFT_O_FILES		=	$(FT_COUNT_SRC_O) $(FT_GET_SRC_O) $(FT_IS_SRC_O) $(FT_LIST_SRC_O)\
 						$(FT_MATH_SRC_O) $(FT_MEM_SRC_O) $(FT_PUT_SRC_O) $(FT_STR_SRC_O)\
-						$(FT_TO_SRC_O)
+						$(FT_TO_SRC_O) $(FT_ERR_SRC_O)
 CFLAGS				=	-Wall -Wextra -Werror -ggdb -g
 
 all : $(NAME)

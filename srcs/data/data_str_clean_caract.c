@@ -3,99 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_clean_caract.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:06:51 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/21 14:59:45 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/07 16:08:34 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-char 		*convert_data_lst_tab(t_data *data)
+static int ft_wordlen_clean(t_data *data, char const *s)
 {
-	char 	*str;
-	t_list	*lst;
-	int 	i;
+	int i;
+	int c;
 
 	i = 0;
-	lst = NULL;
-	lst = data->entry->line;
-	if (data->entry->len_line)
+	c = (data->quotes->quote_pos[2] - data->quotes->quote_pos[1]);
+	while (s[i] && !data_check_caract(s[i]))
 	{
-		if (!(str = (char *)malloc((data->entry->len_line + 1)*sizeof(char))))
-			return (NULL);
-		while(lst)
-		{
-			str[i] = ((char *)lst->content)[0];
-			lst = lst->next;
-			i++;
-		}
-		str[i] = '\0';
-		return (str);
+		if (s[i] == '"' || s[i] == '\'')
+			return (i += (c - 1));
+		i++;
 	}
-	return (NULL);
+	return (i);
 }
 
-char 		**data_clean_to_tab(t_data *data, char *str)
+static int ft_next_clean(t_data *data, char const *s, int opt, int n)
 {
-	char 	**tab_tmp;
-	char 	**st_tmp;
-	int		count_word;
-	int		i;
+	int c;
 
-	i = 0;
-	(void)data;
-	tab_tmp = NULL;
-	st_tmp = NULL;
-	str = trim_str(str);
-	count_word = ft_count_word_caract(str);
-	if (!(tab_tmp = (char **)malloc((count_word + 1)*sizeof(char *))))
-		return (NULL);
-	st_tmp = tab_tmp;
-	while(count_word--)
+	if (opt)
 	{
-		while(data_check_caract(str[i]) && str[i])
-			i++;
-		if (!(*tab_tmp = (char *)malloc((len_word(&str[i]) + 1)*sizeof(char))))
-			return (NULL);
-		*tab_tmp = ft_strcpy_data(*tab_tmp, &str[i]);
-		str = str + len_word(&str[i]);
-		tab_tmp++;
+		while (data_check_caract(s[n]) && s[n] != '\0')
+			n++;
 	}
-	*tab_tmp = NULL;
-	tab_tmp = st_tmp;
+	else
+	{
+		c = (data->quotes->quote_pos[2] - data->quotes->quote_pos[1]);
+		while (s[n] && !data_check_caract(s[n]))
+		{
+			if (data->quotes->quote_pos[0] && (n == (data->quotes->quote_pos[1] - 1)))
+				return (n += (c - 1));
+			n++;
+		}
+	}
+	return (n);
+}
+
+char **data_clean_to_tab(t_data *data, char *s)
+{
+	char **tab_tmp;
+	int count_word;
+	int i;
+	int n;
+
+	tab_tmp = NULL;
+	count_word = ft_count_word_caract(data, s);
+	tab_tmp = (char **)ft_memalloc((count_word + 1) * sizeof(char *));
+	i = 0;
+	n = 0;
+	while (count_word--)
+	{
+		n = ft_next_clean(data, s, 1, n);
+		tab_tmp[i] = ft_strsub(&s[n], data_check_quote(s[n]), ft_wordlen_clean(data, &s[n]));
+		n = ft_next_clean(data, s, 0, n);
+		i++;
+	}
+	tab_tmp[i] = NULL;
 	return (tab_tmp);
 }
 
-char 		**data_split_to_tab(char *line_str, char caract)
+char **data_split_to_tab(t_data *data, char *s, char *caract)
 {
-	char 	**tab_tmp;
-	char 	**st;
-	int		count_word;
-	int		len;
-	int		i;
+	char **tab_tmp;
+	int count_word;
+	int count;
+	int len;
+	int i;
 	
 
-	tab_tmp = NULL;
-	st = NULL;
 	len = 0;
+	tab_tmp = NULL;
+	(void)data;
+	count_word = ft_count_word_spec_caract(s, caract);
+	tab_tmp = (char **)ft_memalloc((count_word + 1) * sizeof(char *));
 	i = 0;
-	count_word = 0;
-	count_word = ft_count_word_spec_caract(line_str, &caract);
-	if (!(tab_tmp = (char **)malloc((count_word + 1)*sizeof(char *))))
-		return (NULL);
-	st = tab_tmp;
+	count = 0;
 	while (count_word--)
 	{
-		len = len_word_caract(line_str, &caract);
-		if (!(*tab_tmp = (char *)malloc((len + 1)*sizeof(char))))
-			return (NULL);
-		*tab_tmp = ft_strncpy(*tab_tmp, line_str, len);
-		line_str = line_str + len;
-		tab_tmp++;
+		
+		count = len_word_caract(s, caract);
+		tab_tmp[i] = (char *)ft_memalloc((count + 1) * sizeof(char));
+		tab_tmp[i] = ft_strncpy(tab_tmp[i], s, count);
+		s = s + count;
+		i++;
 	}
-	*tab_tmp = NULL;
-	tab_tmp = st;
+	tab_tmp[i] = NULL;
 	return (tab_tmp);
 }

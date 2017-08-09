@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 17:34:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 17:35:30 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/07/06 17:40:27 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			modif_elem(char **tab_line, t_list **env_lst, t_list **start)
 		return (1);
 	else if ((!env_tmp || !env_tmp->next))
 	{
-		env = (t_env *)malloc(sizeof(t_env));
+		env = (t_env *)ft_memalloc(sizeof(t_env));
 		if (tab_line[0])
 			env->key = ft_strdup(tab_line[0]);
 		env->infos = tab_line[1] ? ft_strdup(tab_line[1]) : ft_strdup(" ");

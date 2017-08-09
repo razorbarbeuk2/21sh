@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_insert_caract.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 18:40:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 16:45:31 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ t_list *ft_add_print_new_node(char result)
 	t_list *lst;
 
 	lst = NULL;
-	if (!(lst = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
+	lst = (t_list *)ft_memalloc(sizeof(t_list));
 	if (lst)
 	{
 		lst->content = NULL;

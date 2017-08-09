@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 14:29:56 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/05/21 14:30:26 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/07 15:57:13 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,10 @@ int			ft_count_word_spec_caract(char *line_str, char *caract)
 int			len_word_caract(char *line_str, char *caract)
 {
 	int i;
-	int count;
-
+	
 	i = 0;
-	count = 0;
 	if (line_str[0] == caract[0])
-	{
-		while(line_str[i] == caract[0])
-			i++;
-		return (i);
-	}
+		return (1);
 	else
 	{
 		while (line_str[i] && (line_str[i] != caract[0]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 17:41:33 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 11:27:27 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/04 14:39:53 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_lstdel_cmd(t_list **alst)
 		tmp_n = tmp->next;
 		if (tmp->type == TYPE_CMD)
 			ft_free_cmd(tmp->content, tmp->content_size);
-		if (tmp->type == TYPE_SEP)
+		if (tmp->type == TYPE_PIPE)
 			ft_free_sep(tmp->content, tmp->content_size);
 		free(tmp);
 		tmp = tmp_n;

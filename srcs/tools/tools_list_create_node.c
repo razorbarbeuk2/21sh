@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_list_create_node.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 12:14:11 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/22 13:24:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/06 16:48:40 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ t_list	*ft_lstnew_node_type(void const *content, size_t content_size, int t)
 {
 	t_list *lst;
 
-	if (!(lst = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
+	lst = (t_list *)ft_memalloc(sizeof(t_list));
 	if (lst)
 	{
 		lst->next = NULL;
@@ -28,7 +27,7 @@ t_list	*ft_lstnew_node_type(void const *content, size_t content_size, int t)
 			lst->type = 0;
 			return (lst);
 		}
-		if ((lst->content = (void *)malloc(content_size)) != NULL)
+		if ((lst->content = (void *)ft_memalloc(content_size)))
 		{
 			ft_memcpy(lst->content, content, content_size);
 			lst->content_size = content_size;

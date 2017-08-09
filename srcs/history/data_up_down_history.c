@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_up_down_history.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 11:17:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 17:10:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/07/20 17:17:32 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ void			ft_insert_cmd_to_prompt(t_data *data, char *s)
 	i = 0;
 	ft_move_home(data);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
-	if (data->entry->line)
-	{
-		ft_lstdel(&data->entry->line, &ft_free_node);
-		data->entry->line = NULL;
-	}
+	if (data->entry)
+		data->entry = free_data_entry(data->entry);
 	while (s[i])
 	{
 		print_character(data, s[i]);
@@ -64,11 +61,9 @@ int				ft_move_up_down_historic(t_data *data, int result)
 			data->historic->count_pos++;
 		tmp = ft_search_up_down_historic(data, data->historic->count_pos);
 		if (tmp)
-		{
 			ft_insert_cmd_to_prompt(data, tmp);
-			if (result == UP && data->historic->count_pos > 0)
+		if (result == UP && data->historic->count_pos > 1)
 				data->historic->count_pos--;
-		}
 	}
 	return (0);
 }

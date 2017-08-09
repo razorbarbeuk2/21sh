@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 13:16:42 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/11 16:00:30 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/07/06 15:51:15 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	ft_putstr(char const *s)
 		ft_putchar(s[i]);
 		i++;
 	}
+	return ;
 }

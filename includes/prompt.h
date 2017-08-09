@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 22:21:58 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/08 11:26:39 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,34 @@
 
 # include <term.h>
 
+typedef enum		e_enum_quote
+{
+					QUOTE_SIMPLE = 1,
+					QUOTE_DOUBLE = 2
+}					t_enum_quote;
+
 typedef enum		e_enum_exec
 {
-					TYPE_CMD = 1,
-					TYPE_SEP = 2,
-					PIPE_READ = 0,
-					PIPE_WRITE = 1
+					TYPE_CMD,
+					TYPE_SEMICOLUMN,
+					TYPE_REDIRECTION,
+					TYPE_PIPE,
+					TYPE_AND,
+					TYPE_OR,
+					TYPE_FINISH
 }					t_enum_exec;
+
+typedef struct 		s_token_struct
+{
+	t_enum_exec		type;
+	char 			*token_str;
+	
+}  			 		t_token_struct;
 
 typedef enum		e_enum_cursor
 {
+					ACTIVE = 1,
+					INACTIVE = 0,
 					UP = 279165,
 					DOWN =  279166,
 					RIGHT = 279167,
@@ -41,8 +59,8 @@ typedef enum		e_enum_cursor
 					ALT_LEFT = 27279168,
 					SHIFT_LEFT = -23279172,
 					SHIFT_RIGHT = -23279173,
-					CTRL_CPY_PASTE = 16,
-					CTRL_CUT_PASTE = 12,
+					CTRL_CPY_PASTE = 16, // CTRL + N
+					CTRL_CUT_PASTE = 12, // CTRL + 
 					SEARCH_HIST = 18, // CTRL + R
 					RST = 14 // CTRL + N
 					// ALT_RIGHT

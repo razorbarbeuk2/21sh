@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listen_cursor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/29 14:10:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/06 15:34:27 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,39 @@ void		ft_cmd_cursor(t_data *data, int result)
 		return ;
 }
 
+void 		listen_cursor_check_module_active(t_data *data)
+{
+	if (data->set_quotes && !data->set_historique)
+	{
+		get_pos_prompt(data);
+		data->sel->len_prompt = data->quotes->nb_prompt_quote;
+		data->sel->pos_start[0] = data->sel->pos[0];
+		data->sel->pos_start[1] = data->sel->pos[1];
+		motion_list(data, 'E');
+		ft_add_print_caract(data, '\n');
+		motion_list(data, 'E');
+	}
+	if (data->set_historique && !data->set_quotes)
+	{
+		get_pos_prompt(data);
+		data->sel->len_prompt = data->historic->nb_prompt_historique;
+		data->sel->pos_start[0] = data->sel->pos[0];
+		data->sel->pos_start[1] = data->sel->pos[1];
+	}
+}
+
+/*Faire la suite quote prompt - push ENTER*/
+
 int			listen_cursor(t_data *data, t_entry *entry)
 {
 	char	buf[8];
 	int		result;
 
 	result = 0;
-	ft_bzero(buf, 8);
 	data->entry = NULL;
 	data->entry = entry;
-	if (data->set_historique)
-	{
-		get_pos_prompt(data);
-		data->sel->len_prompt = data->nb_prompt_historique;
-		data->sel->pos_start[0] = data->sel->pos[0];
-		data->sel->pos_start[1] = data->sel->pos[1];
-	}
+	ft_memset(buf, 0, 8);
+	listen_cursor_check_module_active(data);
 	data->entry->size_line = data->sel->len_prompt;
 	while(read(0, buf, 8))
 	{
@@ -82,7 +99,7 @@ int			listen_cursor(t_data *data, t_entry *entry)
 			ft_move_cursor(data, result);
 		ft_cmd_cursor(data, result);
 		if ((result >= 32 && result <= 126) && result != HOME && result != END)//Enlever HOME et END dans cette condition Num de touche à changer
-			print_character(data, result);
+			print_character(data, result);	
 		get_pos_prompt(data);
 		ft_bzero(buf, 8);
 	}
