@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/08 11:26:39 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/10 16:18:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum		e_enum_exec
 typedef struct 		s_token_struct
 {
 	t_enum_exec		type;
-	char 			*token_str;
+	char 			*token_name;
+	int 			pos;
 	
 }  			 		t_token_struct;
 
