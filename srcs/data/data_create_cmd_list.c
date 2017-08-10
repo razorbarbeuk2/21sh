@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_cmd_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/10 17:11:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/11 00:07:25 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,22 +107,7 @@ void ft_print_list_token(t_list *token_list)
 	}
 }
 
-void data_check_str_is_token_cmd(t_data *data, t_list **token_list, char *line_str, int i)
-{
-	char *str;
-
-	str = NULL;
-	(void)data;
-	
-	if (line_str)
-	{
-		str = ft_strsub(line_str, 0, i);
-		ft_lstadd_back(token_list, ft_lstnew_node_type((char *)str, ft_strlen(str) * sizeof(char), TYPE_CMD));
-	}
-	return;
-}
-
-int 	ft_print_token(t_list **token_lst)
+int ft_print_token(t_list **token_lst)
 {
 	t_list *lst;
 	t_token_struct *token;
@@ -133,7 +118,7 @@ int 	ft_print_token(t_list **token_lst)
 	{
 		token = NULL;
 		token = (t_token_struct *)lst->content;
-		if(token)
+		if (token)
 		{
 			ft_putendl("START PRINT---------------");
 			ft_putendl(token->token_name);
@@ -144,103 +129,117 @@ int 	ft_print_token(t_list **token_lst)
 	return (0);
 }
 
-
-void 	ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
+void data_check_is_token_operator(t_data *data, t_list **token_list, unsigned int type, char *str, int pos)
 {
- 	t_token_struct *token;
+	t_token_struct *token;
+
+	(void)data;
+	token = NULL;
+	if (str)
+	{
+		token = ft_memalloc(sizeof(t_token_struct));
+		token->type = type;
+		token->token_name = ft_strdup(str);
+		token->pos = pos;
+		ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));
+	}
+	else
+		ft_print_err("Error token operator");
+	return;
+}
+
+void data_check_is_token_cmd(t_data *data, t_list **token_list, char *line_str, int start, int size)
+{
 	t_token_struct *cmd_token;
-	char *cmd;
+	char *str;
+
+	(void)data;
+	str = NULL;
+	cmd_token = NULL;
+	if (line_str)
+	{
+		str = ft_strsub(line_str, start, size);
+		if (str)
+			data_check_is_token_operator(data, token_list, TYPE_CMD, ft_strtrim(str), 0);
+		else
+			ft_print_err("Error token cmd");
+	}
+	ft_strdel(&str);
+	str = NULL;
+	return;
+}
+
+void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
+{
 	int i;
 	int prev;
-	int len;
 
 	i = 0;
 	prev = 0;
-	cmd = NULL;
-	cmd_token = NULL;
-	token = NULL;
 	(void)data;
 	write(1, "\n", 1);
-	len = ft_strlen(line_str);
-	while (line_str[i] && i < len)
+	while (line_str[i] && i < (int)ft_strlen(line_str))
 	{
-		if(line_str[i] == '"' || line_str[i] == '\'')
+		if (line_str[i] == '"' || line_str[i] == '\'')
 			i = ft_is_caract_quote(&line_str[i]);
-		if(line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<')
+		if (line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<')
 		{
-			ft_putendl("TOKEN");
-			token = ft_memalloc(sizeof(t_token_struct));
-			cmd = ft_strsub(line_str, prev, (i - prev));
-			if(cmd)
+			data_check_is_token_cmd(data, token_list, line_str, prev, (i - prev));
+			if (line_str[i] == ';')
+				data_check_is_token_operator(data, token_list, TYPE_SEMICOLUMN, ";", i);
+			else if (line_str[i] == '&' && line_str[i + 1] == '&')
 			{
-				ft_putstr("CMD :");
-				cmd_token = ft_memalloc(sizeof(t_token_struct));
-				cmd_token->type = TYPE_CMD;
-				cmd_token->token_name = ft_strtrim(cmd);
-				cmd_token->pos = 0;
-				ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)cmd_token, (sizeof(t_token_struct))));
+				data_check_is_token_operator(data, token_list, TYPE_AND, "&&", i);
+				i += 2;
 			}
-			prev = i + 1;
-			if(line_str[i] == ';')
+			else if (line_str[i] == '|' && line_str[i + 1] == '|')
 			{
-				token->type = TYPE_SEMICOLUMN;
-				token->token_name = ft_strdup(";");
-				token->pos = i;
-			}		
-			else if(line_str[i] == '&' && line_str[i + 1] == '&')
-			{
-				token->type = TYPE_AND;
-				token->token_name = ft_strdup("&&");
-				token->pos = i;
+				data_check_is_token_operator(data, token_list, TYPE_OR, "||", i);
+				i += 2;
 			}
-			else if(line_str[i] == '|' && line_str[i + 1] == '|')
+			else if (line_str[i] == '|' && line_str[i + 1] != '|')
+				data_check_is_token_operator(data, token_list, TYPE_PIPE, "|", i);
+			else if (line_str[i] == '>' && line_str[i] != '>')
+				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, ">", i);
+			else if (line_str[i] == '>' && line_str[i + 1] == '>')
 			{
-				token->type = TYPE_OR;
-				token->token_name = ft_strdup("||");
-				token->pos = i;
-			}	
-			else if(line_str[i] == '|' && line_str[i + 1] != '|')
-			{
-				token->type = TYPE_PIPE;
-				token->token_name = ft_strdup("|");
-				token->pos = i;
-			}	
-			else if(line_str[i] == '>' || line_str[i] == '<')
-			{
-				token->type = TYPE_REDIRECTION;
-				token->token_name = ft_strdup(">");
-				token->pos = i;
+				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, ">>", i);
+				i += 2;
 			}
-			ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));
-			ft_putendl("END");
-			ft_strdel(&cmd);
-			token = NULL;
+			else if (line_str[i] == '<' && line_str[i] != '<')
+				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, "<", i);
+			else if (line_str[i] == '<' && line_str[i + 1] == '<')
+			{
+				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, "<<", i);
+				i += 2;
+			}
+			prev = (i + 1);
 		}
 		i++;
 	}
+	data_check_is_token_cmd(data, token_list, line_str, prev, (i - prev));
 	ft_print_token(token_list);
-	return ;
+	return;
 }
 
-int 	ft_count_token(t_data *data, char *line_str)
-{
-	int i;
-	int count_token;
+// int ft_count_token(t_data *data, char *line_str)
+// {
+// 	int i;
+// 	int count_token;
 
-	(void)data;
-	i = 0;
-	count_token = 0;
-	while (line_str[i])
-	{
-		if (line_str[i] == '"' || line_str[i] == '\'')
-			i += ft_is_caract_quote(&line_str[i]);
-		if(line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<')
-			count_token++;
-		i++;
-	}
-	return (count_token);
-}
-
+// 	(void)data;
+// 	i = 0;
+// 	count_token = 0;
+// 	while (line_str[i])
+// 	{
+// 		if (line_str[i] == '"' || line_str[i] == '\'')
+// 			i += ft_is_caract_quote(&line_str[i]);
+// 		if (line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<')
+// 			count_token++;
+// 		i++;
+// 	}
+// 	return (count_token);
+// }
 
 t_list *data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 {
@@ -254,7 +253,6 @@ t_list *data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 	token_list = ft_memalloc(sizeof(t_list));
 	ft_token_str_pos(data, line_str, &token_list);
 
-	
 	//ft_print_list_token(token_list);
 	return (NULL);
 }
