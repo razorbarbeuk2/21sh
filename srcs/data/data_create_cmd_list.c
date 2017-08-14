@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/11 00:07:25 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/13 22:54:56 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 	while (line_str[i] && i < (int)ft_strlen(line_str))
 	{
 		if (line_str[i] == '"' || line_str[i] == '\'')
-			i = ft_is_caract_quote(&line_str[i]);
+			i += ft_is_caract_quote(&line_str[i]);
 		if (line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<')
 		{
 			data_check_is_token_cmd(data, token_list, line_str, prev, (i - prev));
