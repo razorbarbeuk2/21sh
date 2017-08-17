@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/07 19:41:53 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/14 14:25:16 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_list	*ft_check_token_separate(t_data *data)
 			ft_putnbr(j);
 			ft_putendl(tmp);
 			ft_putendl("-----------------");
-			ft_lstadd_back(&cmd_sep, ft_lstnew_node_type(tmp, ft_strlen(tmp), TYPE_SEMICOLUMN));
+			ft_lstadd_back(&cmd_sep, ft_lstnew_node_type(tmp, ft_strlen(tmp), TYPE_DSEMI));
 			j = ft_strlen(tmp);
 			ft_strdel(&tmp);
 			tmp = NULL;

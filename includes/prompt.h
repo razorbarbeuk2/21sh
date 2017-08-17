@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/10 16:18:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/14 14:11:54 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ typedef enum		e_enum_quote
 typedef enum		e_enum_exec
 {
 					TYPE_CMD,
-					TYPE_SEMICOLUMN,
-					TYPE_REDIRECTION,
+					TYPE_DSEMI,
+					TYPE_REDIRECTION_LESSGREAT,
+					TYPE_REDIRECTION_GREATAND,
+					TYPE_REDIRECTION_LESSAND,
+					TYPE_REDIRECTION_DGREAT,
+					TYPE_REDIRECTION_DLESS,
 					TYPE_PIPE,
-					TYPE_AND,
-					TYPE_OR,
+					TYPE_AND_IF,
+					TYPE_OR_IF,
 					TYPE_FINISH
 }					t_enum_exec;
 

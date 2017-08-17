@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/13 22:54:56 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/14 22:34:16 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,91 +20,6 @@ int ft_is_caract_quote(char *str)
 	while (str[i] && (str[i] != '"' || str[i] != '\''))
 		i++;
 	return (i);
-}
-
-int ft_is_redirection_left(char c, char **caract, char *c_str)
-{
-	int i;
-
-	i = 0;
-	if (c == '<')
-	{
-		while (c_str[i] && !data_check_caract(c_str[i]))
-		{
-			if (ft_isdigit(c_str[i]) || c_str[i] == '<' || c_str[i] == '-')
-				i++;
-			else
-				print_error("Error token");
-		}
-		(*caract) = ft_memalloc(i * sizeof(char));
-		ft_strncpy((*caract), c_str, i);
-		return (ft_strlen(*caract));
-	}
-	return (0);
-}
-
-int ft_is_redirection_right(char c, char **caract, char *c_str)
-{
-	int i;
-
-	i = 0;
-	if (c == '>')
-	{
-		while (c_str[i] && !data_check_caract(c_str[i]))
-		{
-			if (ft_isdigit(c_str[i]) || c_str[i] == '>' || c_str[i] == '-')
-				i++;
-			else
-				print_error("Error token");
-		}
-		(*caract) = ft_memalloc(i * sizeof(char));
-		ft_strncpy((*caract), c_str, i);
-		return (ft_strlen(*caract));
-	}
-	return (0);
-}
-
-int ft_is_semicolumns(char *c, char **caract)
-{
-	if (c[0] == ';')
-	{
-		(*caract) = ft_strdup(";");
-		return (1);
-	}
-	return (0);
-}
-
-int ft_is_pipe(char *c, char **caract)
-{
-	if (c[0] == '|')
-	{
-		(*caract) = ft_strdup("|");
-		return (1);
-	}
-	if (c[0] == '|' && c[1] == '|')
-	{
-		(*caract) = ft_strdup("||");
-		return (2);
-	}
-	return (0);
-}
-
-void ft_print_list_token(t_list *token_list)
-{
-	t_list *lst;
-
-	lst = NULL;
-	lst = token_list;
-	write(1, "\n", 1);
-	while (lst)
-	{
-		ft_putendl("i");
-		if ((char *)lst->content)
-			ft_putendl((char *)lst->content);
-		else
-			ft_putendl("NO TOKEN-------------");
-		lst = lst->next;
-	}
 }
 
 int ft_print_token(t_list **token_lst)
@@ -129,14 +44,14 @@ int ft_print_token(t_list **token_lst)
 	return (0);
 }
 
-void data_check_is_token_operator(t_data *data, t_list **token_list, unsigned int type, char *str, int pos)
+void data_check_is_token_operator(t_list **token_list, unsigned int type, char *str, int pos)
 {
 	t_token_struct *token;
 
-	(void)data;
 	token = NULL;
 	if (str)
 	{
+		data_check_is_token_cmd(token_list, line_str, prev, (i - prev));
 		token = ft_memalloc(sizeof(t_token_struct));
 		token->type = type;
 		token->token_name = ft_strdup(str);
@@ -148,7 +63,7 @@ void data_check_is_token_operator(t_data *data, t_list **token_list, unsigned in
 	return;
 }
 
-void data_check_is_token_cmd(t_data *data, t_list **token_list, char *line_str, int start, int size)
+void data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size)
 {
 	t_token_struct *cmd_token;
 	char *str;
@@ -158,15 +73,72 @@ void data_check_is_token_cmd(t_data *data, t_list **token_list, char *line_str, 
 	cmd_token = NULL;
 	if (line_str)
 	{
-		str = ft_strsub(line_str, start, size);
-		if (str)
-			data_check_is_token_operator(data, token_list, TYPE_CMD, ft_strtrim(str), 0);
-		else
-			ft_print_err("Error token cmd");
+		ft_putendl("START-------------");
+		ft_putnbr(start);
+		ft_putendl("\nAND-------------");
+		ft_putnbr(size);
+		ft_putendl("\nEND-------------");
+		str = (start > 0) ? ft_strsub(line_str, start, size) : ft_strdup(line_str);
+		str ? data_check_is_token_operator(data, token_list, TYPE_CMD, ft_strtrim(str), 0) : ft_print_err("Error token cmd");
 	}
 	ft_strdel(&str);
 	str = NULL;
 	return;
+}
+
+// char *ft_is_redirection_sentence(char *line_str, int i)
+// {
+// 	int size;
+// 	int st;
+
+// 	size = 0;
+// 	while (line_str[i] && line_str[i - 1] != ' ')
+// 		i--;
+// 	st = i;
+// 	while (line_str[i] && line_str[i + 1] == ' ')
+// 	{
+// 		i++;
+// 		size++;
+// 	}
+// 	return (ft_strsub(line_str, st, size));
+// }
+
+int ft_is_redirection(t_data *data, t_list **token_list, char *line_str, int i)
+{
+	int size;
+	unsigned int type;
+
+	size = i;
+	while (ft_isdigit(line_str[i]))
+		i++;
+	if (line_str[i] == '>' && line_str[i] != '>')
+		type = TYPE_REDIRECTION_LESSGREAT;	
+	else if (line_str[i] == '<' && line_str[i] != '<')
+		type = TYPE_REDIRECTION_LESSGREAT;
+	else if (line_str[i] == '>' && line_str[i + 1] == '&')
+	{
+		type = TYPE_REDIRECTION_GREATAND;
+		i += 2;
+	}
+	else if (line_str[i] == '<' && line_str[i + 1] == '&')
+	{
+		type = TYPE_REDIRECTION_LESSAND;
+		i += 2;
+	}
+	else if (line_str[i] == '>' && line_str[i + 1] == '>')
+	{
+		type = TYPE_REDIRECTION_DGREAT;
+		i += 2;
+	}
+	else if (line_str[i] == '<' && line_str[i + 1] == '<')
+	{	
+		type = TYPE_REDIRECTION_DLESS;
+		i += 2;
+	}
+	while (ft_isdigit(line_str[i]) || line_str[i] == '-')
+		i++;
+	data_check_is_token_operator(token_list, type, ft_strsub(line_str, size, i - size), i);
+	return (i);
 }
 
 void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
@@ -182,38 +154,24 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 	{
 		if (line_str[i] == '"' || line_str[i] == '\'')
 			i += ft_is_caract_quote(&line_str[i]);
-		if (line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<')
+		else if (line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<' || ft_isdigit(line_str[i]))
 		{
-			data_check_is_token_cmd(data, token_list, line_str, prev, (i - prev));
+			prev = (i + 1);
 			if (line_str[i] == ';')
-				data_check_is_token_operator(data, token_list, TYPE_SEMICOLUMN, ";", i);
+				data_check_is_token_operator(token_list, TYPE_DSEMI, ";", i);				
 			else if (line_str[i] == '&' && line_str[i + 1] == '&')
 			{
-				data_check_is_token_operator(data, token_list, TYPE_AND, "&&", i);
+				data_check_is_token_operator(token_list, TYPE_AND_IF, "&&", i);
 				i += 2;
 			}
 			else if (line_str[i] == '|' && line_str[i + 1] == '|')
 			{
-				data_check_is_token_operator(data, token_list, TYPE_OR, "||", i);
+				data_check_is_token_operator(token_list, TYPE_OR_IF, "||", i);
 				i += 2;
 			}
 			else if (line_str[i] == '|' && line_str[i + 1] != '|')
-				data_check_is_token_operator(data, token_list, TYPE_PIPE, "|", i);
-			else if (line_str[i] == '>' && line_str[i] != '>')
-				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, ">", i);
-			else if (line_str[i] == '>' && line_str[i + 1] == '>')
-			{
-				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, ">>", i);
-				i += 2;
-			}
-			else if (line_str[i] == '<' && line_str[i] != '<')
-				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, "<", i);
-			else if (line_str[i] == '<' && line_str[i + 1] == '<')
-			{
-				data_check_is_token_operator(data, token_list, TYPE_REDIRECTION, "<<", i);
-				i += 2;
-			}
-			prev = (i + 1);
+				data_check_is_token_operator(token_list, TYPE_PIPE, "|", i);
+			i = ft_is_redirection(data, token_list, line_str, i);
 		}
 		i++;
 	}
@@ -268,4 +226,22 @@ t_list *data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 // 	if (type == TYPE_PIPE || type == TYPE_SEMICOLUMN || type == TYPE_AND || type == TYPE_OR)
 // 		lst = ft_lstnew_node_type(((t_sep *)node), sizeof(t_sep), type);
 // 	return
+// }
+
+// void ft_print_list_token(t_list *token_list)
+// {
+// 	t_list *lst;
+
+// 	lst = NULL;
+// 	lst = token_list;
+// 	write(1, "\n", 1);
+// 	while (lst)
+// 	{
+// 		ft_putendl("i");
+// 		if ((char *)lst->content)
+// 			ft_putendl((char *)lst->content);
+// 		else
+// 			ft_putendl("NO TOKEN-------------");
+// 		lst = lst->next;
+// 	}
 // }
