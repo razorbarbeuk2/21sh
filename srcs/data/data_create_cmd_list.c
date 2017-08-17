@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_cmd_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/14 22:34:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/17 17:57:31 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,18 @@ int ft_print_token(t_list **token_lst)
 	return (0);
 }
 
-void data_check_is_token_operator(t_list **token_list, unsigned int type, char *str, int pos)
+
+
+void data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos)
 {
 	t_token_struct *token;
 
 	token = NULL;
-	if (str)
+	if (line_str)
 	{
-		data_check_is_token_cmd(token_list, line_str, prev, (i - prev));
 		token = ft_memalloc(sizeof(t_token_struct));
 		token->type = type;
-		token->token_name = ft_strdup(str);
+		token->token_name = ft_strdup(line_str);
 		token->pos = pos;
 		ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));
 	}
@@ -68,18 +69,19 @@ void data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int
 	t_token_struct *cmd_token;
 	char *str;
 
-	(void)data;
 	str = NULL;
 	cmd_token = NULL;
 	if (line_str)
 	{
-		ft_putendl("START-------------");
-		ft_putnbr(start);
-		ft_putendl("\nAND-------------");
-		ft_putnbr(size);
-		ft_putendl("\nEND-------------");
+		// ft_putendl("START-------------");
+		// ft_putnbr(start);
+		// ft_putendl("\nAND-------------");
+		// ft_putnbr(size);
+		// ft_putendl("\nEND-------------");
+		// ft_putendl(line_str);
+		// ft_putendl("\nEND TOKEN-------------");
 		str = (start > 0) ? ft_strsub(line_str, start, size) : ft_strdup(line_str);
-		str ? data_check_is_token_operator(data, token_list, TYPE_CMD, ft_strtrim(str), 0) : ft_print_err("Error token cmd");
+		str ? data_check_is_token_operator(token_list, TYPE_CMD, ft_strtrim(str), 0) : ft_print_err("Error token cmd");
 	}
 	ft_strdel(&str);
 	str = NULL;
@@ -103,11 +105,11 @@ void data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int
 // 	return (ft_strsub(line_str, st, size));
 // }
 
-int ft_is_redirection(t_data *data, t_list **token_list, char *line_str, int i)
+int ft_is_redirection(t_list **token_list, char *line_str, int i)
 {
 	int size;
 	unsigned int type;
-
+	
 	size = i;
 	while (ft_isdigit(line_str[i]))
 		i++;
@@ -144,9 +146,13 @@ int ft_is_redirection(t_data *data, t_list **token_list, char *line_str, int i)
 void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 {
 	int i;
+	int offset;
+	int set_offset;
 	int prev;
 
 	i = 0;
+	offset = 0;
+	set_offset = 0;
 	prev = 0;
 	(void)data;
 	write(1, "\n", 1);
@@ -157,6 +163,7 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 		else if (line_str[i] == '&' || line_str[i] == ';' || line_str[i] == '|' || line_str[i] == '>' || line_str[i] == '<' || ft_isdigit(line_str[i]))
 		{
 			prev = (i + 1);
+			data_check_is_token_cmd(token_list, line_str, i, offset);
 			if (line_str[i] == ';')
 				data_check_is_token_operator(token_list, TYPE_DSEMI, ";", i);				
 			else if (line_str[i] == '&' && line_str[i + 1] == '&')
@@ -171,11 +178,13 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 			}
 			else if (line_str[i] == '|' && line_str[i + 1] != '|')
 				data_check_is_token_operator(token_list, TYPE_PIPE, "|", i);
-			i = ft_is_redirection(data, token_list, line_str, i);
+			i = ft_is_redirection(token_list, line_str, i);
+			offset = 0;
 		}
 		i++;
+		offset++;
 	}
-	data_check_is_token_cmd(data, token_list, line_str, prev, (i - prev));
+	data_check_is_token_cmd(token_list, line_str, prev, (i - prev));
 	ft_print_token(token_list);
 	return;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/07 19:34:19 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/17 17:53:46 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,8 +171,15 @@ int 				add_sentence_historic_node_to_list(t_data *data);
 int 				add_sentence_historic_list_to_file(t_data *data);
 void 				write_sentence_in_historic_file(t_data *data, char *cmd, int *nb_line, int opt);
 int					ft_move_up_down_historic(t_data *data, int result);
-/*PARSE_LEXER*/
+/*LEXER*/
 int 				parse_quote_and_double_quote(t_data *data);
+t_list 				*data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
+void 				ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
+int 				ft_is_redirection(t_list **token_list, char *line_str, int i);
+void 				data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
+
+
+
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next, int *pfd);
 int					exec_cmd_node(t_data *data, t_list *cur);
