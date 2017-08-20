@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/14 14:25:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/19 19:57:17 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,36 +93,6 @@ int 	data_exec_cmd(t_data *data)
 		lst = lst->next;
 	}
 	return (1);
-}
-
-t_list	*ft_check_token_separate(t_data *data)
-{
-	int 	i;
-	int 	j;
-	char 	*tmp;
-	t_list 	*cmd_sep;
-
-	i = 0;
-	j = 0;
-	cmd_sep = (t_list *)ft_memalloc(1 * sizeof(t_list));
-	while (data->entry->line_str[i])
-	{
-		if (data->entry->line_str[i] == ';')
-		{
-			tmp = (char *)ft_memalloc(((i - j) + 1) * sizeof(char));
-			ft_strncpy(tmp, data->entry->line_str, (i - j - 1));
-			ft_putendl("\nSTR------------");
-			ft_putnbr(j);
-			ft_putendl(tmp);
-			ft_putendl("-----------------");
-			ft_lstadd_back(&cmd_sep, ft_lstnew_node_type(tmp, ft_strlen(tmp), TYPE_DSEMI));
-			j = ft_strlen(tmp);
-			ft_strdel(&tmp);
-			tmp = NULL;
-		}
-		i++;
-	}
-	return (cmd_sep);
 }
 
 void 	exec_cmd_character(t_data *data)

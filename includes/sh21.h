@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/17 17:53:46 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/19 19:55:23 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char				*ft_strcpy_data(char *dst, const char *str);
 int					ft_count_word_spec_caract(char *line_str, char *caract);
 int					len_word_caract(char *line_str, char *caract);
 /*TOOLS LIST CREATE NODE*/
-t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
+//t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
 /*INIT*/
 void				init_env(t_list **env_lst);
 int					init_paths_home_env(t_data *data);
@@ -154,7 +154,7 @@ void				ft_add_at(t_list **lst, char result);
 /*DATA*/
 char 				**data_clean_to_tab(t_data *data, char *str);
 char 				*convert_data_lst_tab(t_data *data);
-t_list		*data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
+t_list				*data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
 int 				data_check_quote(char c);
 int 				data_check_caract(char c);
 int 				data_check_spec_caract(char c, char *caract);
