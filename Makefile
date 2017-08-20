@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
+#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/07/19 17:19:35 by RAZOR            ###   ########.fr        #
+#    Updated: 2017/08/20 17:49:46 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRC_NAME 	=	init/init_data.c \
 				init/init_env.c \
 				init/init_term.c \
 				init/term_reset.c \
-				init/init_cmd.c \
 				builtins/builtins_init.c \
 				builtins/builtins_env.c \
 				builtins/builtins_set_unset_env.c \
@@ -42,6 +41,9 @@ SRC_NAME 	=	init/init_data.c \
 				text_line/motion_cursor_RST.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
+				tokens/token_check_init.c \
+				tokens/token_check_redir.c \
+				tokens/token_create_data_type.c \
 				data/data_str_check_opt_cmd.c \
 				data/data_str_check_quote_cmd.c \
 				data/data_str_clean_caract.c \

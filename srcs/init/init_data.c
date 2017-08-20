@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/11 18:26:04 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:31:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int init_data_env_cmd(t_data *data)
 {
 	data->env = NULL;
 	data->env_cpy = NULL;
-	data->cmd = NULL;
+	data->token_list = NULL;
 	data->entry = NULL;
 	data->line = NULL;
 	data->sel = NULL;

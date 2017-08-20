@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   data_sep_is_caract.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/07 19:37:33 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 16:49:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+int data_check_quote_caract(char *str, int *d)
+{
+	int i;
+
+	i = 1;
+	while (str[i])
+	{
+		if(data_check_quote(str[i]))
+			break ;
+		i++;
+	}
+	(*d) += i;
+	return (i);
+}
 
 int data_check_quote(char c)
 {

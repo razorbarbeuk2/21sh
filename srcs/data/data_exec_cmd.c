@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/19 19:57:17 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:47:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int 	data_exec_cmd(t_data *data)
 	t_list *lst;
 
 	lst = NULL;
-	lst = data->cmd;
+	lst = data->token_list;
 	while (lst)
 	{
 		// if (lst->type == TYPE_CMD)
@@ -97,13 +97,6 @@ int 	data_exec_cmd(t_data *data)
 
 void 	exec_cmd_character(t_data *data)
 {
-	char **tmp;
-	char *caract;
-	int i;
-
-	i = 0;
-	tmp = NULL;
-	caract = NULL;
 	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
 	if (data->entry->line_str)

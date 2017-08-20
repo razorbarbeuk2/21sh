@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/11 13:50:28 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:52:55 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int 	free_destruction_final(t_data *data)
 		ft_lstdel(&data->env_cpy, &ft_free_env);
 		data->env_cpy = NULL;
 	}
-	if (data->cmd)
-	{
-		ft_lstdel_cmd(&data->cmd);
-		data->cmd = NULL;
-	}
+	// if (data->cmd)
+	// {
+	// 	ft_lstdel_cmd(&data->cmd);
+	// 	data->cmd = NULL;
+	// }
 	if (data->historic)
 	{
 		data->historic = free_data_historic(data->historic);

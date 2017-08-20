@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/04 14:38:04 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:48:13 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+int ft_print_token(t_list **token_lst)
+{
+	t_list *lst;
+	t_token_struct *token;
+
+	lst = NULL;
+	lst = (*token_lst);
+	token = NULL;
+	while (lst)
+	{
+		token = (t_token_struct *)lst->content;
+		if (token)
+		{
+			ft_putendl("START PRINT---------------");
+			ft_putendl(((t_token_struct *)lst->content)->token_name);
+			ft_putendl("END PRINT---------------");
+		}
+		else
+			ft_putendl("FUCK TOKEN---------------");
+		lst = lst->next;
+		token = NULL;
+	}
+	return (0);
+}
 
 void print_tab(t_data *data, char **str_tab)
 {
@@ -38,78 +63,78 @@ void count_list_cmd(t_data *data, t_list *lst)
 	return;
 }
 
-void print_list_node_cmd(t_data *data, t_list *lst)
-{
-	t_cmd *cmd_lst;
-	int i;
+// void print_list_node_cmd(t_data *data, t_list *lst)
+// {
+// 	t_cmd *cmd_lst;
+// 	int i;
 
-	i = 0;
-	cmd_lst = NULL;
-	cmd_lst = (t_cmd *)lst->content;
-	if (!cmd_lst)
-		ft_putstr_fd("FUCK", data->term->tty);
-	if (cmd_lst->cmd)
-	{
-		ft_putstr_fd("cmd :", data->term->tty);
-		ft_putstr_fd(cmd_lst->cmd, data->term->tty);
-		write(1, "\n", 1);
-	}
-	if (cmd_lst->opt)
-	{
-		ft_putstr_fd("opt :", data->term->tty);
-		ft_putstr_fd(cmd_lst->opt, data->term->tty);
-		write(1, "\n", 1);
-	}
-	if (cmd_lst->files)
-	{
-		while (cmd_lst->files[i])
-		{
-			ft_putstr_fd("file :", data->term->tty);
-			ft_putstr_fd(cmd_lst->files[i], data->term->tty);
-			write(1, "\n", 1);
-			i++;
-		}
-	}
-}
+// 	i = 0;
+// 	cmd_lst = NULL;
+// 	cmd_lst = (t_cmd *)lst->content;
+// 	if (!cmd_lst)
+// 		ft_putstr_fd("FUCK", data->term->tty);
+// 	if (cmd_lst->cmd)
+// 	{
+// 		ft_putstr_fd("cmd :", data->term->tty);
+// 		ft_putstr_fd(cmd_lst->cmd, data->term->tty);
+// 		write(1, "\n", 1);
+// 	}
+// 	if (cmd_lst->opt)
+// 	{
+// 		ft_putstr_fd("opt :", data->term->tty);
+// 		ft_putstr_fd(cmd_lst->opt, data->term->tty);
+// 		write(1, "\n", 1);
+// 	}
+// 	if (cmd_lst->files)
+// 	{
+// 		while (cmd_lst->files[i])
+// 		{
+// 			ft_putstr_fd("file :", data->term->tty);
+// 			ft_putstr_fd(cmd_lst->files[i], data->term->tty);
+// 			write(1, "\n", 1);
+// 			i++;
+// 		}
+// 	}
+// }
 
-void print_list_node_sep(t_data *data, t_list *lst)
-{
-	t_sep *sep;
+// void print_list_node_sep(t_data *data, t_list *lst)
+// {
+// 	t_sep *sep;
 
-	sep = NULL;
-	sep = (t_sep *)lst->content;
-	if (!sep->separate)
-		ft_putstr_fd("FUCK", data->term->tty);
-	if (sep->separate)
-	{
-		ft_putstr_fd("sep :", data->term->tty);
-		ft_putstr_fd(sep->separate, data->term->tty);
-		write(1, "\n", 1);
-	}
-}
+// 	sep = NULL;
+// 	sep = (t_sep *)lst->content;
+// 	if (!sep->separate)
+// 		ft_putstr_fd("FUCK", data->term->tty);
+// 	if (sep->separate)
+// 	{
+// 		ft_putstr_fd("sep :", data->term->tty);
+// 		ft_putstr_fd(sep->separate, data->term->tty);
+// 		write(1, "\n", 1);
+// 	}
+// }
 
-void print_list_cmd(t_data *data, t_list *lst)
-{
-	write(1, "\n", 1);
-	while (lst)
-	{
-		if (lst->type == TYPE_CMD)
-		{
-			ft_putstr_fd("TYPE_CMD : ", data->term->tty);
-			ft_putnbr_fd(TYPE_CMD, data->term->tty);
-			write(1, "\n", 1);
-			print_list_node_cmd(data, lst);
-		}
-		if (lst->type == TYPE_PIPE)
-		{
-			ft_putstr_fd("TYPE_PIPE : ", data->term->tty);
-			ft_putnbr_fd(TYPE_PIPE, data->term->tty);
-			write(1, "\n", 1);
-			print_list_node_sep(data, lst);
-		}
-		lst = lst->next;
-	}
-}
+// void print_list_cmd(t_data *data, t_list *lst)
+// {
+// 	write(1, "\n", 1);
+// 	while (lst)
+// 	{
+// 		if (lst->type == TYPE_CMD)
+// 		{
+// 			ft_putstr_fd("TYPE_CMD : ", data->term->tty);
+// 			ft_putnbr_fd(TYPE_CMD, data->term->tty);
+// 			write(1, "\n", 1);
+// 			print_list_node_cmd(data, lst);
+// 		}
+// 		if (lst->type == TYPE_PIPE)
+// 		{
+// 			ft_putstr_fd("TYPE_PIPE : ", data->term->tty);
+// 			ft_putnbr_fd(TYPE_PIPE, data->term->tty);
+// 			write(1, "\n", 1);
+// 			print_list_node_sep(data, lst);
+// 		}
+// 		lst = lst->next;
+// 	}
+// }
 
 
 /*FAIRE ATTENTION*/

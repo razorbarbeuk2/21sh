@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 18:35:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/03 18:14:44 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:52:28 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@
 // 	return (0);
 // }
 
-int		exec_cmd_node(t_data *data, t_list *cur)
-{
-	char **exec_line;
+// int		exec_cmd_node(t_data *data, t_list *cur)
+// {
+// 	char **exec_line;
 
-	exec_line = NULL;
-	exec_line = ((t_cmd *)cur->content)->exec_cmd;
-	if (exec_line)
-		parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd);
-	return (0);
-}
+// 	exec_line = NULL;
+// 	// exec_line = ((t_cmd *)cur->content)->exec_cmd;
+// 	if (exec_line)
+// 		parse_line_builtins(data, &data->env, ((t_cmd *)cur->content)->exec_cmd);
+// 	return (0);
+// }

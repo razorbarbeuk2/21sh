@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/19 19:55:23 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:40:21 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,6 @@ typedef struct		s_fd
 	int				stdout;
 	int				stderr;
 }					t_fd;
-
-typedef struct		s_sep
-{
-	char 			*separate;
-}					t_sep;
-
-typedef struct		s_cmd
-{
-	char 			*cmd;
-	char 			*opt;
-	char 			**files;
-	int 			_select_cmd;
-	char			**exec_cmd;
-	t_fd			fds;
-}					t_cmd;
 
 /*TOOLS*/
 int					get_tab_to_lst(t_list **data_env, char **environ);
@@ -85,8 +70,6 @@ char 				*trim_str(char *str);
 char				*ft_strcpy_data(char *dst, const char *str);
 int					ft_count_word_spec_caract(char *line_str, char *caract);
 int					len_word_caract(char *line_str, char *caract);
-/*TOOLS LIST CREATE NODE*/
-//t_list				*ft_lstnew_node_type(void const *content, size_t content_size, int t);
 /*INIT*/
 void				init_env(t_list **env_lst);
 int					init_paths_home_env(t_data *data);
@@ -94,8 +77,6 @@ int					init_struct(t_data *data);
 int 				init_prompt(t_data *data);
 t_select 			*init_data_sel();
 t_entry 			*init_data_entry();
-t_cmd 				*init_t_cmd();
-t_sep 				*init_t_sep();
 t_historic 			*init_data_hist();
 t_quote 			*init_data_quotes();
 /*ENV*/
@@ -114,6 +95,7 @@ int					get_exe_cmd(t_data *data, char **path, char **cmd, t_list *env_lst);
 void				print_error(char *str);
 void				print_cmd_not_found(char *str);
 void				print_list_cmd(t_data *data, t_list *lst);
+int					print_parse_error(char *str);
 /*TERM*/
 int					term_init(t_term *term);
 void				termios_init(struct	termios *term);
@@ -154,13 +136,13 @@ void				ft_add_at(t_list **lst, char result);
 /*DATA*/
 char 				**data_clean_to_tab(t_data *data, char *str);
 char 				*convert_data_lst_tab(t_data *data);
-t_list				*data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
+int 				data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
+/*IS CARACT*/
+int					data_check_quote_caract(char *str, int *d);
 int 				data_check_quote(char c);
 int 				data_check_caract(char c);
 int 				data_check_spec_caract(char c, char *caract);
 void				data_create_list_struct(t_data *data, char **line_str, void **node, int *t);
-int 				data_create_node_cmd(char *line_str, t_cmd **cmd_node, char **exec_cmd);
-char				*data_str_check_opt_cmd(t_cmd *cmd, char *line_str);
 int 				ft_is_caract_(char *str, char *c);
 /*HISTORY*/
 int					data_init_history_file(t_data *data);
@@ -172,14 +154,13 @@ int 				add_sentence_historic_list_to_file(t_data *data);
 void 				write_sentence_in_historic_file(t_data *data, char *cmd, int *nb_line, int opt);
 int					ft_move_up_down_historic(t_data *data, int result);
 /*LEXER*/
-int 				parse_quote_and_double_quote(t_data *data);
-t_list 				*data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
 void 				ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
+void 				data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
+int 				data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
+int 				parse_quote_and_double_quote(t_data *data);
 int 				ft_is_redirection(t_list **token_list, char *line_str, int i);
 void 				data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
-
-
-
+int 				ft_error_token(unsigned int type);
 /*EXEC*/
 int					exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next, int *pfd);
 int					exec_cmd_node(t_data *data, t_list *cur);
@@ -189,6 +170,7 @@ void				print_lst_line(t_data *data, t_list *lst);
 void 				print_list_node_cmd(t_data *data, t_list *lst);
 void 				print_tab(t_data *data, char **str_tab);
 void 				count_list_cmd(t_data *data, t_list *lst);
+int 				ft_print_token(t_list **token_lst);
 /*CLEAN CARACT*/
 char 				**data_split_to_tab(t_data *data, char *line_str, char *caract);
 //char 				**data_split_to_tab(char *line_str, char *caract);

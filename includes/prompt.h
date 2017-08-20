@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/14 14:11:54 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 16:32:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum		e_enum_exec
 					TYPE_PIPE,
 					TYPE_AND_IF,
 					TYPE_OR_IF,
+					TYPE_ERROR_PARSE,
 					TYPE_FINISH
 }					t_enum_exec;
 

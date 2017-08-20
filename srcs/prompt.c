@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/07/19 12:57:01 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/20 17:55:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		get_reset_prompt(t_data *data)
 {
 	ft_putchar_fd('\n', data->term->tty);
 	free_cursor(data);
-	if (data->cmd)
+	if (data->token_list)
 	{
-		ft_lstdel_cmd(&data->cmd);
-		data->cmd = NULL;
+		ft_lstdel_token(&data->token_list);// A faire 
+		data->token_list = NULL;
 	}
 	if (!(data->sel = init_data_sel()))
 		return (-1);
