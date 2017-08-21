@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/20 16:32:45 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/21 16:20:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,37 @@ typedef enum		e_enum_quote
 					QUOTE_DOUBLE = 2
 }					t_enum_quote;
 
-typedef enum		e_enum_exec
+enum				e_enum_exec
 {
-					TYPE_CMD,
 					TYPE_DSEMI,
+					TYPE_AND_IF,
+					TYPE_OR_IF,
+					TYPE_PIPE,
 					TYPE_REDIRECTION_LESSGREAT,
 					TYPE_REDIRECTION_GREATAND,
 					TYPE_REDIRECTION_LESSAND,
 					TYPE_REDIRECTION_DGREAT,
 					TYPE_REDIRECTION_DLESS,
-					TYPE_PIPE,
-					TYPE_AND_IF,
-					TYPE_OR_IF,
-					TYPE_ERROR_PARSE,
-					TYPE_FINISH
-}					t_enum_exec;
+					TYPE_CMD,
+					TYPE_FINISH,
+					TYPE_ERROR_PARSE
+};
+
+typedef struct 		s_token_node
+{
+	t_list			*left;
+	t_list			*right;
+}					t_token_node;
+
+typedef struct 		s_token_tree
+{
+	t_list			*head;
+	t_list			*end;
+}					t_token_tree;
 
 typedef struct 		s_token_struct
 {
-	t_enum_exec		type;
+	enum			type;
 	char 			*token_name;
 	int 			pos;
 	

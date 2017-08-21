@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/20 17:40:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/21 15:42:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ void				ft_free_env(void *tmp, size_t tmp_size);
 void				ft_free_tab_path(char **oldpath, char **path);
 void				ft_free_node(void *tmp, size_t tmp_size);
 void				ft_free_cmd(void *tmp, size_t tmp_size);
-void				ft_lstdel_cmd(t_list **alst);
+void				ft_lstdel_token(t_list **token_list);
 int     			free_cursor(t_data *data);
 int 				free_destruction_final(t_data *data);
 void 				ft_free_pos(t_select *sel);
+void				ft_free_token(t_token_struct *token);
 t_select			*free_data_select(t_select *sel);
 t_entry				*free_data_entry(t_entry *entry);
 t_historic			*free_data_historic(t_historic *historic);

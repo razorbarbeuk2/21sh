@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/20 17:52:55 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/21 14:15:54 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int 	free_destruction_final(t_data *data)
 		ft_lstdel(&data->env_cpy, &ft_free_env);
 		data->env_cpy = NULL;
 	}
-	// if (data->cmd)
-	// {
-	// 	ft_lstdel_cmd(&data->cmd);
-	// 	data->cmd = NULL;
-	// }
+	if (data->token_list)
+	{
+		ft_lstdel_token(&data->token_list);
+		data->token_list = NULL;
+	}
 	if (data->historic)
 	{
 		data->historic = free_data_historic(data->historic);

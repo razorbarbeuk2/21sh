@@ -3,50 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/21 12:20:01 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/21 16:25:00 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int dup_it_child(t_data *data, t_list *lst, int *save_fd, int p[2])
+// int dup_it_child(t_data *data, t_list *lst, int *save_fd, int p[2])
+// {
+// 	(void)save_fd;
+// 	close(1);
+// 	close(p[1]);
+// 	dup2(p[0], STDIN_FILENO);
+// 	close(p[0]);
+// 	return (exec_cmd_node(data, lst));
+// }
+
+// int dup_it_dad(t_data *data, t_list *lst, int *save_fd, int p[2])
+// {
+// 	(void)save_fd;
+// 	close(0);
+// 	close(p[0]);
+// 	dup2(p[1], STDOUT_FILENO);
+// 	close(p[1]);
+// 	return (exec_cmd_node(data, lst));
+// }
+
+// int 	data_exec_cmd(t_data *data)
+// {
+// 	t_list *lst;
+
+// 	lst = NULL;
+// 	lst = data->token_list;
+// 	while (lst)
+// 	{
+// 		// if (lst->type == TYPE_CMD)
+// 		// 	ft_putendl((char *)(t_cmd *)lst->content->cmd);
+// 		// if (lst->type == TYPE_PIPE)
+// 		// 	ft_putendl((t_cmd *)lst->content->separate);
+// 		lst = lst->next;
+// 	}
+// 	return (1);
+// }
+
+int 	ft_count_enum(void *e, unsigned int START, unsigned int END)
 {
-	(void)save_fd;
-	close(1);
-	close(p[1]);
-	dup2(p[0], STDIN_FILENO);
-	close(p[0]);
-	return (exec_cmd_node(data, lst));
+	enum t;
+
+	t = enum(*e);
+	t = START;
+	while((unsigned int)(*e) != END)
+		(unsigned int)(*e)++;
+	return ((*e));
 }
 
-int dup_it_dad(t_data *data, t_list *lst, int *save_fd, int p[2])
+int 	data_construct_token_tree(t_data *data)
 {
-	(void)save_fd;
-	close(0);
-	close(p[0]);
-	dup2(p[1], STDOUT_FILENO);
-	close(p[1]);
-	return (exec_cmd_node(data, lst));
+	(void)data;
+	return (0);
 }
 
-int 	data_exec_cmd(t_data *data)
+void 	data_construct_token_priority_node(void *tab_priority, unsigned int tok)
 {
-	t_list *lst;
+	
+}
 
-	lst = NULL;
-	lst = data->token_list;
-	while (lst)
+void 	data_construct_token_priority_tree(t_data *data)
+{
+	(void)data;
+	struct s_token_priority
 	{
-		// if (lst->type == TYPE_CMD)
-		// 	ft_putendl((char *)(t_cmd *)lst->content->cmd);
-		// if (lst->type == TYPE_PIPE)
-		// 	ft_putendl((t_cmd *)lst->content->separate);
-		lst = lst->next;
-	}
-	return (1);
+		unsigned int token;
+		int 		 priority;
+	} 	   t_token_priority;
+
+	enum e_enum_exec tok;
+	t_token_priority *tab_priority;
+	int 		count;
+	int 		i;
+	
+	count = 0;
+	count = ft_count_enum(&tok, TYPE_DSEMI, TYPE_FINISH);
+	// while(tab_priority[i])
+	// {
+	// 	if (tok == TYPE_DSEMI)
+	// 	{
+	// 		tab_priority[i]->token = tok;
+	// 		tab_priority[i]->priority = 1;
+	// 	}
+	// 	else if (tok == TYPE_AND_IF || tok == TYPE_OR_IF)
+	// 	{
+	// 		tab_priority[i]->token = tok;
+	// 		tab_priority[i]->priority = 1;
+	// 	}
+			
+	// }
+	ft_putendl("\nHELLO ENUM -----------------");
+	ft_putnbr(count);
+	ft_putendl("\nBYE ENUM -------------------");
+	return ;
 }
 
 void 	exec_cmd_character(t_data *data)
@@ -58,12 +116,20 @@ void 	exec_cmd_character(t_data *data)
 		if (!add_sentence_historic_node_to_list(data))
 			print_error("historic error\n");
 		data_check_str_list_struct_cmd_loop(data, data->entry->line_str);
-		data_exec_cmd(data);
+		data_construct_token_priority_tree(data);
+		data_construct_token_tree(data);
+		//data_exec_cmd(data);
 	}
 	if (!get_reset_prompt(data))
 		print_error("Prompt error\n");
 	return;
 }
+
+
+
+
+
+ 
 
 // ft_putendl("NEXT ---------------------");
 // ft_putendl(((t_cmd *)lst->next->content)->exec_cmd[0]);
