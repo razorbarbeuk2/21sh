@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/20 17:55:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/20 22:34:36 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		get_reset_prompt(t_data *data)
 	free_cursor(data);
 	if (data->token_list)
 	{
-		ft_lstdel_token(&data->token_list);// A faire 
+		ft_lstdel_token(&data->token_list);
 		data->token_list = NULL;
 	}
 	if (!(data->sel = init_data_sel()))
