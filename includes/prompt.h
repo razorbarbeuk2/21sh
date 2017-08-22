@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/21 16:20:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/22 18:00:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,24 @@ typedef struct 		s_token_node
 
 typedef struct 		s_token_tree
 {
+	t_list			*tree;
 	t_list			*head;
 	t_list			*end;
 }					t_token_tree;
 
 typedef struct 		s_token_struct
 {
-	enum			type;
-	char 			*token_name;
-	int 			pos;
+	enum e_enum_exec	type;
+	char 				*token_name;
+	int 				pos;
 	
 }  			 		t_token_struct;
+
+struct 				s_token_priority
+{
+	unsigned int 	token;
+	int 			priority;
+};
 
 typedef enum		e_enum_cursor
 {

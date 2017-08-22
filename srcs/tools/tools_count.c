@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_count.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 14:48:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/19 19:52:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/22 14:38:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,9 @@ char	*ft_strcpy_data(char *dst, const char *str)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+int 	ft_count_enum(unsigned int START, unsigned int END)
+{
+	return ((size_t)(END - START));
 }

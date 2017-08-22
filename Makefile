@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/08/20 17:49:46 by gbourson         ###   ########.fr        #
+#    Updated: 2017/08/22 17:23:49 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_NAME 	=	init/init_data.c \
 				tokens/token_check_init.c \
 				tokens/token_check_redir.c \
 				tokens/token_create_data_type.c \
+				tokens/token_define_priority_tab.c \
 				data/data_str_check_opt_cmd.c \
 				data/data_str_check_quote_cmd.c \
 				data/data_str_clean_caract.c \

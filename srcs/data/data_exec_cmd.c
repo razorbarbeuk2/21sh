@@ -6,11 +6,39 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/21 16:25:00 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/22 18:04:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void data_construct_token_tree(data);
+{
+	t_token_tree *tree;
+
+	tree = NULL;
+	tree = ft_memalloc(sizeof(t_token_tree));
+	
+	
+}
+
+void exec_cmd_character(t_data *data)
+{
+	parse_quote_and_double_quote(data);
+	data->entry->line_str = convert_data_lst_tab(data);
+	if (data->entry->line_str)
+	{
+		if (!add_sentence_historic_node_to_list(data))
+			print_error("historic error\n");
+		data_check_str_list_struct_cmd_loop(data, data->entry->line_str);
+		data_construct_token_priority_tree(data);
+		data_construct_token_tree(data);
+		//data_exec_cmd(data);
+	}
+	if (!get_reset_prompt(data))
+		print_error("Prompt error\n");
+	return;
+}
 
 // int dup_it_child(t_data *data, t_list *lst, int *save_fd, int p[2])
 // {
@@ -48,88 +76,6 @@
 // 	}
 // 	return (1);
 // }
-
-int 	ft_count_enum(void *e, unsigned int START, unsigned int END)
-{
-	enum t;
-
-	t = enum(*e);
-	t = START;
-	while((unsigned int)(*e) != END)
-		(unsigned int)(*e)++;
-	return ((*e));
-}
-
-int 	data_construct_token_tree(t_data *data)
-{
-	(void)data;
-	return (0);
-}
-
-void 	data_construct_token_priority_node(void *tab_priority, unsigned int tok)
-{
-	
-}
-
-void 	data_construct_token_priority_tree(t_data *data)
-{
-	(void)data;
-	struct s_token_priority
-	{
-		unsigned int token;
-		int 		 priority;
-	} 	   t_token_priority;
-
-	enum e_enum_exec tok;
-	t_token_priority *tab_priority;
-	int 		count;
-	int 		i;
-	
-	count = 0;
-	count = ft_count_enum(&tok, TYPE_DSEMI, TYPE_FINISH);
-	// while(tab_priority[i])
-	// {
-	// 	if (tok == TYPE_DSEMI)
-	// 	{
-	// 		tab_priority[i]->token = tok;
-	// 		tab_priority[i]->priority = 1;
-	// 	}
-	// 	else if (tok == TYPE_AND_IF || tok == TYPE_OR_IF)
-	// 	{
-	// 		tab_priority[i]->token = tok;
-	// 		tab_priority[i]->priority = 1;
-	// 	}
-			
-	// }
-	ft_putendl("\nHELLO ENUM -----------------");
-	ft_putnbr(count);
-	ft_putendl("\nBYE ENUM -------------------");
-	return ;
-}
-
-void 	exec_cmd_character(t_data *data)
-{
-	parse_quote_and_double_quote(data);
-	data->entry->line_str = convert_data_lst_tab(data);
-	if (data->entry->line_str)
-	{
-		if (!add_sentence_historic_node_to_list(data))
-			print_error("historic error\n");
-		data_check_str_list_struct_cmd_loop(data, data->entry->line_str);
-		data_construct_token_priority_tree(data);
-		data_construct_token_tree(data);
-		//data_exec_cmd(data);
-	}
-	if (!get_reset_prompt(data))
-		print_error("Prompt error\n");
-	return;
-}
-
-
-
-
-
- 
 
 // ft_putendl("NEXT ---------------------");
 // ft_putendl(((t_cmd *)lst->next->content)->exec_cmd[0]);
