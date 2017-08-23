@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_check_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/20 22:25:20 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/23 18:08:30 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 		else if (line_str[i[0]] && (line_str[i[0]] == '&' || line_str[i[0]] == ';' || line_str[i[0]] == '|' || line_str[i[0]] == '>' || line_str[i[0]] == '<'))
 		{
 			data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);
-			if (line_str[i[0]] == ';')
+			if (line_str[i[0]] == ';' && data_check_caract(line_str[i[0] + 1]))
 					i[0] += data_check_is_token_operator(token_list, TYPE_DSEMI, ";", i[0]);
-			else if (line_str[i[0]] == '&' && line_str[i[0] + 1] == '&')
+			else if (line_str[i[0]] == '&' && line_str[i[0] + 1] == '&' && data_check_caract(line_str[i[0] + 2]))
 				i[0] += data_check_is_token_operator(token_list, TYPE_AND_IF, "&&", i[0]);
-			else if (line_str[i[0]] == '|' && line_str[i[0] + 1] == '|')
+			else if (line_str[i[0]] == '|' && line_str[i[0] + 1] == '|' && data_check_caract(line_str[i[0] + 2]))
 				i[0] += data_check_is_token_operator(token_list, TYPE_OR_IF, "||", i[0]);
 			else if (line_str[i[0]] == '|' && line_str[i[0] + 1] != '|')
 				i[0] += data_check_is_token_operator(token_list, TYPE_PIPE, "|", i[0]);
@@ -44,6 +44,5 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 		i[1]++;
 	}
 	data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);
-	ft_print_token(token_list);
 	return;
 }

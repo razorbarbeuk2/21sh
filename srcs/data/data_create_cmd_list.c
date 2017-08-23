@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/20 17:46:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/23 17:59:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int ft_token_check_cmd(t_data *data, t_list *token_list)
 int data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 {
 	ft_token_str_pos(data, line_str, &data->token_list);
-	ft_token_check_cmd(data, data->token_list);
 	// termine cette fonction pour execution.
-	return (1);
+	return (ft_token_check_cmd(data, data->token_list));
 }

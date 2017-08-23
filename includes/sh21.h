@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/22 17:35:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/23 14:49:30 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int							ft_concat_int(char *buf);
 int							ft_putchar_select(int c);
 /*TOOLS COUNT*/
 int 						len_word(char *str);
+int							len_word_caract(char *line_str, char *caract);
 int 						ft_count_word_caract(t_data *data, char *str);
 int 						data_check_caract(char c);
 char 						*trim_str(char *str);

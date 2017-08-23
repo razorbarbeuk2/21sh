@@ -6,33 +6,119 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/22 18:04:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/23 18:10:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void data_construct_token_tree(data);
+t_token_node *init_node(t_list *val)
 {
-	t_token_tree *tree;
+	t_token_node *node_tree;
 
-	tree = NULL;
-	tree = ft_memalloc(sizeof(t_token_tree));
-	
-	
+	node_tree = NULL;
+	node_tree = ft_memalloc(sizeof(t_token_node));
+	if (node_tree && val)
+	{
+		node_tree->node = val;
+		node_tree->tleft = NULL;
+		node_tree->tright = NULL;
+		return (node_tree);
+	}
+	return (NULL);
+}
+
+void data_construct_token_tree_node(t_data *data, t_list *lst_node, t_list *left_node, t_list *right_node)
+{
+	t_token_node *node_tree;
+
+	(void)data;
+	node_tree = NULL;
+	node_tree = init_node(lst_node);
+	if (node_tree)
+	{
+		if (left_node)
+			node_tree->tleft = init_node(left_node);
+		if (right_node)
+			node_tree->tright = init_node(right_node);
+		if (node_tree->tleft)
+			node_tree->tleft->tparent = node_tree;
+		if (node_tree->tright)
+			node_tree->tright->tparent = node_tree;
+		return;
+	}
+	return;
+}
+
+void check_construct_token_tree(t_data *data, struct s_token_priority **tab_priority, int i)
+{
+	t_list *token_list_tmp;
+	t_token_struct *tmp_t_token_struct;
+	t_list *prev;
+	t_list *next;
+
+	tmp_t_token_struct = NULL;
+	token_list_tmp = data->token_list;
+	if (tab_priority[i]->token == TYPE_FINISH)
+		return;
+	if (token_list_tmp && tab_priority[i]->token != TYPE_FINISH)
+	{
+		while (token_list_tmp && token_list_tmp->next)
+		{
+			prev = token_list_tmp;
+			tmp_t_token_struct = ((t_token_struct *)token_list_tmp->next->content);
+			if (token_list_tmp->next && (tmp_t_token_struct->type == tab_priority[i]->token))
+			{
+				next = (token_list_tmp->next->next) ? token_list_tmp->next->next : NULL;
+				data_construct_token_tree_node(data, token_list_tmp->next, prev, next);
+			}
+			token_list_tmp = token_list_tmp->next;
+			tmp_t_token_struct = NULL;
+			prev = NULL;
+		}
+		check_construct_token_tree(data, tab_priority, i + 1);
+	}
+	return;
+}
+
+void data_construct_token_tree(t_data *data, struct s_token_priority **tab_priority)
+{
+	t_token_tree *tree_struct;
+	t_list *token_list_tmp;
+
+	tree_struct = NULL;
+	token_list_tmp = data->token_list;
+	tree_struct = ft_memalloc(sizeof(t_token_tree));
+	if (token_list_tmp && tab_priority)
+	{
+		check_construct_token_tree(data, tab_priority, 0);
+		return;
+	}
+	return;
 }
 
 void exec_cmd_character(t_data *data)
 {
+	struct s_token_priority **tab_priority;
+
+	tab_priority = NULL;
 	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
 	if (data->entry->line_str)
 	{
 		if (!add_sentence_historic_node_to_list(data))
 			print_error("historic error\n");
-		data_check_str_list_struct_cmd_loop(data, data->entry->line_str);
-		data_construct_token_priority_tree(data);
-		data_construct_token_tree(data);
+		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str))
+		{
+			tab_priority = data_construct_token_priority_tab(data);
+			ft_print_token(&data->token_list);
+			data_construct_token_tree(data, tab_priority);
+		}
+		else
+		{
+			if (!get_reset_prompt(data))
+				print_error("Prompt error\n");
+		}
 		//data_exec_cmd(data);
 	}
 	if (!get_reset_prompt(data))

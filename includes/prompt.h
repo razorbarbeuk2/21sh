@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/22 18:00:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/23 17:25:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ enum				e_enum_exec
 					TYPE_ERROR_PARSE
 };
 
-typedef struct 		s_token_node
+typedef struct 			s_token_node
 {
-	t_list			*left;
-	t_list			*right;
-}					t_token_node;
+	t_list				*node;
+	struct s_token_node	*tleft;
+	struct s_token_node	*tright;
+	struct s_token_node	*tparent;
+}						t_token_node;
 
 typedef struct 		s_token_tree
 {
@@ -52,7 +54,7 @@ typedef struct 		s_token_tree
 
 typedef struct 		s_token_struct
 {
-	enum e_enum_exec	type;
+	unsigned int		type;
 	char 				*token_name;
 	int 				pos;
 	
