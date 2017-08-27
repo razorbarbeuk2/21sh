@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:18:02 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/26 15:51:39 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/27 18:22:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,36 @@ static int pos(int n)
 	return (n);
 }
 
-static void	ft_cpy_word_pos(t_data *data)
+static void ft_cpy_word_pos(t_data *data)
 {
 	data->sel->pos_tmp[0] = data->sel->pos[0];
 	data->sel->pos_tmp[1] = data->sel->pos[1];
 	data->sel->i_lst_tmp = data->sel->i_lst;
 }
 
-void	ft_cpy_word_left(t_data *data)
+void ft_cpy_word_left(t_data *data)
 {
-	t_list	*tmp;
+	t_list *tmp;
 
 	tmp = NULL;
-	tputs(tgetstr("so", NULL), 1, ft_putchar_select);
-	tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
-	ft_move_cursor(data, LEFT);
-	ft_putchar_fd(((char *)tmp->content)[0], data->term->tty);	
-	tputs(tgetstr("me", NULL), 1, ft_putchar_select);
-	data->sel->i_lst++;
-	ft_lstadd(&data->entry->cpy, ft_lstnew(&(((char *)tmp->content)[0]), sizeof(char)));
-	ft_move_cursor(data, LEFT);
-	ft_cpy_word_pos(data);
-	return ;
+	if (data->entry->line && data->sel->i_lst)
+	{
+		tputs(tgetstr("so", NULL), 1, ft_putchar_select);
+		tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+		ft_move_cursor(data, LEFT);
+		ft_putchar_fd(((char *)tmp->content)[0], data->term->tty);
+		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
+		data->sel->i_lst++;
+		ft_lstadd(&data->entry->cpy, ft_lstnew(&(((char *)tmp->content)[0]), sizeof(char)));
+		ft_move_cursor(data, LEFT);
+		ft_cpy_word_pos(data);
+	}
+	return;
 }
 
-void	ft_cpy_word_right(t_data *data)
+void ft_cpy_word_right(t_data *data)
 {
-	t_list	*tmp;
+	t_list *tmp;
 
 	tmp = NULL;
 	if (data->sel->i_lst < (int)data->entry->len_line - 1)
@@ -58,12 +61,12 @@ void	ft_cpy_word_right(t_data *data)
 		ft_lstadd_back(&data->entry->cpy, ft_lstnew(&tmp->content, ft_strlen(tmp->content + 1)));
 		ft_cpy_word_pos(data);
 	}
-	return ;
+	return;
 }
 
-void	ft_paste_word_cpy(t_data *data)
+void ft_paste_word_cpy(t_data *data)
 {
-	t_list	*tmp;
+	t_list *tmp;
 
 	tmp = NULL;
 	tmp = data->entry->cpy;
@@ -77,16 +80,15 @@ void	ft_paste_word_cpy(t_data *data)
 		}
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 	}
-	return ;
+	return;
 }
 
-
-void	ft_paste_word_cut(t_data *data)
+void ft_paste_word_cut(t_data *data)
 {
-	t_list	*tmp;
-	int		_count;
-	int		_i;
-	int		_c;
+	t_list *tmp;
+	int _count;
+	int _i;
+	int _c;
 
 	tmp = NULL;
 	tmp = data->entry->cpy;
@@ -115,5 +117,5 @@ void	ft_paste_word_cut(t_data *data)
 		}
 		ft_paste_word_cpy(data);
 	}
-	return ;
+	return;
 }
