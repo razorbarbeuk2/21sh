@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/24 17:16:51 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/27 14:54:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int 						add_sentence_historic_list_to_file(t_data *data);
 void 						write_sentence_in_historic_file(t_data *data, char *cmd, int *nb_line, int opt);
 int							ft_move_up_down_historic(t_data *data, int result);
 /*LEXER*/
-void 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
+int 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
 int 						parse_quote_and_double_quote(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_check_redir.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 17:37:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/24 17:16:06 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/27 15:15:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *
 	size = i;
 	while (ft_isdigit(line_str[i]))
 		i++;
-	if (line_str[i] == '>' && line_str[i] != '>')
+	if (line_str[i] == '>' && line_str[i + 1] != '>')
 		(*type) = TYPE_REDIRECTION_LESSGREAT;
-	else if (line_str[i] == '<' && line_str[i] != '<')
+	else if (line_str[i] == '<' && line_str[i + 1] != '<')
 		(*type) = TYPE_REDIRECTION_LESSGREAT;
 	else if (line_str[i] == '>' && line_str[i + 1] == '&')
 	{
@@ -43,6 +43,8 @@ int ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *
 		(*type) = TYPE_REDIRECTION_DLESS;
 		i += 2;
 	}
+	else
+		return (0);
 	while (ft_isdigit(line_str[i]) || line_str[i] == '-')
 		i++;
 	data_check_is_token_operator(token_list, (*type), ft_strsub(line_str, size, i - size), i);

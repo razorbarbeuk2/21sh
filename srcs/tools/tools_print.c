@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/24 15:29:08 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/27 15:11:20 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int ft_print_token(t_list **token_lst)
 	lst = NULL;
 	lst = (*token_lst);
 	token = NULL;
+	write(1, "\n", 1);
 	while (lst)
 	{
 		token = (t_token_struct *)lst->content;
