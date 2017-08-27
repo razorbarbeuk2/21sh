@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_check_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/23 18:08:30 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/24 19:34:29 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 {
 	int *i;
+	unsigned int type;
 
 	(void)data;
-	write(1, "\n", 1);
+	type = 0;
 	i = ft_memalloc(2 * sizeof(int));
 	while (line_str[i[0]] && (i[0] < (int)ft_strlen(line_str)))
 	{
@@ -35,9 +36,9 @@ void ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
 			else if (line_str[i[0]] == '|' && line_str[i[0] + 1] != '|')
 				i[0] += data_check_is_token_operator(token_list, TYPE_PIPE, "|", i[0]);
 			else if (line_str[i[0]] == '>' || line_str[i[0]] == '<')
-				i[0] = ft_is_redirection(token_list, line_str, i[0]);
+				i[0] = ft_is_redirection(token_list, line_str, i[0], &type);
 			else
-				ft_error_token(TYPE_ERROR_PARSE);
+				ft_error_token(type);
 			i[1] = 0;
 		}
 		i[0]++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/23 14:49:30 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/24 17:16:51 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
 int 						parse_quote_and_double_quote(t_data *data);
-int 						ft_is_redirection(t_list **token_list, char *line_str, int i);
+int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						ft_error_token(unsigned int type);
 struct s_token_priority		**data_construct_token_priority_tab(t_data *data);

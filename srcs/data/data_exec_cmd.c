@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/23 18:10:07 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/24 15:13:04 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void exec_cmd_character(t_data *data)
 	struct s_token_priority **tab_priority;
 
 	tab_priority = NULL;
+	write(1, "\n", 1);
 	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
 	if (data->entry->line_str)
