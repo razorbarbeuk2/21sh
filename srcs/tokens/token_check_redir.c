@@ -6,47 +6,49 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 17:37:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/27 15:15:36 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/30 17:01:17 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type)
+int ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_list)
 {
 	int size;
+	int j;
 
-	size = i;
-	while (ft_isdigit(line_str[i]))
-		i++;
-	if (line_str[i] == '>' && line_str[i + 1] != '>')
+	size = (*io);
+	j = (*io);
+	while (ft_isdigit(str[j]))
+		j++;
+	if (str[j] == '>' && str[j + 1] != '>')
 		(*type) = TYPE_REDIRECTION_LESSGREAT;
-	else if (line_str[i] == '<' && line_str[i + 1] != '<')
+	else if (str[j] == '<' && str[j + 1] != '<')
 		(*type) = TYPE_REDIRECTION_LESSGREAT;
-	else if (line_str[i] == '>' && line_str[i + 1] == '&')
+	else if (str[j] == '>' && str[j + 1] == '&')
 	{
 		(*type) = TYPE_REDIRECTION_GREATAND;
-		i += 2;
+		j += 2;
 	}
-	else if (line_str[i] == '<' && line_str[i + 1] == '&')
+	else if (str[j] == '<' && str[j + 1] == '&')
 	{
 		(*type) = TYPE_REDIRECTION_LESSAND;
-		i += 2;
+		j += 2;
 	}
-	else if (line_str[i] == '>' && line_str[i + 1] == '>')
+	else if (str[j] == '>' && str[j + 1] == '>')
 	{
 		(*type) = TYPE_REDIRECTION_DGREAT;
-		i += 2;
+		j += 2;
 	}
-	else if (line_str[i] == '<' && line_str[i + 1] == '<')
+	else if (str[j] == '<' && str[j + 1] == '<')
 	{
 		(*type) = TYPE_REDIRECTION_DLESS;
-		i += 2;
+		j += 2;
 	}
 	else
 		return (0);
-	while (ft_isdigit(line_str[i]) || line_str[i] == '-')
-		i++;
-	data_check_is_token_operator(token_list, (*type), ft_strsub(line_str, size, i - size), i);
-	return (i);
+	while (ft_isdigit(str[j]) || str[j] == '-')
+		j++;
+	data_check_is_token_operator(token_list, (*type), ft_strsub(str, size, j - size), j);
+	return (j);
 }

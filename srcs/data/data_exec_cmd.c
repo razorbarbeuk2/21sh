@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/24 15:13:04 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/30 19:10:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void exec_cmd_character(t_data *data)
 		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str))
 		{
 			tab_priority = data_construct_token_priority_tab(data);
-			ft_print_token(&data->token_list);
 			data_construct_token_tree(data, tab_priority);
 		}
 		else
@@ -120,7 +119,6 @@ void exec_cmd_character(t_data *data)
 			if (!get_reset_prompt(data))
 				print_error("Prompt error\n");
 		}
-		//data_exec_cmd(data);
 	}
 	if (!get_reset_prompt(data))
 		print_error("Prompt error\n");

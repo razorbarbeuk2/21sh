@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:20:22 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/01 17:27:33 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/08/30 16:21:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef	int			(*t_func)(t_data *data, char **line);
 typedef	void		(*t_option)(t_list *env_lst, char **line);
+//typedef	int			(*token_func)(char *str, int *io, unsigned int *type, t_list **token_list);
 
 typedef struct		s_char
 {
