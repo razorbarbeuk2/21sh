@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/27 14:54:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/08/27 20:46:43 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,10 @@ void 						write_sentence_in_historic_file(t_data *data, char *cmd, int *nb_line
 int							ft_move_up_down_historic(t_data *data, int result);
 /*LEXER*/
 int 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
+int 						ft_token_and_if(char *str, int *io, unsigned int *type, t_list **token_list);
+int 						ft_token_or_if(char *str, int *io, unsigned int *type, t_list **token_list);
+int 						ft_token_pipe(char *str, int *io, unsigned int *type, t_list **token_list);
+int 						ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_list);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
 int 						parse_quote_and_double_quote(t_data *data);
