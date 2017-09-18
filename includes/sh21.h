@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/30 16:55:53 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/15 17:17:47 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,25 +182,6 @@ int 						ft_print_token(t_list **token_lst);
 /*CLEAN CARACT*/
 char 						**data_split_to_tab(t_data *data, char *line_str, char *caract);
 //char 				**data_split_to_tab(char *line_str, char *caract);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/30 19:10:11 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/18 09:13:19 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void print_node_val(t_token_node *node_tree)
+{
+	t_token_struct *tmp_t_token_struct;
+
+	tmp_t_token_struct = NULL;
+	if (node_tree->node)
+	{
+		tmp_t_token_struct = ((t_token_struct *)node_tree->node->content);
+		ft_putstr(tmp_t_token_struct->token_name);
+		tmp_t_token_struct = NULL;
+	}
+	return;
+}
+
+void tree_print(t_token_node *node_tree)
+{
+	if (node_tree == NULL)
+		return;
+	if (node_tree->tparent != NULL)
+	{
+		print_node_val(node_tree->tparent);
+		ft_putstr(" -> ");
+		print_node_val(node_tree);
+		ft_putstr("\n");
+	}
+	else
+		print_node_val(node_tree);
+	if (node_tree->tleft)
+		tree_print(node_tree->tleft);
+	if (node_tree->tright)
+		tree_print(node_tree->tright);
+	return;
+}
 
 t_token_node *init_node(t_list *val)
 {
@@ -28,39 +62,35 @@ t_token_node *init_node(t_list *val)
 	return (NULL);
 }
 
-void data_construct_token_tree_node(t_data *data, t_list *lst_node, t_list *left_node, t_list *right_node)
+t_token_node *data_construct_token_tree_node(t_data *data, t_list *lst_node, t_token_node *left_node, t_token_node *right_node)
 {
 	t_token_node *node_tree;
 
 	(void)data;
 	node_tree = NULL;
 	node_tree = init_node(lst_node);
-	if (node_tree)
-	{
-		if (left_node)
-			node_tree->tleft = init_node(left_node);
-		if (right_node)
-			node_tree->tright = init_node(right_node);
-		if (node_tree->tleft)
-			node_tree->tleft->tparent = node_tree;
-		if (node_tree->tright)
-			node_tree->tright->tparent = node_tree;
-		return;
-	}
-	return;
+	node_tree->tleft = left_node;
+	node_tree->tright = right_node;
+	if (left_node)
+		left_node->tparent = node_tree;
+	if (right_node)
+		right_node->tparent = node_tree;
+	return (node_tree);
 }
 
-void check_construct_token_tree(t_data *data, struct s_token_priority **tab_priority, int i)
+void 		check_construct_token_tree(t_data *data, struct s_token_priority **tab_priority, int i, t_token_node **st_node)
 {
-	t_list *token_list_tmp;
-	t_token_struct *tmp_t_token_struct;
-	t_list *prev;
-	t_list *next;
+	t_list 			*token_list_tmp;
+	t_token_node 	*st_node_tmp;
+	t_token_struct 	*tmp_t_token_struct;
+	t_list 			*prev;
+	t_list 			*next;
 
+	st_node_tmp = *st_node;
 	tmp_t_token_struct = NULL;
 	token_list_tmp = data->token_list;
 	if (tab_priority[i]->token == TYPE_FINISH)
-		return;
+		return ;
 	if (token_list_tmp && tab_priority[i]->token != TYPE_FINISH)
 	{
 		while (token_list_tmp && token_list_tmp->next)
@@ -70,28 +100,30 @@ void check_construct_token_tree(t_data *data, struct s_token_priority **tab_prio
 			if (token_list_tmp->next && (tmp_t_token_struct->type == tab_priority[i]->token))
 			{
 				next = (token_list_tmp->next->next) ? token_list_tmp->next->next : NULL;
-				data_construct_token_tree_node(data, token_list_tmp->next, prev, next);
+				st_node_tmp = data_construct_token_tree_node(data, token_list_tmp->next, init_node(prev), init_node(next));
 			}
 			token_list_tmp = token_list_tmp->next;
 			tmp_t_token_struct = NULL;
 			prev = NULL;
 		}
-		check_construct_token_tree(data, tab_priority, i + 1);
+		check_construct_token_tree(data, tab_priority, i + 1, st_node);
 	}
-	return;
+	return ;
 }
 
 void data_construct_token_tree(t_data *data, struct s_token_priority **tab_priority)
 {
-	t_token_tree *tree_struct;
-	t_list *token_list_tmp;
+	t_token_node 	*node_tree;
+	t_list 			*token_list_tmp;
 
-	tree_struct = NULL;
+	node_tree = NULL;
 	token_list_tmp = data->token_list;
-	tree_struct = ft_memalloc(sizeof(t_token_tree));
 	if (token_list_tmp && tab_priority)
 	{
-		check_construct_token_tree(data, tab_priority, 0);
+		check_construct_token_tree(data, tab_priority, 0, &node_tree);
+		if (!node_tree)
+			ft_putstr("NO NODE");
+		tree_print(node_tree);
 		return;
 	}
 	return;

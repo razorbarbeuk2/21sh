@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/30 17:00:04 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/15 15:52:33 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ typedef struct 			s_token_node
 
 typedef struct 		s_token_tree
 {
-	t_list			*tree;
-	t_list			*head;
-	t_list			*end;
+	t_token_node		*tree;
+	t_token_node		*head;
+	t_token_node		*end;
 }					t_token_tree;
 
 typedef struct 		s_token_struct
