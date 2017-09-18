@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/18 09:13:19 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/18 16:25:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,24 @@ void print_node_val(t_token_node *node_tree)
 	return;
 }
 
-void tree_print(t_token_node *node_tree)
-{
-	if (node_tree == NULL)
-		return;
-	if (node_tree->tparent != NULL)
-	{
-		print_node_val(node_tree->tparent);
-		ft_putstr(" -> ");
-		print_node_val(node_tree);
-		ft_putstr("\n");
-	}
-	else
-		print_node_val(node_tree);
-	if (node_tree->tleft)
-		tree_print(node_tree->tleft);
-	if (node_tree->tright)
-		tree_print(node_tree->tright);
-	return;
-}
+// void tree_print(t_token_node *node_tree)
+// {
+// 	if (node_tree == NULL)
+// 		return;
+// 	if (node_tree->tparent != NULL)
+// 	{
+// 		ft_putstr(" -> ");
+// 		print_node_val(node_tree);
+// 		ft_putstr("\n");
+// 	}
+// 	else
+// 		print_node_val(node_tree);
+// 	if (node_tree->tleft)
+// 		tree_print(node_tree->tleft);
+// 	if (node_tree->tright)
+// 		tree_print(node_tree->tright);
+// 	return;
+// }
 
 t_token_node *init_node(t_list *val)
 {
@@ -62,78 +61,66 @@ t_token_node *init_node(t_list *val)
 	return (NULL);
 }
 
-t_token_node *data_construct_token_tree_node(t_data *data, t_list *lst_node, t_token_node *left_node, t_token_node *right_node)
+t_token_node *check_construct_token_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node)
+{
+	t_list *lst;
+	t_list *tmp;
+	t_token_struct *tmp_struct;
+
+	tmp = NULL;
+	lst = token_list;
+	tmp_struct = NULL;
+	if(value ==  6 || !token_list)
+		return (NULL);
+	while (lst && lst != cmp)
+	{
+		tmp_struct = (t_token_struct *)lst->content;
+		if(tmp_struct->value == value)
+			tmp = lst;
+		lst = lst->next;
+	}
+	if(!tmp)
+		return(check_construct_token_tree(token_list, cmp, value + 1, st_node));
+	st_node = init_node(tmp);
+	st_node->tleft = check_construct_token_tree(token_list, tmp, value, st_node->tleft);
+	st_node->tright = check_construct_token_tree(tmp->next, cmp, value + 1, st_node->tright);
+	return (st_node);
+}
+
+void	print(t_token_node *st_node)
+{
+	if (!st_node)
+		return ;
+	ft_putendl(((t_token_struct *)st_node->node->content)->token_name);
+	if (st_node->tleft)
+	ft_putstr("On va a gauche\n");
+	print(st_node->tleft);
+	if (st_node->tright)
+	ft_putstr("On va a droite\n");
+	print(st_node->tright);
+}
+
+void data_construct_token_tree(t_data *data)
 {
 	t_token_node *node_tree;
-
-	(void)data;
-	node_tree = NULL;
-	node_tree = init_node(lst_node);
-	node_tree->tleft = left_node;
-	node_tree->tright = right_node;
-	if (left_node)
-		left_node->tparent = node_tree;
-	if (right_node)
-		right_node->tparent = node_tree;
-	return (node_tree);
-}
-
-void 		check_construct_token_tree(t_data *data, struct s_token_priority **tab_priority, int i, t_token_node **st_node)
-{
-	t_list 			*token_list_tmp;
-	t_token_node 	*st_node_tmp;
-	t_token_struct 	*tmp_t_token_struct;
-	t_list 			*prev;
-	t_list 			*next;
-
-	st_node_tmp = *st_node;
-	tmp_t_token_struct = NULL;
-	token_list_tmp = data->token_list;
-	if (tab_priority[i]->token == TYPE_FINISH)
-		return ;
-	if (token_list_tmp && tab_priority[i]->token != TYPE_FINISH)
-	{
-		while (token_list_tmp && token_list_tmp->next)
-		{
-			prev = token_list_tmp;
-			tmp_t_token_struct = ((t_token_struct *)token_list_tmp->next->content);
-			if (token_list_tmp->next && (tmp_t_token_struct->type == tab_priority[i]->token))
-			{
-				next = (token_list_tmp->next->next) ? token_list_tmp->next->next : NULL;
-				st_node_tmp = data_construct_token_tree_node(data, token_list_tmp->next, init_node(prev), init_node(next));
-			}
-			token_list_tmp = token_list_tmp->next;
-			tmp_t_token_struct = NULL;
-			prev = NULL;
-		}
-		check_construct_token_tree(data, tab_priority, i + 1, st_node);
-	}
-	return ;
-}
-
-void data_construct_token_tree(t_data *data, struct s_token_priority **tab_priority)
-{
-	t_token_node 	*node_tree;
-	t_list 			*token_list_tmp;
+	t_token_struct *tmp_struct;
 
 	node_tree = NULL;
-	token_list_tmp = data->token_list;
-	if (token_list_tmp && tab_priority)
+	tmp_struct = NULL;
+	if (data->token_list)
 	{
-		check_construct_token_tree(data, tab_priority, 0, &node_tree);
-		if (!node_tree)
-			ft_putstr("NO NODE");
-		tree_print(node_tree);
+		node_tree = check_construct_token_tree(data->token_list, NULL, 1, node_tree);
+		print(node_tree);
+		// if (!node_tree)
+		// 	ft_putstr("NO NODE");
+		//tree_print(node_tree);
 		return;
 	}
 	return;
 }
 
 void exec_cmd_character(t_data *data)
-{
-	struct s_token_priority **tab_priority;
-
-	tab_priority = NULL;
+{	
 	write(1, "\n", 1);
 	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
@@ -142,10 +129,7 @@ void exec_cmd_character(t_data *data)
 		if (!add_sentence_historic_node_to_list(data))
 			print_error("historic error\n");
 		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str))
-		{
-			tab_priority = data_construct_token_priority_tab(data);
-			data_construct_token_tree(data, tab_priority);
-		}
+			data_construct_token_tree(data);
 		else
 		{
 			if (!get_reset_prompt(data))

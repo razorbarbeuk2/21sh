@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   token_create_data_type.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/20 16:56:57 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/24 17:08:11 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/18 15:41:14 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+static int data_construct_token_priority(unsigned int tok)
+{
+	if (tok == TYPE_DSEMI)
+		return (1);
+	else if (tok == TYPE_AND_IF || tok == TYPE_OR_IF)
+		return (2);
+	else if (tok == TYPE_PIPE)
+		return (3);
+	else if (tok == TYPE_REDIRECTION_LESSGREAT || tok == TYPE_REDIRECTION_GREATAND || \
+		tok == TYPE_REDIRECTION_LESSAND || tok == TYPE_REDIRECTION_DGREAT || tok == TYPE_REDIRECTION_DLESS)
+		return (4);
+	else if (tok == TYPE_CMD)
+		return (5);
+	else
+		return (0);
+}
 
 int data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos)
 {
@@ -23,6 +40,7 @@ int data_check_is_token_operator(t_list **token_list, unsigned int type, char *l
 		token->type = type;
 		token->token_name = ft_strdup(line_str);
 		token->pos = pos;
+		token->value = data_construct_token_priority(type);
 		ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));
 		return (ft_strlen(line_str));
 	}
