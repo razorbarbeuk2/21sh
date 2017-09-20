@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/15 17:17:47 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/20 12:44:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ int 						data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
 int							data_check_quote_caract(char *str, int *d);
 int 						data_check_quote(char c);
 int 						data_check_caract(char c);
+int 						data_check_false_caract(char *c);
 int 						data_check_spec_caract(char c, char *caract);
 void						data_create_list_struct(t_data *data, char **line_str, void **node, int *t);
 int 						ft_is_caract_(char *str, char *c);
@@ -168,7 +169,8 @@ int 						parse_quote_and_double_quote(t_data *data);
 int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						ft_error_token(unsigned int type);
-struct s_token_priority		**data_construct_token_priority_tab(t_data *data);
+/*AST*/
+t_token_node 				*check_construct_token_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node);
 /*EXEC*/
 int							exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next, int *pfd);
 int							exec_cmd_node(t_data *data, t_list *cur);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
+#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/19 22:03:16 by RAZOR            ###   ########.fr        #
+#    Updated: 2017/09/20 11:31:28 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,10 @@ SRC_NAME 	=	init/init_data.c \
 				tokens/token_check_init.c \
 				tokens/token_check_redir.c \
 				tokens/token_create_data_type.c \
-				tokens/token_define_priority_tab.c \
 				tokens/token_and_if.c \
 				tokens/token_or_if.c \
 				tokens/token_pipe.c \
 				tokens/token_semicol.c \
-				data/data_str_check_opt_cmd.c \
 				data/data_str_check_quote_cmd.c \
 				data/data_str_clean_caract.c \
 				data/data_lst_to_tab.c \
@@ -58,6 +56,7 @@ SRC_NAME 	=	init/init_data.c \
 				data/data_create_cmd_list.c \
 				data/data_sep_is_caract.c \
 				data/data_exec_cmd.c \
+				data/data_create_ast.c \
 				data/data_exec_pipe.c \
 				history/data_create_history_files.c \
 				history/data_up_down_history.c \

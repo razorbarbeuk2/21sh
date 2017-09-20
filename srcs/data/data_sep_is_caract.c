@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/20 16:49:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 12:43:34 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int data_check_quote_caract(char *str, int *d)
 int data_check_quote(char c)
 {
 	if (c == '"' || c == '\'')
+		return (1);
+	return (0);
+}
+
+int data_check_false_caract(char *c)
+{
+	if ((*c) == '&' || (*c) == '>' || (*c) == '<' || (*c) == '|' || (*c) == ';')
 		return (1);
 	return (0);
 }
