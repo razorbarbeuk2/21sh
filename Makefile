@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/20 11:31:28 by gbourson         ###   ########.fr        #
+#    Updated: 2017/09/20 16:07:12 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC_NAME 	=	init/init_data.c \
 				text_line/prompt_position.c \
 				tokens/token_check_init.c \
 				tokens/token_check_redir.c \
+				tokens/token_check_redir_error.c \
 				tokens/token_create_data_type.c \
 				tokens/token_and_if.c \
 				tokens/token_or_if.c \

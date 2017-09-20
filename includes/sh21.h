@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/20 12:44:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 16:43:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int 						add_sentence_historic_list_to_file(t_data *data);
 void 						write_sentence_in_historic_file(t_data *data, char *cmd, int *nb_line, int opt);
 int							ft_move_up_down_historic(t_data *data, int result);
 /*LEXER*/
-int 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list);
+int 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list, unsigned int *type);
 int 						ft_token_and_if(char *str, int *io, unsigned int *type, t_list **token_list);
 int 						ft_token_or_if(char *str, int *io, unsigned int *type, t_list **token_list);
 int 						ft_token_pipe(char *str, int *io, unsigned int *type, t_list **token_list);
@@ -168,6 +168,8 @@ int 						data_check_is_token_operator(t_list **token_list, unsigned int type, c
 int 						parse_quote_and_double_quote(t_data *data);
 int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
+int 						ft_token_redirection_ERROR(char *d);
+int 						ft_token_redirection_ERROR_NEXT(char *d);
 int 						ft_error_token(unsigned int type);
 /*AST*/
 t_token_node 				*check_construct_token_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node);

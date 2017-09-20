@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 13:07:00 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:14:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,32 @@ typedef int (*G_func)(char *str, int *io, unsigned int *type, t_list **token_lis
 	NULL
 };
 
-int ft_token_str_pos(t_data *data, char *line_str, t_list **token_list)
+int ft_token_str_pos(t_data *data, char *line_str, t_list **token_list, unsigned int *type)
 {
 	int *i;
+	int state;
 	int j;
-	unsigned int type;
 	
-
 	(void)data;
-	type = 0;
+	state = 0;
 	i = ft_memalloc(2 * sizeof(int));
 	while (line_str[i[0]] && (i[0] < (int)ft_strlen(line_str)))
 	{
 		if (line_str[i[0]] && (line_str[i[0]] == '"' || line_str[i[0]] == '\''))
 			i[0] += data_check_quote_caract(&line_str[i[0]], &i[1]);
-		else if (line_str[i[0]] && (line_str[i[0]] == '&' || line_str[i[0]] == ';' || line_str[i[0]] == '|' || line_str[i[0]] == '>' || line_str[i[0]] == '<'))
+		else if (line_str[i[0]] && data_check_false_caract(&line_str[i[0]]))
 		{
 			j = 0;
-			data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);			
+			data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);	
 			while(G[j])
 			{
-				// if(G[j](line_str, &i[0], &type, token_list) == -1)
-				// 	return (ft_error_token(type));
-				if (G[j](line_str, &i[0], &type, token_list))
-					break ;
+				if ((state = G[j](line_str, &i[0], type, token_list)) != 0)
+				{
+					if (state == -1)
+						return (-1);
+					else
+						break ;
+				}
 				j++;
 			}
 			i[1] = 0;

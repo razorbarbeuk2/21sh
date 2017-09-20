@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/18 15:41:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 18:25:34 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ enum				e_enum_exec
 					TYPE_AND_IF,
 					TYPE_OR_IF,
 					TYPE_PIPE,
-					TYPE_REDIRECTION_LESSGREAT,
+					TYPE_REDIRECTION_LESSGREAT_RIGHT,
+					TYPE_REDIRECTION_LESSGREAT_LEFT,
 					TYPE_REDIRECTION_GREATAND,
 					TYPE_REDIRECTION_LESSAND,
 					TYPE_REDIRECTION_DGREAT,

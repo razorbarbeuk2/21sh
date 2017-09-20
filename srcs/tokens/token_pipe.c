@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 20:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/18 17:17:28 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:08:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_token_pipe(char *str, int *io, unsigned int *type, t_list **token_list)
 		}
 		else
 		{
-			(*type) = 3;
+			(*type) = TYPE_PIPE;
 			return (-1);
 		}
 	}

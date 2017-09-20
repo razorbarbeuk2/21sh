@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 20:44:10 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/30 16:49:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:09:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_list)
 		}
 		else
 		{
-			(*type) = 0;
+			(*type) = TYPE_DSEMI;
 			return (-1);
 		}
 	}

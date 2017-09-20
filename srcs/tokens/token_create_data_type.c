@@ -6,27 +6,45 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/20 16:56:57 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/18 15:41:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:06:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static int data_construct_token_priority(unsigned int tok)
+struct s_num_priority_token
 {
-	if (tok == TYPE_DSEMI)
-		return (1);
-	else if (tok == TYPE_AND_IF || tok == TYPE_OR_IF)
-		return (2);
-	else if (tok == TYPE_PIPE)
-		return (3);
-	else if (tok == TYPE_REDIRECTION_LESSGREAT || tok == TYPE_REDIRECTION_GREATAND || \
-		tok == TYPE_REDIRECTION_LESSAND || tok == TYPE_REDIRECTION_DGREAT || tok == TYPE_REDIRECTION_DLESS)
-		return (4);
-	else if (tok == TYPE_CMD)
-		return (5);
-	else
-		return (0);
+	unsigned int t;
+	int 		 c;
+};
+
+static const struct s_num_priority_token s_num_priority_t[] = {
+	{TYPE_DSEMI, 1},
+	{TYPE_AND_IF, 2},
+	{TYPE_OR_IF, 2},
+	{TYPE_PIPE, 3},
+	{TYPE_REDIRECTION_LESSGREAT_RIGHT, 4},
+	{TYPE_REDIRECTION_LESSGREAT_LEFT, 4},
+	{TYPE_REDIRECTION_GREATAND, 4},
+	{TYPE_REDIRECTION_LESSAND, 4},
+	{TYPE_REDIRECTION_DGREAT, 4},
+	{TYPE_REDIRECTION_DLESS, 4},
+	{TYPE_CMD, 5},
+	{TYPE_FINISH, 0}
+};
+
+static int data_construct_token_priority(unsigned int type)
+{
+	int i;
+
+	i = 0;
+	while (s_num_priority_t[i].t != TYPE_FINISH)
+	{
+		if (type == s_num_priority_t[i].t)
+			return (s_num_priority_t[i].c);
+		i++;
+	}
+	return (0);
 }
 
 int data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos)

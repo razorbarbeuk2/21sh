@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 20:43:29 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/30 16:37:28 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 19:15:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int ft_token_and_if(char *str, int *io, unsigned int *type, t_list **token_list)
 		}
 		else
 		{
-			(*type) = 1;
+			(*type) = TYPE_AND_IF;
 			return (-1);
 		}
 	}

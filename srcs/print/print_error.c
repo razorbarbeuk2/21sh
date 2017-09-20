@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/24 15:14:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/20 14:41:30 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int		print_parse_error(char *str)
 	print_error(str);
 	print_error("'");
 	print_error("\n");
-	return (0);
+	return (-1);
 }

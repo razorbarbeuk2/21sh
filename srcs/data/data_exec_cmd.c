@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 11:33:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/20 16:31:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void exec_cmd_character(t_data *data)
 	{
 		if (!add_sentence_historic_node_to_list(data))
 			print_error("historic error\n");
-		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str))
+		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str) != -1)
 		{
 			node_tree = check_construct_token_tree(data->token_list, NULL, 1, node_tree);
 			print(node_tree);
