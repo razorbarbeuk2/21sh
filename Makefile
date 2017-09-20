@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
+#    By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/08/30 15:22:45 by gbourson         ###   ########.fr        #
+#    Updated: 2017/09/19 22:03:16 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,6 @@ SRC_NAME 	=	init/init_data.c \
 				data/data_lst_to_tab.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
-				data/data_create_cmd_node.c \
-				data/data_create_cmd_node_type_cmd.c \
 				data/data_create_cmd_list.c \
 				data/data_sep_is_caract.c \
 				data/data_exec_cmd.c \
