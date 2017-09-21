@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_create_history_node_to_list.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/29 16:25:12 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/20 15:58:40 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/21 12:32:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void free_str_historic_node(char *str_n, char *str)
 		str = NULL;
 		str_n = NULL;
 	}
-	return ;
+	return;
 }
 
 static int add_num_historic_node(t_data *data, char *str_n, char *str, int i)

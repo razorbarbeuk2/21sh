@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/27 20:43:29 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 19:15:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/21 12:27:55 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int ft_token_and_if(char *str, int *io, unsigned int *type, t_list **token_list)
 	it = (*io);
 	if (str[it] == '&')
 	{
-		if (str[it] == '&' && str[it + 1] == '&' && data_check_caract(str[it + 2]))
+		if (str[it] == '&' && str[it + 1] == '&' && !data_check_false_caract(&str[it + 2]))
 		{
 			(*io) += data_check_is_token_operator(token_list, TYPE_AND_IF, "&&", (*io));
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/20 16:43:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/21 17:42:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,20 @@ int 						ft_token_redirection_ERROR(char *d);
 int 						ft_token_redirection_ERROR_NEXT(char *d);
 int 						ft_error_token(unsigned int type);
 /*AST*/
-t_token_node 				*check_construct_token_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node);
+t_token_node 				*construct_ast_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node);
 /*EXEC*/
-int							exec_cmd_node_pipe(t_data *data, t_list *prev, t_list *next, int *pfd);
-int							exec_cmd_node(t_data *data, t_list *cur);
+int 						exec_AND_IF(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_CMD(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_DSEMI(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_OR_IF(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_PIPE(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_redir_GREATAND(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_redir_LESSAND(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_redir_DGREAT(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec_redir_DLESS(t_data *data, t_token_node *tleft, t_token_node *tright);
+int 						exec(t_data *data, t_token_node *cur);
 /*TOOLS*/
 t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void						print_lst_line(t_data *data, t_list *lst);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 19:14:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/21 12:29:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int ft_token_str_pos(t_data *data, char *line_str, t_list **token_list, unsigned
 		else if (line_str[i[0]] && data_check_false_caract(&line_str[i[0]]))
 		{
 			j = 0;
-			data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);	
+			data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);
 			while(G[j])
 			{
 				if ((state = G[j](line_str, &i[0], type, token_list)) != 0)

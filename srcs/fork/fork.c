@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:50:15 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/01 15:31:33 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/21 18:52:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ int		get_exe_cmd(t_data *data, char **path, char **cmd, t_list *env_lst)
 	if (pid != 0)
 		waitpid(-1, &status, 0);
 	else
-		return(execve(*path, cmd, get_lst_to_tab(env_lst)));
+	{
+		ft_putendl("PATH=-----------");
+		ft_putendl(*path);
+		ft_putendl("CMD-----------");
+		print_tab(data, cmd);
+		ft_putendl("-----------");
+		ft_putnbr(execve(*path, cmd, get_lst_to_tab(env_lst)));
+	}
+		
 	return (0);
 }

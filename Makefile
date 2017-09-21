@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/20 16:07:12 by gbourson         ###   ########.fr        #
+#    Updated: 2017/09/21 17:45:28 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,13 @@ SRC_NAME 	=	init/init_data.c \
 				data/data_sep_is_caract.c \
 				data/data_exec_cmd.c \
 				data/data_create_ast.c \
-				data/data_exec_pipe.c \
+				exec/exec_and_if.c \
+				exec/exec_cmd.c \
+				exec/exec_dsemi.c \
+				exec/exec_or_if.c \
+				exec/exec_pipe.c \
+				exec/exec_redir.c \
+				exec/exec.c \
 				history/data_create_history_files.c \
 				history/data_up_down_history.c \
 				history/data_create_history_node_to_list.c \

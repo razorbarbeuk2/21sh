@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 21:44:26 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 11:25:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/21 14:15:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_token_node *init_node(t_list *val)
 	return (NULL);
 }
 
-t_token_node *check_construct_token_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node)
+t_token_node 		*construct_ast_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node)
 {
 	t_list *lst;
 	t_list *tmp;
@@ -61,9 +61,9 @@ t_token_node *check_construct_token_tree(t_list *token_list, t_list *cmp, int va
 		lst = lst->next;
 	}
 	if(!tmp)
-		return(check_construct_token_tree(token_list, cmp, value + 1, st_node));
+		return(construct_ast_tree(token_list, cmp, value + 1, st_node));
 	st_node = init_node(tmp);
-	st_node->tleft = check_construct_token_tree(token_list, tmp, value, st_node->tleft);
-	st_node->tright = check_construct_token_tree(tmp->next, cmp, value + 1, st_node->tright);
+	st_node->tleft = construct_ast_tree(token_list, tmp, value, st_node->tleft);
+	st_node->tright = construct_ast_tree(tmp->next, cmp, value + 1, st_node->tright);
 	return (st_node);
 }

@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_semicol.c                                    :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/27 20:44:10 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/21 14:19:13 by gbourson         ###   ########.fr       */
+/*   Created: 2017/09/21 17:38:17 by gbourson          #+#    #+#             */
+/*   Updated: 2017/09/21 17:59:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_list)
+int exec(t_data *data, t_token_node *cur)
 {
-	int it;
+    t_token_struct *cur_t;
 
-	it = 0;
-	it = (*io);
-	if (str[it] == ';')
-	{
-		if (str[it] == ';' && !data_check_false_caract(&str[it + 1]))
-		{
-			(*io) += data_check_is_token_operator(token_list, TYPE_DSEMI, ";", (*io));
-			return (1);
-		}
-		else
-		{
-			(*type) = TYPE_DSEMI;
-			return (-1);
-		}
-	}
-	return (0);
+    cur_t = NULL;
+    cur_t = ((t_token_struct *)cur->node->content);
+    ft_putendl(cur_t->token_name);
+    return (parse_line_builtins(data, &data->env, &cur_t->token_name));
 }
