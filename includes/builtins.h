@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:20:22 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/30 16:21:47 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/27 16:52:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define BUILTINS_H
 
 # define OPT_ENV "i"
-# define BUILD_FIND 0
-# define BUILD_EXE 1
 
 typedef	int			(*t_func)(t_data *data, char **line);
 typedef	void		(*t_option)(t_list *env_lst, char **line);
@@ -40,7 +38,7 @@ typedef struct		s_buil
 }					t_buil;
 
 /*BUILTINS DRIVE*/
-int					buil_drive(t_data *data, t_list **env_lst, char **line, int opt);
+int					buil_drive(t_data *data, t_list **env_lst, char **line);
 /*BUILTINS*/
 int					parse_line_builtins(t_data *data, t_list **env_lst, char **line);
 /*BUILTINS ENV*/

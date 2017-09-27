@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/21 23:59:51 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/27 18:30:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-typedef int (*function_token)(t_data *data, t_token_node *tleft, t_token_node *tright);
+typedef int (*function_token)(t_data *data, t_token_node *node, unsigned int fork_state);
 
 struct s_exec_token
 {
@@ -31,7 +31,7 @@ static const struct s_exec_token s_exec_t[] = {
 	{TYPE_REDIRECTION_LESSAND, exec_redir_LESSAND},
 	{TYPE_REDIRECTION_DGREAT, exec_redir_DGREAT},
 	{TYPE_REDIRECTION_DLESS, exec_redir_DLESS},
-	{TYPE_CMD, exec_CMD},
+	{TYPE_CMD, exec},
 	{TYPE_FINISH, NULL}};
 
 static void reset_exec_cmd_character(t_data *data)
@@ -80,7 +80,7 @@ void ft_print_token_t(unsigned int t)
 		ft_putendl("START TYPE_CMD---------------");
 }
 
-static int exec_cmd_type(t_data *data, t_token_node *node_cur)
+int exec_cmd_type(t_data *data, t_token_node *node_cur, unsigned int fork_state)
 {
 	int i;
 	t_token_struct *node_content;
@@ -90,22 +90,19 @@ static int exec_cmd_type(t_data *data, t_token_node *node_cur)
 	while (s_exec_t[i].t != TYPE_FINISH)
 	{
 		node_content = ((t_token_struct *)node_cur->node->content);
-		// ft_print_token_t(node_content->type);
 		if (s_exec_t[i].t == node_content->type)
-			s_exec_t[i].f(data, node_cur->tleft, node_cur->tright);
+			s_exec_t[i].f(data, node_cur, fork_state);
 		i++;
 	}
 	return (-1);
 }
 
-static void read_ast(t_data *data, t_token_node *node_cur)
+static void read_ast(t_data *data, t_token_node *node_cur, unsigned int fork_state)
 {
 	if (!node_cur)
 		return;
-	if (node_cur->tleft)
-		exec_cmd_type(data, node_cur->tleft);
-	if (node_cur->tright)
-		exec_cmd_type(data, node_cur->tright);
+	if (node_cur)
+		exec_cmd_type(data, node_cur, fork_state);
 }
 
 void exec_cmd_character(t_data *data)
@@ -116,6 +113,7 @@ void exec_cmd_character(t_data *data)
 	node_tree = NULL;
 	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
+	//ft_term_reset(data->term);
 	if (data->entry->line_str)
 	{
 		if (!add_sentence_historic_node_to_list(data))
@@ -124,7 +122,7 @@ void exec_cmd_character(t_data *data)
 		{
 			node_tree = construct_ast_tree(data->token_list, NULL, 1, node_tree);
 			//print(node_tree);
-			(node_tree && node_tree->tleft) ? read_ast(data, node_tree) : exec(data, node_tree);
+			read_ast(data, node_tree, FORK);
 		}
 		return (reset_exec_cmd_character(data));
 	}

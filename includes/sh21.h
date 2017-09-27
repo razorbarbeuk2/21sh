@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/21 17:42:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/27 17:29:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct		s_fd
 /*TOOLS*/
 int							get_tab_to_lst(t_list **data_env, char **environ);
 char						**get_lst_to_tab(t_list *env_lst);
-void						print_lst(t_list *lst);
+void						print_env(t_list *lst);
 void 						print_lst_line_tools(t_data *data, t_list *lst);
 void						print_pos_cursor(t_data *data);
 /*TOOLS FREE*/
@@ -174,18 +174,19 @@ int 						ft_error_token(unsigned int type);
 /*AST*/
 t_token_node 				*construct_ast_tree(t_list *token_list, t_list *cmp, int value, t_token_node *st_node);
 /*EXEC*/
-int 						exec_AND_IF(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_CMD(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_DSEMI(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_OR_IF(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_PIPE(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_redir_GREATAND(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_redir_LESSAND(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_redir_DGREAT(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec_redir_DLESS(t_data *data, t_token_node *tleft, t_token_node *tright);
-int 						exec(t_data *data, t_token_node *cur);
+int 						exec_cmd_type(t_data *data, t_token_node *node_cur, unsigned int fork_state);
+int 						exec_AND_IF(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_CMD(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_DSEMI(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_OR_IF(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_PIPE(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_GREATAND(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec(t_data *data, t_token_node *cur, unsigned int fork_state);
 /*TOOLS*/
 t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void						print_lst_line(t_data *data, t_list *lst);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:40:50 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/27 19:09:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/27 17:03:17 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int			term_init(t_term *term)
 			return (-1);
 		term->width = win.ws_col;
 		term->height = win.ws_row;
-		
-		// tputs(tgetstr("ti", NULL), 1, ft_putchar_select);
-		// tputs(tgetstr("vi", NULL), 1, ft_putchar_select);
 	}
 	return (1);
 }

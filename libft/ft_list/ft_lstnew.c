@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 14:45:51 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/06 17:49:37 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/27 17:47:09 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	t_list *lst;
 
 	lst = NULL;
-	lst = (t_list *)ft_memalloc(sizeof(t_list));
+	lst = ft_memalloc(sizeof(t_list));
 	if (lst)
 	{
 		lst->content = NULL;

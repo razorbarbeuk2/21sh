@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/22 17:11:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:55:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_data
 	t_historic		*historic;
 	t_quote			*quotes;
 	t_term			*term;
+	pid_t	        pid;
 	int 			set_historique;
 	int 			set_quotes;
 	int				nb_pipe;

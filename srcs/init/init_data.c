@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/20 17:31:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/27 19:10:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int init_data_env_cmd(t_data *data)
 	data->sel = NULL;
 	data->historic = NULL;
 	data->term = NULL;
+	data->pid = 0;
 	data->set_historique = 0;
 	data->set_quotes = 0;
 	data->nb_pipe = 0;

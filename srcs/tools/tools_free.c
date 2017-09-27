@@ -6,13 +6,13 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 15:04:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/27 19:20:03 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void	ft_free_char(char **tmp)
+void		ft_free_char(char **tmp)
 {
 	int i;
 

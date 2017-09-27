@@ -3,17 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   tools_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/21 23:54:01 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/27 19:00:51 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
+void print_env(t_list *lst)
+{
+	t_list	*tmp;
+	t_env	*env;
 
-
+	tmp = lst;
+	if(!lst)
+		ft_putendl_fd("FUCK 21SH", STDOUT_FILENO);
+	while (tmp)
+	{
+		env = NULL;
+		env = (t_env *)tmp->content;
+		ft_putstr_fd(env->key, STDOUT_FILENO);
+		ft_putchar_fd('=', STDOUT_FILENO);
+		ft_putendl_fd(env->infos, STDOUT_FILENO);
+		tmp = tmp->next;
+	}
+	tmp = NULL;
+	return ;
+}
 // int ft_print_token(t_list **token_lst)
 // {
 // 	t_list *lst;
