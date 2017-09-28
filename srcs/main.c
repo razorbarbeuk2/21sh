@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/27 19:12:35 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:29:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int init_env_lst(t_data *data)
 		{	
 			env = init_env_lst_node(tmp_env);
 			ft_lstadd_back(&data->env, ft_lstnew(env, sizeof(t_env)));
-			ft_free_char(tmp_env);
+			ft_free_char_array(&tmp_env);
 			ft_memdel((void *)&env);
 		}
 		i++;
@@ -77,12 +77,12 @@ int main(int ac, char **av)
 	(void)av;
 	if (!(init_struct(&data)))
 	{
-		print_error("21 is Dead\n");
+		ft_print_error("21 is Dead\n");
 		return (0);
 	}
 	if (!init_sh(&data))
 	{
-		print_error("21 is Dead\n");
+		ft_print_error("21 is Dead\n");
 		return (0);
 	}
 	return (0);

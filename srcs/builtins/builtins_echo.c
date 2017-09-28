@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 14:32:16 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/06/28 12:04:20 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:39:14 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_opt		*ft_opt_echo(void)
 	return ((void *)opt_echo);
 }
 
-int					builtin_echo_parse_opt(t_list *env_lst, char **line, t_opt *opt)
+int					builtin_echo_parse_opt(t_data *data, char **line, t_opt *opt)
 {
 	int n;
 	int i;
@@ -36,7 +36,7 @@ int					builtin_echo_parse_opt(t_list *env_lst, char **line, t_opt *opt)
 		{
 			if ((ft_strcmp(line[i], opt[n].opt)) == 0)
 			{
-				opt[n].f(env_lst, &line[i]);
+				opt[n].f(data, &line[i]);
 				return (1);
 			}
 			n++;
@@ -46,7 +46,7 @@ int					builtin_echo_parse_opt(t_list *env_lst, char **line, t_opt *opt)
 	return (0);
 }
 
-static int			builtin_echo_var(char **tmp, char **str, t_list *env_lst)
+static int			builtin_echo_var(t_data *data, char **tmp, char **str)
 {
 	char *tmp_n;
 
@@ -55,12 +55,12 @@ static int			builtin_echo_var(char **tmp, char **str, t_list *env_lst)
 	if (tmp_n[0] == '$')
 	{
 		*str = ft_strsub(tmp_n, 1, ft_strlen(tmp_n) - 1);
-		if (!(tmp_n = get_search_infos(env_lst, *str)))
+		if (!(tmp_n = get_search_infos(data, *str)))
 		{
-			print_error("No variable in env\n");
+			ft_print_error("No variable in env\n");
 			ft_strdel(&tmp_n);
 			ft_strdel(&*str);
-			return (0);
+			return (-1);
 		}
 		*tmp = tmp_n;
 	}
@@ -68,7 +68,7 @@ static int			builtin_echo_var(char **tmp, char **str, t_list *env_lst)
 	return (1);
 }
 
-void				builtin_echo_quote(t_list *env_lst, char **line)
+void				builtin_echo_quote(t_data *data, char **line)
 {
 	char		*tmp;
 	char		*str;
@@ -88,7 +88,7 @@ void				builtin_echo_quote(t_list *env_lst, char **line)
 				i++;
 			tmp[i] = '\0';
 		}
-		if (!(builtin_echo_var(&tmp, &str, env_lst)))
+		if (!(builtin_echo_var(data, &tmp, &str)))
 			return ;
 		ft_strcpy(*line, tmp);
 	}
@@ -104,8 +104,8 @@ int					builtin_echo(t_data *data, char **line)
 	opt = ft_opt_echo();
 	while (line[i])
 	{
-		builtin_echo_quote(data->env, &line[i]);
-		if (builtin_echo_parse_opt(data->env, line, opt))
+		builtin_echo_quote(data, &line[i]);
+		if (builtin_echo_parse_opt(data, line, opt))
 			return (1);
 		else
 			ft_putstr(line[i]);

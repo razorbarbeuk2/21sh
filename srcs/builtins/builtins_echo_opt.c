@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_echo_opt.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/18 12:21:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/13 14:13:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 19:59:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void		builtin_echo_use_n(t_list *env_lst ,char **line)
+void		builtin_echo_use_n(t_data *data, char **line)
 {
 	int		i;
 
 	i = 1;
 	while (line[i])
 	{
-		builtin_echo_quote(env_lst, &line[i]);
+		builtin_echo_quote(data, &line[i]);
 		while ((line[i]) && (line[i][0] == '-'))
 			i++;
 		ft_putstr(line[i]);
@@ -69,7 +69,7 @@ static char	*ft_put_opt(char *line, char *st)
 	return (NULL);
 }
 
-void		builtin_echo_use_e(t_list *env_lst ,char **line)
+void		builtin_echo_use_e(t_data *data ,char **line)
 {
 	char	*st;
 	int		i;
@@ -79,7 +79,7 @@ void		builtin_echo_use_e(t_list *env_lst ,char **line)
 	ft_strdel(&line[0]);
 	while (line[i])
 	{
-		builtin_echo_quote(env_lst, &line[i]);
+		builtin_echo_quote(data, &line[i]);
 		st = line[i];
 		if (ft_strchr(st, 39))
 		{

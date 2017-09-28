@@ -6,77 +6,44 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/19 12:17:54 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/12 17:14:33 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 16:39:21 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static void	free_move_infos_print(char *path, char *tmp)
+char 		*builtin_cd_special_caract_return(t_data *data, char *str)
 {
-	ft_putendl(tmp);
-	ft_strdel(&tmp);
-	ft_strdel(&path);
+	(void)data;
+	(void)str;
+	return ("..");
+}
+
+char 		*builtin_cd_special_caract_slash(t_data *data, char *str)
+{
+	(void)data;
+	(void)str;
+	return ("/");
+}
+
+int			builtin_cd_special_caract_home(t_data *data, char **path)
+{
+	if (!get_search_infos(data, "HOME"))
+		return (ft_print_error("No HOME in env"));
+	(*path) = ft_strdup(get_search_infos(data, "HOME"));
+	return (1);
 }
 
 int			ft_check_move(char *path)
 {
 	struct stat		infos;
-	char			*tmp;
 
 	if (stat(path, &infos) == -1)
-	{
-		tmp = ft_strjoin(path, ": No such file or directory.");
-		free_move_infos_print(path, tmp);
-		return (0);
-	}
+		return (ft_print_move_error(path, ": No such file or directory."));
 	if (!S_ISDIR(infos.st_mode))
-	{
-		tmp = ft_strjoin(path, ": Not a directory.");
-		free_move_infos_print(path, tmp);
-		return (0);
-	}
-	if (chdir(path) != 0)
-	{
-		tmp = ft_strjoin(path, ": Permission denied");
-		free_move_infos_print(path, tmp);
-		return (0);
-	}
-	ft_strdel(&path);
-	return (1);
-}
-
-char		*builtin_cd_special_caract_home_noline(t_list **env_lst, \
-	char **line)
-{
-	if ((!line[1]) && (get_search_infos(*env_lst, "HOME")))
-		return (ft_strdup(get_search_infos(*env_lst, "HOME")));
+		return (ft_print_move_error(path, ": Not a directory."));
+	if(!chdir(path))
+		return (1);
 	else
-		return (NULL);
-}
-
-char		*builtin_cd_special_caract_home(t_list **env_lst, char **line)
-{
-	if ((ft_strcmp(line[1], "~") == 0) || (ft_strcmp(line[1], "~/") == 0))
-		return (ft_strdup(get_search_infos(*env_lst, "HOME")));
-	else
-		return (ft_strjoin(get_search_infos(*env_lst, "HOME") \
-		, ft_strchr(line[1], '/')));
-}
-
-char		*builtin_cd_special_caract(t_list **env_lst, char **line)
-{
-	if ((line[1][0] == '~' || (ft_strcmp(line[1], "~") == 0)) \
-		&& (get_search_infos(*env_lst, "HOME")))
-		return (builtin_cd_special_caract_home(env_lst, line));
-	else if (line[1] && (ft_strcmp(line[1], "/") == 0))
-		return (ft_strdup("/"));
-	else if (line[1] && (ft_strcmp(line[1], "-") == 0) \
-		&& get_search_infos(*env_lst, "OLDPWD"))
-		return (ft_strdup(get_search_infos(*env_lst, "OLDPWD")));
-	else if (line[1] && ((ft_strcmp(line[1], "..") == 0) \
-		|| (ft_strcmp(line[1], "../") == 0)))
-		return (ft_strdup(".."));
-	else
-		return (ft_strdup(line[1]));
+		return (ft_print_error("ERROR"));
 }

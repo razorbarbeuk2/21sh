@@ -6,72 +6,83 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 19:43:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 20:15:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void		ft_free_char_array(char ***tmp)
+typedef int (*t_function_opt)(t_data *data);
+
+struct 	s_option
 {
-	int 	i;
-	char 	**tmp_n;
+	char 			*option;
+	t_function_opt 	f;	
+};
+
+static const struct s_option s_option_tab[] = {
+	{"i", builtin_env_null},
+	{NULL, NULL}
+};
+
+static int	builtin_move_opt(char *line)
+{
+	int i;
 
 	i = 0;
-	tmp_n = (*tmp);
-	if (!tmp_n)
-		return ;
-	while (tmp_n[i])
+	while (line[i] == '-')
+		i++;
+	return (i);
+}
+
+static char *ft_concat_opt(struct s_option *t)
+{
+	int 	i;
+	char 	*c;
+
+	i = 0;
+	c = NULL;
+	while (t[i].option)
+		i++;
+	c = ft_memalloc(i * sizeof(char));
+	i = 0;
+	while (t[i].option)
 	{
-		free(tmp_n[i]);
-		tmp_n[i] = NULL;
+		c[i] = t[i].option;
 		i++;
 	}
-	free(tmp_n);
-	tmp_n = NULL;
-	return ;
+	c[i] = '\0';
+	return (c);
 }
 
-static t_env	*env_cpy_node(t_list *env_node)
+static int builtin_env_opt(t_data *data, char *line, char *builtins)
 {
-	t_env  	*env_cpy;
-	t_env  	*env_struct;
+	int i;
+	int n;
+	int set;
 
-	env_struct = NULL;
-	if (env_node)
+	i = 0;
+	n = builtin_move_opt(line);
+	while (line[n])
 	{
-		env_struct = (t_env *)env_node->content;
-		env_cpy = ft_memalloc(sizeof(t_env));
-		if(env_struct->key)
-			env_cpy->key = ft_strdup(env_struct->key);
-		env_cpy->infos = env_struct->infos ? ft_strdup(env_struct->infos) : ft_strdup(" ");
-		return (env_cpy);
-	}
-	return (NULL);
-}
-
-static t_list	*env_cpy(t_data *data)
-{
-	t_list	*env;
-	t_env  	*env_cpy;
-	t_list	*env_cpy_lst;
-
-	env = NULL;
-	env_cpy_lst = NULL;
-	env = data->env;
-	while (env)
-	{
-		env_cpy = NULL;
-		if (env)
+		i = 0;
+		set = 0;
+		while (s_option_tab[i].option)
 		{
-			env_cpy = env_cpy_node(env);
-			ft_lstadd_back(&env_cpy_lst, ft_lstnew(env_cpy, sizeof(t_env)));
-			ft_memdel((void *)&env_cpy);
+			if (ft_strcmp(s_option_tab[i].option, &line[n]) == 0)
+			{
+				if (s_option_tab[i].f(data) == -1)
+					ft_print_error("Error Option function");
+			}
+			i++;
 		}
-		env = env->next;
+		if (!set)
+			return (ft_print_error_option(line[n], builtins, ft_concat_opt(s_option_tab)));
+		n++;
 	}
-	return (env_cpy_lst);
+	return (0);
 }
+
 
 int		builtin_env(t_data *data, char **line)
 {
@@ -81,7 +92,7 @@ int		builtin_env(t_data *data, char **line)
 	i = 1;
 	tmp = NULL;
 	data->env_cpy = NULL;
-	data->env_cpy = get_parse_opt(line, OPT_ENV) ? NULL : env_cpy(data);
+	data->env_cpy = builtin_env_opt(data, line[1], "env") ? NULL : env_cpy(data);
 	while (line[i] && line[i][0] == '-')
 		i++;
 	while (line[i] && ft_strchr(line[i], '='))
@@ -95,6 +106,6 @@ int		builtin_env(t_data *data, char **line)
 	else
 		print_env(data->env_cpy);
 	ft_free_char_array(&tmp);
-	ft_lstdel(&data->env_cpy, &ft_free_env);
+	//ft_lstdel(&data->env_cpy, &ft_free_env);
 	return (1);
 }

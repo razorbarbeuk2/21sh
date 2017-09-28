@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/21 17:45:28 by gbourson         ###   ########.fr        #
+#    Updated: 2017/09/28 18:36:45 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ SRC_NAME 	=	init/init_data.c \
 				init/init_term.c \
 				init/term_reset.c \
 				builtins/builtins_init.c \
+				builtins/builtins_check_args.c \
 				builtins/builtins_env.c \
+				builtins/builtins_envcpy.c \
 				builtins/builtins_set_unset_env.c \
 				builtins/builtins_cd.c \
 				builtins/builtins_cd_move.c \

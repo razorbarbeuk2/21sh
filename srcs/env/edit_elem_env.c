@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_elem_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 17:34:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/07/06 17:40:27 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 18:01:21 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int			modif_elem(char **tab_line, t_list **env_lst, t_list **start)
 	env = NULL;
 	env_tmp = *env_lst;
 	if (env_tmp)
+	{
 		env = ((t_env *)env_tmp->content);
-	if (modif_elem_reel(tab_line, env))
-		return (1);
+		return (modif_elem_reel(tab_line, env));
+	}
 	else if ((!env_tmp || !env_tmp->next))
 	{
-		env = (t_env *)ft_memalloc(sizeof(t_env));
+		env = ft_memalloc(sizeof(t_env));
 		if (tab_line[0])
 			env->key = ft_strdup(tab_line[0]);
 		env->infos = tab_line[1] ? ft_strdup(tab_line[1]) : ft_strdup(" ");

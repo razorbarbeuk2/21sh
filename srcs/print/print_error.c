@@ -6,33 +6,53 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 14:41:30 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 19:40:24 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void	print_error(char *str)
+int 	ft_print_error_option(char str, char *usage, char *builtins)
 {
-	ft_putstr_fd(RED, 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\e[0m", 2);
+	ft_putstr_fd(builtins, STDERR_FILENO);
+	ft_putstr_fd(": illegal option -- ", STDERR_FILENO);
+	ft_putendl_fd(&str, STDERR_FILENO);
+	ft_putstr_fd("usage: ", STDERR_FILENO);
+	ft_putstr_fd(builtins, STDERR_FILENO);
+	ft_putstr_fd(" [-", STDERR_FILENO);
+	ft_putstr_fd("]\n", STDERR_FILENO);
 }
 
-void	print_cmd_not_found(char *str)
+int		ft_print_move_error(char *str, char *error)
 {
-	print_error("21sh: ");
-	print_error(str);
-	print_error(" command not found");
-	print_error("\n");
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(error, STDERR_FILENO);
+	ft_putstr_fd("\e[0m", STDERR_FILENO);
+	return (-1);
 }
 
-int		print_parse_error(char *str)
+int		ft_print_error(char *str)
 {
-	print_error("21sh: ");
-	print_error(" parse error near '");
-	print_error(str);
-	print_error("'");
-	print_error("\n");
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("\e[0m", STDERR_FILENO);
+	return (-1);
+}
+
+int		ft_print_cmd_not_found(char *str)
+{
+	ft_print_error("21sh: ");
+	ft_print_error(str);
+	ft_print_error(" command not found\n");
+	return (-1);
+}
+
+int		ft_print_parse_error(char *str)
+{
+	ft_print_error("21sh: ");
+	ft_print_error(" parse error near '");
+	ft_print_error(str);
+	ft_print_error("'\n");
 	return (-1);
 }

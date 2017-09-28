@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search.c                                           :+:      :+:    :+:   */
+/*   env_elem_search.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:50:33 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/10/12 15:54:47 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 17:56:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-char	*get_search_infos(t_list *env, char *str)
+char	*get_search_infos(t_data *data, char *str)
 {
 	t_list *tmp;
 
 	tmp = NULL;
-	tmp = env;
+	tmp = data->env;
 	if (!str)
 		return (NULL);
 	while (tmp)

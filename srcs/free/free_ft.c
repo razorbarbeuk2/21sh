@@ -6,17 +6,38 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/21 14:15:54 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 11:43:01 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-int     free_quote(t_data *data)
+
+void ft_free_char_array(char ***tmp)
+{
+	int i;
+	char **tmp_n;
+
+	i = 0;
+	tmp_n = (*tmp);
+	if (!tmp_n)
+		return;
+	while (tmp_n[i])
+	{
+		free(tmp_n[i]);
+		tmp_n[i] = NULL;
+		i++;
+	}
+	free(tmp_n);
+	tmp_n = NULL;
+	return;
+}
+
+int free_quote(t_data *data)
 {
 	if (data->quotes->quote_pos[0])
 	{
 		data->quotes = free_data_quotes(data->quotes);
-		free (data->quotes->quote);
+		free(data->quotes->quote);
 		data->quotes->quote = NULL;
 		free(data->quotes);
 		data->quotes = NULL;
@@ -24,9 +45,9 @@ int     free_quote(t_data *data)
 	return (1);
 }
 
-int     free_cursor(t_data *data)
+int free_cursor(t_data *data)
 {
-    if (data->sel)
+	if (data->sel)
 	{
 		data->sel = free_data_select(data->sel);
 		ft_free_pos(data->sel);
@@ -39,10 +60,10 @@ int     free_cursor(t_data *data)
 		free(data->entry);
 		data->entry = NULL;
 	}
-    return (1);
+	return (1);
 }
 
-int 	free_destruction_final(t_data *data)
+int free_destruction_final(t_data *data)
 {
 	free_cursor(data);
 	if (data->env)
@@ -60,13 +81,13 @@ int 	free_destruction_final(t_data *data)
 	if (data->historic)
 	{
 		data->historic = free_data_historic(data->historic);
-		free (data->historic->historique);
+		free(data->historic->historique);
 		data->historic->historique = NULL;
 		free(data->historic);
 		data->historic = NULL;
 	}
-    if (data->term)
+	if (data->term)
 		ft_term_reset(data->term);
-	ft_free_char(data->paths);
+	ft_free_char_array(&data->paths);
 	return (1);
 }

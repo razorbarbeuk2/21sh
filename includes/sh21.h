@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 17:29:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 20:12:56 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define SEARCH_COLOR "\033[38;2;22;193;213m"
 # define POS "\033[6n"
 # define DEBUG ft_putstr("FUCK");
+#define	 BACK 1
 
 typedef struct		s_fd
 {
@@ -39,13 +40,13 @@ typedef struct		s_fd
 }					t_fd;
 
 /*TOOLS*/
-int							get_tab_to_lst(t_list **data_env, char **environ);
+// int							get_tab_to_lst(t_list **data_env, char **environ);
 char						**get_lst_to_tab(t_list *env_lst);
 void						print_env(t_list *lst);
 void 						print_lst_line_tools(t_data *data, t_list *lst);
 void						print_pos_cursor(t_data *data);
 /*TOOLS FREE*/
-void						ft_free_char(char **tmp);
+void 						ft_free_char_array(char ***tmp);
 void						ft_free_env(void *tmp, size_t tmp_size);
 void						ft_free_tab_path(char **oldpath, char **path);
 void						ft_free_node(void *tmp, size_t tmp_size);
@@ -82,7 +83,7 @@ t_entry 					*init_data_entry();
 t_historic 					*init_data_hist();
 t_quote 					*init_data_quotes();
 /*ENV*/
-char						*get_search_infos(t_list *env, char *str);
+char						*get_search_infos(t_data *data, char *str);
 int							iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s));
 int							modif_elem(char **tab_line, t_list **env_lst, t_list **start);
 int							del_elem(char **tab_line, t_list **env_lst, t_list **start);
@@ -94,10 +95,12 @@ int							ft_get_access(t_data *data, char **line, char *result);
 int							ft_no_paths(t_data *data, char **line);
 int							get_exe_cmd(t_data *data, char **path, char **cmd, t_list *env_lst);
 /*PRINT*/
-void						print_error(char *str);
-void						print_cmd_not_found(char *str);
-void						print_list_cmd(t_data *data, t_list *lst);
-int							print_parse_error(char *str);
+int							ft_print_error(char *str);
+int							ft_print_cmd_not_found(char *str);
+//void						print_list_cmd(t_data *data, t_list *lst);
+int							ft_print_parse_error(char *str);
+int							ft_print_move_error(char *str, char *error);
+int 						ft_print_error_option(char str, char *usage, char *builtins);
 /*TERM*/
 int							term_init(t_term *term);
 void						termios_init(struct	termios *term);
@@ -129,7 +132,7 @@ void 						ft_move(t_data *data, int x, int y);
 void						reset_line(t_data *data);
 void						print_character(t_data *data, char result);
 void						del_one_character(t_data *data, int result);
-void						exec_cmd_character(t_data *data);
+int							exec_cmd_character(t_data *data);
 void						motion_list(t_data *data, char opt);
 /*ADD_DEL_CPY_PRINT_CHARACT*/
 int							ft_add_print_caract(t_data *data, char result); /*data_str_insert_caract.c*/

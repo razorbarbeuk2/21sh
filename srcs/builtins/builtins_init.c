@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 19:54:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 11:32:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int			parse_line_builtins(t_data *data, t_list **env_lst, char **line)
 
 	state = 0;
 	if ((state = buil_drive(data, env_lst, line)))
+	{
+		ft_putendl("STATE");
 		return (state);
+	}
 	else
 	{
 		state = get_exe_path(data, line);

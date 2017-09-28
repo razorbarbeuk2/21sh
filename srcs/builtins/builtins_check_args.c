@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter_elem_env.c                                    :+:      :+:    :+:   */
+/*   builtins_check_args.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/12 17:36:04 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 17:43:22 by gbourson         ###   ########.fr       */
+/*   Created: 2017/09/28 11:34:08 by gbourson          #+#    #+#             */
+/*   Updated: 2017/09/28 12:05:24 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int			iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s))
+int builtins_check_args(char **line, int num)
 {
-	t_list	*cpy;
+    int i;
 
-	cpy = NULL;
-	cpy = *env_lst;
-	if (!cpy && tab_line)
-	{
-		f(tab_line, env_lst, env_lst);
-		return (1);
-	}
-	while (cpy)
-	{
-		if (f(tab_line, &cpy, env_lst))
-			return (1);
-		cpy = cpy->next;
-	}
-	return (0);
+    i = 0;
+    while (line[i])
+        i++;
+    if (i > num)
+        return (ft_print_error("Too many arguments."));
+    return (1);
 }

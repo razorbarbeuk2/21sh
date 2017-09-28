@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_set_unset_env.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:23 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/06 16:43:34 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 11:56:28 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int				builtin_unsetenv(t_data *data, char **line)
 	int i;
 
 	i = 1;
-	(void)data;
 	ft_strdel(&line[0]);
 	while (line[i])
 	{
@@ -28,40 +27,32 @@ int				builtin_unsetenv(t_data *data, char **line)
 	return (0);
 }
 
-static void		builtin_setenv_next(char **tmp, t_list **env_lst, \
-	char **line, int n)
+static void		builtin_setenv_next(char **tmp, t_list **env_lst, char **line)
 {
 	if (!line[2])
 		tmp[1] = " ";
-	tmp[n] = NULL;
+	tmp[2] = NULL;
 	iter_elem_env(tmp, env_lst, &modif_elem);
 	ft_strdel_double(tmp);
 }
 
 int				builtin_setenv(t_data *data, char **line)
 {
-	int		i;
-	int		n;
 	char	**tmp;
+	int		i;
 
 	i = 1;
-	n = 0;
-	(void)data;
 	if (line[i] && ft_isalpha_string(line[i]))
 	{
-		if (ft_count_tab(&line[i]) > 2)
-		{
-			print_error("Too many arguments.\n");
-			return (0);
-		}
-		tmp = (char **)ft_memalloc(3*sizeof(char *));
+		if (builtins_check_args(line, 3))
+			return (-1);
+		tmp = ft_memalloc(3*sizeof(char *));
 		while (line[i])
 		{
-			tmp[n] = line[i];
-			n++;
+			tmp[i - 1] = line[i];
 			i++;
 		}
-		builtin_setenv_next(tmp, &data->env, line, n);
+		builtin_setenv_next(tmp, &data->env, line);
 	}
-	return (0);
+	return (1);
 }

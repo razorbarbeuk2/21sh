@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 17:26:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/25 17:22:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 18:51:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,32 @@ static int	ft_opt_is_in(char *str, char c)
 	return (0);
 }
 
-static int	ft_opt(char *str, char *opt)
+static int 	get_parse_opt_next(char *str, char *opt)
+{
+	int i;
+	int o;
+
+	i = 0;
+	while (str == '-')
+		str++;
+	while (str[i] && ft_opt_is_in(str[i], opt[i]))
+	{
+		if ()
+
+
+	}
+	return (ft_print_error("Erreur Options\n"));
+}
+
+int			env_parse_opt(char **str, char *opt)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_opt_is_in(opt, str[i]) && (str[i] != '-'))
-		{
-			print_error("Erreur Options");
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-int			get_parse_opt(char **str, char *opt)
-{
-	int i;
-
-	i = 1;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i][0] == '-' && (ft_strcmp(str[i], "-") != 0) \
-			&& (ft_strcmp(str[i], "--") != 0))
-		{
-			if (!ft_opt(str[i], opt))
-				return (0);
-			else
-				return (1);
-		}
+		if ((str[i][0] == '-') || (str[i][0] == '-' && str[i][1] == '-'))
+			return (ft_opt_is_in(str[i], opt));
 		i++;
 	}
 	return (0);

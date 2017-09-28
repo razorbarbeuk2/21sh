@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:48:45 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/27 13:03:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:26:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_no_paths(t_data *data, char **line)
 		if (access(line[0], X_OK) == 0)
 			get_exe_cmd(data, &line[0], line, data->env);
 		else
-			print_error("PATH is empty\n");
+			return(ft_print_error("PATH is empty"));
 		return (0);
 	}
 	return (1);

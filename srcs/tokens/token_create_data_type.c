@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/20 16:56:57 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/21 15:22:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:04:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,22 @@ static int data_construct_token_priority(unsigned int type)
 	return (0);
 }
 
-int data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos)
+int data_check_is_token_operator(t_list **token_list, unsigned int type, char *str, int pos)
 {
 	t_token_struct *token;
 
 	token = NULL;
-	if (line_str)
+	if (str)
 	{
 		token = ft_memalloc(sizeof(t_token_struct));
 		token->type = type;
-		token->token_name = ft_strdup(line_str);
+		token->token_name = ft_strdup(str);
 		token->pos = pos;
 		token->value = data_construct_token_priority(type);
 		ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));
-		return (ft_strlen(line_str));
+		return (1);
 	}
-	else
-		ft_print_err("Error token create");
-	return (0);
+	return(ft_print_error("Error token create"));
 }
 
 void data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size)

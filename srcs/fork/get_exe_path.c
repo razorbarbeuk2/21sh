@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_exe_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/21 23:45:22 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 12:27:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ int			get_exe_path(t_data *data, char **line)
 			return (1);
 		else if (i == 0 && ft_strchr(line[0], '/'))
 		{
-			print_cmd_not_found(line[0]);
 			ft_strdel(&result);
-			return (-1);
+			return (ft_print_cmd_not_found(line[0]));
 		}
 		ft_strdel(&result);
 		result = NULL;
 		i++;
 	}
-	print_cmd_not_found(line[0]);
+	ft_print_cmd_not_found(line[0]);
 	return (-1);
 }

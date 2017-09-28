@@ -6,29 +6,11 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:42:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/27 19:20:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 11:40:34 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-
-void		ft_free_char(char **tmp)
-{
-	int i;
-
-	i = 0;
-	if (!tmp)
-		return ;
-	while (tmp[i])
-	{
-		free(tmp[i]);
-		tmp[i] = NULL;
-		i++;
-	}
-	free(tmp);
-	tmp = NULL;
-	return ;
-}
 
 void		ft_free_node(void *tmp, size_t tmp_size)
 {

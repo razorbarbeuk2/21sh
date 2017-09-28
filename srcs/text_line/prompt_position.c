@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/07/06 17:59:46 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/28 11:45:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_clean_buf_pos(t_data *data, char *buf)
 		data->sel->pos[i] = (ft_atoi(tab_pos[i]) - 1);
 		i++;
 	}
-	ft_free_char(tab_pos);
+	ft_free_char_array(&tab_pos);
 	//data->sel->pos[i] = 0;
 	tab_pos = NULL;
 	return ;

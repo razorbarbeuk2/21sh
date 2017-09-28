@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/20 19:29:54 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:21:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int ft_error_token(unsigned int type)
 	while (s_error_t[i].c)
 	{
 		if (type == s_error_t[i].t)
-			return (print_parse_error(s_error_t[i].c));
+			return (ft_print_parse_error(s_error_t[i].c));
 		i++;
 	}
 	return (0);

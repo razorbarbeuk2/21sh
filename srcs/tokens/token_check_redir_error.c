@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 15:20:44 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/20 19:14:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:20:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int ft_token_redirection_ERROR_STRING(char j)
 
 	c[0] = j;
 	c[1] = '\0';
-	return (print_parse_error(c));
+	return (ft_print_parse_error(c));
 }
 
 static int ft_token_redirection_ERROR_SIMPLE_INT(char d)

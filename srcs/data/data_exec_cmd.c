@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/27 18:30:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:24:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static const struct s_exec_token s_exec_t[] = {
 	{TYPE_CMD, exec},
 	{TYPE_FINISH, NULL}};
 
-static void reset_exec_cmd_character(t_data *data)
+static int reset_exec_cmd_character(t_data *data)
 {
 	if (!get_reset_prompt(data))
-		print_error("Prompt error\n");
-	return;
+		return (ft_print_error("Prompt error"));
+	return (1);
 }
 
 void print(t_token_node *st_node)
@@ -105,7 +105,7 @@ static void read_ast(t_data *data, t_token_node *node_cur, unsigned int fork_sta
 		exec_cmd_type(data, node_cur, fork_state);
 }
 
-void exec_cmd_character(t_data *data)
+int exec_cmd_character(t_data *data)
 {
 	t_token_node *node_tree;
 
@@ -117,7 +117,7 @@ void exec_cmd_character(t_data *data)
 	if (data->entry->line_str)
 	{
 		if (!add_sentence_historic_node_to_list(data))
-			print_error("historic error\n");
+			return (ft_print_error("historic error"));
 		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str) != -1)
 		{
 			node_tree = construct_ast_tree(data->token_list, NULL, 1, node_tree);
