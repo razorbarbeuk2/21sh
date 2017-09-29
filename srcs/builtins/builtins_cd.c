@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:27 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/28 17:45:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:47:27 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ struct s_caract
 };
 
 static const struct s_caract s_caract_tab[] = {
-	{"~", "HOME", get_search_infos},
-	{"~/", "HOME", get_search_infos},
-	{"-", "OLDPWD", get_search_infos},
+	{"~", "HOME", env_search_infos},
+	{"~/", "HOME", env_search_infos},
+	{"-", "OLDPWD", env_search_infos},
 	{"/", NULL, builtin_cd_special_caract_slash},
 	{"..", NULL, builtin_cd_special_caract_return},
 	{"../", NULL, builtin_cd_special_caract_return},
-	{NULL, NULL, NULL}};
+	{NULL, NULL, NULL}
+};
 
 static char *builtin_cd_parse_special_caract(t_data *data, char *line)
 {
@@ -46,7 +47,7 @@ static char *builtin_cd_parse_special_caract(t_data *data, char *line)
 
 static int ft_check_caract(t_data *data, char **path, char **line)
 {
-	if (!get_search_infos(data, "OLDPWD") || !get_search_infos(data, "PWD"))
+	if (!env_search_infos(data, "OLDPWD") || !env_search_infos(data, "PWD"))
 		return (ft_print_error("No PWD or OLDPWD in env"));
 	if (!line[1])
 		return (builtin_cd_special_caract_home(data, &path[1]));
@@ -82,22 +83,16 @@ int builtin_cd(t_data *data, char **line)
 		return (-1);
 	getcwd(oldpath[1], 1024);
 	ft_strdel(&line[0]);
-	// ft_putendl("test-------------");
-	// ft_putendl(oldpath[0]);
-	// ft_putendl(oldpath[1]);
-	// ft_putendl(path[0]);
-	// ft_putendl(path[1]);
-	// ft_putendl("------------------");
 	if (ft_check_caract(data, &path[1], line))
 	{
 		if (path[1] && oldpath)
 		{
-			if (ft_check_move(line[1]))
+			if (builtin_cd_move(line[1]))
 			{
 				getcwd(path[1], 1024);
-				ft_putendl(oldpath[1]);
-				ft_putendl(path[1]);
-				print_env(data->env);
+				// ft_putendl(oldpath[1]);
+				// ft_putendl(path[1]);
+				// print_env(data->env);
 				iter_elem_env(oldpath, &data->env, &modif_elem);
 				iter_elem_env(path, &data->env, &modif_elem);
 			}

@@ -6,26 +6,27 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 19:11:25 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/28 13:15:08 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 19:37:35 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static void	ft_reset_myterm(struct termios *term)
+static void	termios_reset(struct termios *term)
 {
 	term->c_lflag |= (ICANON | ECHO);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
 }
 
-void		ft_term_reset(t_term *term)
+int			term_reset(t_term *term)
 {
 	if (tcgetattr(0, &term->myterm) == -1)
-		return ;
-	ft_reset_myterm(&term->myterm);
+		return (ft_print_error("Tcgetattr ERROR\n"));
+	termios_reset(&term->myterm);
 	if (tcsetattr(0, TCSANOW, &term->myterm) == -1)
-		return ;
+		return (ft_print_error("Tcsetattr ERROR\n"));
+	return (1);
 }
 
 // void		ft_term_stop(void)

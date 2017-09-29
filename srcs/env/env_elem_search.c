@@ -6,13 +6,13 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:50:33 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 17:56:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:31:56 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-char	*get_search_infos(t_data *data, char *str)
+char	*env_search_infos(t_data *data, char *str)
 {
 	t_list *tmp;
 

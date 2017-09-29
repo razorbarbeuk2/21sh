@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/28 11:43:01 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 19:38:42 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int free_destruction_final(t_data *data)
 		data->historic = NULL;
 	}
 	if (data->term)
-		ft_term_reset(data->term);
+		term_reset(data->term);
 	ft_free_char_array(&data->paths);
 	return (1);
 }

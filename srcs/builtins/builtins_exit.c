@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:15 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/19 17:35:01 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/29 19:36:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void end_shell(t_data *data)
 	if (data)
 	{
 		add_sentence_historic_list_to_file(data);
-		ft_term_reset(data->term);
+		term_reset(data->term);
 		free_destruction_final(data);
 	}
 	return ;

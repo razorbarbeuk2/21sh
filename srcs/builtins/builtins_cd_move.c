@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/19 12:17:54 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/28 16:39:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:45:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ char 		*builtin_cd_special_caract_slash(t_data *data, char *str)
 
 int			builtin_cd_special_caract_home(t_data *data, char **path)
 {
-	if (!get_search_infos(data, "HOME"))
+	if (!env_search_infos(data, "HOME"))
 		return (ft_print_error("No HOME in env"));
-	(*path) = ft_strdup(get_search_infos(data, "HOME"));
+	(*path) = ft_strdup(env_search_infos(data, "HOME"));
 	return (1);
 }
 
-int			ft_check_move(char *path)
+int			builtin_cd_move(char *path)
 {
 	struct stat		infos;
 

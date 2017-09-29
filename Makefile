@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/28 18:36:45 by gbourson         ###   ########.fr        #
+#    Updated: 2017/09/29 19:20:38 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,9 @@ LIB			=	./libft/libft.a
 SRC_NAME 	=	init/init_data.c \
 				init/init_prompt.c \
 				init/init_env.c \
+				init/init_env_list.c \
 				init/init_term.c \
 				init/term_reset.c \
-				builtins/builtins_init.c \
-				builtins/builtins_check_args.c \
-				builtins/builtins_env.c \
-				builtins/builtins_envcpy.c \
-				builtins/builtins_set_unset_env.c \
-				builtins/builtins_cd.c \
-				builtins/builtins_cd_move.c \
-				builtins/builtins_echo.c \
-				builtins/builtins_echo_opt.c \
-				builtins/builtins_exit.c \
 				env/iter_elem_env.c \
 				env/del_elem_env.c \
 				env/edit_elem_env.c \
@@ -67,6 +58,19 @@ SRC_NAME 	=	init/init_data.c \
 				exec/exec_pipe.c \
 				exec/exec_redir.c \
 				exec/exec.c \
+				exec/exec_parse_line_builtins.c \
+				exec/exec_get_access.c \
+				exec/exec_get_path.c \
+				builtins/builtins_check_args.c \
+				builtins/builtins_env.c \
+				builtins/builtins_envcpy.c \
+				builtins/builtins_set_unset_env.c \
+				builtins/builtins_cd.c \
+				builtins/builtins_cd_move.c \
+				builtins/builtins_echo.c \
+				builtins/builtins_echo_opt.c \
+				builtins/builtins_exit.c \
+				builtins/options/parse_option.c \
 				history/data_create_history_files.c \
 				history/data_up_down_history.c \
 				history/data_create_history_node_to_list.c \
@@ -78,9 +82,6 @@ SRC_NAME 	=	init/init_data.c \
 				tools/tools_termcaps.c \
 				tools/tools_print.c \
 				tools/tools_count.c \
-				fork/access.c \
-				fork/fork.c \
-				fork/get_exe_path.c \
 				free/free_ft.c \
 				free/free_struct.c \
 				free/free_struct_cmd.c \

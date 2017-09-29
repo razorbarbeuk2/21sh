@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/26 14:32:16 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 14:39:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:46:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int			builtin_echo_var(t_data *data, char **tmp, char **str)
 	if (tmp_n[0] == '$')
 	{
 		*str = ft_strsub(tmp_n, 1, ft_strlen(tmp_n) - 1);
-		if (!(tmp_n = get_search_infos(data, *str)))
+		if (!(tmp_n = env_search_infos(data, *str)))
 		{
 			ft_print_error("No variable in env\n");
 			ft_strdel(&tmp_n);

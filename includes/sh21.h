@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/28 20:12:56 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 19:37:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,14 @@
 # include "./data.h"
 # include "./builtins.h"
 
-# define RED "\e[31m"
-# define ORANGE "\033[38;2;255;189;0m"
-# define SEARCH_COLOR "\033[38;2;22;193;213m"
-# define POS "\033[6n"
-# define DEBUG ft_putstr("FUCK");
-#define	 BACK 1
-
-typedef struct		s_fd
-{
-	int				stdin;
-	int				stdout;
-	int				stderr;
-}					t_fd;
+# define RED 			"\e[31m"
+# define ORANGE 		"\033[38;2;255;189;0m"
+# define SEARCH_COLOR	"\033[38;2;22;193;213m"
+# define POS 			"\033[6n"
+# define DEBUG 			ft_putstr("FUCK");
+#define	 BACK 			1
+# define FORK 			1
+# define UNFORK 		0 
 
 /*TOOLS*/
 // int							get_tab_to_lst(t_list **data_env, char **environ);
@@ -64,17 +59,9 @@ t_quote 					*free_data_quotes(t_quote *quotes);
 /*TOOLS TERMCAPS*/
 int							ft_concat_int(char *buf);
 int							ft_putchar_select(int c);
-/*TOOLS COUNT*/
-int 						len_word(char *str);
-int							len_word_caract(char *line_str, char *caract);
-int 						ft_count_word_caract(t_data *data, char *str);
-int 						data_check_caract(char c);
-char 						*trim_str(char *str);
-char						*ft_strcpy_data(char *dst, const char *str);
-int							ft_count_word_spec_caract(char *line_str, char *caract);
-int 						ft_count_enum(unsigned int START, unsigned int END);
 /*INIT*/
 void						init_env(t_list **env_lst);
+int         				init_env_lst(t_data *data);
 int							init_paths_home_env(t_data *data);
 int							init_struct(t_data *data);
 int 						init_prompt(t_data *data);
@@ -83,28 +70,20 @@ t_entry 					*init_data_entry();
 t_historic 					*init_data_hist();
 t_quote 					*init_data_quotes();
 /*ENV*/
-char						*get_search_infos(t_data *data, char *str);
+char						*env_search_infos(t_data *data, char *str);
 int							iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list **e, t_list **s));
 int							modif_elem(char **tab_line, t_list **env_lst, t_list **start);
 int							del_elem(char **tab_line, t_list **env_lst, t_list **start);
-/*OPTIONS*/
-int							get_parse_opt(char **str, char *opt);
-/*EXE*/
-int							get_exe_path(t_data *data, char **line);
-int							ft_get_access(t_data *data, char **line, char *result);
-int							ft_no_paths(t_data *data, char **line);
-int							get_exe_cmd(t_data *data, char **path, char **cmd, t_list *env_lst);
 /*PRINT*/
 int							ft_print_error(char *str);
 int							ft_print_cmd_not_found(char *str);
 //void						print_list_cmd(t_data *data, t_list *lst);
 int							ft_print_parse_error(char *str);
 int							ft_print_move_error(char *str, char *error);
-int 						ft_print_error_option(char str, char *usage, char *builtins);
+int 						ft_print_error_option(char *str, char *usage, char *builtins);
 /*TERM*/
 int							term_init(t_term *term);
-void						termios_init(struct	termios *term);
-void						ft_term_reset(t_term *term);
+int							term_reset(t_term *term);
 /*PROMPT*/
 char						*ft_cut_path(t_data *data);
 int							get_reset_prompt(t_data *data);
@@ -190,6 +169,33 @@ int 						exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork
 int 						exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec(t_data *data, t_token_node *cur, unsigned int fork_state);
+int							exec_parse_line_builtins(t_data *data, char **line, int fork_state);
+int        					exec_fork_step(t_data *data, unsigned int fork_state);
+int							exec_get_path(t_data *data, char **line);
+int							exec_get_access(t_data *data, char **line, char *result);
+int							exec_no_paths(t_data *data, char **line);
+int							exec_cmd(t_data *data, char **path, char **cmd, t_list *env_lst);
+int       					exec_exit(int fork_state);
+/*BUILTINS*/
+int 						builtins_check_args(char **line, int num);
+int							builtin_env(t_data *data, char **line);
+t_list						*builtin_env_cpy(t_data *data);
+int 						builtin_env_null(t_data *data, char *line);
+int 						builtin_env_unset(t_data *data, char *line);
+int							builtin_setenv(t_data *data, char **line);
+int							builtin_unsetenv(t_data *data, char **line);
+int							builtin_cd(t_data *data, char **line);
+int							builtin_cd_special_caract_home(t_data *data, char **line);
+char 						*builtin_cd_special_caract_slash(t_data *data, char *str);
+char 						*builtin_cd_special_caract_return(t_data *data, char *str);
+int							builtin_cd_move(char *path);
+int							builtin_echo(t_data *data, char **line);
+void						builtin_echo_use_e(t_data *data, char **line);
+void						builtin_echo_use_n(t_data *data, char **line);
+void						builtin_echo_quote(t_data *data, char **line);
+int							builtin_exit(t_data *data, char **line);
+/*OPTIONS*/
+int 						builtin_parse_opt(t_data *data, char *line, char *builtins, const struct s_option s_option_tab[]);
 /*TOOLS*/
 t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void						print_lst_line(t_data *data, t_list *lst);
@@ -197,11 +203,21 @@ void 						print_list_node_cmd(t_data *data, t_list *lst);
 void 						print_tab(t_data *data, char **str_tab);
 void 						count_list_cmd(t_data *data, t_list *lst);
 int 						ft_print_token(t_list **token_lst);
+/*TOOLS COUNT*/
+int 						len_word(char *str);
+int							len_word_caract(char *line_str, char *caract);
+int 						ft_count_word_caract(t_data *data, char *str);
+int 						data_check_caract(char c);
+char 						*trim_str(char *str);
+char						*ft_strcpy_data(char *dst, const char *str);
+int							ft_count_word_spec_caract(char *line_str, char *caract);
+int 						ft_count_enum(unsigned int START, unsigned int END);
 /*CLEAN CARACT*/
 char 						**data_split_to_tab(t_data *data, char *line_str, char *caract);
 //char 				**data_split_to_tab(char *line_str, char *caract);
 
-
+// /*OPTIONS*/
+// int							get_parse_opt(char **str, char *opt);
 
 
 

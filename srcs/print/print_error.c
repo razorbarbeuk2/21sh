@@ -6,21 +6,22 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 19:40:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 18:06:59 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int 	ft_print_error_option(char str, char *usage, char *builtins)
+int 	ft_print_error_option(char *str, char *usage, char *builtins)
 {
 	ft_putstr_fd(builtins, STDERR_FILENO);
 	ft_putstr_fd(": illegal option -- ", STDERR_FILENO);
-	ft_putendl_fd(&str, STDERR_FILENO);
-	ft_putstr_fd("usage: ", STDERR_FILENO);
-	ft_putstr_fd(builtins, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("\nusage: ", STDERR_FILENO);
 	ft_putstr_fd(" [-", STDERR_FILENO);
+	ft_putstr_fd(usage, STDERR_FILENO);
 	ft_putstr_fd("]\n", STDERR_FILENO);
+	return (-1);
 }
 
 int		ft_print_move_error(char *str, char *error)

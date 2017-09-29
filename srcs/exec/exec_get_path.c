@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_exe_path.c                                     :+:      :+:    :+:   */
+/*   exec_get_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 12:27:07 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 18:05:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		*ft_name_join(char *name, char *path)
 	return (tmp);
 }
 
-static char		*get_exe_path_check_result(char *line, char *paths, int i)
+static char		*exec_get_path_check_result(char *line, char *paths, int i)
 {
 	if (line)
 	{
@@ -36,19 +36,19 @@ static char		*get_exe_path_check_result(char *line, char *paths, int i)
 	return (NULL);
 }
 
-int			get_exe_path(t_data *data, char **line)
+int				exec_get_path(t_data *data, char **line)
 {
 	char	*result;
 	int		i;
 
 	i = 0;
 	result = NULL;
-	if (!ft_no_paths(data, line))
-		return (0);
+	if (exec_no_paths(data, line))
+		return (1);
 	while (data->paths && data->paths[i])
 	{
-		result = get_exe_path_check_result(line[0], data->paths[i], i);
-		if(ft_get_access(data, line, result))
+		result = exec_get_path_check_result(line[0], data->paths[i], i);
+		if(exec_get_access(data, line, result))
 			return (1);
 		else if (i == 0 && ft_strchr(line[0], '/'))
 		{
@@ -59,6 +59,5 @@ int			get_exe_path(t_data *data, char **line)
 		result = NULL;
 		i++;
 	}
-	ft_print_cmd_not_found(line[0]);
-	return (-1);
+	return (ft_print_cmd_not_found(line[0]));
 }

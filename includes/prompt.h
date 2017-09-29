@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 15:28:42 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 14:10:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define PROMPT_H
 
 # include <term.h>
-
-# define FORK 		1
-# define NOT_FORK 	0 
 
 typedef enum		e_enum_quote
 {

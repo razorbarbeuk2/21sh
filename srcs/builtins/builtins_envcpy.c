@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 18:35:37 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/28 18:36:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/29 13:12:48 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_env	*env_cpy_node(t_list *env_node)
 	return (NULL);
 }
 
-t_list	*env_cpy(t_data *data)
+t_list	*builtin_env_cpy(t_data *data)
 {
 	t_list	*env;
 	t_env  	*env_cpy;
