@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/19 12:17:54 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 17:45:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 18:59:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@ char 		*builtin_cd_special_caract_slash(t_data *data, char *str)
 
 int			builtin_cd_special_caract_home(t_data *data, char **path)
 {
-	if (!env_search_infos(data, "HOME"))
-		return (ft_print_error("No HOME in env"));
-	(*path) = ft_strdup(env_search_infos(data, "HOME"));
+	if (((*path) = ft_strdup(env_search_infos(data, "HOME"))) == NULL)
+	{
+		if (data->home)
+		{
+			(*path) = ft_strdup(data->home);
+			return (1);
+		}
+		return (ft_print_error("No HOME in env\n"));
+	}
 	return (1);
 }
 
@@ -39,9 +45,9 @@ int			builtin_cd_move(char *path)
 	struct stat		infos;
 
 	if (stat(path, &infos) == -1)
-		return (ft_print_move_error(path, ": No such file or directory."));
+		return (ft_print_move_error(path, ": No such file or directory.\n"));
 	if (!S_ISDIR(infos.st_mode))
-		return (ft_print_move_error(path, ": Not a directory."));
+		return (ft_print_move_error(path, ": Not a directory.\n"));
 	if(!chdir(path))
 		return (1);
 	else

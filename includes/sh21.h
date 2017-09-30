@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 19:37:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:08:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void						print_env(t_list *lst);
 void 						print_lst_line_tools(t_data *data, t_list *lst);
 void						print_pos_cursor(t_data *data);
 /*TOOLS FREE*/
-void 						ft_free_char_array(char ***tmp);
+void                        ft_free_char_array(char ***tmp);
 void						ft_free_env(void *tmp, size_t tmp_size);
 void						ft_free_tab_path(char **oldpath, char **path);
 void						ft_free_node(void *tmp, size_t tmp_size);
@@ -185,7 +185,10 @@ int 						builtin_env_unset(t_data *data, char *line);
 int							builtin_setenv(t_data *data, char **line);
 int							builtin_unsetenv(t_data *data, char **line);
 int							builtin_cd(t_data *data, char **line);
+int                         builtin_cd_init_paths(char ***oldpath, char ***path, char **line);
+char                        **builtin_cd_init_path(char ***path);
 int							builtin_cd_special_caract_home(t_data *data, char **line);
+int 	                    builtin_cd_check_caract(t_data *data, char **path, char **line);
 char 						*builtin_cd_special_caract_slash(t_data *data, char *str);
 char 						*builtin_cd_special_caract_return(t_data *data, char *str);
 int							builtin_cd_move(char *path);

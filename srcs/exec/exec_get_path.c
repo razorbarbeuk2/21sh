@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/29 18:05:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:05:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int				exec_get_path(t_data *data, char **line)
 
 	i = 0;
 	result = NULL;
-	if (exec_no_paths(data, line))
-		return (1);
+	if (exec_no_paths(data, line) == -1)
+		return (-1);
 	while (data->paths && data->paths[i])
 	{
 		result = exec_get_path_check_result(line[0], data->paths[i], i);
-		if(exec_get_access(data, line, result))
-			return (1);
+		if(exec_get_access(data, line, result) == -1)
+			return (-1);
 		else if (i == 0 && ft_strchr(line[0], '/'))
 		{
 			ft_strdel(&result);

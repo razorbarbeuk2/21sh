@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:03:08 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/11 13:52:18 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/09/30 20:01:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ t_entry *free_data_entry(t_entry *entry)
 {
 	if (entry)
 	{
-		if (entry->line)
-			ft_lstdel(&entry->line, &ft_free_node);
-		if (entry->cpy)
-			ft_lstdel(&entry->cpy, &ft_free_node);
+		ft_lstdel(&entry->line, &ft_free_node);
+		ft_lstdel(&entry->cpy, &ft_free_node);
 		ft_strdel(&entry->line_str);
 		//ft_free_char(entry->line_str_double);
 		entry->line_str = NULL;

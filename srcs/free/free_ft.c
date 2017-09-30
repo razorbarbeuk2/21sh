@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 19:38:42 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:08:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ void ft_free_char_array(char ***tmp)
 
 	i = 0;
 	tmp_n = (*tmp);
-	if (!tmp_n)
-		return;
-	while (tmp_n[i])
+	if (tmp_n)
 	{
-		free(tmp_n[i]);
-		tmp_n[i] = NULL;
-		i++;
+		while (tmp_n[i])
+		{
+			ft_strdel(&tmp_n[i]);
+			i++;
+		}
+		ft_strdel_double(tmp_n);
 	}
-	free(tmp_n);
-	tmp_n = NULL;
 	return;
 }
 

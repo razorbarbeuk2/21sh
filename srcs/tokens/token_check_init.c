@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/21 12:29:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 20:26:04 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int ft_token_str_pos(t_data *data, char *line_str, t_list **token_list, unsigned
 	
 	(void)data;
 	state = 0;
-	i = ft_memalloc(2 * sizeof(int));
+	i = ft_memalloc(3 * sizeof(int));
 	while (line_str[i[0]] && (i[0] < (int)ft_strlen(line_str)))
 	{
 		if (line_str[i[0]] && (line_str[i[0]] == '"' || line_str[i[0]] == '\''))

@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/29 19:20:38 by gbourson         ###   ########.fr        #
+#    Updated: 2017/09/30 19:33:25 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,8 @@ SRC_NAME 	=	init/init_data.c \
 				builtins/builtins_envcpy.c \
 				builtins/builtins_set_unset_env.c \
 				builtins/builtins_cd.c \
+				builtins/builtins_cd_init.c \
+				builtins/builtins_cd_check_caract.c \
 				builtins/builtins_cd_move.c \
 				builtins/builtins_echo.c \
 				builtins/builtins_echo_opt.c \
@@ -119,5 +121,8 @@ fclean : clean
 	@echo "C'est encore plus propre..."
 
 re : 	fclean all
+
+leaks1 :
+	while true ; do leaks 21sh ; sleep 3 ; clear ; done
 
 .PHONY: all, clean, fclean, re

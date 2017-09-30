@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 19:10:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:16:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_select 	*init_data_sel()
 	init_sel->i_lst = 0;
 	init_sel->i_lst_tmp = 0;
 	init_sel->_bottom = 0;
+	init_sel->offset = 0;
 	init_sel->prompt = NULL;
 	init_sel->len_prompt = 0;
 

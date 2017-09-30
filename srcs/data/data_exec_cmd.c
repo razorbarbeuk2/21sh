@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/29 19:47:11 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 19:50:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int exec_cmd_character(t_data *data)
 			return (ft_print_error("historic error"));
 		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str) != -1)
 		{
-			getchar();
 			node_tree = construct_ast_tree(data->token_list, NULL, 1, node_tree);
 			if (node_tree)
 				exec_cmd_type(data, node_tree, FORK);

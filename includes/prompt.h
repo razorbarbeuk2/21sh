@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 14:10:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:16:00 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct		s_select
 	int				i_lst_tmp;
 	int				_bottom;
 	char			*prompt;
+	int 			offset;
 	size_t			len_prompt;
 }					t_select;
 

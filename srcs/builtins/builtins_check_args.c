@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 11:34:08 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/28 12:05:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 17:40:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int builtins_check_args(char **line, int num)
     while (line[i])
         i++;
     if (i > num)
-        return (ft_print_error("Too many arguments."));
+        return (ft_print_error("Too many arguments.\n"));
     return (1);
 }

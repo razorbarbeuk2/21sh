@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/29 19:55:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/09/30 19:46:48 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_cut_path(t_data *data)
 
 int		get_reset_prompt(t_data *data)
 {
-	ft_putchar_fd('\n', data->term->tty);
+	//ft_putchar_fd('\n', data->term->tty);
 	free_cursor(data);
 	if (data->token_list)
 	{
@@ -49,9 +49,10 @@ int		get_reset_prompt(t_data *data)
 void	get_super_prompt(t_data *data)
 {
 	ft_putstr_fd(ORANGE, data->term->tty);
-	if ((data->sel->prompt = ft_cut_path(data)))
+	if ((data->sel->prompt = ft_cut_path(data)) && data->home)
 	{
-		if (data->home)
+		data->sel->offset = (ft_strlen(data->sel->prompt) - ft_strlen(data->home));
+		if (data->sel->offset > 0)
 		{
 			ft_putstr_fd(data->sel->prompt + ft_strlen(data->home), data->term->tty);
 			data->sel->len_prompt = (ft_strlen(data->sel->prompt) - ft_strlen(data->home) + 4);
