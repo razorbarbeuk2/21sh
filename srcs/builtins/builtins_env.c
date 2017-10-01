@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/01 17:42:46 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 20:54:26 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ int builtin_env_unset(t_data *data, char **line)
 	return (0);
 }
 
-int		builtin_env_next(t_data *data, char **line)
+int		builtin_env_next(t_data *data, char **line, struct s_option *s_option_tab)
 {
-	struct s_option *s_option_tab;
 	int		i;
 	char	**tmp;
 
 	i = 1;
 	tmp = NULL;
-	s_option_tab = builtins_stat_option();
-	data->env_cpy = s_option_tab[0].set ? NULL : builtin_env_cpy(data);
+	data->env_cpy = s_option_tab[0].set ? NULL : builtin_env_cpy(data, &data->env);
 	if (s_option_tab[1].set)
 		builtin_env_unset(data, line);
 	while (line[i] && line[i][0] == '-')
@@ -56,13 +54,17 @@ int		builtin_env_next(t_data *data, char **line)
 	else
 		print_env(data->env_cpy);
 	ft_free_char_array(&tmp);
-	//ft_lstdel(&data->env_cpy, &ft_free_env);
+	ft_lstdel(&data->env_cpy, &ft_free_env);
 	return (1);
 }
 
 int		builtin_env(t_data *data, char **line)
 {
+	struct s_option *s_option_tab;
+
+	s_option_tab = builtins_stat_option();
+	builtin_opt_init(s_option_tab);
 	if (builtin_parse_opt(data, line, "env", NULL) == -1)
 		return (-1);
-	return(builtin_env_next(data, line));
+	return(builtin_env_next(data, line, s_option_tab));
 }

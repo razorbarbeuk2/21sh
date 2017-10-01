@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/01 17:43:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 20:37:26 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ int       					exec_exit(int fork_state);
 /*BUILTINS*/
 int 						builtins_check_args(char **line, int num);
 int							builtin_env(t_data *data, char **line);
-t_list						*builtin_env_cpy(t_data *data);
+t_list						*builtin_env_cpy(t_data *data, t_list **env_tmp);
 int 						builtin_env_unset(t_data *data, char **line);
 int							builtin_setenv(t_data *data, char **line);
 int							builtin_unsetenv(t_data *data, char **line);
@@ -198,6 +198,7 @@ void						builtin_echo_use_n(t_data *data, char **line);
 void						builtin_echo_quote(t_data *data, char **line);
 int							builtin_exit(t_data *data, char **line);
 /*OPTIONS*/
+int                         builtin_opt_init(struct s_option *s_option_tab);
 int 						builtin_parse_opt(t_data *data, char **line, char *builtins, struct s_option *s_option_tab);
 struct s_option             *builtins_stat_option(void);
 /*TOOLS*/

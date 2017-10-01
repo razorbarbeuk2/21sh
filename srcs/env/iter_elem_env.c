@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter_elem_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 17:36:04 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 17:43:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 20:55:40 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			iter_elem_env(char **tab_line, t_list **env_lst, int (*f)(char **t, t_list
 	t_list	*cpy;
 
 	cpy = NULL;
-	cpy = *env_lst;
+	cpy = (*env_lst);
 	if (!cpy && tab_line)
 	{
 		f(tab_line, env_lst, env_lst);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 11:49:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/01 17:19:44 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 20:32:22 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ static int builtin_move_opt(char *line)
 	while (line[i] == '-')
 		i++;
 	return (i);
+}
+
+int builtin_opt_init(struct s_option *s_option_tab)
+{
+	int opt;
+
+	opt = 0;
+	while (s_option_tab[opt].option)
+	{
+		s_option_tab[opt].set = 0;
+		opt++;
+	}
+	return (1);
 }
 
 int builtin_parse_opt_check(char c, struct s_option *s_option_tab)
