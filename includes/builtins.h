@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:20:22 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 17:42:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:27:16 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ typedef struct		s_opt
 	t_option		f;
 }					t_opt;
 
-struct 	s_option
+struct 				set_option
 {
-	char 			*option;
-	t_function_opt 	f;	
+	int 			set_option;
+	int 			num_option;	
+};
+
+struct 				s_option
+{
+	char 			option;
+	int 			set;	
 };
 
 #endif

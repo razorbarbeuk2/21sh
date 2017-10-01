@@ -6,27 +6,24 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 17:44:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 17:42:46 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static const struct s_option s_option_tab[] = {
-	{"i", builtin_env_null},
-	{"u", builtin_env_unset},
-	{NULL, NULL}
-};
-
-int builtin_env_null(t_data *data, char *line)
+struct s_option *builtins_stat_option(void)
 {
-	(void)data;
-	(void)line;
-	ft_putendl("ENV NULL");
-	return (0);
+	static struct s_option s_option_tab[] = {
+		{'i', 0},
+		{'u', 0},
+		{0, 0}
+	};
+	
+	return (s_option_tab);
 }
 
-int builtin_env_unset(t_data *data, char *line)
+int builtin_env_unset(t_data *data, char **line)
 {
 	(void)data;
 	(void)line;
@@ -36,13 +33,18 @@ int builtin_env_unset(t_data *data, char *line)
 
 int		builtin_env_next(t_data *data, char **line)
 {
+	struct s_option *s_option_tab;
 	int		i;
 	char	**tmp;
 
-	i = 0;
+	i = 1;
 	tmp = NULL;
-	data->env_cpy = NULL;
-	builtin_parse_opt(data, line[i], "env", s_option_tab);
+	s_option_tab = builtins_stat_option();
+	data->env_cpy = s_option_tab[0].set ? NULL : builtin_env_cpy(data);
+	if (s_option_tab[1].set)
+		builtin_env_unset(data, line);
+	while (line[i] && line[i][0] == '-')
+		i++;
 	while (line[i] && ft_strchr(line[i], '='))
 	{
 		tmp = ft_strsplit(line[i], '=');
@@ -60,14 +62,7 @@ int		builtin_env_next(t_data *data, char **line)
 
 int		builtin_env(t_data *data, char **line)
 {
-	int		i;
-
-	i = 0;
-	while (line[i] && line[i][0] == '-')
-	{
-		if ((builtin_parse_opt(data, line[i], "env", s_option_tab)) == -1)
-			return (-1);
-		i++;
-	}
-	return(builtin_env_next(data, &line[i]));
+	if (builtin_parse_opt(data, line, "env", NULL) == -1)
+		return (-1);
+	return(builtin_env_next(data, line));
 }

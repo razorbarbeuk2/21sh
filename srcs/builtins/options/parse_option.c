@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 11:49:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 13:15:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 17:19:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char *ft_concat_opt(const struct s_option *t)
 {
-	int 	i;
-	char 	*c;
+	int i;
+	char *c;
 
 	i = 0;
 	c = NULL;
@@ -25,14 +25,14 @@ static char *ft_concat_opt(const struct s_option *t)
 	i = 0;
 	while (t[i].option)
 	{
-		c[i] = t[i].option[0];
+		c[i] = t[i].option;
 		i++;
 	}
 	c[i] = '\0';
 	return (c);
 }
 
-static int	builtin_move_opt(char *line)
+static int builtin_move_opt(char *line)
 {
 	int i;
 
@@ -42,32 +42,46 @@ static int	builtin_move_opt(char *line)
 	return (i);
 }
 
-int builtin_parse_opt(t_data *data, char *line, char *builtins, const struct s_option s_option_tab[])
+int builtin_parse_opt_check(char c, struct s_option *s_option_tab)
+{
+	int opt;
+	int set_option;
+
+	opt = 0;
+	set_option = 0;
+	while (s_option_tab[opt].option)
+	{
+		if (c == s_option_tab[opt].option)
+		{
+			s_option_tab[opt].set = OPT;
+			set_option = 1;
+		}
+		opt++;
+	}
+	if (!set_option)
+		return (-1);
+	return (1);
+}
+
+int builtin_parse_opt(t_data *data, char **line, char *builtins, struct s_option *s_option_tab)
 {
 	int i;
 	int n;
-	int set;
 
-	i = 0;
-	n = builtin_move_opt(line);
-	while (line[n])
+	i = 1;
+	(void)data;
+	s_option_tab = builtins_stat_option();
+	while (line[i] && line[i][0] == '-')
 	{
-		i = 0;
-		set = 0;
-		while (s_option_tab[i].option)
+		n = builtin_move_opt(line[i]);
+		while (line[i][n])
 		{
-			if (ft_strcmp(s_option_tab[i].option, &line[n]) == 0)
-			{
-				if (s_option_tab[i].f(data, line) == -1)
-					ft_print_error("Error Option function");
-				set = 1;
-			}
-			i++;
+			
+			if (builtin_parse_opt_check(line[i][n], s_option_tab) == -1)
+				return (ft_print_error_option(line[i][n], ft_concat_opt(s_option_tab), builtins));
+			n++;
 		}
-		if (!set)
-			return (ft_print_error_option(&line[n], ft_concat_opt(s_option_tab), builtins));
-		n++;
+		i++;
 	}
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/30 20:08:18 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/01 17:43:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define DEBUG 			ft_putstr("FUCK");
 #define	 BACK 			1
 # define FORK 			1
-# define UNFORK 		0 
+# define UNFORK 		0
+# define OPT 		    1
 
 /*TOOLS*/
 // int							get_tab_to_lst(t_list **data_env, char **environ);
@@ -80,7 +81,7 @@ int							ft_print_cmd_not_found(char *str);
 //void						print_list_cmd(t_data *data, t_list *lst);
 int							ft_print_parse_error(char *str);
 int							ft_print_move_error(char *str, char *error);
-int 						ft_print_error_option(char *str, char *usage, char *builtins);
+int 						ft_print_error_option(char c, char *usage, char *builtins);
 /*TERM*/
 int							term_init(t_term *term);
 int							term_reset(t_term *term);
@@ -180,8 +181,7 @@ int       					exec_exit(int fork_state);
 int 						builtins_check_args(char **line, int num);
 int							builtin_env(t_data *data, char **line);
 t_list						*builtin_env_cpy(t_data *data);
-int 						builtin_env_null(t_data *data, char *line);
-int 						builtin_env_unset(t_data *data, char *line);
+int 						builtin_env_unset(t_data *data, char **line);
 int							builtin_setenv(t_data *data, char **line);
 int							builtin_unsetenv(t_data *data, char **line);
 int							builtin_cd(t_data *data, char **line);
@@ -198,7 +198,8 @@ void						builtin_echo_use_n(t_data *data, char **line);
 void						builtin_echo_quote(t_data *data, char **line);
 int							builtin_exit(t_data *data, char **line);
 /*OPTIONS*/
-int 						builtin_parse_opt(t_data *data, char *line, char *builtins, const struct s_option s_option_tab[]);
+int 						builtin_parse_opt(t_data *data, char **line, char *builtins, struct s_option *s_option_tab);
+struct s_option             *builtins_stat_option(void);
 /*TOOLS*/
 t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void						print_lst_line(t_data *data, t_list *lst);
