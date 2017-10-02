@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/07/06 16:45:31 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/02 13:27:47 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ t_list *ft_add_print_new_node(char result)
 	t_list *lst;
 
 	lst = NULL;
-	lst = (t_list *)ft_memalloc(sizeof(t_list));
+	lst = ft_memalloc(sizeof(t_list));
 	if (lst)
 	{
 		lst->content = NULL;
-		lst->content = ft_memalloc(2*sizeof(char));
+		lst->content = ft_memalloc(2 * sizeof(char));
 		((char *)lst->content)[0] = result;
 		((char *)lst->content)[1] = '\0';
 		lst->content_size = 0;
@@ -59,9 +59,9 @@ int ft_add_print_caract(t_data *data, char result)
 	tmp_st = tmp_lst;
 	if (!data->sel->i_lst)
 		ft_lstadd(&tmp_lst, ft_add_print_new_node(result));
-	else if ((data->sel->i_lst < (int)data->entry->len_line) && data->sel->i_lst > 0)
+	else if (data->sel->i_lst < (int)data->entry->len_line)
 	{
-		tmp_lst = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+		tmp_lst = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst - 1));
 		tmp_swap = tmp_lst->next;
 		tmp_lst->next = NULL;
 		ft_lstadd_back(&tmp_lst, ft_add_print_new_node(result));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_elem_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 17:34:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 18:01:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/02 10:38:01 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	modif_elem_reel(char **tab_line, t_env *env)
 {
-	if (env && ft_strcmp(tab_line[0], env->key) == 0)
+	if (env && (ft_strcmp(tab_line[0], env->key)) == 0)
 	{
 		if (env->infos)
 			ft_strdel(&env->infos);
@@ -31,12 +31,10 @@ int			modif_elem(char **tab_line, t_list **env_lst, t_list **start)
 
 	(void)start;
 	env = NULL;
-	env_tmp = *env_lst;
-	if (env_tmp)
-	{
-		env = ((t_env *)env_tmp->content);
-		return (modif_elem_reel(tab_line, env));
-	}
+	env_tmp = (*env_lst);
+	env = ((t_env *)env_tmp->content);
+	if(modif_elem_reel(tab_line, env))
+		return (1);
 	else if ((!env_tmp || !env_tmp->next))
 	{
 		env = ft_memalloc(sizeof(t_env));

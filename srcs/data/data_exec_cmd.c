@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/30 19:50:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/02 13:14:55 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ int exec_cmd_type(t_data *data, t_token_node *node_cur, unsigned int fork_state)
 	return (-1);
 }
 
+
+void test_print(t_data *data)
+{
+	t_list *tmp;
+
+	ft_putendl("TEST-----------------");
+	tmp = NULL;	
+	tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+	write(1, "\n", 1);
+	ft_putchar(((char *)tmp->content)[0]);
+	ft_putendl("-----------------");
+
+}
+
 int exec_cmd_character(t_data *data)
 {
 	t_token_node *node_tree;
@@ -67,12 +81,16 @@ int exec_cmd_character(t_data *data)
 	node_tree = NULL;
 	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
+	
+	term_reset(data->term);
+	return (1);
 	if (data->entry->line_str)
 	{
 		if (!add_sentence_historic_node_to_list(data))
 			return (ft_print_error("historic error"));
 		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str) != -1)
 		{
+			
 			node_tree = construct_ast_tree(data->token_list, NULL, 1, node_tree);
 			if (node_tree)
 				exec_cmd_type(data, node_tree, FORK);

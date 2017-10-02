@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 17:38:17 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/29 19:52:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/02 10:40:00 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int        exec(t_data *data, t_token_node *cur, unsigned int fork_state)
     
     cur_t = NULL;
     line = NULL;
-    term_reset(data->term);
     cur_t = ((t_token_struct *)cur->node->content);
     line = ft_strsplit(cur_t->token_name, ' ');
     exec_parse_line_builtins(data, line, fork_state);

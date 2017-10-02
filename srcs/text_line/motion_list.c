@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   motion_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:19:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/19 11:44:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/02 12:29:05 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,11 @@ t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
 	(void)data;
 	tmp_lst = NULL;
 	tmp_lst = (*lst);
-	if (!pos)
-		return (NULL);
-	count = 1;
-	if (pos)
+	count = 0;
+	while (count != pos && tmp_lst->next)
 	{
-		while (count != pos && tmp_lst && tmp_lst->next)
-		{
-			tmp_lst = tmp_lst->next;
-			count++;
-		}
-		return (tmp_lst);
+		tmp_lst = tmp_lst->next;
+		count++;
 	}
-	tmp_lst = NULL;
-	return (NULL);
+	return (tmp_lst);
 }
