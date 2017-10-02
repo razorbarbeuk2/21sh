@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/30 17:16:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/02 17:04:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,5 @@ int init_struct(t_data *data)
 		return (-1);
 	if (!(data->sel = init_data_sel()))
 		return (-1);
-	
 	return (1);
 }

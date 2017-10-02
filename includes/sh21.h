@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/01 20:37:26 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/02 21:55:10 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,11 @@ void						ft_move_end(t_data *data);
 void						ft_move_cursor(t_data *data, int result);
 void 						ft_move(t_data *data, int x, int y);
 void						reset_line(t_data *data);
-void						print_character(t_data *data, char result);
 void						del_one_character(t_data *data, int result);
 int							exec_cmd_character(t_data *data);
 void						motion_list(t_data *data, char opt);
 /*ADD_DEL_CPY_PRINT_CHARACT*/
-int							ft_add_print_caract(t_data *data, char result); /*data_str_insert_caract.c*/
+int                         ft_add_print_caract(t_data *data, char result);                                             
 int							ft_del_print_caract(t_data *data, char result); /*data_str_insert.c*/
 void						ft_add_at(t_list **lst, char result);
 /*DATA*/
@@ -206,6 +205,7 @@ t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
 void						print_lst_line(t_data *data, t_list *lst);
 void 						print_list_node_cmd(t_data *data, t_list *lst);
 void 						print_tab(t_data *data, char **str_tab);
+void		                print_character(t_data *data, char result);
 void 						count_list_cmd(t_data *data, t_list *lst);
 int 						ft_print_token(t_list **token_lst);
 /*TOOLS COUNT*/

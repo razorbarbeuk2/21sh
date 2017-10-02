@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/02 13:14:55 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/02 21:37:00 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,9 @@ int exec_cmd_character(t_data *data)
 	write(1, "\n", 1);
 	node_tree = NULL;
 	parse_quote_and_double_quote(data);
+	//print_lst_line(data, data->entry->line);
 	data->entry->line_str = convert_data_lst_tab(data);
-	
-	term_reset(data->term);
-	return (1);
+	//term_reset(data->term);
 	if (data->entry->line_str)
 	{
 		if (!add_sentence_historic_node_to_list(data))

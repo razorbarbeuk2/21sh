@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_str_del_caract.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/02 13:58:31 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/02 21:45:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,41 @@ void ft_del_lst(void *content, size_t content_size)
 	return;
 }
 
-int ft_del_print_caract_middle_line(t_data *data)
+int ft_del_print_caract_first_line(t_data *data)
+{
+	t_list *tmp_cur;
+	t_list *tmp_next;
+
+	tmp_cur = data->entry->line;
+	tmp_next = tmp_cur->next;
+	ft_lstdelone(&tmp_cur, &ft_del_lst);
+	data->entry->line = tmp_next;
+	data->entry->cut_line = tmp_next;
+	return (1);
+}
+
+int ft_del_print_middle_caract_line(t_data *data)
 {
 	t_list *tmp_cur;
 	t_list *tmp_prev;
 	t_list *tmp_next;
 
-	tmp_cur = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
-	tmp_prev = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst - 1));
-	tmp_next = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst + 1));
+	tmp_cur = ft_move_at_list(data, &data->entry->line, data->sel->i_lst - 1);
+	tmp_prev = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst - 2));
+	tmp_next = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst));
 	tmp_prev->next = tmp_next;
 	ft_lstdelone(&tmp_cur, &ft_del_lst);
 	data->entry->cut_line = tmp_next;
 	return (1);
 }
 
-int ft_del_print_caract_max_line(t_data *data)
+int ft_del_print_last_caract_line(t_data *data)
 {
 	t_list *tmp_cur;
 	t_list *tmp_prev;
 
-	tmp_cur = ft_move_at_list(data, &data->entry->line, (int)data->entry->len_line);
-	tmp_prev = ft_move_at_list(data, &data->entry->line, ((int)data->entry->len_line - 1));
+	tmp_cur = ft_move_at_list(data, &data->entry->line, ((int)data->entry->len_line - 1));
+	tmp_prev = ft_move_at_list(data, &data->entry->line, ((int)data->entry->len_line - 2));
 	ft_lstdelone(&tmp_cur, &ft_del_lst);
 	tmp_prev->next = NULL;
 	return (1);
@@ -55,27 +68,12 @@ int ft_del_print_caract(t_data *data, char result)
 	data->entry->cut_line = NULL;
 	if ((int)data->entry->len_line)
 	{
-		if (data->sel->i_lst == (int)data->entry->len_line)
-			ft_del_print_caract_max_line(data);
+		if (data->sel->i_lst == 1)
+			ft_del_print_caract_first_line(data);
 		else if (data->sel->i_lst < (int)data->entry->len_line)
-		{
-			ft_del_print_caract_middle_line(data);
-			// tmp_tools = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
-			// tmp_swap = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst - 1));
-			// if (tmp_swap->next && tmp_tools)
-			// {
-			// 	tmp_tools->next = tmp_swap->next;
-			// 	data->entry->cut_line = tmp_swap->next;
-			// }
-			// else
-			// {
-			// 	data->entry->line = data->entry->line->next;
-			// 	data->entry->cut_line = data->entry->line;
-			// }
-		}
-		// tmp_swap = NULL;
-		// tmp_tools = NULL;
-		// tmp_st = NULL;
+			ft_del_print_middle_caract_line(data);
+		else if (data->sel->i_lst == (int)data->entry->len_line)
+			ft_del_print_last_caract_line(data);
 		return (1);
 	}
 	return (0);

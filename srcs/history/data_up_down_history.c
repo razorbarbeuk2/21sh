@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_up_down_history.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 11:17:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/20 17:17:32 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/02 22:06:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				ft_move_up_down_historic(t_data *data, int result)
 {
 	char  		*tmp;
 	
+	(void)result;
 	tmp = NULL;
 	if (data->historic->list_historic && (data->historic->count_pos < data->historic->count_node + 1) && data->historic->count_pos > 0)
 	{

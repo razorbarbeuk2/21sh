@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   motion_cursor_LR.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/02 13:07:06 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/02 22:34:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void ft_move_left(t_data *data)
 	sel = data->sel;
 	if (sel->pos[1] > (int)sel->len_prompt && sel->pos[0] == sel->pos_start[0])
 	{
-		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
+		tputs(tgoto((tgetstr("le", NULL)), 0, 0), 0, ft_putchar_select);
 		motion_list(data, 'L');
 		return ;
 	}
 	if (sel->pos[0] != sel->pos_start[0] && sel->pos[1] > 0)
 	{
-		tputs(tgoto((tgetstr("LE", NULL)), 0, 0), 0, ft_putchar_select);
+		tputs(tgoto((tgetstr("le", NULL)), 0, 0), 0, ft_putchar_select);
 		motion_list(data, 'L');
 		return ;
 	}
@@ -54,7 +54,7 @@ void ft_move_right(t_data *data)
 	{
 		if (data->sel->pos[1] < (len%(int)data->term->width))
 		{
-			tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
+			tputs(tgoto(tgetstr("nd", NULL), 0, 0), 1, ft_putchar_select);
 			motion_list(data, 'R');
 		}
 		return;
@@ -67,7 +67,7 @@ void ft_move_right(t_data *data)
 	}
 	if ((data->sel->pos[1] < len))
 	{
-		tputs(tgoto(tgetstr("RI", NULL), 0, 0), 1, ft_putchar_select);
+		tputs(tgoto(tgetstr("nd", NULL), 0, 0), 1, ft_putchar_select);
 		motion_list(data, 'R');
 		return;
 	}
