@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/02 21:55:10 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/03 16:59:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define FORK 			1
 # define UNFORK 		0
 # define OPT 		    1
+# define PROMPT 		1
 
 /*TOOLS*/
 // int							get_tab_to_lst(t_list **data_env, char **environ);
@@ -65,7 +66,7 @@ void						init_env(t_list **env_lst);
 int         				init_env_lst(t_data *data);
 int							init_paths_home_env(t_data *data);
 int							init_struct(t_data *data);
-int 						init_prompt(t_data *data);
+int 	                    init_prompt(t_data *data, unsigned int flag);
 t_select 					*init_data_sel();
 t_entry 					*init_data_entry();
 t_historic 					*init_data_hist();

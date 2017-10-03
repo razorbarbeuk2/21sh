@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:41:09 by gbourson          #+#    #+#             */
-/*   Updated: 2017/07/10 14:38:00 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/03 16:59:35 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int 	init_prompt(t_data *data)
+int 	init_prompt(t_data *data, unsigned int flag)
 {
-	get_super_prompt(data);
+	if (flag)
+		get_super_prompt(data);
 	get_pos_prompt(data);
 	data->sel->pos_start[0] = data->sel->pos[0];
 	data->sel->pos_start[1] = data->sel->pos[1];

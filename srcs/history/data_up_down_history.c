@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/20 11:17:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/02 22:06:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/03 18:06:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void			ft_insert_cmd_to_prompt(t_data *data, char *s)
 	while (s[i])
 	{
 		print_character(data, s[i]);
+		if (data->sel->_bottom)
+			get_pos_prompt(data);
 		i++;
 	}
 	return ;

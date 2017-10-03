@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/30 19:46:48 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/03 17:00:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		get_reset_prompt(t_data *data)
 		return (-1);
 	if (!(data->quotes = init_data_quotes()))
 		return (-1);
-	if (!init_prompt(data))
+	if (!init_prompt(data, PROMPT))
 		return (-1);
 	listen_cursor(data, data->line);
 	return (1);
