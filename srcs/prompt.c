@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/03 17:00:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:11:24 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*ft_cut_path(t_data *data)
 
 int		get_reset_prompt(t_data *data)
 {
-	//ft_putchar_fd('\n', data->term->tty);
 	free_cursor(data);
 	if (data->token_list)
 	{

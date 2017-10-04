@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:57:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/04 12:58:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 23:03:30 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		del_one_character(t_data *data, int result)
 				ft_move(data, (data->sel->pos[1] = ((int)data->term->width - 1)), (data->sel->pos[0] -= 1));
 				i_ = 1;
 			}
-			ft_move_cursor(data, LEFT);
+			ft_move_cursor(data, LEFT, MOVE_LST);
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 			if ((data->sel->pos[1]) == (data->term->width - 1) && i_)
 			{
@@ -57,7 +57,7 @@ void		del_one_character(t_data *data, int result)
 		{
 			ft_del_print_caract(data, result);
 			data->entry->len_line--;
-			ft_move_cursor(data, LEFT);
+			ft_move_cursor(data, LEFT, MOVE_LST);
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
 			del_print_middle_sentence(data);
 			return ;

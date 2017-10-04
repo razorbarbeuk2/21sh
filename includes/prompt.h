@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/03 18:02:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:32:13 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ typedef enum			e_enum_cursor
 						ALT_LEFT = 27279168,
 						SHIFT_LEFT = -23279172,
 						SHIFT_RIGHT = -23279173,
-						CTRL_CPY_PASTE = 16, // CTRL + N
-						CTRL_CUT_PASTE = 12, // CTRL + 
+						CTRL_CPY_PASTE = 16, // CTRL + P
+						CTRL_CUT_PASTE = 12, // CTRL + L
 						SEARCH_HIST = 18, // CTRL + R
-						RST = 14 // CTRL + N
+						//RST = 14 // CTRL + N
 						// ALT_RIGHT
 						// HOME = 58,
 						// END = 61,

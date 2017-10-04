@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/09/30 19:33:25 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/04 18:28:28 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_NAME 	=	init/init_data.c \
 				data/data_lst_to_tab.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
+				data/data_str_cpy.c \
 				data/data_create_cmd_list.c \
 				data/data_sep_is_caract.c \
 				data/data_exec_cmd.c \

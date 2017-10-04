@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   motion_cursor_ALT_W_LR.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 15:14:09 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/02 12:02:40 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/04 23:30:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	ft_move_word_LR(t_data *data, int offset, char opt)
 	while (offset)
 	{
 		if (opt == 'L')
-			ft_move_cursor(data, LEFT);
+			ft_move_cursor(data, LEFT, MOVE_LST);
 		if (opt == 'R')
-			ft_move_cursor(data, RIGHT);
+			ft_move_cursor(data, RIGHT, MOVE_LST);
 		get_pos_prompt(data);
 		offset--;
 	}
@@ -47,7 +47,6 @@ void 		ft_move_word_left(t_data *data)
 			if (data_check_caract(((char *)tmp->content)[0]) && !data_check_caract(((char *)tmp->next->content)[0]) && _i)
 				break ;
 		}
-		
 	}
 	offset = (data->sel->i_lst - count - 1);
 	ft_move_word_LR(data, offset, 'L');

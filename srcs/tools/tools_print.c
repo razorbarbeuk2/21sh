@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/02 20:32:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 22:54:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,15 +186,15 @@ void print_lst_line(t_data *data, t_list *lst)
 	if (list)
 	{
 		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
-		if (data->sel->pos[1] == (data->term->width - 1))
-			ft_move_cursor(data, LEFT);
+		// if (data->sel->pos[1] == (data->term->width - 1))
+		// 	ft_move_cursor(data, LEFT, MOVE_LST);
 		while (list)
 		{
 			ft_putstr_fd((char *)list->content, data->term->tty);
+			list->set_select = 0;
 			list = list->next;
 		}
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
-		list = NULL;
 	}
 	return;
 }

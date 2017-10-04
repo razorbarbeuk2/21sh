@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:41:40 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/03 15:33:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 21:18:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void ft_move(t_data *data, int x, int y)
 		tputs(tgoto((tgetstr("cm", NULL)), x, y), 0, ft_putchar_select);
 }
 
-void ft_move_left(t_data *data)
+void ft_move_left(t_data *data, int state)
 { 
 	if (data->sel->pos[1] > (int)data->sel->len_prompt && data->sel->pos[0] == data->sel->pos_start[0])
 		tputs(tgoto((tgetstr("le", NULL)), 0, 0), 0, ft_putchar_select);
@@ -26,11 +26,12 @@ void ft_move_left(t_data *data)
 		tputs(tgoto((tgetstr("le", NULL)), 0, 0), 0, ft_putchar_select);
 	else if (data->sel->pos[0] != data->sel->pos_start[0] && data->sel->pos[1] == 0)
 		ft_move(data, (data->sel->pos[1] = ((int)data->term->width - 1)), (data->sel->pos[0] -= 1));
-	motion_list(data, 'L');
+	if (state)
+		motion_list(data, 'L');
 	return ;
 }
 
-void ft_move_right(t_data *data)
+void ft_move_right(t_data *data, int state)
 {
 	int len;
 
@@ -44,6 +45,7 @@ void ft_move_right(t_data *data)
 		ft_move(data, (data->sel->pos[1] = 0), (data->sel->pos[0] += 1));
 	else if (data->sel->pos[1] < len)
 		tputs(tgoto(tgetstr("nd", NULL), 0, 0), 1, ft_putchar_select);
-	motion_list(data, 'R');
+	if (state)
+		motion_list(data, 'R');
 	return ;
 }

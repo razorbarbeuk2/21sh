@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/03 18:07:59 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 23:44:26 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ static const struct s_exec_token s_exec_t[] = {
 	{TYPE_CMD, exec},
 	{TYPE_FINISH, NULL}};
 
-static int reset_exec_cmd_character(t_data *data)
-{
-	term_init(data->term);
-	if (!get_reset_prompt(data))
-		return (ft_print_error("Prompt error"));
-	return (1);
-}
-
 int exec_cmd_type(t_data *data, t_token_node *node_cur, unsigned int fork_state)
 {
 	int i;
@@ -59,6 +51,14 @@ int exec_cmd_type(t_data *data, t_token_node *node_cur, unsigned int fork_state)
 	return (-1);
 }
 
+static int reset_exec_cmd_character(t_data *data)
+{
+	term_init(data->term);
+	if (!get_reset_prompt(data))
+		return (ft_print_error("Prompt error"));
+	return (1);
+}
+
 int exec_cmd_character(t_data *data)
 {
 	t_token_node *node_tree;
@@ -66,10 +66,6 @@ int exec_cmd_character(t_data *data)
 	write(1, "\n", 1);
 	node_tree = NULL;
 	parse_quote_and_double_quote(data);
-	write(1, "\n", 1);
-	ft_putnbr(data->entry->offset_line);
-	write(1, "\n", 1);
-	//print_lst_line(data, data->entry->line);
 	data->entry->line_str = convert_data_lst_tab(data);
 	term_reset(data->term);
 	if (data->entry->line_str)
@@ -94,4 +90,3 @@ int exec_cmd_character(t_data *data)
 // 	if (node_cur)
 // 		exec_cmd_type(data, node_cur, FORK);
 // }
-

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:16:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/06/29 11:57:07 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 23:11:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void ft_move_end(t_data *data)
 	else
 		ft_move(data, (data->sel->pos[1] = (data->term->width - 1)), data->sel->pos[0]);
 	motion_list(data, 'E');
+	return ;
 }

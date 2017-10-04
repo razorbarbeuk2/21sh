@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:20:22 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/01 15:27:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 20:49:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ struct 				s_option
 {
 	char 			option;
 	int 			set;	
+};
+
+struct 				s_cpy
+{
+	char 			c;
+	int				set;
 };
 
 #endif

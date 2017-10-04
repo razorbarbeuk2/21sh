@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/03 16:59:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 23:06:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define UNFORK 		0
 # define OPT 		    1
 # define PROMPT 		1
+# define MOVE_LST       1
+// # define PROMPT_CPY 	0
 
 /*TOOLS*/
 // int							get_tab_to_lst(t_list **data_env, char **environ);
@@ -96,8 +98,9 @@ int							get_pos_prompt(t_data *data);
 void						ft_listen_cmd(t_data *data);
 /*MOTION_CURSOR*/
 int							listen_cursor(t_data *data, t_entry *entry);
-void						ft_move_left(t_data *data);
-void						ft_move_right(t_data *data);
+void						ft_move_cursor(t_data *data, int result, int state);
+void                        ft_move_left(t_data *data, int state);
+void                        ft_move_right(t_data *data, int state);
 void						ft_move_up(t_data *data);
 void						ft_move_down(t_data *data);
 void						ft_move_word_left(t_data *data);
@@ -108,7 +111,6 @@ void						ft_paste_word_cpy(t_data *data);
 void						ft_paste_word_cut(t_data *data);
 void						ft_move_home(t_data *data);
 void						ft_move_end(t_data *data);
-void						ft_move_cursor(t_data *data, int result);
 void 						ft_move(t_data *data, int x, int y);
 void						reset_line(t_data *data);
 void						del_one_character(t_data *data, int result);
