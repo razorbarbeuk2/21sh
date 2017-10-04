@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/03 18:03:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 11:48:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_entry 	*init_data_entry()
 	init_entry->line_str = NULL;
 	init_entry->line_str_double = NULL;
 	init_entry->nb_line = 0;
-	init_entry->offset_line = 0;
+	init_entry->offset_line = 1;
 	init_entry->len_line = 0;
 	init_entry->size_line = 0;
 

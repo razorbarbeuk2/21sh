@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:57:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/02 21:38:21 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/04 12:58:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ void		del_one_character(t_data *data, int result)
 {
 	int i_lst;
 	int i_;
+	int len;
 
 	i_lst = 0;
 	i_ = 0;
+	len = ((int)data->sel->len_prompt + (int)data->entry->len_line);
+	data->entry->offset_line = (len / (data->term->width) + 1);
 	if ((int)data->entry->len_line && data->sel->i_lst)
 	{
 		if (data->sel->i_lst == (int)data->entry->len_line)
