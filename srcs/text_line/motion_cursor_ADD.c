@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:59:10 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/04 16:49:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:27:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void print_character(t_data *data, char result)
 	motion_list(data, 'R');
 	if (data->sel->pos[1] == (data->term->width - 1))
 		print_character_cursor_endline(data);
-	if (data->sel->i_lst < (int)data->entry->len_line && data->sel->i_lst > 1)
+	if (data->sel->i_lst < (int)data->entry->len_line)
 		print_character_cursor_middleline(data, offset);
 	data->entry->offset_line = offset;
 	return;

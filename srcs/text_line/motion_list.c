@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:19:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/02 21:38:04 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:35:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,20 @@ t_list 	*ft_move_at_list(t_data *data, t_list **lst, int pos)
 		count++;
 	}
 	return (tmp_lst);
+}
+
+int 	ft_move_at_line(t_data *data, t_list **lst, t_list *tmp)
+{
+	t_list	*tmp_lst;
+	int 	count;
+
+	(void)data;
+	count = 0;
+	tmp_lst = (*lst);
+	while (tmp != tmp_lst)
+	{
+		tmp_lst = tmp_lst->next;
+		count++;
+	}
+	return (count);
 }

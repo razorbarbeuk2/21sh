@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/04 20:55:46 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/05 17:01:29 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int ft_add_print_caract(t_data *data, char result)
 	tmp_cur = data->entry->line;
 	data->entry->cut_line = NULL;
 	if (!data->sel->i_lst)
+	{
 		ft_lstadd(&tmp_cur, ft_add_print_new_node(result));
+		data->entry->cut_line = tmp_cur->next;
+	}
 	else if (data->sel->i_lst < (int)data->entry->len_line)
 	{
 		tmp_cur = ft_add_print_caract_middleline(data, result);

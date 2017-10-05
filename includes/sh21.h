@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/04 23:06:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:40:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define OPT 		    1
 # define PROMPT 		1
 # define MOVE_LST       1
+# define CPY            1
+# define CUT            0
 // # define PROMPT_CPY 	0
 
 /*TOOLS*/
@@ -107,7 +109,7 @@ void						ft_move_word_left(t_data *data);
 void						ft_move_word_right(t_data *data);
 void						ft_cpy_word_left(t_data *data);
 void						ft_cpy_word_right(t_data *data);
-void						ft_paste_word_cpy(t_data *data);
+void                        ft_paste_word_cpy(t_data *data, int mode);
 void						ft_paste_word_cut(t_data *data);
 void						ft_move_home(t_data *data);
 void						ft_move_end(t_data *data);
@@ -118,7 +120,7 @@ int							exec_cmd_character(t_data *data);
 void						motion_list(t_data *data, char opt);
 /*ADD_DEL_CPY_PRINT_CHARACT*/
 int                         ft_add_print_caract(t_data *data, char result);                                             
-int							ft_del_print_caract(t_data *data, char result); /*data_str_insert.c*/
+int                         ft_del_print_caract(t_data *data);
 void						ft_add_at(t_list **lst, char result);
 /*DATA*/
 char 						**data_clean_to_tab(t_data *data, char *str);
@@ -205,6 +207,7 @@ int 						builtin_parse_opt(t_data *data, char **line, char *builtins, struct s_
 struct s_option             *builtins_stat_option(void);
 /*TOOLS*/
 t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
+int 	                    ft_move_at_line(t_data *data, t_list **lst, t_list *tmp);
 void						print_lst_line(t_data *data, t_list *lst);
 void 						print_list_node_cmd(t_data *data, t_list *lst);
 void 						print_tab(t_data *data, char **str_tab);

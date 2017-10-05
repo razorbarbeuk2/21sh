@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 21:23:36 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/04 18:02:54 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:02:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int ft_del_print_caract_first_line(t_data *data)
 	ft_lstdelone(&tmp_cur, &ft_del_lst);
 	data->entry->line = tmp_next;
 	data->entry->cut_line = tmp_next;
+	data->entry->len_line--;
 	return (1);
 }
 
@@ -47,6 +48,7 @@ int ft_del_print_middle_caract_line(t_data *data)
 	tmp_prev->next = tmp_next;
 	ft_lstdelone(&tmp_cur, &ft_del_lst);
 	data->entry->cut_line = tmp_next;
+	data->entry->len_line--;
 	return (1);
 }
 
@@ -59,12 +61,12 @@ int ft_del_print_last_caract_line(t_data *data)
 	tmp_prev = ft_move_at_list(data, &data->entry->line, ((int)data->entry->len_line - 2));
 	ft_lstdelone(&tmp_cur, &ft_del_lst);
 	tmp_prev->next = NULL;
+	data->entry->len_line--;
 	return (1);
 }
 
-int ft_del_print_caract(t_data *data, char result)
+int ft_del_print_caract(t_data *data)
 {
-	(void)result;
 	data->entry->cut_line = NULL;
 	if ((int)data->entry->len_line)
 	{

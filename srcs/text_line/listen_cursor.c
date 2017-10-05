@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/04 21:23:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:40:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		ft_cmd_cursor(t_data *data, int result)
 	else if (result == SHIFT_RIGHT)
 		ft_cpy_word_right(data);
 	else if (result == CTRL_CPY_PASTE)
-		ft_paste_word_cpy(data);
+		ft_paste_word_cpy(data, CPY);
 	else if (result == CTRL_CUT_PASTE)
 		ft_paste_word_cut(data);
 	else if (result == ENTER)
