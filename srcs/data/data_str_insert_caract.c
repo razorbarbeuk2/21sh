@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 17:47:09 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/05 17:01:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/06 21:02:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int ft_add_print_caract(t_data *data, char result)
 		tmp_cur = ft_add_print_caract_middleline(data, result);
 		tmp_cur = data->entry->line;
 	}
-	else 
+	else
 		ft_lstadd_back(&tmp_cur, ft_add_print_new_node(result));
 	data->entry->len_line++;
 	data->entry->line = tmp_cur;

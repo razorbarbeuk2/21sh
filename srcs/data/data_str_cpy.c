@@ -6,11 +6,18 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:25:00 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/05 19:42:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/06 21:19:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void ft_cpy_word_pos(t_data *data)
+{
+	data->sel->pos_tmp[0] = data->sel->pos[0];
+	data->sel->pos_tmp[1] = data->sel->pos[1];
+	data->sel->i_lst_tmp = data->sel->i_lst;
+}
 
 static void print_lst_in_line(t_data *data, t_list *tmp)
 {
@@ -45,11 +52,14 @@ void ft_paste_word_cpy(t_data *data, int mode)
 		init_cpy_list(data);
 	if (data->entry->cpy)
 	{
-		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
+		get_pos_prompt(data);
+		ft_cpy_word_pos(data);
 		print_lst_in_line(data, data->entry->cpy);
-		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
+		reset_line(data);
+		ft_move(data, data->sel->pos_tmp[1], data->sel->pos_tmp[0]);
+		data->sel->i_lst = data->sel->i_lst_tmp;
 	}
-	return;
+	return ;
 }
 
 static void ft_paste_word_cut_del(t_data *data)
@@ -62,7 +72,7 @@ static void ft_paste_word_cut_del(t_data *data)
 	{
 		tmp = NULL;
 		tmp = ft_move_at_list(data, &data->entry->line, (data->sel->i_lst - 1));
-		if (tmp->set_select)
+		if (tmp && tmp->set_select)
 			ft_del_print_caract(data);
 		ft_move_cursor(data, LEFT, MOVE_LST);
 	}
@@ -73,73 +83,19 @@ static void ft_paste_word_cut_del(t_data *data)
 void ft_paste_word_cut(t_data *data)
 {
 	t_list *tmp;
-	t_list *start;
-	//int 	pos;
 
 	tmp = data->entry->line;
-	start = data->entry->line;
 	init_cpy_list(data);
 	ft_paste_word_cut_del(data);
+	tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+	//log_info("tmp [%c] && tmp->set [%d]", ((char *)tmp->content)[0], tmp && tmp->set_select);
+	if (tmp && !tmp->set_select)
+		data->sel->i_lst = ft_move_at_line(data, &data->entry->line, tmp);
+	else
+		data->sel->i_lst = ft_lst_count(data->entry->line);
 	ft_paste_word_cpy(data, CUT);
-	//tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
-	//data->sel->i_lst = ft_move_at_line(data, &data->entry->line, tmp);
-	//pos = ft_move_at_line(data, &data->entry->line, tmp);
-	//if (data->entry->cpy)
-	//{
-		// tmp = ft_move_at_list(data, &data->entry->line, pos);
-		// data->entry->line = tmp;
-		// tmp = data->entry->line->next;
-		// data->entry->line->next = NULL;
-		// print_lst_in_line(data, data->entry->cpy);
-		// ft_putendl("\nTEST==========");
-		// print_lst_line(data, data->entry->cpy);
-		// ft_putendl("\n--------------");
-		// print_lst_line(data, data->entry->line);
-		// ft_putendl("\n--------------");
-		// ft_putnbr(pos);
-		// ft_putendl("\n--------------");
-		// data->entry->line = ft_move_at_list(data, &data->entry->line, ft_lst_count(data->entry->line));
-		// data->entry->line->next = tmp;
-		// data->entry->len_line = ft_lst_count(data->entry->line);
-		// data->entry->line = start;
-	//}
-	//return;
+	data->entry->len_line = ft_lst_count(data->entry->line);
+	ft_lstdel(&data->entry->cpy, &ft_free_node);
+	return ;
 }
-
-// void ft_paste_word_cut(t_data *data)
-// {
-// 	t_list *tmp;
-// 	int _count;
-// 	int _i;
-// 	int _c;
-
-// 	tmp = NULL;
-// 	tmp = data->entry->cpy;
-// 	_i = data->sel->i_lst;
-// 	_count = 0;
-// 	_c = 0;
-// 	if (data->entry->cpy)
-// 	{
-// 		ft_move(data, (data->sel->pos_tmp[1] - 1), data->sel->pos_tmp[0]);
-// 		_count = ft_lst_count(data->entry->cpy);
-// 		data->sel->i_lst = data->sel->i_lst_tmp;
-// 		while (_count--)
-// 			ft_move_cursor(data, RIGHT, MOVE_LST);
-// 		_count = ft_lst_count(data->entry->cpy);
-// 		while (_count--)
-// 			del_one_character(data, 0);
-// 		_count = ft_lst_count(data->entry->cpy);
-// 		_c = pos(_i - _count);
-// 		data->sel->i_lst = _c;
-// 		ft_move_home(data);
-// 		get_pos_prompt(data);
-// 		while (_c--)
-// 		{
-// 			ft_move_cursor(data, RIGHT, MOVE_LST);
-// 			get_pos_prompt(data);
-// 		}
-// 		ft_paste_word_cpy(data);
-// 	}
-// 	return;
-// }
 

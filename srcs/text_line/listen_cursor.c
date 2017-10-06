@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/05 19:40:44 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/06 21:55:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void		ft_cmd_cursor(t_data *data, int result)
 	else if (result == DEL)
 		del_one_character(data, result);
 	else if (result == ESC)
+	{
+		reset_line_cpy(data);
 		reset_line(data);
+	}
 	else if (result == SEARCH_HIST)
 		get_hist_prompt(data);
 	else
@@ -98,8 +101,8 @@ int			listen_cursor(t_data *data, t_entry *entry)
 		if (result == LEFT || result == RIGHT || result == HOME || result == END || result == UP || result == DOWN)
 			ft_move_cursor(data, result, MOVE_LST);
 		ft_cmd_cursor(data, result);
-		if ((result >= 32 && result <= 126) && result != HOME && result != END)//Enlever HOME et END dans cette condition Num de touche à changer
-			print_character(data, result);	
+		if ((result >= 32 && result <= 126) && result != HOME && result != END)
+			print_character(data, result);
 		get_pos_prompt(data);
 		ft_bzero(buf, 8);
 	}

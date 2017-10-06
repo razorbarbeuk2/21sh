@@ -6,12 +6,16 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/05 19:40:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:45:42 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH21_H
 # define SH21_H
+
+//
+# include <logger_utils.h>
+# include <logger.h>
 
 # include <sys/ioctl.h>
 # include <sys/types.h>
@@ -115,6 +119,7 @@ void						ft_move_home(t_data *data);
 void						ft_move_end(t_data *data);
 void 						ft_move(t_data *data, int x, int y);
 void						reset_line(t_data *data);
+void 	                    reset_line_cpy(t_data *data);
 void						del_one_character(t_data *data, int result);
 int							exec_cmd_character(t_data *data);
 void						motion_list(t_data *data, char opt);

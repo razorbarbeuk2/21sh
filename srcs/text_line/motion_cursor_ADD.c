@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:59:10 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/05 18:27:29 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/06 23:11:45 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void print_character_cursor_middleline(t_data *data, int offset)
 {
+	
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 	print_lst_line(data, data->entry->cut_line);
 	if ((data->entry->offset_line < offset) && ((data->sel->pos_start[0] + offset - 1) == data->term->height))
