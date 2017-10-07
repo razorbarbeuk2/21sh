@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:57:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/06 23:28:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/07 16:41:12 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,30 @@
 
 static void		del_print_end_sentence(t_data *data)
 {
-	int i_;
-	
-	i_ = 0;
-	ft_del_print_caract(data);
-	// if ((data->sel->pos[1]) == 0 && !i_)
-	// {
-	// 	ft_move(data, (data->sel->pos[1] = data->term->width - 1), (data->sel->pos[0] -= 1));
-	// 	i_ = 1;
-	// }
-	ft_move_cursor(data, LEFT, MOVE_LST);
-	//tputs(tgetstr("dc", NULL), 0, ft_putchar_select);
-	tputs(tgoto((tgetstr("dc", NULL)), 0, 0), 0, ft_putchar_select);
-	// if ((data->sel->pos[1]) == 0)
-	// {
-		//tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-		// ft_move(data, data->sel->pos[1] = (data->term->width - 1), data->sel->pos[0]);
-		// i_ = 0;
-	// }
+	if (data->entry->line)
+	{
+		ft_del_print_caract(data);
+		ft_move_home(data);
+		tputs(tgetstr("vi", NULL), 1, ft_putchar_select);
+		tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
+		print_lst_line_end_pos_cursor(data, data->entry->line);
+	}
+	tputs(tgetstr("ve", NULL), 1, ft_putchar_select);
+	tputs(tgetstr("ae", NULL), 1, ft_putchar_select);
+	motion_list(data, 'E');
 	return ;
 }
 
 static void		del_print_middle_sentence(t_data *data)
 {
-	int i_lst;
-
-	i_lst = 0;
-	i_lst = data->sel->i_lst;
-	ft_del_print_caract(data);
-	ft_move_cursor(data, LEFT, MOVE_LST);
-	tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
-	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
-	print_lst_line(data, data->entry->cut_line);
-	data->sel->i_lst = i_lst;
+	if (data->entry->line)
+	{
+		ft_del_print_caract(data);
+		ft_move_cursor(data, LEFT, MOVE_LST);
+		tputs(tgetstr("dc", NULL), 1, ft_putchar_select);
+		tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
+		print_lst_line(data, data->entry->cut_line);
+	}
 	return ;
 }
 

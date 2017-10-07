@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 17:18:02 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/06 21:10:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/07 17:22:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ static void ft_cpy_word_set_state(t_data *data, t_list *tmp)
 		tputs(tgetstr("me", NULL), 1, ft_putchar_select);
 		tmp->set_select = 1;
 	}
-	else
-	{
-		ft_putchar_fd(((char *)tmp->content)[0], data->term->tty);
-		tmp->set_select = 0;
-	}
+	return ;
 }
 
 static int ft_cpy_word_left_set_select(t_data *data, int DIR)
@@ -46,19 +42,10 @@ static int ft_cpy_word_left_set_select(t_data *data, int DIR)
 
 void ft_cpy_word_left(t_data *data)
 {
-	int	PROMPT_CPY;
-
-	PROMPT_CPY = 0;
-	if (data->sel->pos[1] == 0)
-		PROMPT_CPY = 1;
-	if (data->entry->line)
+	if (data->entry->line && data->sel->i_lst < (int)data->entry->len_line)
 	{
 		ft_cpy_word_left_set_select(data, LEFT);
 		ft_move_cursor(data, LEFT, 0);
-		// if (!PROMPT_CPY)
-		// else
-		// 	ft_move(data, data->sel->pos[1]--, data->sel->pos[0]);
-		PROMPT_CPY = 0;
 	}
 	return;
 }

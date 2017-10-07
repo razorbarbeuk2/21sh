@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:25:00 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/06 21:19:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/07 18:00:17 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static void ft_paste_word_cut_del(t_data *data)
 			ft_del_print_caract(data);
 		ft_move_cursor(data, LEFT, MOVE_LST);
 	}
-	reset_line(data);
 	return ;
 }
 
@@ -86,13 +85,12 @@ void ft_paste_word_cut(t_data *data)
 
 	tmp = data->entry->line;
 	init_cpy_list(data);
-	ft_paste_word_cut_del(data);
 	tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
-	//log_info("tmp [%c] && tmp->set [%d]", ((char *)tmp->content)[0], tmp && tmp->set_select);
 	if (tmp && !tmp->set_select)
 		data->sel->i_lst = ft_move_at_line(data, &data->entry->line, tmp);
 	else
 		data->sel->i_lst = ft_lst_count(data->entry->line);
+	ft_paste_word_cut_del(data);
 	ft_paste_word_cpy(data, CUT);
 	data->entry->len_line = ft_lst_count(data->entry->line);
 	ft_lstdel(&data->entry->cpy, &ft_free_node);

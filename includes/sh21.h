@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/06 19:45:42 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/07 16:25:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ struct s_option             *builtins_stat_option(void);
 t_list						*ft_move_at_list(t_data *data, t_list **lst, int pos);
 int 	                    ft_move_at_line(t_data *data, t_list **lst, t_list *tmp);
 void						print_lst_line(t_data *data, t_list *lst);
+void                        print_lst_line_end_pos_cursor(t_data *data, t_list *lst);
 void 						print_list_node_cmd(t_data *data, t_list *lst);
 void 						print_tab(t_data *data, char **str_tab);
 void		                print_character(t_data *data, char result);

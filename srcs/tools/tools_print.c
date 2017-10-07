@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/04 22:54:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/07 16:16:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,22 @@ void count_list_cmd(t_data *data, t_list *lst)
 // }
 
 /*FAIRE ATTENTION*/
+
+void print_lst_line_end_pos_cursor(t_data *data, t_list *lst)
+{
+	if (lst)
+	{
+		while (lst)
+		{
+			ft_putstr_fd((char *)lst->content, data->term->tty);
+			lst->set_select = 0;
+			lst = lst->next;
+		}
+		return ;
+	}
+	return ;
+}
+
 void print_lst_line(t_data *data, t_list *lst)
 {
 	t_list *list;

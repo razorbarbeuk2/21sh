@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 16:16:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/05 18:06:48 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/07 16:12:42 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,28 @@ void ft_move_home(t_data *data)
 
 	sel = NULL;
 	sel = data->sel;
-	if ((sel->pos[1] != (sel->pos_start[1] + (int)sel->len_prompt) && sel->pos[0] != sel->pos_start[0]) || (sel->pos[0] == sel->pos_start[0]))
+	if (data->sel->i_lst > 0)
 	{
 		ft_move(data, data->sel->pos_start[1], data->sel->pos_start[0]);
 		motion_list(data, 'H');
 	}
 	return;
 }
+
+// void ft_move_home(t_data *data)
+// {
+// 	t_select *sel;
+
+// 	sel = NULL;
+// 	sel = data->sel;
+// 	if (data->sel->i_lst > 0)
+// 	if ((sel->pos[1] != (sel->pos_start[1] + (int)sel->len_prompt) && sel->pos[0] != sel->pos_start[0]) || (sel->pos[0] == sel->pos_start[0]))
+// 	{
+// 		ft_move(data, data->sel->pos_start[1], data->sel->pos_start[0]);
+// 		motion_list(data, 'H');
+// 	}
+// 	return;
+// }
 
 void ft_move_end(t_data *data)
 {
