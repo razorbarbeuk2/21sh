@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/07 16:25:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:44:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include <sys/stat.h>
 # include <ncurses.h>
 # include <term.h>
-# include  <fcntl.h>
+# include <fcntl.h>
+# include <term.h>
+# include <unistd.h>
 # include "../libft/libft.h"
 # include "./prompt.h"
 # include "./data.h"
@@ -113,7 +115,7 @@ void						ft_move_word_left(t_data *data);
 void						ft_move_word_right(t_data *data);
 void						ft_cpy_word_left(t_data *data);
 void						ft_cpy_word_right(t_data *data);
-void                        ft_paste_word_cpy(t_data *data, int mode);
+void                        ft_paste_word_cpy(t_data *data);
 void						ft_paste_word_cut(t_data *data);
 void						ft_move_home(t_data *data);
 void						ft_move_end(t_data *data);

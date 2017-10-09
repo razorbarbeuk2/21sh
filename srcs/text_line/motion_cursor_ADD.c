@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 16:59:10 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/07 16:39:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/09 14:37:09 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void print_character_cursor_middleline(t_data *data, int offset)
 {
-	
-	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 	print_lst_line(data, data->entry->cut_line);
 	if ((data->entry->offset_line < offset) && ((data->sel->pos_start[0] + offset - 1) == data->term->height))
 		data->sel->_bottom = 1;
@@ -49,10 +47,10 @@ void print_character(t_data *data, char result)
 	ft_add_print_caract(data, result);
 	ft_putchar_fd(result, data->term->tty);
 	motion_list(data, 'R');
-	if (data->sel->pos[1] == (data->term->width - 1))
-		print_character_cursor_endline(data);
 	if (data->sel->i_lst < (int)data->entry->len_line)
 		print_character_cursor_middleline(data, offset);
+	if (data->sel->pos[1] == (data->term->width - 1))
+		print_character_cursor_endline(data);
 	data->entry->offset_line = offset;
 	return;
 }

@@ -6,18 +6,19 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 17:38:17 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/07 14:07:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:16:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int       exec_exit(int fork_state)
-{
-    if (fork_state)
-        exit(EXIT_SUCCESS);
-    return (1);
-}
+// int       exec_exit(int fork_state)
+// {
+//     ft_putendl("\nEXIT");
+//     if (fork_state)
+//         exit(EXIT_SUCCESS);
+//     return (1);
+// }
 
 int        exec_fork_step(t_data *data, unsigned int fork_state)
 {   

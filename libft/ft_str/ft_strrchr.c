@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 19:08:46 by gbourson          #+#    #+#             */
-/*   Updated: 2016/10/11 16:06:07 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/09 20:31:17 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ char	*ft_strrchr(const char *s, int c)
 	if (s[i] == c)
 		return ((char *)s + i);
 	else
-		return (0);
+		return (NULL);
 }

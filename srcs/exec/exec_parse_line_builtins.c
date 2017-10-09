@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/04 23:39:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:43:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ static int	builtins_parsing(t_data *data, char **line)
 
 int 		exec_exe_step(t_data *data, char **line, int fork_state)
 {
-	if (exec_get_path(data, line) == -1)
-		return (ft_print_error("Error path cmd\n"));
-	return (exec_exit(fork_state));
+	(void)fork_state;
+	exec_get_path(data, line);
+	//exec_exit(fork_state);
+	return (1);
 }
 
 int			exec_parse_line_builtins(t_data *data, char **line, int fork_state)

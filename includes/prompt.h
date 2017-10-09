@@ -6,14 +6,12 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/05 13:04:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:44:35 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROMPT_H
 # define PROMPT_H
-
-# include <term.h>
 
 typedef enum			e_enum_quote
 {

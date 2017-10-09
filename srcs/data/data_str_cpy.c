@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 18:25:00 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/07 18:00:17 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/09 14:15:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void print_lst_in_line(t_data *data, t_list *tmp)
 {
 	while (tmp)
 	{
+		get_pos_prompt(data);
 		print_character(data, ((char *)tmp->content)[0]);
 		tmp = tmp->next;
 	}
@@ -46,18 +47,14 @@ void init_cpy_list(t_data *data)
 	return;
 }
 
-void ft_paste_word_cpy(t_data *data, int mode)
+void ft_paste_word_cpy(t_data *data)
 {
-	if (mode)
-		init_cpy_list(data);
+	init_cpy_list(data);
 	if (data->entry->cpy)
 	{
 		get_pos_prompt(data);
-		ft_cpy_word_pos(data);
 		print_lst_in_line(data, data->entry->cpy);
-		reset_line(data);
-		ft_move(data, data->sel->pos_tmp[1], data->sel->pos_tmp[0]);
-		data->sel->i_lst = data->sel->i_lst_tmp;
+		ft_lstdel(&data->entry->cpy, &ft_free_node);	
 	}
 	return ;
 }
@@ -86,14 +83,15 @@ void ft_paste_word_cut(t_data *data)
 	tmp = data->entry->line;
 	init_cpy_list(data);
 	tmp = ft_move_at_list(data, &data->entry->line, data->sel->i_lst);
+	ft_paste_word_cut_del(data);
 	if (tmp && !tmp->set_select)
 		data->sel->i_lst = ft_move_at_line(data, &data->entry->line, tmp);
 	else
 		data->sel->i_lst = ft_lst_count(data->entry->line);
-	ft_paste_word_cut_del(data);
-	ft_paste_word_cpy(data, CUT);
+	print_lst_in_line(data, data->entry->cpy);
 	data->entry->len_line = ft_lst_count(data->entry->line);
 	ft_lstdel(&data->entry->cpy, &ft_free_node);
+	reset_line(data);
 	return ;
 }
 
