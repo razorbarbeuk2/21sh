@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:53:55 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/30 20:08:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 18:36:12 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void ft_free_char_array(char ***tmp)
 
 int free_quote(t_data *data)
 {
-	if (data->quotes->quote_pos[0])
+	if (data->quotes)
 	{
 		data->quotes = free_data_quotes(data->quotes);
-		free(data->quotes->quote);
-		data->quotes->quote = NULL;
 		free(data->quotes);
 		data->quotes = NULL;
 	}

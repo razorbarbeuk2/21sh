@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/06 19:45:19 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/10 14:38:26 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC_NAME 	=	init/init_data.c \
 				exec/exec_pipe.c \
 				exec/exec_redir.c \
 				exec/exec.c \
+				exec/exec_parse_elem_cmd.c \
 				exec/exec_parse_line_builtins.c \
 				exec/exec_get_access.c \
 				exec/exec_get_path.c \

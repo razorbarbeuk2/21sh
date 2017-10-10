@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/09 19:44:35 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 12:47:52 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ typedef struct 			s_token_node
 
 typedef struct 			s_token_struct
 {
-	unsigned int		type;
-	int					value;
-	char 				*token_name;
-	int 				pos;
-	
+	unsigned int			type;
+	int						value;
+	char 					*token_name;
+	int 					pos;
 }  			 			t_token_struct;
 
 struct 					s_token_priority

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 17:38:17 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/09 19:16:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 16:04:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ int        exec_fork_step(t_data *data, unsigned int fork_state)
 
 int        exec(t_data *data, t_token_node *cur, unsigned int fork_state)
 {
-    t_token_struct  *cur_t;
-    char            **line;
+    t_token_struct  *cur_token;
+    //char            **line;
     
-    cur_t = NULL;
-    line = NULL;
-    cur_t = ((t_token_struct *)cur->node->content);
-    line = ft_strsplit(cur_t->token_name, ' ');
-    exec_parse_line_builtins(data, line, fork_state);
+    (void)fork_state;
+    cur_token = ((t_token_struct *)cur->node->content);
+    //ft_parse_number_in_command(data, cur_token->token_name);
+    ft_split_in_command(data, cur_token->token_name);
+    // line = ft_strsplit(cur_token->token_name, ' ');
+    // print_tab(data, line);
+    //exec_parse_line_builtins(data, line, fork_state);
     return (1);
 }

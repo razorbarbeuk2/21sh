@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_sep_is_caract.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/02 11:17:37 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/10 15:45:23 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ int data_check_quote_caract(char *str, int *d)
 	}
 	(*d) += i;
 	return (i);
+}
+
+unsigned char data_check_quote_type(char c)
+{
+	if (c == '"')
+		return (QUOTE_DOUBLE);
+	if (c == '\'')
+		return (QUOTE_SIMPLE);
+	return (0);
 }
 
 int data_check_quote(char c)

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/09 19:44:52 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 17:23:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define MOVE_LST       1
 # define CPY            1
 # define CUT            0
+# define QUOTE_DOUBLE_SET   '"'
+# define QUOTE_SIMPLE_SET   '\''
 // # define PROMPT_CPY 	0
 
 /*TOOLS*/
@@ -141,6 +143,11 @@ int 						data_check_false_caract(char *c);
 int 						data_check_spec_caract(char c, char *caract);
 void						data_create_list_struct(t_data *data, char **line_str, void **node, int *t);
 int 						ft_is_caract_(char *str, char *c);
+
+/*QUOTES*/
+char                        *ft_parse_number_in_command_remove_quote(char *cmd);
+char                        **ft_split_in_command(t_data *data, char *cmd);
+unsigned char               data_check_quote_type(char c);
 /*HISTORY*/
 int							data_init_history_file(t_data *data);
 int							data_check_and_create_history_cmd(t_data *data, char *cmd);
@@ -159,7 +166,7 @@ int 						ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_l
 int 						ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_list);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
-int 						parse_quote_and_double_quote(t_data *data);
+int                         parse_quote_and_double_quote(t_data *data, t_list *line);
 int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						ft_token_redirection_ERROR(char *d);

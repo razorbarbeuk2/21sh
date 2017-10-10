@@ -6,13 +6,13 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 15:12:28 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/03 18:01:09 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 18:30:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int check_quote_and_doucle_quote(char s)
+int check_quote_and_double_quote_result(char s)
 {
     if (s == '\'')
         return (QUOTE_SIMPLE);
@@ -21,44 +21,49 @@ int check_quote_and_doucle_quote(char s)
     return (0);
 }
 
-int parse_quote_and_double_quote_set(t_data *data, t_list *lst)
+int check_quote_and_double_quote(t_list *line, int set_quote)
 {
-    char c;
-    int count;
-
-    count = 0;
+    char         c;
     
-    while (lst)
+    while (line)
     {
-        c = ((char *)lst->content)[0];
-        if ((data->quotes->quote_pos[0] = check_quote_and_doucle_quote(c)) && !data->quotes->quote_pos[1])
-            data->quotes->quote_pos[1] = count;
-        else if (check_quote_and_doucle_quote(c) && (count > data->quotes->quote_pos[1]))
-        {
-            data->quotes->quote_pos[2] = count;
-            data->set_quotes = INACTIVE;
+        c = ((char *)line->content)[0]; 
+        if (check_quote_and_double_quote_result(c) == set_quote)
             return (1);
-        }
-        count++;
-        lst = lst->next;
+        line = line->next;
     }
-    if (data->quotes->quote_pos[1] && !data->quotes->quote_pos[2])
-    {
-        
-        data->set_quotes = ACTIVE;
-        get_quote_prompt(data);
-        listen_cursor(data, data->line);
-    }
-    return (1);
+    return (0);
 }
 
-int parse_quote_and_double_quote(t_data *data)
+int parse_quote_and_double_quote(t_data *data, t_list *line)
 {
-    t_list *lst;
-    
-    lst = NULL;
-    lst = data->entry->line;
-    if (data->entry->len_line)
-        parse_quote_and_double_quote_set(data, lst);
+    int          set_quote;
+    char         c;
+
+    set_quote = 0;
+    if (line)
+    {
+        while (line)
+        {
+            c = ((char *)line->content)[0];
+            if ((set_quote = check_quote_and_double_quote_result(c)) != 0)
+            {
+                if (check_quote_and_double_quote(line->next, set_quote))
+                {
+                    data->quotes = free_data_quotes(data->quotes);
+                    data->set_quotes = INACTIVE;
+                    set_quote = 0;
+                }
+                else
+                {
+                    data->set_quotes = ACTIVE;
+                    data->quotes = init_data_quotes();
+                    get_quote_prompt(data);
+                    listen_cursor(data, data->line);
+                }
+            }
+            line = line->next;
+        }
+    }
     return (0);
 }

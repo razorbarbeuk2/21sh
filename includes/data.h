@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 18:55:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 17:04:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ typedef struct		s_quote
 {
 	int 			*quote_pos;
 	int 			nb_prompt_quote;
-	t_entry			*quote;
 }					t_quote;
 
 typedef struct		s_historic

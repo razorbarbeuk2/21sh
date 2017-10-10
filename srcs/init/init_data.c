@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/04 11:48:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 17:38:49 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int init_data_env_cmd(t_data *data)
 	data->line = NULL;
 	data->sel = NULL;
 	data->historic = NULL;
+	data->quotes = NULL;
 	data->term = NULL;
 	data->pid = 0;
 	data->set_historique = 0;
@@ -39,7 +40,6 @@ t_quote *init_data_quotes()
 	init_quote = NULL;
 	init_quote = (t_quote *)ft_memalloc(sizeof(t_quote));
 	init_quote->quote_pos = ft_memalloc(3 * sizeof(int));
-	init_quote->quote = init_data_entry();
 	init_quote->nb_prompt_quote = 0;
 
 	return (init_quote);
@@ -118,8 +118,6 @@ int init_struct(t_data *data)
 	if (!(data->term = init_term()))
 		return (-1);
 	if (!(data->line = init_data_entry()))
-		return (-1);
-	if (!(data->quotes = init_data_quotes()))
 		return (-1);
 	if (!(data->historic = init_data_hist()))
 		return (-1);

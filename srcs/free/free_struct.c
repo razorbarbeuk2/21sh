@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/27 18:03:08 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/06 13:47:28 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/10 17:40:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_quote *free_data_quotes(t_quote *quotes)
 		ft_memdel((void **)&quotes->quote_pos);
 		quotes->quote_pos = NULL;
 		quotes->nb_prompt_quote = 0;
-		quotes->quote = free_data_entry(quotes->quote);
 	}
 	return (init_data_quotes());
 }
