@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/10 18:37:25 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/11 19:35:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ int exec_cmd_character(t_data *data)
 {
 	t_token_node *node_tree;
 
-	write(1, "\n", 1);
+	N;
 	node_tree = NULL;
-	parse_quote_and_double_quote(data, data->entry->line);
+	parse_quote_and_double_quote(data);
 	data->entry->line_str = convert_data_lst_tab(data);
+	//ft_putendl(data->entry->line_str);
 	term_reset(data->term);
 	if (data->entry->line_str)
 	{

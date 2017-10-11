@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/10 14:38:26 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/11 17:06:06 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC_NAME 	=	init/init_data.c \
 				history/data_create_history_node_to_list.c \
 				history/data_update_history_cmd.c \
 				tools/tools_count_spec_caract.c \
+				tools/tools_count_quote.c \
 				tools/tools_list_create_node.c \
 				tools/tools_free.c \
 				tools/tools_list.c \

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/10 17:23:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:08:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@
 # include "./data.h"
 # include "./builtins.h"
 
-# define RED 			"\e[31m"
-# define ORANGE 		"\033[38;2;255;189;0m"
-# define SEARCH_COLOR	"\033[38;2;22;193;213m"
-# define POS 			"\033[6n"
-# define DEBUG 			ft_putstr("FUCK");
-#define	 BACK 			1
-# define FORK 			1
-# define UNFORK 		0
-# define OPT 		    1
-# define PROMPT 		1
-# define MOVE_LST       1
-# define CPY            1
-# define CUT            0
+# define RED 			    "\e[31m"
+# define ORANGE 		    "\033[38;2;255;189;0m"
+# define SEARCH_COLOR	    "\033[38;2;22;193;213m"
+# define POS 			    "\033[6n"
+# define DEBUG 			    ft_putendl("FUCK");
+# define N                  write(1, "\n", 1);
+# define BACK 			    1
+# define FORK 			    1
+# define UNFORK 		    0
+# define OPT 		        1
+# define PROMPT 		    1
+# define MOVE_LST           1
+# define CPY                1
+# define CUT                0
 # define QUOTE_DOUBLE_SET   '"'
 # define QUOTE_SIMPLE_SET   '\''
 // # define PROMPT_CPY 	0
@@ -145,6 +146,10 @@ void						data_create_list_struct(t_data *data, char **line_str, void **node, in
 int 						ft_is_caract_(char *str, char *c);
 
 /*QUOTES*/
+int                         parse_quote_and_double_quote(t_data *data);
+int                         ft_count_quote(t_list *line);
+int                         ft_count_type_quote(int *tab_quotes, int type);
+int                         check_quote_and_double_quote_result(char s);
 char                        *ft_parse_number_in_command_remove_quote(char *cmd);
 char                        **ft_split_in_command(t_data *data, char *cmd);
 unsigned char               data_check_quote_type(char c);
@@ -166,7 +171,6 @@ int 						ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_l
 int 						ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_list);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
-int                         parse_quote_and_double_quote(t_data *data, t_list *line);
 int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						ft_token_redirection_ERROR(char *d);
