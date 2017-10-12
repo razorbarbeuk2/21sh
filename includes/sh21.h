@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/11 17:08:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 21:04:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int                         ft_del_print_caract(t_data *data);
 void						ft_add_at(t_list **lst, char result);
 /*DATA*/
 char 						**data_clean_to_tab(t_data *data, char *str);
-char 						*convert_data_lst_tab(t_data *data);
+char 		                *convert_data_lst_tab(t_data *data, t_list *line);
 int 						data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
 /*IS CARACT*/
 int							data_check_quote_caract(char *str, int *d);
@@ -150,8 +150,9 @@ int                         parse_quote_and_double_quote(t_data *data);
 int                         ft_count_quote(t_list *line);
 int                         ft_count_type_quote(int *tab_quotes, int type);
 int                         check_quote_and_double_quote_result(char s);
-char                        *ft_parse_number_in_command_remove_quote(char *cmd);
 char                        **ft_split_in_command(t_data *data, char *cmd);
+int                         ft_parse_number_in_command_count(char *cmd);
+int                         ft_parse_number_in_command_quote(char *cmd);
 unsigned char               data_check_quote_type(char c);
 /*HISTORY*/
 int							data_init_history_file(t_data *data);
@@ -195,8 +196,8 @@ int 						exec(t_data *data, t_token_node *cur, unsigned int fork_state);
 int							exec_parse_line_builtins(t_data *data, char **line, int fork_state);
 int        					exec_fork_step(t_data *data, unsigned int fork_state);
 int							exec_get_path(t_data *data, char **line);
-int							exec_get_access(t_data *data, char **line, char *result);
-int							exec_no_paths(t_data *data, char **line);
+int						    exec_get_access(t_data *data, char **line, char *result);
+int						    exec_no_paths(t_data *data, char **line);
 int							exec_cmd(t_data *data, char **path, char **cmd, t_list *env_lst);
 int       					exec_exit(int fork_state);
 /*BUILTINS*/

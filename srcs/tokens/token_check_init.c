@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/30 20:26:04 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 17:50:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int ft_token_str_pos(t_data *data, char *line_str, t_list **token_list, unsigned
 		i[1]++;
 	}
 	data_check_is_token_cmd(token_list, line_str, (i[0] - i[1]), i[1]);
+	ft_memdel((void **)&i);
 	return (1);
 }

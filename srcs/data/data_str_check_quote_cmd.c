@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/07 15:12:28 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/11 17:52:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 17:37:48 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int *parse_quote_and_double_quote_in_tab(t_list *line)
 		}
 		line = line->next;
 	}
+	tab_quote[i] = 0;
 	return (tab_quote);
 }
 
@@ -72,8 +73,8 @@ int parse_quote_and_double_quote(t_data *data)
 	i = 0;
 	type_quote = 0;
 	count_type_quote = 0;
+	tab_quote_ = NULL;
 	tab_quote_ = parse_quote_and_double_quote_in_tab(data->entry->line);
-
 	while (tab_quote_[i])
 	{
 		if (tab_quote_[i] != type_quote)
@@ -82,7 +83,8 @@ int parse_quote_and_double_quote(t_data *data)
 			count_type_quote = ft_count_type_quote(tab_quote_, type_quote);
 			if ((count_type_quote%2) == 0)
 			{
-                quote_prompt_and_INACTIVE(data);
+				quote_prompt_and_INACTIVE(data);
+				ft_memdel((void **)&tab_quote_);
                 return (1);
 			}
             else
@@ -91,5 +93,6 @@ int parse_quote_and_double_quote(t_data *data)
 		}
 		i++;
 	}
+	ft_memdel((void **)&tab_quote_);
 	return (0);
 }

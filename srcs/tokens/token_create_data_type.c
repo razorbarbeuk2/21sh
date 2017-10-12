@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/20 16:56:57 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/10 12:21:48 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 18:30:14 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int data_check_is_token_operator(t_list **token_list, unsigned int type, char *s
 		token->pos = pos;
 		token->value = data_construct_token_priority(type);
 		ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));
+		ft_memdel((void **)&token);
 		return (1);
 	}
 	return(ft_print_error("Error token create"));
@@ -68,15 +69,18 @@ int data_check_is_token_operator(t_list **token_list, unsigned int type, char *s
 void data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size)
 {
 	char *str;
+	char *tmp_str;
 
 	str = NULL;
 	if (line_str)
 	{
-		str = ft_strsub(line_str, start, size);
-		str = ft_strtrim(str);
+		tmp_str = ft_strsub(line_str, start, size);
+		str = ft_strtrim(tmp_str);
 		str ? data_check_is_token_operator(token_list, TYPE_CMD, str, size) : ft_print_err("Error token cmd");
 		ft_strdel(&str);
+		ft_strdel(&tmp_str);
 		str = NULL;
+		tmp_str = NULL;
 	}
 	return;
 }

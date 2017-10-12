@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 17:37:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/09 15:08:31 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 18:51:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,13 @@ static int ft_token_redirection_TYPE(char *str, unsigned int *type)
 
 int ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_list)
 {
+	char *tmp;
 	int size;
 	int j;
 
 	size = (*io);
 	j = (*io);
+	tmp = NULL;
 	while (ft_isdigit(str[j]))
 		j--;
 	j += ft_token_redirection_TYPE(&str[j], type);
@@ -93,7 +95,9 @@ int ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_
 	{
 		while (ft_isdigit(str[j]) || str[j] == '-')
 			j++;
-		data_check_is_token_operator(token_list, (*type), ft_strsub(str, size, j - size), j);
+		tmp = ft_strsub(str, size, j - size);
+		data_check_is_token_operator(token_list, (*type), tmp, j);
+		ft_strdel(&tmp);
 		(*io) = j;
 		return (1);
 	}

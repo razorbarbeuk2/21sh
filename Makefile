@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/11 17:06:06 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/12 20:33:58 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,13 +53,13 @@ SRC_NAME 	=	init/init_data.c \
 				data/data_exec_cmd.c \
 				data/data_create_ast.c \
 				exec/exec_and_if.c \
-				exec/exec_cmd.c \
 				exec/exec_dsemi.c \
 				exec/exec_or_if.c \
 				exec/exec_pipe.c \
 				exec/exec_redir.c \
 				exec/exec.c \
 				exec/exec_parse_elem_cmd.c \
+				exec/exec_parse_elem_count.c \
 				exec/exec_parse_line_builtins.c \
 				exec/exec_get_access.c \
 				exec/exec_get_path.c \
@@ -100,7 +100,7 @@ SRC_NAME 	=	init/init_data.c \
 SRC			=	$(addprefix srcs/, $(SRC_NAME))
 INCLUDES	=	-I./libft/includes/ -I./includes -I ./log/incs
 OBJ			=	$(SRC:.c=.o)
-CFLAGS		=	-g -Werror -Wall -Wextra
+CFLAGS		=	-g3 -O2 -Werror -Wall -Wextra -fsanitize=address
 
 all : $(NAME)
 
@@ -127,6 +127,6 @@ fclean : clean
 re : 	fclean all
 
 leaks1 :
-	while true ; do leaks 21sh ; sleep 3 ; clear ; done
+	while true ; do leaks 21sh ; sleep 1 ; clear ; done
 
 .PHONY: all, clean, fclean, re

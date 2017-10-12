@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/04 14:11:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 17:24:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int		get_reset_prompt(t_data *data)
 {
 	free_cursor(data);
 	if (data->token_list)
-	{
 		ft_lstdel_token(&data->token_list);
-		data->token_list = NULL;
-	}
 	if (!(data->sel = init_data_sel()))
 		return (-1);
 	if (!(data->line = init_data_entry()))
@@ -64,8 +61,6 @@ void	get_super_prompt(t_data *data)
 	}
 	ft_putstr_fd(" $> ", data->term->tty);
 	ft_putstr_fd("\033[m", data->term->tty);
-	//printf("%zu%p\n", data->sel->len_prompt, &data->sel->len_prompt);
-	//0x100003040
 	return ;
 }
 
@@ -101,5 +96,6 @@ void	get_quote_prompt(t_data *data)
 	ft_putstr_fd(tmp, data->term->tty);
 	data->quotes->nb_prompt_quote = ft_strlen(tmp);
 	ft_strdel(&tmp);
+	tmp = NULL;
 	return ;
 }

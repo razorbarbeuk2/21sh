@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   data_lst_to_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 16:06:28 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/08/03 18:16:31 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/12 17:09:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-char 		*convert_data_lst_tab(t_data *data)
+char 		*convert_data_lst_tab(t_data *data, t_list *line)
 {
 	char 	*str;
-	t_list	*lst;
 	int 	i;
 
 	i = 0;
-	lst = NULL;
-	lst = data->entry->line;
-	if (data->entry->len_line)
+	if (line)
 	{
 		str = (char *)ft_memalloc((data->entry->len_line + 1)*sizeof(char));
-		while(lst)
+		while(line)
 		{
-			str[i] = ((char *)lst->content)[0];
-			lst = lst->next;
+			str[i] = ((char *)line->content)[0];
+			line = line->next;
 			i++;
 		}
 		str[i] = '\0';

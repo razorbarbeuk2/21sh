@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/11 19:35:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 20:45:57 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int exec_cmd_character(t_data *data)
 	N;
 	node_tree = NULL;
 	parse_quote_and_double_quote(data);
-	data->entry->line_str = convert_data_lst_tab(data);
+	data->entry->line_str = convert_data_lst_tab(data, data->entry->line);
 	//ft_putendl(data->entry->line_str);
 	term_reset(data->term);
 	if (data->entry->line_str)
@@ -78,16 +78,9 @@ int exec_cmd_character(t_data *data)
 			node_tree = construct_ast_tree(data->token_list, NULL, 1, node_tree);
 			if (node_tree)
 				exec_cmd_type(data, node_tree, FORK);
+			// free_node_tree(node_tree);
 		}
 		return (reset_exec_cmd_character(data));
 	}
 	return (reset_exec_cmd_character(data));
 }
-
-// static void read_ast(t_data *data, t_token_node *node_cur)
-// {
-// 	if (!node_cur)
-// 		return;
-// 	if (node_cur)
-// 		exec_cmd_type(data, node_cur, FORK);
-// }

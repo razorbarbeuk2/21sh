@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/09 19:43:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 21:33:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,27 @@ static int	builtins_parsing(t_data *data, char **line)
 	return (0);
 }
 
-int 		exec_exe_step(t_data *data, char **line, int fork_state)
-{
-	(void)fork_state;
-	exec_get_path(data, line);
-	//exec_exit(fork_state);
-	return (1);
-}
-
-int			exec_parse_line_builtins(t_data *data, char **line, int fork_state)
+int			exec_parse_line_builtins(t_data *data, char **line, int fork_state __attribute__((unused)))
 {
 	int result;
+	int test;
 
 	result = 0;
 	if ((result = builtins_parsing(data, line)))
 		return (result);
 	else
 	{
-		if (fork_state)
+		printf("Fork  : %d %d\n", fork_state, getpid());
+		if ((test = exec_fork_step(data, fork_state)))
 		{
-			if (exec_fork_step(data, fork_state))
-				return (exec_exe_step(data, line, fork_state));
+			printf("return :%d %d\n",test, getpid());
+			return (exec_get_path(data, line));
 		}
 		else
-			return (exec_exe_step(data, line, fork_state));
+		{
+			printf("return :%d %d\n",test, getpid());
+			return (exec_get_path(data, line));
+		}
 	}
 	return (0);
 }

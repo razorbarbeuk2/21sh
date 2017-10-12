@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/10 17:38:49 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 17:23:51 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ t_quote *init_data_quotes()
 
 	init_quote = NULL;
 	init_quote = (t_quote *)ft_memalloc(sizeof(t_quote));
-	init_quote->quote_pos = ft_memalloc(3 * sizeof(int));
 	init_quote->nb_prompt_quote = 0;
-
 	return (init_quote);
 }
 

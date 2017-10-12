@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/09 18:47:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/12 21:21:03 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,17 @@ static char		*exec_get_path_check_result(char *line, char *paths, int i)
 
 int				exec_get_path(t_data *data, char **line)
 {
-	char	*result;
 	int		i;
+	char	*result;
 
 	i = 0;
-	result = NULL;
-	if (exec_no_paths(data, line) == -1)
-		return (-1);
 	while (data->paths && data->paths[i])
 	{
 		result = exec_get_path_check_result(line[0], data->paths[i], i);
-		exec_get_access(data, line, result);
-		if (i == 0 && ft_strchr(line[0], '/'))
-		{
-			ft_strdel(&result);
-			return (ft_print_cmd_not_found(line[0]));
-		}
-		ft_strdel(&result);
-		result = NULL;
+		if (access(result, X_OK) == 0)
+			exec_get_access(data, line, result);
 		i++;
+		ft_strdel(&result);
 	}
-	return (ft_print_cmd_not_found(line[0]));
+	return (0);
 }
