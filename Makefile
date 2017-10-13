@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/12 20:33:58 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/13 15:57:48 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ SRC_NAME 	=	init/init_data.c \
 				tokens/token_pipe.c \
 				tokens/token_semicol.c \
 				data/data_str_check_quote_cmd.c \
-				data/data_str_clean_caract.c \
 				data/data_lst_to_tab.c \
 				data/data_str_insert_caract.c \
 				data/data_str_del_caract.c \
@@ -57,7 +56,8 @@ SRC_NAME 	=	init/init_data.c \
 				exec/exec_or_if.c \
 				exec/exec_pipe.c \
 				exec/exec_redir.c \
-				exec/exec.c \
+				exec/exec_execute.c \
+				exec/exec_parse_cmd_type.c \
 				exec/exec_parse_elem_cmd.c \
 				exec/exec_parse_elem_count.c \
 				exec/exec_parse_line_builtins.c \

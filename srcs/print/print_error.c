@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/03 16:51:28 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/13 17:32:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int		ft_print_move_error(char *str, char *error)
 	return (-1);
 }
 
+int		ft_print_error_access(char *str)
+{
+	ft_putstr_fd("21sh: ", STDERR_FILENO);
+	ft_putstr_fd(" permission denied: ", STDERR_FILENO);
+	ft_putendl_fd(str, STDERR_FILENO);
+	return (-1);
+}
+
 int		ft_print_error(char *str)
 {
 	ft_putstr_fd(RED, STDERR_FILENO);
@@ -43,9 +51,9 @@ int		ft_print_error(char *str)
 
 int		ft_print_cmd_not_found(char *str)
 {
-	ft_print_error("21sh: ");
-	ft_print_error(str);
-	ft_print_error(" command not found\n");
+	ft_putstr_fd("21sh: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(" command not found\n", STDERR_FILENO);
 	return (-1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 14:48:50 by gbourson          #+#    #+#             */
-/*   Updated: 2017/08/22 14:38:41 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/13 13:02:21 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ int			len_word(char *str)
 	return (i);
 }
 
-int 		ft_count_word_caract(t_data *data, char *str)
-{
-	int 	i;
-	int 	count;
+// int 		ft_count_word_caract(t_data *data, char *str)
+// {
+// 	int 	i;
+// 	int 	count;
 
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (data_check_quote(str[i]))
-			i += (data->quotes->quote_pos[2] - data->quotes->quote_pos[1]);	
-		if ((!data_check_caract(str[i]) && data_check_caract(str[i + 1])) || (!data_check_caract(str[i]) && str[i + 1] == '\0'))
-			count++;
-		i++;
-	}
-	return (count);
-}
+// 	i = 0;
+// 	count = 0;
+// 	while (str[i])
+// 	{
+// 		if (data_check_quote(str[i]))
+// 			i += (data->quotes->quote_pos[2] - data->quotes->quote_pos[1]);	
+// 		if ((!data_check_caract(str[i]) && data_check_caract(str[i + 1])) || (!data_check_caract(str[i]) && str[i + 1] == '\0'))
+// 			count++;
+// 		i++;
+// 	}
+// 	return (count);
+// }
 
 char 		*trim_str(char *str)
 {

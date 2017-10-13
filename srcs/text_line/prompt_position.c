@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/05 12:58:56 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/13 19:03:06 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,43 @@
 
 static void	ft_clean_buf_pos(t_data *data, char *buf)
 {
-	int 	i;
-	int 	j;
-	char	**tab_pos;
+	// int 	i;
+	// int 	j;
+	// char	**tab_pos;
 
-	i = 0;
-	j = 0;
-	tab_pos = NULL;
-	while (!ft_isdigit(buf[i]))
-		i++;
-	tab_pos = ft_strsplit(&buf[i], ';');
-	i = 0;
-	while (tab_pos[i])
-	{
-		if (ft_strchr(tab_pos[i], 'R'))
-		{
-			while (ft_isdigit(tab_pos[i][j]))
-				j++;
-			tab_pos[i][j] = '\0';
-		}
-		data->sel->pos[i] = (ft_atoi(tab_pos[i]) - 1);
-		i++;
-	}
-	ft_free_char_array(&tab_pos);
-	//data->sel->pos[i] = 0;
-	tab_pos = NULL;
+	// i = 0;
+	// j = 0;
+	(void)data;
+	ft_putendl_fd(buf, data->term->tty);
+	// tab_pos = NULL;
+	// while (!ft_isdigit(buf[i]))
+	// 	i++;
+	// tab_pos = ft_strsplit(&buf[i], ';');
+	// i = 0;
+	// while (tab_pos[i])
+	// {
+	// 	if (ft_strchr(tab_pos[i], 'R'))
+	// 	{
+	// 		while (ft_isdigit(tab_pos[i][j]))
+	// 			j++;
+	// 		tab_pos[i][j] = '\0';
+	// 	}
+	// 	data->sel->pos[i] = (ft_atoi(tab_pos[i]) - 1);
+	// 	i++;
+	// }
+	// ft_free_char_array(&tab_pos);
+	// tab_pos = NULL;
 	return ;
 }
 
 int			get_pos_prompt(t_data *data)
 {
-	char	buf[14];
+	char	buf[9];
 
-	ft_memset(buf, 0, 14);
+	ft_memset(buf, 0, 9);
 	ft_putstr_fd(POS, data->term->tty);
-	read(data->term->tty, buf, 14);
+	read(data->term->tty, buf, 9);
 	ft_clean_buf_pos(data, buf);
-	ft_bzero(buf, 14);
+	ft_bzero(buf, 9);
 	return (0);
 }

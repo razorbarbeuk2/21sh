@@ -1,0 +1,19 @@
+ls: jnkbnkjb: No such file or directory
+srcs:
+builtins
+data
+env
+exec
+free
+history
+init
+main.c
+main.o
+parse_options.c
+parse_options.o
+print
+prompt.c
+prompt.o
+text_line
+tokens
+tools

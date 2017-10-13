@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/01 20:54:26 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/13 16:01:08 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		builtin_env_next(t_data *data, char **line, struct s_option *s_option_tab)
 		i++;
 	}
 	if (line[i])
-		exec_parse_line_builtins(data, &line[i], UNFORK);
+		exec_parse_builtins(data, &line[i], UNFORK);
 	else
 		print_env(data->env_cpy);
 	ft_free_char_array(&tmp);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/12 21:04:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/13 17:19:56 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define BACK 			    1
 # define FORK 			    1
 # define UNFORK 		    0
+# define TRUNC 		        1
+# define APPREND 		    2
 # define OPT 		        1
 # define PROMPT 		    1
 # define MOVE_LST           1
@@ -94,6 +96,7 @@ int							ft_print_error(char *str);
 int							ft_print_cmd_not_found(char *str);
 //void						print_list_cmd(t_data *data, t_list *lst);
 int							ft_print_parse_error(char *str);
+int		                    ft_print_error_access(char *str);
 int							ft_print_move_error(char *str, char *error);
 int 						ft_print_error_option(char c, char *usage, char *builtins);
 /*TERM*/
@@ -192,13 +195,12 @@ int 						exec_redir_GREATAND(t_data *data, t_token_node *node, unsigned int for
 int 						exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec(t_data *data, t_token_node *cur, unsigned int fork_state);
-int							exec_parse_line_builtins(t_data *data, char **line, int fork_state);
-int        					exec_fork_step(t_data *data, unsigned int fork_state);
-int							exec_get_path(t_data *data, char **line);
-int						    exec_get_access(t_data *data, char **line, char *result);
-int						    exec_no_paths(t_data *data, char **line);
-int							exec_cmd(t_data *data, char **path, char **cmd, t_list *env_lst);
+int 						exec_execute(t_data *data, t_token_node *cur, unsigned int fork_state);
+int							exec_parse_builtins(t_data *data, char **line, int fork_state);
+int		                    exec_builtins_parsing(t_data *data, char **line);
+int        					exec_fork_step(t_data *data, char **line, unsigned int fork_state);
+void						exec_get_path(t_data *data, char **line);
+int			                exec_get_access(t_data *data, char **line);
 int       					exec_exit(int fork_state);
 /*BUILTINS*/
 int 						builtins_check_args(char **line, int num);
