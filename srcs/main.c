@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/13 18:30:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 15:59:47 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ int main()
 {
 	t_data	data;
 
-	logger_init(7, "./log2");
 	if (init_struct(&data) == -1)
 		init_error();
 	if (init_sh(&data) == -1)
 		init_error();
-	logger_close();
 	return (0);
 }

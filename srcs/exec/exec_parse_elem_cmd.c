@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 12:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/12 19:11:17 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:26:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char *ft_str_remove_quote(char *cmd, char *dest)
     i = 0;
     j = 0;
     type = 0;
+
     while (cmd[i])
     {
         if ((type = data_check_quote_type(cmd[i])) > 0)
@@ -32,7 +33,10 @@ char *ft_str_remove_quote(char *cmd, char *dest)
                 i++;
                 j++;
             }
-            i++;
+            if (cmd[i] && (!cmd[i + 1] || data_check_caract(cmd[i + 1])))
+                cmd[i] = '\0';
+            else
+                i++;
         }
         dest[j] = cmd[i];
         i++;
@@ -53,7 +57,7 @@ char *ft_str_remove_detect(char *cmd, int size, int status)
     {
         if (data_check_quote(cmd[i]))
         {
-            str = ft_memalloc((ft_strlen(cmd) - 2) * sizeof(char *));
+            str = ft_memalloc((ft_strlen(cmd) - 1) * sizeof(char *));
             str = ft_str_remove_quote(cmd, str);
             return (str);
         }
@@ -79,7 +83,7 @@ int ft_len(char *cmd, int *status)
     return (i);
 }
 
-char **ft_split_in_command(t_data *data, char *cmd)
+char **ft_split_in_command(char *cmd)
 {
     char **tab_cmd;
     int status;
@@ -87,7 +91,6 @@ char **ft_split_in_command(t_data *data, char *cmd)
     int len;
     int i;
 
-    (void)data;
     i = 0;
     len = 0;
     status = 0;

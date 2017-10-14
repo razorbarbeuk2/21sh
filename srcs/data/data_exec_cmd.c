@@ -6,19 +6,11 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/13 15:55:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 18:11:25 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-
-// static void exec_cmd_type_node(t_data *data, t_token_node *node_cur, int fork)
-// {
-// 	if (node_cur->tleft)
-// 		exec_cmd_type(data, node_cur->tleft, fork);
-// 	if (node_cur->tright)
-// 		exec_cmd_type(data, node_cur->tright, fork);
-// }
 
 static int reset_exec_cmd_character(t_data *data)
 {
@@ -31,11 +23,14 @@ static int reset_exec_cmd_character(t_data *data)
 int 		exec_cmd_character(t_data *data)
 {
 	t_token_node *node_tree;
+	char 			*str;
 
 	N;
+	str = NULL;
 	node_tree = NULL;
 	parse_quote_and_double_quote(data);
-	data->entry->line_str = convert_data_lst_tab(data, data->entry->line);
+	str = convert_data_lst_tab(data, data->entry->line);
+	data->entry->line_str = ft_strtrim(str);
 	term_reset(data->term);
 	if (data->entry->line_str)
 	{
@@ -46,7 +41,8 @@ int 		exec_cmd_character(t_data *data)
 			node_tree = construct_ast_tree(data->token_list, NULL, 1, node_tree);
 			if (node_tree)
 				exec_cmd_type(data, node_tree, FORK);
-			// free_node_tree(node_tree);
+			if (data->fork == FORK)
+				exit(EXIT_SUCCESS);
 		}
 		return (reset_exec_cmd_character(data));
 	}

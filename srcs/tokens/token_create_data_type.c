@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/20 16:56:57 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/12 18:30:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 16:45:08 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int data_check_is_token_operator(t_list **token_list, unsigned int type, char *s
 	{
 		token = ft_memalloc(sizeof(t_token_struct));
 		token->type = type;
-		token->token_name = ft_strdup(str);
+		token->token_name_str = ft_strdup(str);
+		token->token_name_tab = ft_split_in_command(str);
 		token->pos = pos;
 		token->value = data_construct_token_priority(type);
 		ft_lstadd_back(token_list, ft_lstnew((t_token_struct *)token, (sizeof(t_token_struct))));

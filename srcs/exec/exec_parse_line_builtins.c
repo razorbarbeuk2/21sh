@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 15:04:19 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/13 15:59:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:54:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		exec_builtins_parsing(t_data *data, char **line)
 	int		i;
 
 	i = 0;
-	while (builtins[i].name)
+	while (line && builtins[i].name)
 	{
 			if (ft_strcmp(line[0], builtins[i].name) == 0)
 				return (builtins[i].function(data, line));

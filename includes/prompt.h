@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/10 12:47:52 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:45:37 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum					e_enum_exec
 						TYPE_REDIRECTION_LESSAND,
 						TYPE_REDIRECTION_DGREAT,
 						TYPE_REDIRECTION_DLESS,
+						TYPE_IO_NUMBER,
 						TYPE_CMD,
 						TYPE_FINISH,
 						TYPE_ERROR_PARSE
@@ -47,7 +48,8 @@ typedef struct 			s_token_struct
 {
 	unsigned int			type;
 	int						value;
-	char 					*token_name;
+	char 					*token_name_str;
+	char 					**token_name_tab;
 	int 					pos;
 }  			 			t_token_struct;
 
@@ -79,9 +81,7 @@ typedef enum			e_enum_cursor
 						SHIFT_RIGHT = -23279173,
 						CTRL_CPY_PASTE = 16, // CTRL + P
 						CTRL_CUT_PASTE = 12, // CTRL + L
-						SEARCH_HIST = 18, // CTRL + R
-						//RST = 14 // CTRL + N
-						// ALT_RIGHT
+						SEARCH_HIST = 18,
 						// HOME = 58,
 						// END = 61,
 }						t_enum_cursor;

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/13 18:38:20 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 15:09:40 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ int			listen_cursor(t_data *data, t_entry *entry)
 	data->entry = NULL;
 	data->entry = entry;
 	ft_memset(buf, 0, 8);
+	ft_bzero(buf, 8);
 	listen_cursor_check_module_active(data);
 	data->entry->size_line = data->sel->len_prompt;
-	while(read(0, buf, 8))
+	while(read(0, buf, 7))
 	{
 		result = ft_concat_int(buf);
 		if (result == LEFT || result == RIGHT || result == HOME || result == END || result == UP || result == DOWN)

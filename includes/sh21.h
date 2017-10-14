@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/13 17:19:56 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 18:48:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SH21_H
 
 //
-# include <logger_utils.h>
-# include <logger.h>
+// # include <logger_utils.h>
+// # include <logger.h>
 
 # include <sys/ioctl.h>
 # include <sys/types.h>
@@ -40,8 +40,8 @@
 # define BACK 			    1
 # define FORK 			    1
 # define UNFORK 		    0
-# define TRUNC 		        1
-# define APPREND 		    2
+# define _TRUNC 		    1
+# define _APPEND 		    2
 # define OPT 		        1
 # define PROMPT 		    1
 # define MOVE_LST           1
@@ -49,6 +49,7 @@
 # define CUT                0
 # define QUOTE_DOUBLE_SET   '"'
 # define QUOTE_SIMPLE_SET   '\''
+# define ERROR              "\e[31mERROR"
 // # define PROMPT_CPY 	0
 
 /*TOOLS*/
@@ -153,7 +154,7 @@ int                         parse_quote_and_double_quote(t_data *data);
 int                         ft_count_quote(t_list *line);
 int                         ft_count_type_quote(int *tab_quotes, int type);
 int                         check_quote_and_double_quote_result(char s);
-char                        **ft_split_in_command(t_data *data, char *cmd);
+char                        **ft_split_in_command(char *cmd);
 int                         ft_parse_number_in_command_count(char *cmd);
 int                         ft_parse_number_in_command_quote(char *cmd);
 unsigned char               data_check_quote_type(char c);
@@ -196,10 +197,10 @@ int 						exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork
 int 						exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_execute(t_data *data, t_token_node *cur, unsigned int fork_state);
-int							exec_parse_builtins(t_data *data, char **line, int fork_state);
+int							exec_parse_builtins(t_data *data, char **line, unsigned int fork_state);
 int		                    exec_builtins_parsing(t_data *data, char **line);
-int        					exec_fork_step(t_data *data, char **line, unsigned int fork_state);
-void						exec_get_path(t_data *data, char **line);
+int        					exec_fork_step(t_data *data, unsigned int fork_state);
+int						    exec_get_path(t_data *data, char **line);
 int			                exec_get_access(t_data *data, char **line);
 int       					exec_exit(int fork_state);
 /*BUILTINS*/
@@ -218,9 +219,9 @@ char 						*builtin_cd_special_caract_slash(t_data *data, char *str);
 char 						*builtin_cd_special_caract_return(t_data *data, char *str);
 int							builtin_cd_move(char *path);
 int							builtin_echo(t_data *data, char **line);
-void						builtin_echo_use_e(t_data *data, char **line);
-void						builtin_echo_use_n(t_data *data, char **line);
-void						builtin_echo_quote(t_data *data, char **line);
+// void						builtin_echo_use_e(t_data *data, char **line);
+// void						builtin_echo_use_n(t_data *data, char **line);
+// void						builtin_echo_quote(t_data *data, char **line);
 int							builtin_exit(t_data *data, char **line);
 /*OPTIONS*/
 int                         builtin_opt_init(struct s_option *s_option_tab);

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/13 17:32:06 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 18:39:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int 	ft_print_error_option(char c, char *usage, char *builtins)
 {
+	ERROR;
 	ft_putstr_fd(builtins, STDERR_FILENO);
 	ft_putstr_fd(": illegal option -- ", STDERR_FILENO);
 	ft_putchar_fd(c, STDERR_FILENO);
@@ -26,6 +27,7 @@ int 	ft_print_error_option(char c, char *usage, char *builtins)
 
 int		ft_print_move_error(char *str, char *error)
 {
+	ERROR;
 	ft_putstr_fd(RED, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(error, STDERR_FILENO);
@@ -35,6 +37,7 @@ int		ft_print_move_error(char *str, char *error)
 
 int		ft_print_error_access(char *str)
 {
+	ERROR;
 	ft_putstr_fd("21sh: ", STDERR_FILENO);
 	ft_putstr_fd(" permission denied: ", STDERR_FILENO);
 	ft_putendl_fd(str, STDERR_FILENO);
@@ -43,6 +46,7 @@ int		ft_print_error_access(char *str)
 
 int		ft_print_error(char *str)
 {
+	ERROR;
 	ft_putstr_fd(RED, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd("\e[0m", STDERR_FILENO);
@@ -51,6 +55,7 @@ int		ft_print_error(char *str)
 
 int		ft_print_cmd_not_found(char *str)
 {
+	ERROR;
 	ft_putstr_fd("21sh: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(" command not found\n", STDERR_FILENO);
@@ -59,6 +64,7 @@ int		ft_print_cmd_not_found(char *str)
 
 int		ft_print_parse_error(char *str)
 {
+	ERROR;
 	ft_print_error("21sh: ");
 	ft_print_error(" parse error near '");
 	ft_print_error(str);

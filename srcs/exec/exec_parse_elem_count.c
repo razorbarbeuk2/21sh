@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 12:00:37 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/12 12:03:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 12:49:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ int ft_parse_number_in_command_quote(char *cmd)
 
 int ft_parse_number_in_command_count_next(char *cmd, int count)
 {
-    if (data_check_caract(*cmd) && !data_check_caract(*(cmd + 1)))
-        count++;
-    else if (!data_check_caract(*cmd) && *(cmd + 1) == '\0')
-        count++;
-    else if (data_check_caract(*cmd) && *(cmd + 1) == '\0')
-        count++;
+    if (cmd)
+    {
+        if (data_check_caract(*cmd) && !data_check_caract(*(cmd + 1)))
+            count++;
+        else if (!data_check_caract(*cmd) && *(cmd + 1) == '\0')
+            count++;
+        else if (data_check_caract(*cmd) && *(cmd + 1) == '\0')
+            count++;
+    }
     return (count);
 }
 

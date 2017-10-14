@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/09/28 12:21:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 16:43:31 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ int ft_error_token(unsigned int type)
 	return (0);
 }
 
+static int parse_token_list(t_list *token_list)
+{
+	t_token_struct *token_struct;
+	t_token_struct *token_struct_next;
+
+	while (token_list)
+	{
+		token_struct = (t_token_struct *)token_list->content;
+		token_struct_next = (t_token_struct *)token_list->next->content;
+		if (token_struct->type != TYPE_CMD && token_struct_next->type != TYPE_CMD)
+			return (-1);
+		token_list = token_list->next;
+	}
+	return (1);
+}
+
 int data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 {
 	unsigned int type;
@@ -53,6 +69,7 @@ int data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 	type = 0;
 	if(ft_token_str_pos(data, line_str, &data->token_list, &type) == -1)
 		return (ft_error_token(type));
-	// termine cette fonction pour execution.
+	if (parse_token_list(data->token_list) == -1)
+		return (-1);
 	return (1);
 }

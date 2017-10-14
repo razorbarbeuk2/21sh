@@ -6,17 +6,16 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 17:38:17 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/13 17:40:25 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:26:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int        exec_fork_step(t_data *data, char **line, unsigned int fork_state)
+int        exec_fork_step(t_data *data, unsigned int fork_state)
 {   
     int status;
 
-    (void)line;
     status = 0;
     if (fork_state)
     {
@@ -31,7 +30,7 @@ int        exec_fork_step(t_data *data, char **line, unsigned int fork_state)
     return (-1);
 }
 
-int			exec_parse_builtins(t_data *data, char **line, int fork_state)
+int			exec_parse_builtins(t_data *data, char **line, unsigned int fork_state)
 {
 	int result;
 
@@ -40,9 +39,11 @@ int			exec_parse_builtins(t_data *data, char **line, int fork_state)
 		return (result);
 	else
 	{
-        exec_get_path(data, &line[0]);
-        if (exec_fork_step(data, line, fork_state))
-             exec_get_access(data, line);
+        if (exec_get_path(data, &line[0]))
+        {
+            if (exec_fork_step(data, fork_state))
+                 exec_get_access(data, line);
+        }
     }
     return (0);
 }
@@ -50,11 +51,9 @@ int			exec_parse_builtins(t_data *data, char **line, int fork_state)
 int        exec_execute(t_data *data, t_token_node *cur, unsigned int fork_state)
 {
     t_token_struct  *cur_token;
-    char            **line;
     
     cur_token = ((t_token_struct *)cur->node->content);
-    line = ft_split_in_command(data, cur_token->token_name);
-    exec_parse_builtins(data, line, fork_state);
-    ft_free_char_array(&line);
+    //print_tab(data, cur_token->token_name_tab);
+    exec_parse_builtins(data, cur_token->token_name_tab, fork_state);
     return (1);
 }

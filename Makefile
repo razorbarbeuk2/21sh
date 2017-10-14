@@ -6,13 +6,13 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/13 15:57:48 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/14 16:01:46 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME 		=	21sh
-LIB			=	./libft/libft.a ./log/liblogger.a
+LIB			=	./libft/libft.a
 SRC_NAME 	=	init/init_data.c \
 				init/init_prompt.c \
 				init/init_env.c \
@@ -98,7 +98,7 @@ SRC_NAME 	=	init/init_data.c \
 				
 
 SRC			=	$(addprefix srcs/, $(SRC_NAME))
-INCLUDES	=	-I./libft/includes/ -I./includes -I ./log/incs
+INCLUDES	=	-I./libft/includes/ -I./includes
 OBJ			=	$(SRC:.c=.o)
 CFLAGS		=	-g3 -O2 -Werror -Wall -Wextra -fsanitize=address
 
@@ -109,7 +109,6 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	@make -C log
 	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -ltermcap
 	@echo "Tu as compilé"
 

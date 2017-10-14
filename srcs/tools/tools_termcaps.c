@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_termcaps.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:44:29 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/11/29 16:30:42 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/14 11:56:34 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int ft_concat_int(char *buf)
 		result = result*100 + buf[i];
 		i++;
 	}
+	ft_bzero(buf, 8);
 	return (result);
 }
 

@@ -6,59 +6,72 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 16:02:43 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/13 18:21:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 19:22:18 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int exec_redir_OPEN(t_data *data, char *token_name, int option)
+int exec_redirect_option_OPEN(t_token_struct *token_struct, int option)
 {
     int     fd;
-    char    **line;
-    int     count;
-
-    line = ft_split_in_command(data, token_name);
-    count = ft_count_tab(line);
-    if (ft_isdigit(line[count - 1][0]))
-        fd = ft_atoi(line[count - 1]);
-    else
-    {
-        if (option == TRUNC)
-            fd = open(token_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (option == APPREND)
-            fd = open(token_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-    }
-    ft_free_char_array(&line);
+    
+    fd = 0;
+    if (option == _TRUNC)
+        fd = open(token_struct->token_name_str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (option == _APPEND)
+        fd = open(token_struct->token_name_str, O_WRONLY | O_CREAT | O_APPEND, 0644);
     return (fd);
 }
 
-int exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *node_cur, unsigned int fork_state)
+int exec_redirect_option_DIGIT(t_data *data, t_token_struct *token_struct)
+{   
+    int     fd;
+    int     count;
+
+    (void)data;
+    fd = 0;
+    count = 0;
+    if (token_struct)
+    {
+        count = ft_count_tab(token_struct->token_name_tab);
+        if (ft_isdigit(token_struct->token_name_tab[count - 1][0]))
+        {
+            fd = ft_atoi(token_struct->token_name_tab[count - 1]);
+            ft_strdel(&token_struct->token_name_tab[count - 1]);
+            token_struct->token_name_tab[count - 1] = NULL;
+        }
+        return (fd);
+    }
+    return (STDOUT_FILENO);
+}
+
+int exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state)//>
 {
     t_token_struct *node_content_left;
     t_token_struct *node_content_right;
     int            fd;
-    char           **line;
+    int            out;
     
     (void)fork_state;
-    ft_putendl("\nREDIR");
-    node_content_left = ((t_token_struct *)node_cur->tleft->node->content);
-    node_content_right = ((t_token_struct *)node_cur->tright->node->content);
-    if (node_content_left && node_content_right)
+    node_content_left = ((t_token_struct *)node->tleft->node->content);
+    node_content_right = ((t_token_struct *)node->tright->node->content);
+    if (node)
     {
-        fd = exec_redir_OPEN(data, node_content_right->token_name, TRUNC);
-        line = ft_split_in_command(data, node_content_left->token_name);
-        if (exec_fork_step(data, line, FORK))
+        if (exec_fork_step(data, FORK))
         {
-            dup2(fd, STDOUT_FILENO);
+            data->fork = FORK;
+            fd = exec_redirect_option_OPEN(node_content_right, _TRUNC);
+            out = exec_redirect_option_DIGIT(data, node_content_left);
+            dup2(fd, out);
             close(fd);
-            exec_cmd_type(data, node_cur->tleft, UNFORK);
+            exec_cmd_type(data, node->tleft, UNFORK);
         }
     }
     return (0);
 }
 
-int exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *node_cur, unsigned int fork_state)
+int exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *node_cur, unsigned int fork_state)//<
 {
     (void)data;
     (void)node_cur;
@@ -67,7 +80,7 @@ int exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *node_cur, unsigned int
     return (0);
 }
 
-int exec_redir_GREATAND(t_data *data, t_token_node *node, unsigned int fork_state)
+int exec_redir_GREATAND(t_data *data, t_token_node *node, unsigned int fork_state)//>&
 {
     (void)data;
     (void)node;
@@ -76,7 +89,7 @@ int exec_redir_GREATAND(t_data *data, t_token_node *node, unsigned int fork_stat
     return (0);
 }
 
-int exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork_state)
+int exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork_state)//<&
 {
     (void)data;
     (void)node;
@@ -85,16 +98,32 @@ int exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork_state
     return (0);
 }
 
-int exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state)
+int exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state)//>>
 {
-    (void)data;
-    (void)node;
+    t_token_struct *node_content_left;
+    t_token_struct *node_content_right;
+    int            fd;
+    int            out;
+    
     (void)fork_state;
-    ft_putendl("exec_redir_DGREAT");
+    node_content_left = ((t_token_struct *)node->tleft->node->content);
+    node_content_right = ((t_token_struct *)node->tright->node->content);
+    if (node)
+    {
+        if (exec_fork_step(data, FORK))
+        {
+            data->fork = FORK;
+            fd = exec_redirect_option_OPEN(node_content_right, _APPEND);
+            out = exec_redirect_option_DIGIT(data, node_content_left);
+            dup2(fd, out);
+            close(fd);
+            exec_cmd_type(data, node->tleft, UNFORK);
+        }
+    }
     return (0);
 }
 
-int exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state)
+int exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state)//<<
 {
     (void)data;
     (void)node;

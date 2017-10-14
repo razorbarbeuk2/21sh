@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:52:27 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/13 14:58:18 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 12:44:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char		*exec_get_path_check_result(char *line, char *paths, int i)
 	return (NULL);
 }
 
-void 			exec_get_path(t_data *data, char **line)
+int 			exec_get_path(t_data *data, char **line)
 {
 	int		i;
 	char	*result;
@@ -48,9 +48,11 @@ void 			exec_get_path(t_data *data, char **line)
 		if (access(result, F_OK) == 0)
 		{
 			(*line) = result;
-			return ;
+			return (1);
 		}
 		ft_strdel(&result);
 		i++;
 	}
+	ft_print_cmd_not_found(line[0]);
+	return (0);
 }

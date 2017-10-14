@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 11:48:45 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/13 17:34:57 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/14 12:43:31 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int			exec_get_access(t_data *data, char **line)
 {
+	
 	if (access(line[0], X_OK) == 0)
 	{
 		execve(line[0], line, get_lst_to_tab(data->env));
