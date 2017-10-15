@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/07 16:16:36 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 16:25:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +32,55 @@ void print_env(t_list *lst)
 	tmp = NULL;
 	return ;
 }
-// int ft_print_token(t_list **token_lst)
-// {
-// 	t_list *lst;
-// 	t_token_struct *token;
 
-// 	lst = NULL;
-// 	lst = (*token_lst);
-// 	token = NULL;
-// 	write(1, "\n", 1);
-// 	while (lst)
-// 	{
-// 		token = (t_token_struct *)lst->content;
-// 		if (token)
-// 		{
-// 			if (token->type == TYPE_DSEMI)
-// 				ft_putendl("START TYPE DSEMI---------------");
-// 			else if (token->type == TYPE_AND_IF)
-// 				ft_putendl("START TYPE_AND_IF---------------");
-// 			else if (token->type == TYPE_OR_IF)
-// 				ft_putendl("START TYPE_OR_IF---------------");
-// 			else if (token->type == TYPE_PIPE)
-// 				ft_putendl("START TYPE_PIPE---------------");
-// 			else if (token->type == TYPE_REDIRECTION_LESSGREAT)
-// 				ft_putendl("START TYPE_REDIRECTION_LESSGREAT---------------");
-// 			else if (token->type == TYPE_REDIRECTION_GREATAND)
-// 				ft_putendl("START TYPE_REDIRECTION_GREATAND---------------");
-// 			else if (token->type == TYPE_REDIRECTION_LESSAND)
-// 				ft_putendl("START TYPE_REDIRECTION_LESSAND---------------");
-// 			else if (token->type == TYPE_REDIRECTION_DGREAT)
-// 				ft_putendl("START TYPE_REDIRECTION_DGREAT---------------");
-// 			else if (token->type == TYPE_REDIRECTION_DLESS)
-// 				ft_putendl("START TYPE_REDIRECTION_DLESS---------------");
-// 			else if (token->type == TYPE_CMD)
-// 				ft_putendl("START TYPE_CMD---------------");
-// 			ft_putendl(((t_token_struct *)lst->content)->token_name);
-// 			ft_putendl("END TOKEN---------------");
-// 		}
-// 		else
-// 			ft_putendl("FUCK TOKEN---------------");
-// 		lst = lst->next;
-// 		token = NULL;
-// 	}
-// 	return (0);
-// }
+int ft_print_token(t_list **token_lst)
+{
+	t_list *lst;
+	t_token_struct *token;
+
+	lst = NULL;
+	lst = (*token_lst);
+	token = NULL;
+	write(1, "\n", 1);
+	while (lst)
+	{
+		token = (t_token_struct *)lst->content;
+		if (token)
+		{
+			if (token->type == TYPE_DSEMI)
+				ft_putendl("TYPE DSEMI---------------");
+			else if (token->type == TYPE_AND_IF)
+				ft_putendl("TYPE_AND_IF---------------");
+			else if (token->type == TYPE_OR_IF)
+				ft_putendl("TYPE_OR_IF---------------");
+			else if (token->type == TYPE_PIPE)
+				ft_putendl("TYPE_PIPE---------------");
+			else if (token->type == TYPE_REDIRECTION_LESSGREAT_RIGHT)
+				ft_putendl("TYPE_REDIRECTION_LESSGREAT_RIGHT---------------");
+			else if (token->type == TYPE_REDIRECTION_LESSGREAT_LEFT)
+				ft_putendl("TYPE_REDIRECTION_LESSGREAT_LEFT---------------");
+			else if (token->type == TYPE_REDIRECTION_GREATAND)
+				ft_putendl("TYPE_REDIRECTION_GREATAND---------------");
+			else if (token->type == TYPE_REDIRECTION_LESSAND)
+				ft_putendl("TYPE_REDIRECTION_LESSAND---------------");
+			else if (token->type == TYPE_REDIRECTION_DGREAT)
+				ft_putendl("TYPE_REDIRECTION_DGREAT---------------");
+			else if (token->type == TYPE_REDIRECTION_DLESS)
+				ft_putendl("TYPE_REDIRECTION_DLESS---------------");
+			else if (token->type == TYPE_IO_NUMBER)
+				ft_putendl("TYPE_IO_NUMBER---------------");
+			else if (token->type == TYPE_CMD)
+				ft_putendl("TYPE_CMD---------------");
+			ft_putendl(((t_token_struct *)lst->content)->token_name_str);
+			ft_putendl("END TOKEN---------------");
+		}
+		else
+			ft_putendl("FUCK TOKEN---------------");
+		lst = lst->next;
+		token = NULL;
+	}
+	return (0);
+}
 
 void print_tab(t_data *data, char **str_tab)
 {

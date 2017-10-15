@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 16:02:43 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/14 19:22:18 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 18:21:21 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,21 @@ int exec_redirect_option_OPEN(t_token_struct *token_struct, int option)
     return (fd);
 }
 
-int exec_redirect_option_DIGIT(t_data *data, t_token_struct *token_struct)
+int exec_redirect_option_DIGIT(t_data *data, t_token_node *node)
 {   
     int     fd;
-    int     count;
-
+    t_token_struct *node_content_right;
+    
     (void)data;
     fd = 0;
-    count = 0;
-    if (token_struct)
-    {
-        count = ft_count_tab(token_struct->token_name_tab);
-        if (ft_isdigit(token_struct->token_name_tab[count - 1][0]))
-        {
-            fd = ft_atoi(token_struct->token_name_tab[count - 1]);
-            ft_strdel(&token_struct->token_name_tab[count - 1]);
-            token_struct->token_name_tab[count - 1] = NULL;
-        }
-        return (fd);
-    }
-    return (STDOUT_FILENO);
+
+    if (node->tright && node->tright->tright)
+        node_content_right = ((t_token_struct *)node->tright->tright->node->content);
+    else if (node->tright)
+        node_content_right = ((t_token_struct *)node->tright->node->content);
+    else
+        return (STDOUT_FILENO);
+    return (ft_atoi(node_content_right->token_name_str));
 }
 
 int exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state)//>
@@ -56,13 +51,17 @@ int exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *node, unsigned int fo
     (void)fork_state;
     node_content_left = ((t_token_struct *)node->tleft->node->content);
     node_content_right = ((t_token_struct *)node->tright->node->content);
+    ft_putendl("TEST ---------------------------");
+    ft_putendl(node_content_left->token_name_str);
+    ft_putendl(node_content_right->token_name_str);
+    ft_putendl("--------------------------------");
     if (node)
     {
         if (exec_fork_step(data, FORK))
         {
             data->fork = FORK;
             fd = exec_redirect_option_OPEN(node_content_right, _TRUNC);
-            out = exec_redirect_option_DIGIT(data, node_content_left);
+            out = exec_redirect_option_DIGIT(data, node->tleft);
             dup2(fd, out);
             close(fd);
             exec_cmd_type(data, node->tleft, UNFORK);
@@ -114,7 +113,7 @@ int exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state)
         {
             data->fork = FORK;
             fd = exec_redirect_option_OPEN(node_content_right, _APPEND);
-            out = exec_redirect_option_DIGIT(data, node_content_left);
+            out = exec_redirect_option_DIGIT(data, node->tleft);
             dup2(fd, out);
             close(fd);
             exec_cmd_type(data, node->tleft, UNFORK);

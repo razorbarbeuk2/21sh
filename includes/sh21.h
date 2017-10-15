@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/14 18:48:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 13:45:04 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,10 @@ int 						ft_token_or_if(char *str, int *io, unsigned int *type, t_list **token_
 int 						ft_token_pipe(char *str, int *io, unsigned int *type, t_list **token_list);
 int 						ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_list);
 int 						ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_list);
+int                         ft_token_redirection_LESSGREAT(char *j, unsigned int *type);
+int                         ft_token_redirection_GREATAND_LESSAND(char *j, unsigned int *type);
+int                         ft_token_redirection_DGREAT_DLESS(char *j, unsigned int *type);
+int                         ft_token_io_number(char *str, int *io, unsigned int *type, t_list **token_list);
 void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
 int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
 int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);

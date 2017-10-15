@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/14 16:43:31 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 16:31:12 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int parse_token_list(t_list *token_list)
 	{
 		token_struct = (t_token_struct *)token_list->content;
 		token_struct_next = (t_token_struct *)token_list->next->content;
-		if (token_struct->type != TYPE_CMD && token_struct_next->type != TYPE_CMD)
+		if ((token_struct->type != TYPE_CMD && token_struct->type != TYPE_IO_NUMBER) && (token_struct_next->type != TYPE_CMD))
 			return (-1);
 		token_list = token_list->next;
 	}

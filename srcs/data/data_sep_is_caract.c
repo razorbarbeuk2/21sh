@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/10 15:45:23 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 14:50:19 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int data_check_quote(char c)
 
 int data_check_false_caract(char *c)
 {
-	if ((*c) == '&' || (*c) == '>' || (*c) == '<' || (*c) == '|' || (*c) == ';')
+	if ((*c) == '&' || (*c) == '>' || (*c) == '<' || (*c) == '|' || (*c) == ';' || ft_isdigit(*c))
 		return (1);
 	return (0);
 }

@@ -6,15 +6,14 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 17:37:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/14 19:51:16 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 16:05:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static int ft_token_redirection_LESSGREAT(char *j, unsigned int *type)
+int ft_token_redirection_LESSGREAT(char *j, unsigned int *type)
 {
-
 	if (!data_check_false_caract(j + 1))
 	{
 		if (*j == '>')
@@ -22,7 +21,7 @@ static int ft_token_redirection_LESSGREAT(char *j, unsigned int *type)
 			(*type) = TYPE_REDIRECTION_LESSGREAT_RIGHT;
 			return (1);
 		}
-		else if (*j == '<')
+		if (*j == '<')
 		{
 			(*type) = TYPE_REDIRECTION_LESSGREAT_LEFT;
 			return (1);
@@ -31,7 +30,7 @@ static int ft_token_redirection_LESSGREAT(char *j, unsigned int *type)
 	return (ft_token_redirection_ERROR(j));
 }
 
-static int ft_token_redirection_GREATAND_LESSAND(char *j, unsigned int *type)
+int ft_token_redirection_GREATAND_LESSAND(char *j, unsigned int *type)
 {
 	if (!data_check_false_caract(j + 2))
 	{
@@ -49,7 +48,7 @@ static int ft_token_redirection_GREATAND_LESSAND(char *j, unsigned int *type)
 	return (ft_token_redirection_ERROR_NEXT(j));
 }
 
-static int ft_token_redirection_DGREAT_DLESS(char *j, unsigned int *type)
+int ft_token_redirection_DGREAT_DLESS(char *j, unsigned int *type)
 {
 	if (!data_check_false_caract(j + 2))
 	{
@@ -88,17 +87,16 @@ int ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_
 	size = (*io);
 	j = (*io);
 	tmp = NULL;
-	// while (ft_isdigit(str[j]))
-	// 	j--;
+	j += ft_token_io_number(str, io, type, token_list);
+	size = (*io);
 	j += ft_token_redirection_TYPE(&str[j], type);
 	if (j > (*io))
 	{
-		while (ft_isdigit(str[j]) || str[j] == '-')
-			j++;
 		tmp = ft_strsub(str, size, j - size);
 		data_check_is_token_operator(token_list, (*type), tmp, j);
-		ft_strdel(&tmp);
 		(*io) = j;
+		j += ft_token_io_number(str, io, type, token_list);
+		ft_strdel(&tmp);
 		return (1);
 	}
 	return (0);

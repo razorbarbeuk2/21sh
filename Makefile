@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/14 16:01:46 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/15 12:55:15 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_NAME 	=	init/init_data.c \
 				tokens/token_and_if.c \
 				tokens/token_or_if.c \
 				tokens/token_pipe.c \
+				tokens/token_io_number.c \
 				tokens/token_semicol.c \
 				data/data_str_check_quote_cmd.c \
 				data/data_lst_to_tab.c \

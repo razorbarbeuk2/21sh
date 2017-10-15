@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/04 15:14:23 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/14 19:48:13 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 16:31:58 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef int (*G_func)(char *str, int *io, unsigned int *type, t_list **token_lis
 	ft_token_or_if,
 	ft_token_pipe,
 	ft_token_redirection,
-	ft_token_ionumber,
 	NULL
 };
 

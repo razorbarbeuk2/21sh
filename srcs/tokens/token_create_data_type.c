@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/20 16:56:57 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/14 16:45:08 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/15 17:18:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static const struct s_num_priority_token s_num_priority_t[] = {
 	{TYPE_REDIRECTION_DGREAT, 4},
 	{TYPE_REDIRECTION_DLESS, 4},
 	{TYPE_CMD, 5},
+	{TYPE_IO_NUMBER, 6},
 	{TYPE_FINISH, 0}
 };
 
