@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/15 13:45:04 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/16 14:34:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define UNFORK 		    0
 # define _TRUNC 		    1
 # define _APPEND 		    2
+# define _READ_INSIDE 		3
 # define OPT 		        1
 # define PROMPT 		    1
 # define MOVE_LST           1

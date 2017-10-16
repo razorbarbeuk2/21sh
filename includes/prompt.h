@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:46:52 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/14 19:45:37 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/16 16:06:10 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ enum					e_enum_exec
 						TYPE_IO_NUMBER,
 						TYPE_CMD,
 						TYPE_FINISH,
+						TYPE_NEAR_RETURN,
 						TYPE_ERROR_PARSE
 };
 

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/15 16:31:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/16 16:07:12 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static const struct s_error_token s_error_t[] = {
 	{"<&", TYPE_REDIRECTION_LESSAND},
 	{">>", TYPE_REDIRECTION_DGREAT},
 	{"<<", TYPE_REDIRECTION_DLESS},
+	{"\\n", TYPE_NEAR_RETURN},
 	{NULL, TYPE_FINISH}
 };
 

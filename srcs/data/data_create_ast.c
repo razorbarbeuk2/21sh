@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 21:44:26 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/15 18:22:52 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/16 11:55:05 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_token_node 		*construct_ast_tree(t_list *token_list, t_list *cmp, int value, t
 
 	tmp = NULL;
 	lst = token_list;
-	tmp_struct = N ULL;
+	tmp_struct = NULL;
 	if(value ==  7 || !token_list)
 		return (NULL);
 	while (lst && lst != cmp)

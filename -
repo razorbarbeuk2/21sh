@@ -1,5 +1,4 @@
 -
-2
 21sh
 Makefile
 README.md
@@ -8,7 +7,5 @@ comment
 comment_bordel
 includes
 libft
-ls
 pipe_example.c
 srcs
-test
