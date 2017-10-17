@@ -6,46 +6,11 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:53:58 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/16 16:07:12 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/17 18:53:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-
-struct s_error_token
-{
-	char 		 *c;
-	unsigned int t;
-};
-
-static const struct s_error_token s_error_t[] = {
-	{";", TYPE_DSEMI},
-	{"&&", TYPE_AND_IF},
-	{"||", TYPE_OR_IF},
-	{"|", TYPE_PIPE},
-	{">", TYPE_REDIRECTION_LESSGREAT_RIGHT},
-	{"<", TYPE_REDIRECTION_LESSGREAT_LEFT},
-	{">&", TYPE_REDIRECTION_GREATAND},
-	{"<&", TYPE_REDIRECTION_LESSAND},
-	{">>", TYPE_REDIRECTION_DGREAT},
-	{"<<", TYPE_REDIRECTION_DLESS},
-	{"\\n", TYPE_NEAR_RETURN},
-	{NULL, TYPE_FINISH}
-};
-
-int ft_error_token(unsigned int type)
-{
-	int i;
-
-	i = 0;
-	while (s_error_t[i].c)
-	{
-		if (type == s_error_t[i].t)
-			return (ft_print_parse_error(s_error_t[i].c));
-		i++;
-	}
-	return (0);
-}
 
 static int parse_token_list(t_list *token_list)
 {
@@ -55,12 +20,62 @@ static int parse_token_list(t_list *token_list)
 	while (token_list)
 	{
 		token_struct = (t_token_struct *)token_list->content;
-		token_struct_next = (t_token_struct *)token_list->next->content;
-		if ((token_struct->type != TYPE_CMD && token_struct->type != TYPE_IO_NUMBER) && (token_struct_next->type != TYPE_CMD))
-			return (-1);
+		if (token_list->next)
+			token_struct_next = (t_token_struct *)token_list->next->content;
+		if (token_struct->type == TYPE_ERROR_PARSE)
+			return (ft_print_parse_error(&token_struct->error));
+		else if (token_struct->type != TYPE_CMD && !token_list->next)
+			return (ft_print_parse_error("\\n"));
+		else if ((token_struct->type != TYPE_CMD) && (token_struct_next->type != TYPE_CMD))
+			return (ft_print_parse_near_token(token_struct->token_name_str));
+		// if ((token_struct->type != TYPE_CMD && token_struct->type != TYPE_IO_NUMBER) && (token_struct_next->type != TYPE_CMD))
+		// 	return (ft_print_parse_error(token_struct->token_name_str));
+		
 		token_list = token_list->next;
 	}
 	return (1);
+}
+
+int data_check_digit(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	return (i);
+}
+
+int ft_token_io_number(t_data *data, t_list *token_lst)
+{
+	t_list				*tmp;
+	t_token_struct		*token;
+	t_token_struct		*token_next;
+	int size;
+	char *str;
+	
+	str = NULL;
+	while (token_lst)
+	{
+		token = (t_token_struct *)token_lst->content;
+		if (token_lst->next)
+			token_next = (t_token_struct *)token_lst->next->content;
+		if ((token->type == TYPE_CMD) && (token_next->type != TYPE_CMD))
+		{
+			size = ft_count_tab(token->token_name_tab);
+			if (data_check_digit(token->token_name_tab[size - 1]) > 0)
+			{
+				tmp = token_lst->next;
+				token_lst->next = NULL;
+				data_check_is_token(data, token->token_name_tab[size - 1], _IONUMBER);
+				ft_strdel(&token->token_name_tab[size - 1]);
+				token_lst = token_lst->next;
+				token_lst->next = tmp;
+			}
+		}
+		token_lst = token_lst->next;
+	}
+	return (0);
 }
 
 int data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
@@ -68,9 +83,9 @@ int data_check_str_list_struct_cmd_loop(t_data *data, char *line_str)
 	unsigned int type;
 
 	type = 0;
-	if(ft_token_str_pos(data, line_str, &data->token_list, &type) == -1)
-		return (ft_error_token(type));
+	ft_token_str(data, line_str);
 	if (parse_token_list(data->token_list) == -1)
 		return (-1);
+	ft_token_io_number(data, data->token_list);
 	return (1);
 }

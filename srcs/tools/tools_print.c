@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/15 16:25:02 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/17 18:59:08 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,20 @@ void print_env(t_list *lst)
 	return ;
 }
 
-int ft_print_token(t_list **token_lst)
+int ft_print_token_test(t_list *token_lst)
+{
+	t_token_struct *token;
+
+	while (token_lst)
+	{
+		token = (t_token_struct *)token_lst->content;
+		ft_putendl(token->token_name_str);
+		token_lst = token_lst->next;
+	}
+	return (0);
+}
+
+int ft_print_token(t_data *data, t_list **token_lst)
 {
 	t_list *lst;
 	t_token_struct *token;
@@ -71,7 +84,9 @@ int ft_print_token(t_list **token_lst)
 				ft_putendl("TYPE_IO_NUMBER---------------");
 			else if (token->type == TYPE_CMD)
 				ft_putendl("TYPE_CMD---------------");
-			ft_putendl(((t_token_struct *)lst->content)->token_name_str);
+			else if (token->type == TYPE_IO_NUMBER)
+				ft_putendl("TYPE_IO_NUMBER---------------");
+			print_tab(data, token->token_name_tab);
 			ft_putendl("END TOKEN---------------");
 		}
 		else
@@ -89,9 +104,11 @@ void print_tab(t_data *data, char **str_tab)
 	i = 0;
 	while (str_tab[i])
 	{
-		ft_putendl_fd(str_tab[i], data->term->tty);
+		ft_putstr_fd(str_tab[i], data->term->tty);
+		ft_putstr(" ");
 		i++;
 	}
+	N;
 }
 
 void count_list_cmd(t_data *data, t_list *lst)

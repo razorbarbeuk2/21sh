@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/16 14:34:32 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/17 19:00:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 # define MOVE_LST           1
 # define CPY                1
 # define CUT                0
+# define _CMD               0
+# define _TOKEN             1
+# define _IONUMBER          2
 # define QUOTE_DOUBLE_SET   '"'
 # define QUOTE_SIMPLE_SET   '\''
 # define ERROR              "\e[31mERROR"
@@ -101,6 +104,7 @@ int							ft_print_parse_error(char *str);
 int		                    ft_print_error_access(char *str);
 int							ft_print_move_error(char *str, char *error);
 int 						ft_print_error_option(char c, char *usage, char *builtins);
+int		                    ft_print_parse_near_token(char *str);
 /*TERM*/
 int							term_init(t_term *term);
 int							term_reset(t_term *term);
@@ -169,20 +173,10 @@ int 						add_sentence_historic_list_to_file(t_data *data);
 void 						write_sentence_in_historic_file(t_data *data, char *cmd, int *nb_line, int opt);
 int							ft_move_up_down_historic(t_data *data, int result);
 /*LEXER*/
-int 						ft_token_str_pos(t_data *data, char *line_str, t_list **token_list, unsigned int *type);
-int 						ft_token_and_if(char *str, int *io, unsigned int *type, t_list **token_list);
-int 						ft_token_or_if(char *str, int *io, unsigned int *type, t_list **token_list);
-int 						ft_token_pipe(char *str, int *io, unsigned int *type, t_list **token_list);
-int 						ft_token_semi(char *str, int *io, unsigned int *type, t_list **token_list);
-int 						ft_token_redirection(char *str, int *io, unsigned int *type, t_list **token_list);
-int                         ft_token_redirection_LESSGREAT(char *j, unsigned int *type);
-int                         ft_token_redirection_GREATAND_LESSAND(char *j, unsigned int *type);
-int                         ft_token_redirection_DGREAT_DLESS(char *j, unsigned int *type);
-int                         ft_token_io_number(char *str, int *io, unsigned int *type, t_list **token_list);
-void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
-int 						data_check_is_token_operator(t_list **token_list, unsigned int type, char *line_str, int pos);
-int 						ft_is_redirection(t_list **token_list, char *line_str, int i, unsigned int *type);
-void 						data_check_is_token_cmd(t_list **token_list, char *line_str, int start, int size);
+int                         ft_token_str(t_data *data, char *line_str);
+int                         ft_token_io_number(t_data *data, t_list *token_list);
+void                        data_check_is_token_cmd(t_data *data, char *line_str, int start, int size, unsigned int flag);
+int                         data_check_is_token(t_data *data, char *str, unsigned int flag);
 int 						ft_token_redirection_ERROR(char *d);
 int 						ft_token_redirection_ERROR_NEXT(char *d);
 int 						ft_error_token(unsigned int type);
@@ -241,7 +235,8 @@ void 						print_list_node_cmd(t_data *data, t_list *lst);
 void 						print_tab(t_data *data, char **str_tab);
 void		                print_character(t_data *data, char result);
 void 						count_list_cmd(t_data *data, t_list *lst);
-int 						ft_print_token(t_list **token_lst);
+int                         ft_print_token(t_data *data, t_list **token_lst);
+int                         ft_print_token_test(t_list *token_lst);
 /*TOOLS COUNT*/
 int 						len_word(char *str);
 int							len_word_caract(char *line_str, char *caract);

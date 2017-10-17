@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 12:07:53 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/14 18:39:19 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/17 16:29:41 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,16 @@ int		ft_print_parse_error(char *str)
 	ERROR;
 	ft_print_error("21sh: ");
 	ft_print_error(" parse error near '");
+	ft_print_error(str);
+	ft_print_error("'\n");
+	return (-1);
+}
+
+int		ft_print_parse_near_token(char *str)
+{
+	ERROR;
+	ft_print_error("21sh: ");
+	ft_print_error("syntax error near unexpected token `");
 	ft_print_error(str);
 	ft_print_error("'\n");
 	return (-1);
