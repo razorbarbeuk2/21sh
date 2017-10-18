@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/17 19:00:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:13:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void						get_super_prompt(t_data *data);
 void						get_quote_prompt(t_data *data);
 void						get_hist_prompt(t_data *data);
 int							get_pos_prompt(t_data *data);
+void	                    get_heredoc_prompt(t_data *data);
 void						ft_listen_cmd(t_data *data);
 /*MOTION_CURSOR*/
 int							listen_cursor(t_data *data, t_entry *entry);
@@ -189,12 +190,8 @@ int 						exec_CMD(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_DSEMI(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_OR_IF(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_PIPE(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec_redir_LESSGREAT_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec_redir_LESSGREAT_LEFT(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec_redir_GREATAND(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec_redir_LESSAND(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec_redir_DGREAT(t_data *data, t_token_node *node, unsigned int fork_state);
-int 						exec_redir_DLESS(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state);
+int 						exec_redir_LEFT(t_data *data, t_token_node *node, unsigned int fork_state);
 int 						exec_execute(t_data *data, t_token_node *cur, unsigned int fork_state);
 int							exec_parse_builtins(t_data *data, char **line, unsigned int fork_state);
 int		                    exec_builtins_parsing(t_data *data, char **line);
@@ -244,7 +241,6 @@ int 						ft_count_word_caract(t_data *data, char *str);
 int 						data_check_caract(char c);
 char 						*trim_str(char *str);
 char						*ft_strcpy_data(char *dst, const char *str);
-int							ft_count_word_spec_caract(char *line_str, char *caract);
 int 						ft_count_enum(unsigned int START, unsigned int END);
 /*CLEAN CARACT*/
 char 						**data_split_to_tab(t_data *data, char *line_str, char *caract);

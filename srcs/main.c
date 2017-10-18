@@ -6,13 +6,13 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 22:35:06 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/16 14:03:36 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:21:22 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void init_error()
+void init_error(void)
 {
 	ft_print_error("INIT ERROR\n");
 	exit(EXIT_FAILURE);
@@ -34,7 +34,7 @@ int	init_sh(t_data *data)
 	return (1);
 }
 
-int main()
+int main(void)
 {
 	t_data	data;
 

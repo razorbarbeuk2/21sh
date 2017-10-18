@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/15 18:41:46 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:04:51 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		ft_cmd_cursor(t_data *data, int result)
 
 void 		listen_cursor_check_module_active(t_data *data)
 {
-	if (data->set_quotes && !data->set_historique)
+	if (data->set_quotes)
 	{
 		get_pos_prompt(data);
 		data->sel->len_prompt = data->quotes->nb_prompt_quote;
@@ -73,10 +73,9 @@ void 		listen_cursor_check_module_active(t_data *data)
 		ft_add_print_caract(data, '\n');
 		motion_list(data, 'E');
 	}
-	if (data->set_historique && !data->set_quotes)
+	if (data->set_heredoc)
 	{
 		get_pos_prompt(data);
-		data->sel->len_prompt = data->historic->nb_prompt_historique;
 		data->sel->pos_start[0] = data->sel->pos[0];
 		data->sel->pos_start[1] = data->sel->pos[1];
 	}
@@ -96,7 +95,7 @@ int			listen_cursor(t_data *data, t_entry *entry)
 	ft_bzero(buf, 8);
 	listen_cursor_check_module_active(data);
 	data->entry->size_line = data->sel->len_prompt;
-	while(read(0, buf, 7))
+	while(read(STDIN_FILENO, buf, 7))
 	{
 		result = ft_concat_int(buf);
 		if (result == LEFT || result == RIGHT || result == HOME || result == END || result == UP || result == DOWN)

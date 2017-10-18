@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 15:16:11 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/14 17:58:53 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 16:22:24 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static const struct s_exec_token s_exec_t[] = {
 	{TYPE_AND_IF, exec_AND_IF},
 	{TYPE_OR_IF, exec_OR_IF},
 	{TYPE_PIPE, exec_PIPE},
-	{TYPE_REDIRECTION_LESSGREAT_RIGHT, exec_redir_LESSGREAT_RIGHT},
-	{TYPE_REDIRECTION_LESSGREAT_LEFT, exec_redir_LESSGREAT_LEFT},
-	{TYPE_REDIRECTION_GREATAND, exec_redir_GREATAND},
-	{TYPE_REDIRECTION_LESSAND, exec_redir_LESSAND},
-	{TYPE_REDIRECTION_DGREAT, exec_redir_DGREAT},
-	{TYPE_REDIRECTION_DLESS, exec_redir_DLESS},
+	{TYPE_REDIRECTION_LESSGREAT_RIGHT, exec_redir_RIGHT},
+	{TYPE_REDIRECTION_LESSGREAT_LEFT, exec_redir_LEFT},
+	{TYPE_REDIRECTION_GREATAND, exec_redir_RIGHT},
+	{TYPE_REDIRECTION_LESSAND, exec_redir_LEFT},
+	{TYPE_REDIRECTION_DGREAT, exec_redir_RIGHT},
+	{TYPE_REDIRECTION_DLESS, exec_redir_LEFT},
 	{TYPE_CMD, exec_execute},
 	{TYPE_FINISH, NULL}};
 

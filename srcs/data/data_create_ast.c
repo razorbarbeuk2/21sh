@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 21:44:26 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/16 11:55:05 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 17:24:11 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void print_node_val(t_token_node *node_tree)
 	if (node_tree->node)
 	{
 		tmp_t_token_struct = ((t_token_struct *)node_tree->node->content);
+		ft_putendl(tmp_t_token_struct->token_name_str);
 		tmp_t_token_struct = NULL;
 	}
 	return;

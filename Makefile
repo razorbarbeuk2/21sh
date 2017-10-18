@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/11 13:32:06 by RAZOR             #+#    #+#              #
-#    Updated: 2017/10/17 14:36:43 by gbourson         ###   ########.fr        #
+#    Updated: 2017/10/18 17:17:39 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_NAME 	=	init/init_data.c \
 				text_line/motion_list.c \
 				text_line/prompt_position.c \
 				tokens/token_check_init.c \
+				tokens/token_io_number.c \
 				tokens/token_create_data_type.c \
 				data/data_str_check_quote_cmd.c \
 				data/data_lst_to_tab.c \
@@ -73,7 +74,6 @@ SRC_NAME 	=	init/init_data.c \
 				history/data_up_down_history.c \
 				history/data_create_history_node_to_list.c \
 				history/data_update_history_cmd.c \
-				tools/tools_count_spec_caract.c \
 				tools/tools_count_quote.c \
 				tools/tools_list_create_node.c \
 				tools/tools_free.c \

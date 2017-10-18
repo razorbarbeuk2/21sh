@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/12 17:24:40 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:04:28 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,22 @@ void	get_quote_prompt(t_data *data)
 	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
 	ft_putstr_fd(tmp, data->term->tty);
 	data->quotes->nb_prompt_quote = ft_strlen(tmp);
+	ft_strdel(&tmp);
+	tmp = NULL;
+	return ;
+}
+
+void	get_heredoc_prompt(t_data *data)
+{
+	char 	*tmp;
+
+	tmp = NULL;
+	tmp = ft_strdup("heredoc> ");
+	ft_move_home(data);
+	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
+	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
+	ft_putstr_fd(tmp, data->term->tty);
+	data->sel->len_prompt = ft_strlen(tmp);
 	ft_strdel(&tmp);
 	tmp = NULL;
 	return ;

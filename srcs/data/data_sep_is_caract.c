@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 17:47:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/17 12:45:24 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:41:02 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ int data_check_false_caract(char *c)
 int data_check_caract(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\r' || c == '\n')
-		return (1);
-	return (0);
-}
-
-int data_check_spec_caract(char c, char *caract)
-{
-	if (c == caract[0])
 		return (1);
 	return (0);
 }
