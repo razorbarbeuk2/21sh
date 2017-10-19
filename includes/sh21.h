@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/18 19:13:38 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 15:01:33 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define POS 			    "\033[6n"
 # define DEBUG 			    ft_putendl("FUCK");
 # define N                  write(1, "\n", 1);
+# define SEND 			    1
 # define BACK 			    1
 # define FORK 			    1
 # define UNFORK 		    0
@@ -79,6 +80,7 @@ t_historic					*free_data_historic(t_historic *historic);
 t_quote 					*free_data_quotes(t_quote *quotes);
 
 /*TOOLS TERMCAPS*/
+t_data                      *restor_data(t_data *data, int flag);
 int							ft_concat_int(char *buf);
 int							ft_putchar_select(int c);
 /*INIT*/
@@ -144,7 +146,7 @@ int                         ft_del_print_caract(t_data *data);
 void						ft_add_at(t_list **lst, char result);
 /*DATA*/
 char 						**data_clean_to_tab(t_data *data, char *str);
-char 		                *convert_data_lst_tab(t_data *data, t_list *line);
+int 		                convert_data_lst_tab(t_data *data);
 int 						data_check_str_list_struct_cmd_loop(t_data *data, char *line_str);
 /*IS CARACT*/
 int							data_check_quote_caract(char *str, int *d);
@@ -198,6 +200,7 @@ int		                    exec_builtins_parsing(t_data *data, char **line);
 int        					exec_fork_step(t_data *data, unsigned int fork_state);
 int						    exec_get_path(t_data *data, char **line);
 int			                exec_get_access(t_data *data, char **line);
+int 		                exec_cmd_heredoc(t_data *data);
 int       					exec_exit(int fork_state);
 /*BUILTINS*/
 int 						builtins_check_args(char **line, int num);

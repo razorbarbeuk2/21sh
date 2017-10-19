@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 12:55:24 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/18 19:24:22 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 14:25:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static void	ft_clean_buf_pos(t_data *data, char *buf)
 
 int			get_pos_prompt(t_data *data)
 {
-	char	buf[10];
+	char	*buf;
 
-	ft_memset(buf, 0, 10);
+	buf = ft_memalloc(10 * (sizeof(char *)));
 	ft_bzero(buf, 10);
-	ft_putstr_fd(POS, data->term->tty);
-	read(data->term->tty, buf, 9);
+	ft_putstr_fd(POS, STDERR_FILENO);
+	read(STDERR_FILENO, buf, 9);
 	ft_clean_buf_pos(data, buf);
-	ft_bzero(buf, 10);
+	ft_strdel(&buf);
 	return (0);
 }

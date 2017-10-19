@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 16:02:43 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/18 19:21:58 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 19:00:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ int exec_redirect_option_DIGIT(t_data *data, t_token_node *node)
 
 int exec_redir_function_DUP_FROM(t_data *data, int fd, t_token_node *node)
 {
-    
+    // fd = open("test", O_RDWR);
     data->fork = FORK;
-    ft_putendl("\nTEST NUM-------------------");
-    ft_putnbr(fd);
-    ft_putendl("\n---------------------------");
+    //(void)node;
+    // dup2(STDIN_FILENO, fd);
     dup2(fd, STDIN_FILENO);
+    // ft_putendl_fd("LOLILOL", STDOUT_FILENO);
+    // write(STDIN_FILENO, "toto", 5);
     close(fd);
     exec_cmd_type(data, node->tleft, UNFORK);
     return (1);
@@ -84,13 +85,14 @@ int exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state)/
 
 int exec_redir_LEFT(t_data *data, t_token_node *node, unsigned int fork_state)//<//<<
 {
-    char           *line;
     t_token_struct *node_content;
     t_token_struct *node_content_right;
+    // int status;
     int fd;
+    // int  p[2];
+    // pid_t pid;
 
     fd = 0;
-    (void)line;
     (void)fork_state;
     if (node)
     {
@@ -99,16 +101,10 @@ int exec_redir_LEFT(t_data *data, t_token_node *node, unsigned int fork_state)//
         if (exec_fork_step(data, FORK))
         {
             if (node_content->type == TYPE_REDIRECTION_LESSGREAT_LEFT)
-                fd = open(node_content_right->token_name_str, O_RDONLY, 0644);
+                fd = open(node_content_right->token_name_str, O_RDWR | O_APPEND, 0644);
+                // fd = open("/dev/tty", O_RDWR, 0644);
             if (node_content->type == TYPE_REDIRECTION_DLESS)
             {
-                get_heredoc_prompt(data);
-                listen_cursor(data, data->line);
-                while (get_next_line(STDIN_FILENO, &line))
-                {
-                    if (ft_strcmp(line, node_content_right->token_name_str) == 0)
-                        ft_putendl(line);
-                }
                 
             }
             return (exec_redir_function_DUP_FROM(data, fd, node));

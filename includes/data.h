@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/16 16:55:36 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/18 18:54:11 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 16:46:43 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_data
 	t_list			*env;
 	t_list			*env_cpy;
 	t_list			*token_list;
+	t_token_node 	*node_tree_data;
 	t_entry			*entry;
 	t_entry			*line;
 	t_select		*sel;

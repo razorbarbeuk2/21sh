@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 10:38:44 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/17 18:59:08 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 11:47:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,35 +202,29 @@ void count_list_cmd(t_data *data, t_list *lst)
 
 void print_lst_line_end_pos_cursor(t_data *data, t_list *lst)
 {
-	if (lst)
+	(void)data;
+	while (lst)
 	{
-		while (lst)
-		{
-			ft_putstr_fd((char *)lst->content, data->term->tty);
-			lst->set_select = 0;
-			lst = lst->next;
-		}
-		return ;
+		ft_putstr_fd((char *)lst->content, STDOUT_FILENO);
+		lst->set_select = 0;
+		lst = lst->next;
 	}
 	return ;
 }
 
 void print_lst_line(t_data *data, t_list *lst)
 {
-	t_list *list;
-
-	list = NULL;
-	list = lst;
-	if (list)
+	(void)data;
+	if (lst)
 	{
 		tputs(tgetstr("sc", NULL), 1, ft_putchar_select);
 		// if (data->sel->pos[1] == (data->term->width - 1))
 		// 	ft_move_cursor(data, LEFT, MOVE_LST);
-		while (list)
+		while (lst)
 		{
-			ft_putstr_fd((char *)list->content, data->term->tty);
-			list->set_select = 0;
-			list = list->next;
+			ft_putstr_fd((char *)lst->content, STDOUT_FILENO);
+			lst->set_select = 0;
+			lst = lst->next;
 		}
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_select);
 	}
@@ -239,16 +233,13 @@ void print_lst_line(t_data *data, t_list *lst)
 
 void print_lst_line_tools(t_data *data, t_list *lst)
 {
-	t_list *list;
-
-	list = NULL;
-	list = lst;
+	(void)data;
 	if (!lst)
-		ft_putstr_fd("FUCK", data->term->tty);
-	while (list)
+		ft_putstr_fd("FUCK", STDOUT_FILENO);
+	while (lst)
 	{
-		ft_putendl_fd((char *)list->content, data->term->tty);
-		list = list->next;
+		ft_putendl_fd((char *)lst->content, STDOUT_FILENO);
+		lst = lst->next;
 	}
 	return;
 }

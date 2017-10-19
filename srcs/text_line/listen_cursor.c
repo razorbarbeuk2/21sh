@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:43:20 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/18 19:04:51 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 16:52:14 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,6 @@ void 		listen_cursor_check_module_active(t_data *data)
 		ft_add_print_caract(data, '\n');
 		motion_list(data, 'E');
 	}
-	if (data->set_heredoc)
-	{
-		get_pos_prompt(data);
-		data->sel->pos_start[0] = data->sel->pos[0];
-		data->sel->pos_start[1] = data->sel->pos[1];
-	}
 }
 
 /*Faire la suite quote prompt - push ENTER*/
@@ -89,13 +83,12 @@ int			listen_cursor(t_data *data, t_entry *entry)
 	int		result;
 
 	result = 0;
-	data->entry = NULL;
 	data->entry = entry;
 	ft_memset(buf, 0, 8);
 	ft_bzero(buf, 8);
 	listen_cursor_check_module_active(data);
 	data->entry->size_line = data->sel->len_prompt;
-	while(read(STDIN_FILENO, buf, 7))
+	while(read(data->term->tty, buf, 7))
 	{
 		result = ft_concat_int(buf);
 		if (result == LEFT || result == RIGHT || result == HOME || result == END || result == UP || result == DOWN)

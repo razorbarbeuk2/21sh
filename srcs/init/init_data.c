@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 15:30:56 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/12 17:23:51 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 17:00:38 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int init_data_env_cmd(t_data *data)
 	data->pid = 0;
 	data->set_historique = 0;
 	data->set_quotes = 0;
+	data->set_heredoc = 0;
 	data->nb_pipe = 0;
 	data->home = NULL;
 	data->paths = NULL;
@@ -62,15 +63,15 @@ t_entry 	*init_data_entry()
 
 	init_entry = NULL;
 	init_entry = (t_entry *)ft_memalloc(sizeof(t_entry));
-	init_entry->line = NULL;
-	init_entry->cpy = NULL;
-	init_entry->cut_line = NULL;
-	init_entry->line_str = NULL;
-	init_entry->line_str_double = NULL;
-	init_entry->nb_line = 0;
-	init_entry->offset_line = 1;
-	init_entry->len_line = 0;
-	init_entry->size_line = 0;
+	// init_entry->line = NULL;
+	// init_entry->cpy = NULL;
+	// init_entry->cut_line = NULL;
+	// init_entry->line_str = NULL;
+	// init_entry->line_str_double = NULL;
+	// init_entry->nb_line = 0;
+	// init_entry->offset_line = 1;
+	// init_entry->len_line = 0;
+	// init_entry->size_line = 0;
 
 	return (init_entry);
 }
@@ -84,12 +85,12 @@ t_select 	*init_data_sel()
 	init_sel->pos = ft_memalloc(2*sizeof(int));
 	init_sel->pos_start = ft_memalloc(2*sizeof(int));
 	init_sel->pos_tmp = ft_memalloc(2*sizeof(int));
-	init_sel->i_lst = 0;
-	init_sel->i_lst_tmp = 0;
-	init_sel->_bottom = 0;
-	init_sel->offset = 0;
-	init_sel->prompt = NULL;
-	init_sel->len_prompt = 0;
+	// init_sel->i_lst = 0;
+	// init_sel->i_lst_tmp = 0;
+	// init_sel->_bottom = 0;
+	// init_sel->offset = 0;
+	// init_sel->prompt = NULL;
+	// init_sel->len_prompt = 0;
 
 	return (init_sel);
 }

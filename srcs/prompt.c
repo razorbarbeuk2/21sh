@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/18 19:04:28 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/19 11:40:15 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ int		get_reset_prompt(t_data *data)
 
 void	get_super_prompt(t_data *data)
 {
-	ft_putstr_fd(ORANGE, data->term->tty);
+	ft_putstr_fd(ORANGE, STDOUT_FILENO);
 	if ((data->sel->prompt = ft_cut_path(data)) && data->home)
 	{
 		data->sel->offset = (ft_strlen(data->sel->prompt) - ft_strlen(data->home));
 		if (data->sel->offset > 0)
 		{
-			ft_putstr_fd(data->sel->prompt + ft_strlen(data->home), data->term->tty);
+			ft_putstr_fd(data->sel->prompt + ft_strlen(data->home), STDOUT_FILENO);
 			data->sel->len_prompt = (ft_strlen(data->sel->prompt) - ft_strlen(data->home) + 4);
 		}
 		else
 		{
-			ft_putstr_fd(data->sel->prompt, data->term->tty);
+			ft_putstr_fd(data->sel->prompt, STDOUT_FILENO);
 			data->sel->len_prompt = (ft_strlen(data->sel->prompt) + 4);
 		}
 	}
-	ft_putstr_fd(" $> ", data->term->tty);
-	ft_putstr_fd("\033[m", data->term->tty);
+	ft_putstr_fd(" $> ", STDOUT_FILENO);
+	ft_putstr_fd("\033[m", STDOUT_FILENO);
 	return ;
 }
 
@@ -74,9 +74,9 @@ void	get_hist_prompt(t_data *data)
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
-	ft_putstr_fd(SEARCH_COLOR, data->term->tty);
-	ft_putstr_fd(tmp, data->term->tty);
-	ft_putstr_fd("\033[m", data->term->tty);
+	ft_putstr_fd(SEARCH_COLOR, STDOUT_FILENO);
+	ft_putstr_fd(tmp, STDOUT_FILENO);
+	ft_putstr_fd("\033[m", STDOUT_FILENO);
 	data->set_historique = ACTIVE;
 	data->historic->nb_prompt_historique = ft_strlen(tmp);
 	listen_cursor(data, data->historic->historique);
@@ -93,7 +93,7 @@ void	get_quote_prompt(t_data *data)
 	ft_move_home(data);
 	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
-	ft_putstr_fd(tmp, data->term->tty);
+	ft_putstr_fd(tmp, STDOUT_FILENO);
 	data->quotes->nb_prompt_quote = ft_strlen(tmp);
 	ft_strdel(&tmp);
 	tmp = NULL;
@@ -109,7 +109,7 @@ void	get_heredoc_prompt(t_data *data)
 	ft_move_home(data);
 	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
 	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
-	ft_putstr_fd(tmp, data->term->tty);
+	ft_putstr_fd(tmp, STDOUT_FILENO);
 	data->sel->len_prompt = ft_strlen(tmp);
 	ft_strdel(&tmp);
 	tmp = NULL;
