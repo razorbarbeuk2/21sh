@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 16:02:43 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/19 19:00:36 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/20 00:54:42 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
 int exec_redirect_option_DIGIT(t_data *data, t_token_node *node)
-{   
+{
     t_token_struct *node_content;
-    
+
     (void)data;
     if (node->tright && node->tright->tright)
         node_content = ((t_token_struct *)node->tright->tright->node->content);
@@ -42,7 +42,7 @@ int exec_redir_function_DUP_FROM(t_data *data, int fd, t_token_node *node)
 
 int exec_redir_function_DUP_TO(t_data *data, int fd, t_token_node *node)
 {
-    int            out;
+    int out;
 
     data->fork = FORK;
     out = exec_redirect_option_DIGIT(data, node->tleft);
@@ -52,8 +52,8 @@ int exec_redir_function_DUP_TO(t_data *data, int fd, t_token_node *node)
     return (1);
 }
 
-int exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state)//>//>>//>&
-{   
+int exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state) //>//>>//>&
+{
     t_token_struct *node_content;
     t_token_struct *node_content_right;
     int fd;
@@ -74,7 +74,7 @@ int exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state)/
             {
                 if (node_content_right->type == TYPE_IO_NUMBER)
                     fd = ft_atoi(node_content_right->token_name_str);
-                else 
+                else
                     fd = open(node_content_right->token_name_str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
             }
             return (exec_redir_function_DUP_TO(data, fd, node));
@@ -83,16 +83,16 @@ int exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state)/
     return (0);
 }
 
-int exec_redir_LEFT(t_data *data, t_token_node *node, unsigned int fork_state)//<//<<
+int exec_redir_LEFT(t_data *data, t_token_node *node, unsigned int fork_state) //<//<<
 {
     t_token_struct *node_content;
     t_token_struct *node_content_right;
-    // int status;
+    char *line;
     int fd;
-    // int  p[2];
-    // pid_t pid;
+    int p[2];
 
     fd = 0;
+    line = NULL;
     (void)fork_state;
     if (node)
     {
@@ -101,11 +101,21 @@ int exec_redir_LEFT(t_data *data, t_token_node *node, unsigned int fork_state)//
         if (exec_fork_step(data, FORK))
         {
             if (node_content->type == TYPE_REDIRECTION_LESSGREAT_LEFT)
-                fd = open(node_content_right->token_name_str, O_RDWR | O_APPEND, 0644);
-                // fd = open("/dev/tty", O_RDWR, 0644);
+                fd = open(node_content_right->token_name_str, O_RDONLY, 0644);
             if (node_content->type == TYPE_REDIRECTION_DLESS)
             {
-                
+                pipe(p);
+                get_heredoc_prompt(data);
+                while (get_next_line(STDIN_FILENO, &line))
+                {
+                    if (ft_strcmp(node_content_right->token_name_str, line) == 0)
+                        break;
+                    ft_putendl_fd(line, p[1]);
+                    ft_strdel(&line);
+                    get_heredoc_prompt(data);
+                }
+                fd = p[0];
+                close(p[1]);
             }
             return (exec_redir_function_DUP_FROM(data, fd, node));
         }

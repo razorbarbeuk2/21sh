@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 15:30:48 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/19 11:40:15 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/20 00:33:31 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,6 @@ void	get_heredoc_prompt(t_data *data)
 
 	tmp = NULL;
 	tmp = ft_strdup("heredoc> ");
-	ft_move_home(data);
-	tputs(tgoto(tgetstr("DO", NULL), 0, 0), 1, ft_putchar_select);
-	tputs(tgoto(tgetstr("cr", NULL), 0, 0), 1, ft_putchar_select);
 	ft_putstr_fd(tmp, STDOUT_FILENO);
 	data->sel->len_prompt = ft_strlen(tmp);
 	ft_strdel(&tmp);
