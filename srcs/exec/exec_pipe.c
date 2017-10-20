@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 16:02:38 by gbourson          #+#    #+#             */
-/*   Updated: 2017/09/27 15:59:03 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/20 14:43:07 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,30 @@
 
 int exec_PIPE(t_data *data, t_token_node *node, unsigned int fork_state)
 {
-    (void)data;
-    (void)node;
+    int p[2];
+    pid_t pid;
+
     (void)fork_state;
-    // if fork (je rapelle la fct forké)
-    //exec_cmd_type(data, node->tright, 1);
-    //   exec_cmd_type(data, node->tleft, 0);
-    ft_putendl("exec_pipe");
-    return (0);
+    if (exec_fork_step(data, FORK))
+    {
+        data->fork = FORK;
+        pipe(p);
+        if ((pid = fork()) == -1)
+            return (-1);
+        if (pid)
+        {           
+            close(p[1]);
+            dup2(p[0], STDIN_FILENO);
+            close(p[0]);
+            exec_cmd_type(data, node->tright, UNFORK);
+        }
+        else
+        {
+            close(p[0]);
+            dup2(p[1], STDOUT_FILENO);
+            close(p[1]);
+            exec_cmd_type(data, node->tleft, UNFORK);
+        }
+    }
+    return (1);
 }

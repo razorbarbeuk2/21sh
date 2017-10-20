@@ -6,11 +6,41 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 17:14:48 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/18 17:15:26 by gbourson         ###   ########.fr       */
+/*   Updated: 2017/10/20 17:45:01 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+struct s_exec_token_io_number
+{
+	unsigned int t;
+};
+
+static const struct s_exec_token_io_number s_token_io_number_t[] = {
+	{TYPE_REDIRECTION_LESSGREAT_RIGHT},
+	{TYPE_REDIRECTION_LESSGREAT_LEFT},
+	{TYPE_REDIRECTION_GREATAND},
+	{TYPE_REDIRECTION_LESSAND},
+	{TYPE_REDIRECTION_DGREAT},
+	{TYPE_REDIRECTION_DLESS},
+	{TYPE_FINISH}
+};
+
+int data_check_token_io_number_function(t_token_struct *token_content)
+{
+	int i;
+
+	i = 0;
+	while (s_token_io_number_t[i].t != TYPE_FINISH)
+	{
+		if (s_token_io_number_t[i].t == token_content->type)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 
 int data_check_digit(char *str)
 {
@@ -84,7 +114,7 @@ int ft_token_io_number(t_data *data, t_list *token_lst)
 		if (token_lst->next)
 		{
 			token_next = (t_token_struct *)token_lst->next->content;
-			if ((token->type == TYPE_CMD) && ((token_next->type == TYPE_REDIRECTION_GREATAND) || (token_next->type == TYPE_REDIRECTION_LESSAND)))
+			if ((token->type == TYPE_CMD) && data_check_token_io_number_function(token_next))
 			{
 				token_lst = ft_token_io_number_struct_left(data, token_lst);
 				token_lst = token_lst->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_exec_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 16:24:18 by RAZOR             #+#    #+#             */
-/*   Updated: 2017/10/20 00:45:57 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/20 16:12:48 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int 		exec_cmd_character(t_data *data)
 			return (ft_print_error("historic error"));
 		if (data_check_str_list_struct_cmd_loop(data, data->entry->line_str) != -1)
 		{
+			ft_print_token(data, &data->token_list);
 			if ((data->node_tree_data = construct_ast_tree(data->token_list, NULL, 1, data->node_tree_data)))
 				exec_cmd_type(data, data->node_tree_data, FORK);
 			if (data->fork == FORK)

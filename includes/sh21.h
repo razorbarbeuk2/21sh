@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/20 00:28:24 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/20 15:08:50 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int		                    ft_print_error_access(char *str);
 int							ft_print_move_error(char *str, char *error);
 int 						ft_print_error_option(char c, char *usage, char *builtins);
 int		                    ft_print_parse_near_token(char *str);
+int		                    ft_print_ambiguous_redirect(char *str);
+
 /*TERM*/
 int							term_init(t_term *term);
 int							term_reset(t_term *term);

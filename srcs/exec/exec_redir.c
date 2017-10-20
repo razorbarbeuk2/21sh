@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 16:02:43 by gbourson          #+#    #+#             */
-/*   Updated: 2017/10/20 00:54:42 by RAZOR            ###   ########.fr       */
+/*   Updated: 2017/10/20 16:07:32 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int exec_redirect_option_DIGIT(t_data *data, t_token_node *node)
 
     (void)data;
     if (node->tright && node->tright->tright)
+    {
+        ft_putendl("TETE DE MORT CONNARD");
         node_content = ((t_token_struct *)node->tright->tright->node->content);
+    }
     if (node->tright)
         node_content = ((t_token_struct *)node->tright->node->content);
     else
@@ -28,13 +31,8 @@ int exec_redirect_option_DIGIT(t_data *data, t_token_node *node)
 
 int exec_redir_function_DUP_FROM(t_data *data, int fd, t_token_node *node)
 {
-    // fd = open("test", O_RDWR);
     data->fork = FORK;
-    //(void)node;
-    // dup2(STDIN_FILENO, fd);
     dup2(fd, STDIN_FILENO);
-    // ft_putendl_fd("LOLILOL", STDOUT_FILENO);
-    // write(STDIN_FILENO, "toto", 5);
     close(fd);
     exec_cmd_type(data, node->tleft, UNFORK);
     return (1);
@@ -75,7 +73,8 @@ int exec_redir_RIGHT(t_data *data, t_token_node *node, unsigned int fork_state) 
                 if (node_content_right->type == TYPE_IO_NUMBER)
                     fd = ft_atoi(node_content_right->token_name_str);
                 else
-                    fd = open(node_content_right->token_name_str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+                    return (ft_print_ambiguous_redirect(node_content_right->token_name_tab[0]));
+                    // fd = open(node_content_right->token_name_str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
             }
             return (exec_redir_function_DUP_TO(data, fd, node));
         }
